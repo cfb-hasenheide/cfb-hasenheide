@@ -6,14 +6,14 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{href: '/#'} CFB Hasenheide
+      %a.navbar-brand{href: root_path} CFB Hasenheide
 
     #navigation.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li.active
-          %a{href: '/#'} Start
+        %li{class: ('active' if params[:controller] == 'welcome')}
+          %a{href: root_path} Start
 
-        %li
+        %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
           %a{href: '/contact'} Kontakt
 
       %ul.nav.navbar-nav.navbar-right
