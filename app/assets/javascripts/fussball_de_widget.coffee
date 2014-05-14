@@ -5,4 +5,6 @@ fussballDeWidget =
     wettbewerb1.setzeMandant('66');
     wettbewerb1.zeigeTabelle('fussballDeWidget');
 
-$ -> fussballDeWidget.init()
+$ ->
+  if $('#fussballDeWidget').length > 0
+    fussballDeWidget.init()
