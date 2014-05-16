@@ -24,25 +24,25 @@
           .form-group
             = f.label :password
             %i (leave blank if you don't want to change it)
-            = f.password_field :password, autocomplete: "off", class: 'form-control'
+            = f.password_field :password, autocomplete: 'off', class: 'form-control'
 
           .form-group
             = f.label :password_confirmation
-            = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
 
           .form-group
             = f.label :current_password
             %i (we need your current password to confirm your changes)
-            = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+            = f.password_field :current_password, autocomplete: 'off', class: 'form-control'
 
         .panel-footer
-          = f.submit "Speichern", class: 'btn btn-primary'
+          = f.submit 'Speichern', class: 'btn btn-primary'
 
     .panel.panel-danger
       .panel-heading
         %h3.panel-title Account löschen
 
       .panel-body
-        = button_to "Account löschen", registration_path(resource_name),
-          data: { confirm: "Are you sure?" }, method: :delete,
+        = button_to 'Account löschen', registration_path(resource_name),
+          data: { confirm: 'Are you sure?' }, method: :delete,
           class: 'btn btn-danger'
