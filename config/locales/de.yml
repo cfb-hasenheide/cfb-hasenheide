@@ -2,5 +2,6 @@ de:
   activerecord:
     attributes:
       user:
+        email: E-Mail
         password: Passwort
         remember_me: Angemeldet bleiben
