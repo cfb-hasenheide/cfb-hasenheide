@@ -7,16 +7,21 @@
 
     %title CFB Hasenheide
 
-    = favicon_link_tag '/favicon.ico?1'
-
-    = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
     = csrf_meta_tags
+    = favicon_link_tag '/favicon.ico?1'
 
     = stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'
     = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
-    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'
+    = stylesheet_link_tag    'application', media: 'all'
 
+  %body
+    = render 'layouts/navigation'
+    .container-fluid
+      = render 'layouts/flash_messages'
+      = yield
+
+    = javascript_include_tag 'application'
+    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'
     = javascript_include_tag 'http://ergebnisdienst.fussball.de/static/egm//js/egmWidget.js?schluessel=01KOOMFOFC000000VS5DVMPIVTDHL375'
 
     / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -24,9 +29,3 @@
     /[if lt IE 9]
       = javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'
       = javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'
-
-  %body
-    = render 'layouts/navigation'
-    .container-fluid
-      = render 'layouts/flash_messages'
-      = yield
