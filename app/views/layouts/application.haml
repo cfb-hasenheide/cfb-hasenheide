@@ -11,8 +11,7 @@
     = favicon_link_tag '/favicon.ico?1'
 
     = stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'
-    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
-    = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
 
   %body
     = render 'layouts/navigation'
@@ -21,7 +20,6 @@
       = yield
 
     = javascript_include_tag 'application'
-    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'
     = javascript_include_tag 'http://ergebnisdienst.fussball.de/static/egm//js/egmWidget.js?schluessel=01KOOMFOFC000000VS5DVMPIVTDHL375'
 
     / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
