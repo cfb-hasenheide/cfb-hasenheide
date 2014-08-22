@@ -1,9 +1,9 @@
-= simple_form_for @event, html: {class: 'form-horizontal'} do |f|
+= simple_form_for @event, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
-  .form-inputs
     = f.input :datetime
+
   .form-actions
     = f.button :submit
