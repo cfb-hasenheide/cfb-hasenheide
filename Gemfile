@@ -48,3 +48,4 @@ gem 'better_errors', group: :development
 gem 'binding_of_caller', group: :development
 gem 'bootstrap-sass'
 gem 'rspec-rails', group: [:development, :test]
+gem 'simple_form'
