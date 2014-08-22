@@ -21,3 +21,8 @@ default: &default
 
 development:
   <<: *default
+  database: cfb_development
+
+test:
+  <<: *default
+  database: cfb_test
