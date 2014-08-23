@@ -1,9 +1,10 @@
-= simple_form_for @event, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+= simple_form_for @event do |f|
+
   = f.error_notification
 
   .form-inputs
     = f.input :name
-    = f.input :datetime
+    = f.input :datetime, input_html: {id: 'datetimepicker'}, as: :string
 
   .form-actions
     = f.button :submit

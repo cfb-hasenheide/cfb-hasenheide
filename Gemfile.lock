@@ -36,6 +36,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.1)
       sass (~> 3.2)
+    bootstrap3-datetimepicker-rails (3.1.2)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -80,6 +82,8 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (5.3.3)
+    momentjs-rails (2.8.1)
+      railties (>= 3.1)
     multi_json (1.10.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
@@ -174,12 +178,14 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bootstrap3-datetimepicker-rails
   coffee-rails (~> 4.0.0)
   devise
   devise_invitable
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  momentjs-rails
   pg
   pry
   rails (= 4.1.1)
