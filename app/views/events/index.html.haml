@@ -4,20 +4,25 @@
     %small= @events.count
 
 %table
-  %tr
-    %th Name
-    %th Datetime
-    %th
-    %th
-    %th
-
-  - @events.each do |event|
+  %thead
     %tr
-      %td= event.name
-      %td= event.datetime
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Name
+      %th Datetime
+      %th
+
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= event.name
+        %td= event.datetime
+        %td
+          = link_to event, class: 'extra-small-button' do
+            %span.glyphicon.glyphicon-eye-open
+          = link_to edit_event_path(event), class: 'extra-small-button' do
+            %span.glyphicon.glyphicon-wrench
+          = link_to event, method: :delete, class: 'extra-small-button',
+            data: { :confirm => 'Are you sure?' } do
+            %span.glyphicon.glyphicon-trash
 
 %br
 
