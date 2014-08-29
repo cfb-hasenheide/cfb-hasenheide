@@ -1,12 +1,29 @@
-%p#notice= notice
+.page-header
+  %h1
+    = @event.name
+    %small= l @event.datetime, format: :short_with_day
 
-%p
-  %b Name:
-  = @event.name
-%p
-  %b Datetime:
-  = @event.datetime
+.half-half
+  .left-half
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Meldeliste
+    %ul.list-group
+      = render partial: 'user_entry', collection: @event.list.ins,
+        color: 'success'
+      = render partial: 'user_entry', collection: @event.list.waitees,
+        color: 'info'
+      = render partial: 'user_entry', collection: @event.list.maybees,
+        color: 'warning'
+      = render partial: 'user_entry', collection: @event.list.outs,
+        color: 'danger'
+  .right-half
+    %p= @event.description
+    %p
+      = @event.address
+      = image_tag 'favicon', class: 'img-responsive img-thumbnail'
 
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
+= link_to edit_event_path(@event), class: 'default-button' do
+  %span.glyphicon.glyphicon-wrench
+
+= link_to 'Alle Events', events_path, class: 'default-button'
