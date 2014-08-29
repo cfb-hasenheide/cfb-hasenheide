@@ -8,6 +8,7 @@
     %tr
       %th Name
       %th Datetime
+      %th Min / Max
       %th
 
   %tbody
@@ -15,6 +16,7 @@
       %tr
         %td= event.name
         %td= event.datetime
+        %td #{event.list.minimum} / #{event.list.maximum}
         %td
           = link_to event, class: 'extra-small-button' do
             %span.glyphicon.glyphicon-eye-open
