@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_many :entry_lists
+  has_one :list
 
   validates :name, :datetime, presence: true
 end
