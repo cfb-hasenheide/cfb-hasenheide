@@ -6,5 +6,11 @@
     = f.input :name
     = f.input :datetime, input_html: {id: 'datetimepicker'}, as: :string
 
+  = f.fields_for :list do |ff|
+
+    .form-inputs
+      = ff.input :minimum
+      = ff.input :maximum
+
   .form-actions
     = f.button :submit
