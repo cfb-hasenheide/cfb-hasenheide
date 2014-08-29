@@ -3,15 +3,23 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :datetime, input_html: {id: 'datetimepicker'}, as: :string
+    .half-half
+      .left-half= f.input :name
+      .right-half= f.input :datetime, input_html: {id: 'datetimepicker'},
+        as: :string
+    = f.input :description
+    = f.input :address
 
-  = f.fields_for :list do |ff|
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title Meldeliste
+    .panel-body
+      = f.fields_for :list do |ff|
 
-    .form-inputs
-      = ff.input :minimum
-      = ff.input :maximum
+        .form-inputs.half-half
+          .left-half= ff.input :minimum
+          .right-half= ff.input :maximum
 
   .form-actions
-    = f.button :submit, 'Speichern', class: 'btn btn-primary'
-    = link_to 'Abbrechen', events_path, class: 'btn btn-default'
+    = f.button :submit, 'Speichern', class: 'primary-button'
+    = link_to 'Abbrechen', events_path, class: 'default-button'
