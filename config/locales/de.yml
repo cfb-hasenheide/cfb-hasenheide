@@ -4,6 +4,7 @@ de:
       blank: Pflichtfeld
       confirmation: ist ungleich
       too_short: ist zu kurz (mind. %{count} Zeichen)
+
   activerecord:
     attributes:
       user:
@@ -18,3 +19,7 @@ de:
       list:
         minimum: Mindestanzahl Teilnehmer
         maximum: Maximalanzahl Teilnehmer
+
+  time:
+    formats:
+      short_with_day: "%a, %d.%m.%y (%H:%M)"

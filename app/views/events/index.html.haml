@@ -7,7 +7,7 @@
   %thead
     %tr
       %th Name
-      %th Datetime
+      %th Datum / Uhrzeit
       %th Min / Max
       %th
 
@@ -15,7 +15,7 @@
     - @events.each do |event|
       %tr
         %td= event.name
-        %td= event.datetime
+        %td= l event.datetime, format: :short_with_day
         %td #{event.list.minimum} / #{event.list.maximum}
         %td
           = link_to event, class: 'extra-small-button' do
