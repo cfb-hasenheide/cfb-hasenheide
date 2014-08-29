@@ -1,7 +1,6 @@
-%h1 Editing event
+%h1
+  Event
+  %em= @event.name
+  bearbeiten
 
 = render 'form'
-
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
