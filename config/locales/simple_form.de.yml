@@ -4,6 +4,6 @@ de:
     "no": Nein
     required:
       text: Pflichtfeld
-      mark: *
+      mark: '*'
     error_notification:
-      default_message: Folgende Fehler sind aufgetreten:
+      default_message: 'Folgende Fehler sind aufgetreten:'
