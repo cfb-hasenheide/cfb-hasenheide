@@ -17,8 +17,8 @@
       = f.fields_for :list do |ff|
 
         .form-inputs.half-half
-          .left-half= ff.input :minimum
-          .right-half= ff.input :maximum
+          .left-half= ff.input :minimum, input_html: { min: 1, max: 99, value: 7 }
+          .right-half= ff.input :maximum, input_html: { min: 2, max: 100, value: 11 }
 
   .form-actions
     = f.button :submit, 'Speichern', class: 'primary-button'
