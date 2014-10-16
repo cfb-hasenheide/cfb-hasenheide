@@ -28,10 +28,19 @@
       = render partial: 'user_entry', collection: @event.list.outs,
         color: 'danger'
   .right-half
-    %p= @event.description
-    %p
-      = @event.address
-      = image_tag 'favicon', class: 'img-responsive img-thumbnail'
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Beschreibung
+      .panel-body
+        %p= @event.description
+
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Adresse
+      .panel-body
+        %p
+          = @event.address
+          = image_tag 'favicon', class: 'img-responsive img-thumbnail'
 
 = link_to edit_event_path(@event), class: 'default-button' do
   %span.glyphicon.glyphicon-wrench
