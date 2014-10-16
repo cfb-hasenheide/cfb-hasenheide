@@ -22,4 +22,4 @@ de:
 
   time:
     formats:
-      short_with_day: "%a, %d.%m.%y (%H:%M)"
+      short_with_day: "%a, %d.%m.%y - %H:%M Uhr"
