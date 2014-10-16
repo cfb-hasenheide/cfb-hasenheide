@@ -14,7 +14,7 @@
   %tbody
     - @events.each do |event|
       %tr
-        %td= event.name
+        %td= link_to event.name, event_path(event)
         %td= l event.datetime, format: :short_with_day
         %td #{event.list.minimum} / #{event.list.maximum}
         %td
