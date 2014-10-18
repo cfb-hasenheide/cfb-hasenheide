@@ -6,4 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(username: 'dev', password: 'password')
+%w(admin player user).each do |username|
+  User.create(username: username,
+              email:    "#{username}@cfb.de",
+              password: 'password')
+end
