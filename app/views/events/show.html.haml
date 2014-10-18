@@ -17,7 +17,9 @@
   .left-half
     .panel.panel-default
       .panel-heading
-        %h3.panel-title Meldeliste
+        %h3.panel-title
+          Meldeliste
+          %span.pull-right #{@event.minimum} - #{@event.maximum}
     %ul.list-group
       TODO
   .right-half

@@ -8,7 +8,7 @@
     %tr
       %th Name
       %th Datum / Uhrzeit
-      %th Min / Max
+      %th Min - Max
       %th
 
   %tbody
@@ -16,6 +16,7 @@
       %tr
         %td= link_to event.name, event_path(event)
         %td= l event.datetime, format: :short_with_day
+        %td #{event.minimum} - #{event.maximum}
         %td
           = link_to event, class: 'extra-small-button' do
             %span.glyphicon.glyphicon-eye-open
