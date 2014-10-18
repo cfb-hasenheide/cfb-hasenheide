@@ -20,8 +20,9 @@
         %h3.panel-title
           Meldeliste
           %span.pull-right #{@event.minimum} - #{@event.maximum}
-    %ul.list-group
-      TODO
+      %ul.list-group
+        - for user in User.all
+          %li.list-group-item= user.username
   .right-half
     .panel.panel-default
       .panel-heading
