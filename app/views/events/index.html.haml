@@ -16,7 +16,6 @@
       %tr
         %td= link_to event.name, event_path(event)
         %td= l event.datetime, format: :short_with_day
-        %td #{event.list.minimum} / #{event.list.maximum}
         %td
           = link_to event, class: 'extra-small-button' do
             %span.glyphicon.glyphicon-eye-open

@@ -16,7 +16,6 @@ de:
         datetime: Datum / Uhrzeit
         description: Beschreibung
         address: Adresse
-      list:
         minimum: Mindestanzahl Teilnehmer
         maximum: Maximalanzahl Teilnehmer
 
