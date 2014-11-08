@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018134147) do
+ActiveRecord::Schema.define(version: 20141108195337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,38 +28,39 @@ ActiveRecord::Schema.define(version: 20141018134147) do
   add_index "event_responses", ["user_id"], name: "index_event_responses_on_user_id", using: :btree
 
   create_table "events", force: true do |t|
-    t.string   "name"
+    t.string   "name",        limit: 255
     t.datetime "datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
-    t.string   "address"
+    t.string   "description", limit: 255
+    t.string   "address",     limit: 255
     t.integer  "minimum"
     t.integer  "maximum"
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
-    t.string   "invitation_token"
+    t.string   "username",               limit: 255
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",                  default: 0
+    t.integer  "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
