@@ -10,9 +10,6 @@
 
     #navigation.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'welcome')}
-          %a{href: root_path} Start
-
         %li{class: ('active' if params[:controller] == 'events')}
           %a{href: events_path} Events
 
