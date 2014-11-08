@@ -2,53 +2,42 @@ source 'https://rubygems.org'
 
 ruby '2.1.4'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# rails 4
 gem 'rails', '4.2.0.beta2'
-# Use postgresl as the database for Active Record
+gem 'turbolinks'
+
+# db
 gem 'pg'
-# Use SCSS for stylesheets
-gem 'sass-rails', '5.0.0.beta1'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-gem 'haml-rails'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-gem 'rails_12factor', group: :production
-gem 'pry', group: [:development, :test]
+# authorization
 gem 'devise'
 gem 'devise_invitable'
-gem 'better_errors', group: :development
-gem 'binding_of_caller', group: :development
+
+# assets
+gem 'sass-rails', '5.0.0.beta1'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'haml-rails'
+gem 'jquery-rails'
 gem 'bootstrap-sass'
-gem 'rspec-rails', group: [:development, :test]
-gem 'simple_form', '>= 3.1.0.rc1'
-# Eonasdan/bootstrap-datetimepicker
-gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+gem 'momentjs-rails' # TODO: needed for bootstrap3-datetimepicker-rails
+gem 'simple_form', '>= 3.1.0.rc1'
+
+# json
+gem 'jbuilder', '~> 2.0'
+
+group :development do
+  gem 'spring', group: :development
+  gem 'better_errors', group: :development
+  gem 'binding_of_caller', group: :development
+end
+
+# specs
+gem 'rspec-rails', group: [:development, :test]
+
+# debugging
+gem 'pry', group: [:development, :test]
+
+# heroku
+gem 'rails_12factor', group: :production
