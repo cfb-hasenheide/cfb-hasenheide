@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  enum role: [:fan, :player, :admin]
+
   validates_presence_of :username
 
   has_and_belongs_to_many :events, foreign_key: :ins

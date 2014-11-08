@@ -1,5 +1,5 @@
-%w(admin player user).each do |username|
-  User.create(username: username,
-              email:    "#{username}@cfb.de",
-              password: 'password')
+%w(fan player admin).each do |role|
+  User.send(role).create(username: role,
+                         email:    "#{role}@cfb.de",
+                         password: 'password')
 end
