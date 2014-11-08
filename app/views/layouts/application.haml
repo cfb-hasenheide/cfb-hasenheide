@@ -17,13 +17,9 @@
     = render 'layouts/navigation'
     .container
       .main-area
-        .sidebar
-          left sidebar
         .main-content
           = render 'layouts/flash_messages'
           = yield
-        .sidebar
-          right sidebar
 
     = javascript_include_tag 'application'
     = javascript_include_tag 'http://ergebnisdienst.fussball.de/static/egm//js/egmWidget.js?schluessel=01KOOMFOFC000000VS5DVMPIVTDHL375'
