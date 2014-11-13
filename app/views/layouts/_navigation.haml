@@ -29,6 +29,4 @@
               %li= link_to 'Logout', destroy_user_session_path, method: :delete
         - else
           %li
-            = link_to 'Registrieren', new_user_registration_path
-          %li
             = link_to 'Login', new_user_session_path
