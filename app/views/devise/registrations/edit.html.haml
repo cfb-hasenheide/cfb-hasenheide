@@ -23,17 +23,22 @@
 
           .form-group
             = f.label :password
-            %i (leave blank if you don't want to change it)
-            = f.password_field :password, autocomplete: 'off', class: 'form-control'
+            = f.password_field :password, autocomplete: 'off',
+              class: 'form-control', 'aria-describedby' => 'passwordHelp'
+            %span.help-block#passwordHelp
+              %i Leer lassen wenn es nicht geändert werden soll
 
           .form-group
             = f.label :password_confirmation
-            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+            = f.password_field :password_confirmation, autocomplete: 'off',
+              class: 'form-control'
 
           .form-group
             = f.label :current_password
-            %i (we need your current password to confirm your changes)
-            = f.password_field :current_password, autocomplete: 'off', class: 'form-control'
+            = f.password_field :current_password, autocomplete: 'off',
+              class: 'form-control', 'aria-describedby' => 'currentPasswordHelp'
+            %span.help-block#currentPasswordHelp
+              %i Zum Bestätigen der Änderungen
 
         .panel-footer
           = f.submit 'Speichern', class: 'btn btn-primary'
