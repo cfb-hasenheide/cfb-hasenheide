@@ -4,12 +4,17 @@
 
   .form-inputs
     .half-half
-      .left-half= f.input :name
-      .right-half= f.input :datetime, input_html: {id: 'datetimepicker'},
-        as: :string
+      .left-half
+        = f.input :name
+      .right-half
+        = f.input :datetime,
+          input_html: {id: 'datetimepicker'},
+          as: :string
     .half-half
-      .left-half= f.input :minimum, collection: 1..100, selected: 7
-      .right-half= f.input :maximum, collection: 1..100, selected: 11
+      .left-half
+        = f.input :minimum, collection: 1..100, selected: 7
+      .right-half
+        = f.input :maximum, collection: 1..100, selected: 11
 
     = f.input :description, as: :text
     = f.input :address
