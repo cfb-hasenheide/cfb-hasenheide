@@ -1,7 +1,7 @@
 .page-header
   %h1
     = @event.name
-    %small= l @event.datetime, format: :short_with_day
+    %small.pull-right= l @event.datetime, format: :short_with_day
 
 .progress
   .progress-bar.progress-bar-success{role: 'progress-bar',
