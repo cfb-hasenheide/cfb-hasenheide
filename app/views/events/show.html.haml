@@ -21,15 +21,7 @@
           Meldeliste
           %span.pull-right #{@event.minimum} - #{@event.maximum}
       .panel-body
-        = simple_form_for @event_response do |f|
-          = f.input :event_id, as: :hidden
-          = f.input :user_id, as: :hidden
-          = f.input :status,
-            collection: status_options,
-            selected: @event_response.status,
-            prompt: 'Bist du dabei?',
-            label: false
-          = f.button :submit, 'Speichern', class: 'primary-button'
+        = render 'event_responses/form', event_response: @event_response
       %ul.list-group
         - for user in User.all
           %li.list-group-item= user.username
