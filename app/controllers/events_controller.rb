@@ -10,6 +10,8 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @event_response = EventResponse.by_event_and_user(@event, current_user) ||
+      EventResponse.new(event: @event, user: current_user)
   end
 
   # GET /events/new
