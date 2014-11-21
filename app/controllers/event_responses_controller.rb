@@ -15,7 +15,6 @@ class EventResponsesController < ApplicationController
     event_response = EventResponse
       .find_by(event_response_params.slice(:event_id, :user_id))
 
-    require 'pry'; binding.pry
     if event_response.update(event_response_params)
       flash[:notice] = 'Deine Meldung wurde aktualisiert!'
     else
