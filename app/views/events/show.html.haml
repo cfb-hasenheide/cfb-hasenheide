@@ -23,8 +23,8 @@
       .panel-body
         = render 'event_responses/form', event_response: @event_response
       %ul.list-group
-        - for user in User.all
-          %li.list-group-item= user.username
+        - for attendee in @event.attendees
+          %li.list-group-item.list-group-item-success= attendee.username
   .right-half
     .panel.panel-default
       .panel-heading
