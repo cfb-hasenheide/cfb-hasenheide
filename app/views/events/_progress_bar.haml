@@ -1,0 +1,7 @@
+.progress
+  .progress-bar.progress-bar-success{role: 'progress-bar',
+    'aria-valuenow' => 1, 'aria-valuemin' => event.minimum,
+    'aria-valuemax' => event.maximum,
+    style: "width: #{event.yes_count.to_f / event.maximum * 100}%;"}
+
+    #{event.yes_count} / #{event.maximum}
