@@ -20,11 +20,11 @@
         %h3.panel-title
           Meldeliste
           %span.pull-right #{@event.minimum} - #{@event.maximum}
-      .panel-body
-        = render 'event_responses/form', event_response: @event_response
+
       %ul.list-group
-        - for attendee in @event.attendees
-          %li.list-group-item.list-group-item-success= attendee.username
+        - for player in @players
+          = render 'event_responses/form', event: @event, user: player
+
   .right-half
     .panel.panel-default
       .panel-heading

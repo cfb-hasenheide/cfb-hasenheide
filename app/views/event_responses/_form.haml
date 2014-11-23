@@ -1,9 +1,15 @@
-= simple_form_for event_response do |f|
-  = f.input :event_id, as: :hidden
-  = f.input :user_id, as: :hidden
-  = f.input :status,
-    collection: status_options,
-    selected: event_response.status,
-    prompt: 'Bist du dabei?',
-    label: false
-  = f.button :submit, 'Speichern', class: 'primary-button'
+%li.list-group-item.list-group-item-success
+  .half-half
+    .left-half
+      = user.username
+
+    .right-half
+      = simple_form_for event_response = EventResponse.find_or_initialize_by(event_id: event.id, user_id: user.id) do |f|
+        = f.input :event_id, as: :hidden
+        = f.input :user_id, as: :hidden
+        = f.input :status,
+          collection: status_options,
+          selected: event_response.status,
+          prompt: 'Bist du dabei?',
+          label: false,
+          input_html: { class: 'input-sm', onchange: 'this.form.submit()' }
