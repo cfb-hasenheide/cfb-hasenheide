@@ -4,7 +4,11 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: [:fan, :player, :admin]
+  enum role: %i(fan player admin)
 
   validates_presence_of :username
+
+  def self.players
+    player + admin
+  end
 end
