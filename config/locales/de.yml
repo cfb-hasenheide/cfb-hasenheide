@@ -14,6 +14,7 @@ de:
         current_password: Aktuelles Passwort
         remember_me: Angemeldet bleiben
       event:
+        kind: Typ
         datetime: Datum / Uhrzeit
         description: Beschreibung
         address: Adresse

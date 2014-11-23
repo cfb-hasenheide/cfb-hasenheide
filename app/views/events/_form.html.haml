@@ -3,6 +3,7 @@
   = f.error_notification
 
   .form-inputs
+    = f.input :kind, collection: event_kind_options, selected: @event.kind
     .half-half
       .left-half
         = f.input :name

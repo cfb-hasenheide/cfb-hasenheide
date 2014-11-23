@@ -1,5 +1,7 @@
 .jumbotron
-  %h1= event.name
+  %h1
+    = event.name
+    %small= event.humanized_kind
 
   %p
     %strong Wann:
