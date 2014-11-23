@@ -1,7 +1,4 @@
-.page-header
-  %h1
-    = @event.name
-    %small.pull-right= l @event.datetime, format: :short_with_day
+= render 'summary', event: @event, event_response: @event_response
 
 = render 'progress_bar', event: @event
 

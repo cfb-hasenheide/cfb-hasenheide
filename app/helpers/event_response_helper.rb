@@ -1,9 +1,9 @@
 module EventResponseHelper
   def status_options
     # TODO use i18n translation
-    { 'Ja' => 'yes',
-      'Nein' => 'no',
-      'Vielleicht' => 'maybee',
-      'Zuschauer' => 'watch' }
+    { 'M - Meldung' => 'yes',
+      '0 - Absage' => 'no',
+      '? - Vielleicht' => 'maybee',
+      'Z - Zuschauer' => 'watch' }
   end
 end

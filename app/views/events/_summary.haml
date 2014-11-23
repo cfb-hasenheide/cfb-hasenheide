@@ -1,0 +1,20 @@
+.jumbotron
+  %h1= event.name
+
+  %p
+    %strong Wann:
+    = l(event.datetime, format: :sentence)
+    %br
+    %strong Wo:
+    = @event.address
+
+  %p= event.description
+
+  %p
+    - if event_response.persisted?
+      Status:
+      %strong= event_response.humanized_status
+    - else
+      = form_for event_response do |f|
+        = f.hidden_field :status, value: 'yes'
+        = f.submit 'Melden', class: 'primary-button'

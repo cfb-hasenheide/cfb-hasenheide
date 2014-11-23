@@ -7,9 +7,20 @@ class EventResponse < ActiveRecord::Base
 
   validates :user_id, :event_id, :status, presence: true
 
-  enum status: %i(yes no maybee watch)
+  enum status: %i(yes no maybee watch waiting)
+
+  # TODO translate in local yml
+  STATUSES = { yes: 'M - Meldung',
+               no: '0 - Absage',
+               maybee: '? - Unsicher',
+               watch: 'Z - Zuschauer',
+               waiting: 'W - Warteliste' }
 
   def self.by_event_and_user(event, user)
-    where(event_id: event, user_id: user).first
+    find_or_initialize_by(event_id: event, user_id: user)
+  end
+
+  def humanized_status
+    STATUSES[status.to_sym]
   end
 end

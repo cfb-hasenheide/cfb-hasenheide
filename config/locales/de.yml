@@ -25,3 +25,4 @@ de:
   time:
     formats:
       short_with_day: "%a, %d.%m.%y - %H:%M Uhr"
+      sentence: "%A, %d.%m.%Y, um %H:%M Uhr"
