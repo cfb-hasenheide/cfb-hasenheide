@@ -1,4 +1,4 @@
-= render 'summary', event: @event, event_response: @event_response
+= render 'summary', event: @event, reply: @reply
 
 = render 'progress_bar', event: @event
 
@@ -12,7 +12,7 @@
 
       %ul.list-group
         - for player in @players
-          = render 'response', event: @event, user: player
+          = render 'reply', event: @event, user: player
 
   .right-half
     .panel.panel-default

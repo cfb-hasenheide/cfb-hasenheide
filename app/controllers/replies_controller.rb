@@ -1,8 +1,8 @@
-class EventResponsesController < ApplicationController
+class RepliesController < ApplicationController
   def create
-    event_response = EventResponse.new(event_response_params)
+    reply = Reply.new(reply_params)
 
-    if event_response.save
+    if reply.save
       flash[:notice] = 'Deine Meldung wurde gespeichert!'
     else
       flash[:error] = 'Deine Meldung konnte nicht gespeichert werden!'
@@ -12,10 +12,9 @@ class EventResponsesController < ApplicationController
   end
 
   def update
-    event_response = EventResponse
-      .find_by(event_response_params.slice(:event_id, :user_id))
+    reply = Reply.find_by(reply_params.slice(:event_id, :user_id))
 
-    if event_response.update(event_response_params)
+    if reply.update(reply_params)
       flash[:notice] = 'Deine Meldung wurde aktualisiert!'
     else
       flash[:error] = 'Deine Meldung konnte nicht aktualisiert werden!'
@@ -26,13 +25,13 @@ class EventResponsesController < ApplicationController
 
   private
 
-  def event_response_params
-    params.require(:event_response).permit(:event_id, :user_id, :status)
+  def reply_params
+    params.require(:reply).permit(:event_id, :user_id, :status)
   end
 
   def sanitized_params
     # TODO refactor me
-    event_response_params.reduce({}) do |memo, (k, v)|
+    reply_params.reduce({}) do |memo, (k, v)|
       memo[k] = v.to_i
       memo
     end

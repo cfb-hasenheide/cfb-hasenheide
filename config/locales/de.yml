@@ -19,7 +19,7 @@ de:
         address: Adresse
         minimum: Mindestanzahl Teilnehmer
         maximum: Maximalanzahl Teilnehmer
-      event_response:
+      reply:
         status: Bist du dabei?
 
   time:

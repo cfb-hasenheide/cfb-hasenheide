@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @players = User.players
-    @event_response = EventResponse.by_event_and_user(@event, current_user)
+    @reply = Reply.by_event_and_user(@event, current_user)
   end
 
   # GET /events/new

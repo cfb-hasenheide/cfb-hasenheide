@@ -1,11 +1,11 @@
 %li.list-group-item.list-group-item-success
   = user.username
-  = simple_form_for event_response_for(event.id, user.id) do |f|
+  = simple_form_for reply_for(event.id, user.id) do |f|
     = f.input :event_id, as: :hidden
     = f.input :user_id, as: :hidden
     = f.input :status,
       collection: status_options,
-      selected: event_response_for(event_id, user.id).status,
+      selected: reply_for(event.id, user.id).status,
       prompt: 'Bist du dabei?',
       label: false,
       input_html: { class: 'input-sm', onchange: 'this.form.submit()' }

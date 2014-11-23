@@ -11,10 +11,10 @@
   %p= event.description
 
   %p
-    - if event_response.persisted?
+    - if reply.persisted?
       Status:
-      %strong= event_response.humanized_status
+      %strong= reply.humanized_status
     - else
-      = form_for event_response do |f|
+      = form_for reply do |f|
         = f.hidden_field :status, value: 'yes'
         = f.submit 'Melden', class: 'primary-button'

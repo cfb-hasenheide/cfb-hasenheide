@@ -1,7 +1,0 @@
-- if user == current_user
-  = render 'event_responses/form', event: event, user: user
-
-- else
-  %li.list-group-item.list-group-item-success
-    = user.username
-    %span.badge= event_response_status_for(event, user)
