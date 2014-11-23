@@ -7,7 +7,7 @@ class Reply < ActiveRecord::Base
 
   validates :user_id, :event_id, :status, presence: true
 
-  enum status: %i(yes no maybee watch waiting)
+  enum status: { yes: 0, no: 1, maybee: 2, watch: 3, waiting: 4 }
 
   # TODO translate in local yml
   STATUSES = { yes: 'M - Meldung',
