@@ -1,3 +1,5 @@
+= render 'breadcrumbs', event: @event
+
 = render 'summary', event: @event, reply: @reply
 
 = render 'progress_bar', event: @event
@@ -31,5 +33,3 @@
 
 = link_to edit_event_path(@event), class: 'default-button' do
   %span.glyphicon.glyphicon-wrench
-
-= link_to 'Alle Events', events_path, class: 'default-button'
