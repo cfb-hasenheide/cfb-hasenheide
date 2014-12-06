@@ -13,10 +13,11 @@
   %p= event.description
 
   %p
-    - if reply.persisted?
-      Status:
-      %strong= reply.humanized_status
-    - else
-      = form_for reply do |f|
-        = f.hidden_field :status, value: 'yes'
-        = f.submit 'Melden', class: 'primary-button'
+    = simple_form_for reply_for(event.id, current_user.id) do |f|
+      = f.input :event_id, as: :hidden
+      = f.input :user_id, as: :hidden
+      = f.input :status,
+        collection: status_options,
+        selected: reply_for(event.id, current_user.id).status,
+        prompt: 'Bist du dabei?',
+        input_html: { class: 'input-sm', onchange: 'this.form.submit()' }
