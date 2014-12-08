@@ -1,10 +1,4 @@
 de:
-  errors:
-    messages:
-      blank: Pflichtfeld
-      confirmation: ist ungleich
-      too_short: ist zu kurz (mind. %{count} Zeichen)
-
   activerecord:
     attributes:
       user:
@@ -26,12 +20,3 @@ de:
         maximum: Maximalanzahl Teilnehmer
       reply:
         status: Bist du dabei?
-
-  helpers:
-    submit:
-      create: "%{model} erstellen"
-
-  time:
-    formats:
-      short_with_day: "%a, %d.%m.%y - %H:%M Uhr"
-      sentence: "%A, %d.%m.%Y, um %H:%M Uhr"
