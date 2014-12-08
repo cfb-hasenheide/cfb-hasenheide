@@ -10,6 +10,9 @@
 
     #navigation.collapse.navbar-collapse
       %ul.nav.navbar-nav
+        %li{class: ('active' if params[:controller] == 'news')}
+          %a{href: news_index_path} News
+
         %li{class: ('active' if params[:controller] == 'events')}
           %a{href: events_path} Events
 

@@ -1,0 +1,27 @@
+%h1 News
+
+- if current_user.admin?
+  %p= link_to 'News erstellen', new_news_path, class: 'primary-button'
+
+%p
+  - for news in @news
+    .panel.panel-primary
+      .panel-body
+        %h2.panel-title
+          = news.title
+          %small.pull-right
+            vor
+            = time_ago_in_words(news.created_at)
+
+      .panel-body
+        = news.content
+
+      - if current_user.admin?
+        .panel-footer
+          = link_to edit_news_path(news), class: 'extra-small-button' do
+            %span.glyphicon.glyphicon-wrench
+            Bearbeiten
+          = link_to news, method: :delete, class: 'extra-small-button',
+            data: { :confirm => 'Are you sure?' } do
+            %span.glyphicon.glyphicon-trash
+            Löschen

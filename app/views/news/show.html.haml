@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @news.title
+%p
+  %b Content:
+  = @news.content
+%p
+  %b Internal:
+  = @news.internal
+
+= link_to 'Edit', edit_news_path(@news)
+\|
+= link_to 'Back', news_index_path
