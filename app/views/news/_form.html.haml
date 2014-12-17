@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :title
-    = f.input :content, as: :text
+    = f.input :content, as: :text, input_html: { class: 'wysihtml5' }
     = f.input :internal
 
   .form-actions
