@@ -21,6 +21,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap3-datetimepicker-rails'
+gem 'bootstrap-wysihtml5-rails'
 gem 'momentjs-rails' # TODO: needed for bootstrap3-datetimepicker-rails
 gem 'simple_form', '>= 3.1.0.rc1'
 
