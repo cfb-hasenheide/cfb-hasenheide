@@ -7,6 +7,8 @@
           %span.glyphicon.glyphicon-plus
           News erstellen
 
+%p.text-right= page_entries_info @news
+
 - for news in @news
   .panel.panel-primary
     .panel-body
@@ -30,4 +32,4 @@
           %span.glyphicon.glyphicon-trash
           Löschen
 
-= paginate(@news)
+.pull-right= paginate(@news)
