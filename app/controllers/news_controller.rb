@@ -5,7 +5,8 @@ class NewsController < ApplicationController
   respond_to :html
 
   def index
-    @news = user_signed_in? ? News.all : News.where(internal: false)
+    @news = News.order('created_at DESC')
+    @news = @news.where(internal: false) unless user_signed_in?
     respond_with(@news)
   end
 
