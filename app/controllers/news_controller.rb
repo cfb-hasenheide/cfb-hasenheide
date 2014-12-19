@@ -23,13 +23,17 @@ class NewsController < ApplicationController
 
   def create
     @news = News.new(news_params)
-    @news.save
-    respond_with(@news)
+    flash[:notice] = 'News wurde erfolgreich erstellt.' if @news.save
+
+    respond_with(@news, location: news_index_url)
   end
 
   def update
-    @news.update(news_params)
-    respond_with(@news)
+    if @news.update(news_params)
+      flash[:notice] = 'News wurde erfolgreich aktualisiert.'
+    end
+
+    respond_with(@news, location: news_index_url)
   end
 
   def destroy
