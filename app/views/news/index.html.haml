@@ -7,28 +7,27 @@
           %span.glyphicon.glyphicon-plus
           Neues Event erstellen
 
+- for news in @news
+  .panel.panel-primary
+    .panel-body
+      %h3.panel-title
+        = news.title
+        - if news.internal
+          %span.label.label-primary Intern
+        %small.pull-right
+          = l(news.created_at, format: :short)
 
+    .panel-body
+      = news.content.html_safe
 
-%p
-  - for news in @news
-    .panel.panel-primary
-      .panel-body
-        %h3.panel-title
-          = news.title
-          - if news.internal
-            %span.label.label-primary Intern
-          %small.pull-right
-            = l(news.created_at, format: :short)
+    - if admin?
+      .panel-footer
+        = link_to edit_news_path(news), class: 'extra-small-button' do
+          %span.glyphicon.glyphicon-wrench
+          Bearbeiten
+        = link_to news, method: :delete, class: 'extra-small-button',
+          data: { :confirm => 'Are you sure?' } do
+          %span.glyphicon.glyphicon-trash
+          Löschen
 
-      .panel-body
-        = news.content.html_safe
-
-      - if admin?
-        .panel-footer
-          = link_to edit_news_path(news), class: 'extra-small-button' do
-            %span.glyphicon.glyphicon-wrench
-            Bearbeiten
-          = link_to news, method: :delete, class: 'extra-small-button',
-            data: { :confirm => 'Are you sure?' } do
-            %span.glyphicon.glyphicon-trash
-            Löschen
+= paginate(@news)
