@@ -1,22 +1,29 @@
-%h1 News
+.page-header
+  %h1
+    News
+    - if admin?
+      .pull-right
+        = link_to new_news_path, class: 'primary-button' do
+          %span.glyphicon.glyphicon-plus
+          Neues Event erstellen
 
-- if current_user.admin?
-  %p= link_to 'News erstellen', new_news_path, class: 'primary-button'
+
 
 %p
   - for news in @news
     .panel.panel-primary
       .panel-body
-        %h2.panel-title
+        %h3.panel-title
           = news.title
+          - if news.internal
+            %span.label.label-primary Intern
           %small.pull-right
-            vor
-            = time_ago_in_words(news.created_at)
+            = l(news.created_at, format: :short)
 
       .panel-body
-        = news.content
+        = news.content.html_safe
 
-      - if current_user.admin?
+      - if admin?
         .panel-footer
           = link_to edit_news_path(news), class: 'extra-small-button' do
             %span.glyphicon.glyphicon-wrench

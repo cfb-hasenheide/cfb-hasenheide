@@ -1,15 +1,9 @@
-%p#notice= notice
+.page-header
+  %h1
+    = @news.title
+    %small
+      = l(@news.created_at, format: :short)
+      .pull-right
+        = link_to 'Alle News', news_index_path
 
-%p
-  %b Title:
-  = @news.title
-%p
-  %b Content:
-  = @news.content
-%p
-  %b Internal:
-  = @news.internal
-
-= link_to 'Edit', edit_news_path(@news)
-\|
-= link_to 'Back', news_index_path
+= @news.content.html_safe
