@@ -22,10 +22,10 @@
 
     - if admin?
       .panel-footer
-        = link_to edit_news_path(news), class: 'extra-small-button' do
+        = link_to edit_news_path(news), class: 'default-button-xs' do
           %span.glyphicon.glyphicon-wrench
           Bearbeiten
-        = link_to news, method: :delete, class: 'extra-small-button',
+        = link_to news, method: :delete, class: 'danger-button-xs',
           data: { :confirm => 'Are you sure?' } do
           %span.glyphicon.glyphicon-trash
           Löschen
