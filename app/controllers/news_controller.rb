@@ -5,8 +5,10 @@ class NewsController < ApplicationController
   respond_to :html
 
   def index
-    @news = News.order('created_at DESC')
-    @news = @news.where(internal: false) unless user_signed_in?
+    news = News.order('created_at DESC')
+    news = news.where(internal: false) unless user_signed_in?
+    @news = news.page(params[:page]).per(5)
+
     respond_with(@news)
   end
 

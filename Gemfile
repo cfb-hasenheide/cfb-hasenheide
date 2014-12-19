@@ -9,6 +9,9 @@ gem 'turbolinks'
 # db
 gem 'pg'
 
+# pagination
+gem 'kaminari'
+
 # authorization
 gem 'devise'
 gem 'devise_invitable'
