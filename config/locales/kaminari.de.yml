@@ -10,8 +10,8 @@ de:
     page_entries_info:
       one_page:
         display_entries:
-          zero: "Keine %{entry_name} gefunden"
-          one: "Angezeigt wird <b>1</b> %{entry_name}"
-          other: "Angezeigt werden <b>alle %{count}</b> %{entry_name}"
+          zero: "Keine Einträge gefunden"
+          one: "Angezeigt wird <b>1</b> Eintrag"
+          other: "Angezeigt werden <b>alle</b> Einträge"
       more_pages:
-        display_entries: "Angezeigt werden %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> von <b>%{total}</b> insgesamt"
+        display_entries: "Angezeigt werden <b>%{first}&nbsp;-&nbsp;%{last}</b> von insgesamt <b>%{total}</b> Einträgen"
