@@ -1,0 +1,25 @@
+.panel.panel-primary
+  .panel-body
+    %h3.panel-title
+      = link_to event.name, event_path(event)
+      %small.pull-right
+        = event.kind
+
+  .panel-body
+    %p
+      %span.glyphicon.glyphicon-calendar
+      = l(event.datetime, format: :long)
+      %span.glyphicon.glyphicon-map-marker
+      = event.address
+
+    %p= event.description
+
+  - if admin?
+    .panel-footer
+      = link_to edit_event_path(event), class: 'default-button-xs' do
+        %span.glyphicon.glyphicon-wrench
+        Bearbeiten
+      = link_to event, method: :delete, class: 'danger-button-xs',
+        data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
+        %span.glyphicon.glyphicon-trash
+        Löschen

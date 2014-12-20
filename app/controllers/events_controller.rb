@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @upcoming_events = Event.upcoming.page(params[:page])
+    @past_events = Event.past.page(params[:page])
   end
 
   # GET /events/1

@@ -13,6 +13,9 @@ class Event < ActiveRecord::Base
             friendly: 'Freundschaftsspiel',
             other: 'Sonstiges' }
 
+  scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime DESC') }
+  scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
+
   def yes_count
     replies.yes.count
   end

@@ -1,31 +1,35 @@
 .page-header
   %h1
     Events
-    %small= @events.count
+    - if admin?
+      .pull-right
+        = link_to new_event_path, class: 'primary-button' do
+          %span.glyphicon.glyphicon-plus
+          Event erstellen
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Datum / Uhrzeit
-      %th Min - Max
-      %th
+%div{role: 'tabpanel'}
+  %ul.nav.nav-pills.nav-justified{role: 'tablist'}
+    %li.active{role: 'presentation'}
+      %a{href: '#upcoming', 'aria-controls' => 'upcoming', role: 'tab',
+      'data-toggle' => 'tab'} Kommende
+    %li{role: 'presentation'}
+      %a{href: '#past', 'aria-controls' => 'past', role: 'tab',
+      'data-toggle' => 'tab'} Vergangene
 
-  %tbody
-    - @events.each do |event|
-      %tr
-        %td= link_to event.name, event_path(event)
-        %td= l event.datetime, format: :short
-        %td #{event.minimum} - #{event.maximum}
-        %td
-          = link_to event, class: 'extra-small-button' do
-            %span.glyphicon.glyphicon-eye-open
-          = link_to edit_event_path(event), class: 'extra-small-button' do
-            %span.glyphicon.glyphicon-wrench
-          = link_to event, method: :delete, class: 'extra-small-button',
-            data: { :confirm => 'Are you sure?' } do
-            %span.glyphicon.glyphicon-trash
+  .tab-content
+    %br
+    .tab-pane.fade.in.active#upcoming{role: 'tabpanel'}
+      %p.text-right= page_entries_info(@upcoming_events)
 
-%br
+      - for event in @upcoming_events
+        = render 'event', event: event
 
-= link_to 'Neues Event', new_event_path, class: 'primary-button'
+      .pull-right= paginate(@upcoming_events)
+
+    .tab-pane.fade#past{role: 'tabpanel'}
+      %p.text-right= page_entries_info(@past_events)
+
+      - for event in @past_events
+        = render 'event', event: event
+
+      .pull-right= paginate(@past_events)
