@@ -120,8 +120,16 @@
         %h3.panel-title Adresse
       .panel-body
         %p
+          %span.glyphicon.glyphicon-map-marker
           = @event.address
-          = image_tag 'favicon', class: 'img-responsive img-thumbnail'
+        %p
+          %span.glyphicon.glyphicon-link
+          = link_to 'in Google Maps öffnen',
+            @event.google_maps_url,
+            target: :blank
+        %p
+          = image_tag @event.google_static_maps_url,
+            class: 'img-responsive img-rounded'
 
 - if admin?
   = link_to edit_event_path(@event), class: 'default-button' do

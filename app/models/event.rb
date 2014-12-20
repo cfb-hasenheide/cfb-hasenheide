@@ -23,4 +23,18 @@ class Event < ActiveRecord::Base
   def humanized_kind
     Event::KINDS[kind.to_sym]
   end
+
+  def google_maps_url
+    "http://maps.google.com/?q=#{address}"
+  end
+
+  def google_static_maps_url
+    'http://maps.googleapis.com/maps/api/staticmap' \
+    "?center=#{address}" \
+    "&markers=color:green|#{address}" \
+    '&zoom=14' \
+    '&size=400x400' \
+    '&sensor=false' \
+    '&scale=2'
+  end
 end
