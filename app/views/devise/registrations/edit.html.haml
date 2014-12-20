@@ -48,6 +48,8 @@
         %h3.panel-title Account löschen
 
       .panel-body
-        = button_to 'Account löschen', registration_path(resource_name),
-          data: { confirm: 'Are you sure?' }, method: :delete,
+        = button_to 'Account löschen',
+          registration_path(resource_name),
+          data: { confirm: 'Wirklich unwiderruflich löschen?' },
+          method: :delete,
           class: 'btn btn-danger'
