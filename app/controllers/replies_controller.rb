@@ -11,6 +11,23 @@ class RepliesController < ApplicationController
     redirect_to :back
   end
 
+  def create_multiple
+    event_id = params[:event_id]
+    user_ids = params[:user_ids]
+
+    redirect_to :back and return unless user_ids
+
+    Reply.yes.where(event_id: event_id).delete_all
+
+    user_ids.each do |user_id|
+      Reply.create(event_id: event_id, user_id: user_id, status: 'yes')
+    end
+
+    flash[:notice] = "#{user_ids.count} Spieler erfolgreich gemeldet."
+
+    redirect_to :back
+  end
+
   def update
     reply = Reply.find_by(reply_params.slice(:event_id, :user_id))
 

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :news
 
   resources :events
-  resources :replies
+  resources :replies do
+    post :create_multiple, on: :collection
+  end
 
   devise_for :users, controllers: { registrations: "registrations" }
   # The priority is based upon order of creation: first created -> highest priority.
