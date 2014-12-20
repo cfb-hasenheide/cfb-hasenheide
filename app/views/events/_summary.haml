@@ -4,10 +4,10 @@
     %small= event.humanized_kind
 
   %p
-    %strong Wann:
+    %span.glyphicon.glyphicon-calendar
     = l(event.datetime)
     %br
-    %strong Wo:
+    %span.glyphicon.glyphicon-map-marker
     = @event.address
 
   %p= event.description
