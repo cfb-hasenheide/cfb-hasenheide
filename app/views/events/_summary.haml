@@ -19,5 +19,5 @@
       = f.input :status,
         collection: status_options,
         selected: reply_for(event.id, current_user.id).status,
-        prompt: 'Bist du dabei?',
+        prompt: 'Ausstehend...',
         input_html: { class: 'input-sm', onchange: 'this.form.submit()' }
