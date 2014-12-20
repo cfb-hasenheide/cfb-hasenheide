@@ -1,0 +1,23 @@
+.panel.panel-primary
+  .panel-body
+    %h3.panel-title
+      = news.title
+      - if news.internal
+        %span.label.label-primary Intern
+      %small.pull-right
+        = l(news.created_at, format: :short)
+
+  .panel-body
+    = news.content.html_safe
+
+  - if admin?
+    .panel-footer
+      = link_to edit_news_path(news), class: 'default-button-xs' do
+        %span.glyphicon.glyphicon-wrench
+        Bearbeiten
+      = link_to news,
+        method: :delete,
+        class: 'danger-button-xs',
+        data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
+        %span.glyphicon.glyphicon-trash
+        Löschen
