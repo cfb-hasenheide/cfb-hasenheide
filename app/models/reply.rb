@@ -16,11 +16,16 @@ class Reply < ActiveRecord::Base
                watch: 'Z - Zuschauer',
                waiting: 'W - Warteliste' }
 
-  def self.by_event_and_user(event, user)
+  def self.for_event_and_user(event, user)
     find_or_initialize_by(event_id: event, user_id: user)
   end
 
+  def self.by_event_and_status(event, status)
+    where(event_id: event).send(status.to_sym)
+  end
+
   def humanized_status
+    return 'Ausstehend' unless status
     STATUSES[status.to_sym]
   end
 end

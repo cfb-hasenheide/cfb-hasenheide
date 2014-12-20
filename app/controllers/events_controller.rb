@@ -12,7 +12,13 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @players = User.players
-    @reply = Reply.by_event_and_user(@event, current_user)
+    @yes_replies = Reply.by_event_and_status(@event, :yes)
+    @no_replies = Reply.by_event_and_status(@event, :no)
+    @waiting_replies = Reply.by_event_and_status(@event, :waiting)
+    @maybee_replies = Reply.by_event_and_status(@event, :maybee)
+    @watch_replies = Reply.by_event_and_status(@event, :watch)
+    @no_reply_players = User.didnt_reply_to_event(@event.id)
+    @reply = Reply.for_event_and_user(@event, current_user)
   end
 
   # GET /events/new

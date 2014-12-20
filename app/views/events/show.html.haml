@@ -6,15 +6,107 @@
 
 .half-half
   .left-half
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title
-          Meldeliste
-          %span.pull-right #{@event.minimum} - #{@event.maximum}
+    .panel-group#replies{role: 'tablist', 'aria-multiselectable' => true}
 
-      %ul.list-group
-        - for player in @players
-          = render 'reply', event: @event, user: player
+      - if @yes_replies.present?
+        .panel.panel-default
+          .panel-heading#headingYes{role: 'tab'}
+            %h3.panel-title
+              %a{href: '#collapseYes', 'data-toggle' => 'collapse',
+              'data-parent' => '#replies', 'aria-expanded' => true,
+              'aria-controls' => 'collapseYes'}
+                Meldungen
+              .pull-right
+                %span.label.label-success= @yes_replies.count
+
+          .panel-collapse.collapse.in#collapseYes{role: 'tabpanel',
+            'aria-labelledby' => 'headingYes'}
+
+            %ul.list-group
+              - for reply in @yes_replies
+                %li.list-group-item.list-group-item-success
+                  = reply.user.username
+                  %span.badge= reply_status_for(@event, reply.user)
+
+      - if @maybee_replies.present?
+        .panel.panel-default
+          .panel-heading#headingMaybee{role: 'tab'}
+            %h3.panel-title
+              %a{href: '#collapseMaybee', 'data-toggle' => 'collapse',
+              'data-parent' => '#replies', 'aria-expanded' => true,
+              'aria-controls' => 'collapseMaybee'}
+                Vielleicht
+              .pull-right
+                %span.label.label-warning= @maybee_replies.count
+
+          .panel-collapse.collapse#collapseMaybee{role: 'tabpanel',
+            'aria-labelledby' => 'headingMaybee'}
+
+            %ul.list-group
+              - for reply in @maybee_replies
+                %li.list-group-item.list-group-item-warning
+                  = reply.user.username
+                  %span.badge= reply_status_for(@event, reply.user)
+
+      - if @no_replies.present?
+        .panel.panel-default
+          .panel-heading#headingNo{role: 'tab'}
+            %h3.panel-title
+              %a{href: '#collapseNo', 'data-toggle' => 'collapse',
+              'data-parent' => '#replies', 'aria-expanded' => true,
+              'aria-controls' => 'collapseNo'}
+                Absagen
+              .pull-right
+                %span.label.label-danger= @no_replies.count
+
+          .panel-collapse.collapse#collapseNo{role: 'tabpanel',
+            'aria-labelledby' => 'headingNo'}
+
+            %ul.list-group
+              - for reply in @no_replies
+                %li.list-group-item.list-group-item-danger
+                  = reply.user.username
+                  %span.badge= reply_status_for(@event, reply.user)
+
+      - if @watch_replies.present?
+        .panel.panel-default
+          .panel-heading#headingWatch{role: 'tab'}
+            %h3.panel-title
+              %a{href: '#collapseWatch', 'data-toggle' => 'collapse',
+              'data-parent' => '#replies', 'aria-expanded' => true,
+              'aria-controls' => 'collapseWatch'}
+                Zuschauer
+              .pull-right
+                %span.label.label-info= @watch_replies.count
+
+          .panel-collapse.collapse#collapseWatch{role: 'tabpanel',
+            'aria-labelledby' => 'headingWatch'}
+
+            %ul.list-group
+              - for reply in @watch_replies
+                %li.list-group-item.list-group-item-info
+                  = reply.user.username
+                  %span.badge= reply_status_for(@event, reply.user)
+
+      - if @no_reply_players.present?
+        .panel.panel-default
+          .panel-heading#headingMissing{role: 'tab'}
+            %h3.panel-title
+              %a{href: '#collapseMissing', 'data-toggle' => 'collapse',
+              'data-parent' => '#replies', 'aria-expanded' => true,
+              'aria-controls' => 'collapseMissing'}
+                Ausstehend
+              .pull-right
+                %span.label.label-default= @no_reply_players.count
+
+          .panel-collapse.collapse#collapseMissing{role: 'tabpanel',
+            'aria-labelledby' => 'headingMissing'}
+
+            %ul.list-group
+              - for player in @no_reply_players
+                %li.list-group-item.list-group-item-default
+                  = player.username
+                  %span.badge= reply_status_for(@event, player)
 
   .right-half
     .panel.panel-default
@@ -31,5 +123,7 @@
           = @event.address
           = image_tag 'favicon', class: 'img-responsive img-thumbnail'
 
-= link_to edit_event_path(@event), class: 'default-button' do
-  %span.glyphicon.glyphicon-wrench
+- if admin?
+  = link_to edit_event_path(@event), class: 'default-button' do
+    %span.glyphicon.glyphicon-wrench
+    Bearbeiten

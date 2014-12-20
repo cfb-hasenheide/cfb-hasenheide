@@ -8,7 +8,7 @@ module ReplyHelper
   end
 
   def reply_for(event, user)
-    Reply.by_event_and_user(event, user)
+    Reply.for_event_and_user(event, user)
   end
 
   def reply_status_for(event, user)
