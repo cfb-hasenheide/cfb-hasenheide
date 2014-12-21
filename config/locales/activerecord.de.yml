@@ -7,6 +7,7 @@ de:
         password_confirmation: Passwort wiederholen
         current_password: Aktuelles Passwort
         remember_me: Angemeldet bleiben
+        role: Rolle
       news:
         title: Titel
         content: Inhalt

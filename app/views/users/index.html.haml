@@ -1,0 +1,40 @@
+.page-header
+  %h1 Userverwaltung
+
+.table-responsive
+  %table
+    %thead
+      %tr
+        %th= User.human_attribute_name(:username)
+        %th= User.human_attribute_name(:email)
+        %th= User.human_attribute_name(:role)
+
+    %tbody
+      - for user in @users
+        %tr{class: table_row_class_for(user)}
+          %td.col-lg-3
+            = form_for(user) do |f|
+              .form-inputs
+                .input-group
+                  = f.text_field :username, class: 'form-control input-sm'
+                  %span.input-group-btn
+                    = button_tag :submit, class: 'primary-button-sm' do
+                      %span.glyphicon.glyphicon-ok
+
+          %td.col-lg-3
+            = form_for(user) do |f|
+              .form-inputs
+                .input-group
+                  = f.text_field :email, class: 'form-control input-sm'
+                  %span.input-group-btn
+                    = button_tag :submit, class: 'primary-button-sm' do
+                      %span.glyphicon.glyphicon-ok
+
+          %td.col-lg-3
+            = form_for(user) do |f|
+              .form-inputs
+                = f.select :role,
+                  options_for_select(User.roles.keys, user.role),
+                  {},
+                  class: 'form-control input-sm',
+                  onchange: 'this.form.submit()'
