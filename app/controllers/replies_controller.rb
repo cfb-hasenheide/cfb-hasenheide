@@ -11,6 +11,7 @@ class RepliesController < ApplicationController
     redirect_to :back
   end
 
+  # TODO: this is not the yellow of the egg
   def create_multiple
     event_id = params[:event_id]
     user_ids = params[:user_ids]
@@ -20,6 +21,7 @@ class RepliesController < ApplicationController
     Reply.yes.where(event_id: event_id).delete_all
 
     user_ids.each do |user_id|
+      Reply.for_event_and_user(event_id, user_id).delete
       Reply.create(event_id: event_id, user_id: user_id, status: 'yes')
     end
 
