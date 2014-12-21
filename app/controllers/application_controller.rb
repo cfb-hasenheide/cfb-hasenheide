@@ -12,11 +12,17 @@ class ApplicationController < ActionController::Base
       u.permit :username, :email, :password, :password_confirmation
     end
 
-    devise_parameter_sanitizer.for(:accept_invitation).concat [:first_name, :last_name, :phone]
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:username, :email, :password, :password_confirmation,
+               :current_password)
+    end
+
+    devise_parameter_sanitizer.for(:accept_invitation)
+      .concat [:first_name, :last_name, :phone]
 
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:first_name, :last_name, :phone, :password, :password_confirmation,
-               :invitation_token)
+      u.permit(:first_name, :last_name, :phone, :password,
+               :password_confirmation, :invitation_token)
     end
   end
 end
