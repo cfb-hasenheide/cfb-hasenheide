@@ -1,6 +1,6 @@
-class CreateEventResponses < ActiveRecord::Migration
+class CreateReplies < ActiveRecord::Migration
   def change
-    create_table :event_responses do |t|
+    create_table :replies do |t|
       t.references :user, index: true
       t.references :event, index: true
       t.integer :status
