@@ -13,11 +13,11 @@
   - if admin?
     .panel-footer
       = link_to edit_news_path(news), class: 'default-button-xs' do
-        %span.glyphicon.glyphicon-wrench
+        = edit_icon
         Bearbeiten
       = link_to news,
         method: :delete,
         class: 'danger-button-xs',
         data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
-        %span.glyphicon.glyphicon-trash
+        = delete_icon
         Löschen

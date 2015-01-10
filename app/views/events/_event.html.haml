@@ -7,21 +7,24 @@
 
   .panel-body
     %p
-      %span.glyphicon.glyphicon-calendar
+      = datetime_icon
       = l(event.datetime, format: :long)
 
       %br
-      %span.glyphicon.glyphicon-map-marker
+      = address_icon
       = event.address
 
     %p= event.description
 
-  - if admin?
-    .panel-footer
+  .panel-footer
+    = link_to root_path, class: 'default-button-xs' do
+      = report_icon
+      Bericht
+    - if admin?
       = link_to edit_event_path(event), class: 'default-button-xs' do
-        %span.glyphicon.glyphicon-wrench
+        = edit_icon
         Bearbeiten
       = link_to event, method: :delete, class: 'danger-button-xs',
         data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
-        %span.glyphicon.glyphicon-trash
+        = delete_icon
         Löschen

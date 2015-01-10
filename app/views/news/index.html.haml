@@ -4,7 +4,7 @@
     - if admin?
       .pull-right
         = link_to new_news_path, class: 'primary-button' do
-          %span.glyphicon.glyphicon-plus
+          = create_icon
           News erstellen
 
 %p.text-right= page_entries_info @news

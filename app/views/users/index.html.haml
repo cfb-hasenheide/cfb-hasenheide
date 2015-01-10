@@ -19,7 +19,7 @@
                   = f.text_field :username, class: 'form-control input-sm'
                   %span.input-group-btn
                     = button_tag :submit, class: 'primary-button-sm' do
-                      %span.glyphicon.glyphicon-ok
+                      = save_icon
 
           %td.col-lg-3
             = form_for(user) do |f|
@@ -28,7 +28,7 @@
                   = f.text_field :email, class: 'form-control input-sm'
                   %span.input-group-btn
                     = button_tag :submit, class: 'primary-button-sm' do
-                      %span.glyphicon.glyphicon-ok
+                      = save_icon
 
           %td.col-lg-3
             = form_for(user) do |f|
