@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :replies
+  has_one :report
 
   enum kind: { league: 0, cup: 1, tournament: 2, friendly: 3, other: 4 }
 

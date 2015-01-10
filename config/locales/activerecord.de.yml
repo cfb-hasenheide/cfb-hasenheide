@@ -23,3 +23,5 @@ de:
         maximum: Maximalanzahl Teilnehmer
       reply:
         status: Bist du dabei?
+      report:
+        content: Bericht

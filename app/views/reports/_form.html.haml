@@ -1,0 +1,11 @@
+= simple_form_for(report) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :event, collection: Event.past,
+      label_method: :generated_name, value_method: :id, prompt: 'Event wählen'
+    = f.input :content, as: :text, input_html: { class: 'wysihtml5' }
+
+  .form-actions
+    = f.button :submit, class: 'primary-button'
+    = link_to 'Abbrechen', reports_path, class: 'default-button'

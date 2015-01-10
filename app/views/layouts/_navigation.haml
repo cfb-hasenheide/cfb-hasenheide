@@ -16,6 +16,9 @@
         %li{class: ('active' if params[:controller] == 'events')}
           %a{href: events_path} Events
 
+        %li{class: ('active' if params[:controller] == 'reports')}
+          %a{href: reports_path} Spielberichte
+
         %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
           %a{href: '/contact'} Kontakt
 

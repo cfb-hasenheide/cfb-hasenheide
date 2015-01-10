@@ -17,9 +17,16 @@
     %p= event.description
 
   .panel-footer
-    = link_to root_path, class: 'default-button-xs' do
-      = report_icon
-      Bericht
+    - if event.report.present?
+      = link_to report_path(event.report), class: 'default-button-xs' do
+        = report_icon
+        Bericht
+    - else
+      = link_to new_report_path(event),
+        class: 'primary-button-xs' do
+        = create_icon
+        Bericht
+
     - if admin?
       = link_to edit_event_path(event), class: 'default-button-xs' do
         = edit_icon

@@ -2,13 +2,14 @@ Rails.application.routes.draw do
   resources :news
 
   resources :events
-  resources :replies do
+  resources :replies, only: [:create, :update] do
     post :create_multiple, on: :collection
   end
 
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users, only: [:index, :update]
   resources :teams, only: [:index, :update]
+  resources :reports
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
