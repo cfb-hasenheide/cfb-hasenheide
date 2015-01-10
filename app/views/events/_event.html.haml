@@ -1,14 +1,16 @@
 .panel.panel-primary
   .panel-body
     %h3.panel-title
-      = link_to event.name, event_path(event)
+      = link_to event.generated_name, event_path(event)
       %small.pull-right
-        = event.kind
+        = event.humanized_kind
 
   .panel-body
     %p
       %span.glyphicon.glyphicon-calendar
       = l(event.datetime, format: :long)
+
+      %br
       %span.glyphicon.glyphicon-map-marker
       = event.address
 

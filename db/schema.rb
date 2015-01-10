@@ -11,21 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221151208) do
+ActiveRecord::Schema.define(version: 20150110144123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",        limit: 255
     t.datetime "datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description", limit: 255
-    t.string   "address",     limit: 255
+    t.string   "description",  limit: 255
+    t.string   "address",      limit: 255
     t.integer  "minimum"
     t.integer  "maximum"
     t.integer  "kind"
+    t.string   "home_team"
+    t.integer  "home_team_id"
+    t.string   "away_team"
+    t.integer  "away_team_id"
   end
 
   create_table "news", force: :cascade do |t|
@@ -46,6 +49,14 @@ ActiveRecord::Schema.define(version: 20141221151208) do
 
   add_index "replies", ["event_id"], name: "index_replies_on_event_id", using: :btree
   add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

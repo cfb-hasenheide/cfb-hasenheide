@@ -15,6 +15,8 @@ de:
       event:
         kind: Typ
         datetime: Datum / Uhrzeit
+        home_team: Heimmannschaft
+        away_team: Auswärtsmannschaft
         description: Beschreibung
         address: Adresse
         minimum: Mindestanzahl Teilnehmer

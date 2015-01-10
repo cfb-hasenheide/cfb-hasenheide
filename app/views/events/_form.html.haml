@@ -2,22 +2,28 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :kind, collection: event_kind_options, selected: @event.kind
     .half-half
       .left-half
-        = f.input :name
+        = f.input :kind, collection: event_kind_options, selected: @event.kind
       .right-half
         = f.input :datetime,
           input_html: {id: 'datetimepicker'},
           as: :string
     .half-half
       .left-half
-        = f.input :minimum, collection: 1..100, selected: 7
+        = f.input :home_team
       .right-half
+        = f.input :away_team
+    .thirds
+      .third
+        = f.input :replyable
+      .third
+        = f.input :minimum, collection: 1..100, selected: 7
+      .third
         = f.input :maximum, collection: 1..100, selected: 11
 
-    = f.input :description, as: :text
     = f.input :address
+    = f.input :description, as: :text
 
   .form-actions
     = f.button :submit, 'Speichern', class: 'primary-button'

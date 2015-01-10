@@ -7,29 +7,23 @@
           %span.glyphicon.glyphicon-plus
           Event erstellen
 
-%div{role: 'tabpanel'}
-  %ul.nav.nav-pills.nav-justified{role: 'tablist'}
-    %li.active{role: 'presentation'}
-      %a{href: '#upcoming', 'aria-controls' => 'upcoming', role: 'tab',
-      'data-toggle' => 'tab'} Kommende
-    %li{role: 'presentation'}
-      %a{href: '#past', 'aria-controls' => 'past', role: 'tab',
-      'data-toggle' => 'tab'} Vergangene
+.half-half
+  .left-half
+    %h2
+      Kommende
+      %small
+        %strong= @upcoming_events.count
 
-  .tab-content
-    %br
-    .tab-pane.fade.in.active#upcoming{role: 'tabpanel'}
-      %p.text-right= page_entries_info(@upcoming_events)
+    - for event in @upcoming_events
+      = render 'event', event: event
 
-      - for event in @upcoming_events
-        = render 'event', event: event
+  .right-half
+    %h2
+      Vergangene
+      %small= page_entries_info(@past_events)
 
-      .pull-right= paginate(@upcoming_events)
+    - for event in @past_events
+      = render 'event', event: event
 
-    .tab-pane.fade#past{role: 'tabpanel'}
-      %p.text-right= page_entries_info(@past_events)
-
-      - for event in @past_events
-        = render 'event', event: event
-
-      .pull-right= paginate(@past_events)
+.pull-right
+  = paginate @past_events

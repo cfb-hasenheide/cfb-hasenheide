@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @upcoming_events = Event.upcoming.page(params[:page])
+    @upcoming_events = Event.upcoming
     @past_events = Event.past.page(params[:page])
   end
 
@@ -81,6 +81,8 @@ class EventsController < ApplicationController
       params.require(:event).permit(:kind,
                                     :name,
                                     :datetime,
+                                    :home_team,
+                                    :away_team,
                                     :description,
                                     :address,
                                     :minimum,

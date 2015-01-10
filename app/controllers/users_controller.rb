@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :admin_check, only: [:index]
-  before_action :set_user, only: [:update]
+  before_action :admin_check, only: :index
+  before_action :set_user, only: :update
 
   respond_to :html
 

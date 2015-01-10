@@ -1,14 +1,15 @@
 class Event < ActiveRecord::Base
   has_many :replies
 
-  enum kind: { home: 0, away: 1, cup: 2, tournament: 3, friendly: 4, other: 5 }
+  enum kind: { league: 0, cup: 1, tournament: 2, friendly: 3, other: 4 }
 
-  validates :kind, :name, :datetime, presence: true
+  validates :kind, :datetime, :home_team, :away_team, presence: true
+
+  before_save :set_teams, if: :teams_changed?
 
   # TODO translate in local yml
-  KINDS = { home: 'Heimspiel Liga',
-            away: 'Auswärtsspiel Liga',
-            cup: 'Pokalspiel',
+  KINDS = { league: 'Liga',
+            cup: 'Pokal',
             tournament: 'Turnier',
             friendly: 'Freundschaftsspiel',
             other: 'Sonstiges' }
@@ -36,5 +37,20 @@ class Event < ActiveRecord::Base
     '&size=400x400' \
     '&sensor=false' \
     '&scale=2'
+  end
+
+  def generated_name
+    "#{home_team} vs. #{away_team}"
+  end
+
+  private
+
+  def set_teams
+    self.home_team_id = Team.find_or_create_by(name: home_team).id
+    self.away_team_id = Team.find_or_create_by(name: away_team).id
+  end
+
+  def teams_changed?
+    home_team_changed? || away_team_changed?
   end
 end
