@@ -5,6 +5,9 @@ class Event < ActiveRecord::Base
   enum kind: { league: 0, cup: 1, tournament: 2, friendly: 3, other: 4 }
 
   validates :kind, :datetime, :home_team, :away_team, presence: true
+  validates :minimum,
+    numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
+  validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
   before_save :set_teams, if: :teams_changed?
 
