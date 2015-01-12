@@ -198,5 +198,5 @@ de:
     formats:
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
-      short: ! "%d. %b. '%y, %H:%M Uhr"
+      short: ! "%d.%m.%y - %H:%M:%S"
     pm: nachmittags

@@ -7,86 +7,10 @@
 .half-half
   .left-half
     .panel-group#replies{role: 'tablist', 'aria-multiselectable' => true}
-
-      - if @yes_replies.present?
-        .panel.panel-default
-          .panel-heading#headingYes{role: 'tab'}
-            %h3.panel-title
-              %a{href: '#collapseYes', 'data-toggle' => 'collapse',
-              'data-parent' => '#replies', 'aria-expanded' => true,
-              'aria-controls' => 'collapseYes'}
-                Meldungen
-              .pull-right
-                %span.label.label-success= @yes_replies.count
-
-          .panel-collapse.collapse.in#collapseYes{role: 'tabpanel',
-            'aria-labelledby' => 'headingYes'}
-
-            %ul.list-group
-              - for reply in @yes_replies
-                %li.list-group-item.list-group-item-success
-                  = reply.user.username
-                  %span.badge= reply_status_for(@event, reply.user)
-
-      - if @maybee_replies.present?
-        .panel.panel-default
-          .panel-heading#headingMaybee{role: 'tab'}
-            %h3.panel-title
-              %a{href: '#collapseMaybee', 'data-toggle' => 'collapse',
-              'data-parent' => '#replies', 'aria-expanded' => true,
-              'aria-controls' => 'collapseMaybee'}
-                Vielleicht
-              .pull-right
-                %span.label.label-warning= @maybee_replies.count
-
-          .panel-collapse.collapse#collapseMaybee{role: 'tabpanel',
-            'aria-labelledby' => 'headingMaybee'}
-
-            %ul.list-group
-              - for reply in @maybee_replies
-                %li.list-group-item.list-group-item-warning
-                  = reply.user.username
-                  %span.badge= reply_status_for(@event, reply.user)
-
-      - if @no_replies.present?
-        .panel.panel-default
-          .panel-heading#headingNo{role: 'tab'}
-            %h3.panel-title
-              %a{href: '#collapseNo', 'data-toggle' => 'collapse',
-              'data-parent' => '#replies', 'aria-expanded' => true,
-              'aria-controls' => 'collapseNo'}
-                Absagen
-              .pull-right
-                %span.label.label-danger= @no_replies.count
-
-          .panel-collapse.collapse#collapseNo{role: 'tabpanel',
-            'aria-labelledby' => 'headingNo'}
-
-            %ul.list-group
-              - for reply in @no_replies
-                %li.list-group-item.list-group-item-danger
-                  = reply.user.username
-                  %span.badge= reply_status_for(@event, reply.user)
-
-      - if @watch_replies.present?
-        .panel.panel-default
-          .panel-heading#headingWatch{role: 'tab'}
-            %h3.panel-title
-              %a{href: '#collapseWatch', 'data-toggle' => 'collapse',
-              'data-parent' => '#replies', 'aria-expanded' => true,
-              'aria-controls' => 'collapseWatch'}
-                Zuschauer
-              .pull-right
-                %span.label.label-info= @watch_replies.count
-
-          .panel-collapse.collapse#collapseWatch{role: 'tabpanel',
-            'aria-labelledby' => 'headingWatch'}
-
-            %ul.list-group
-              - for reply in @watch_replies
-                %li.list-group-item.list-group-item-info
-                  = reply.user.username
-                  %span.badge= reply_status_for(@event, reply.user)
+      = render 'replies', event: @event, replies: @yes_replies, status: :yes
+      = render 'replies', event: @event, replies: @maybee_replies, status: :maybee
+      = render 'replies', event: @event, replies: @no_replies, status: :no
+      = render 'replies', event: @event, replies: @watch_replies, status: :watch
 
       - if @no_reply_players.present?
         .panel.panel-default
@@ -96,8 +20,8 @@
               'data-parent' => '#replies', 'aria-expanded' => true,
               'aria-controls' => 'collapseMissing'}
                 Ausstehend
-              .pull-right
-                %span.label.label-default= @no_reply_players.count
+
+              %span.label.label-default= @no_reply_players.count
 
           .panel-collapse.collapse#collapseMissing{role: 'tabpanel',
             'aria-labelledby' => 'headingMissing'}
@@ -106,7 +30,6 @@
               - for player in @no_reply_players
                 %li.list-group-item.list-group-item-default
                   = player.username
-                  %span.badge= reply_status_for(@event, player)
 
   .right-half
     .panel.panel-default

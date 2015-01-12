@@ -1,0 +1,25 @@
+- if replies.present?
+  .panel.panel-default
+    .panel-heading{role: 'tab', id: "heading#{status.to_s.capitalize}"}
+      %h3.panel-title
+        %a{href: "#collapse#{status.to_s.capitalize}",
+        'data-toggle' => 'collapse',
+        'data-parent' => '#replies',
+        'aria-expanded' => true,
+        'aria-controls' => "collapse#{status.to_s.capitalize}"}
+          = Reply::STATUSES[status]
+
+        %span{class: "label label-#{class_for(status)}"}
+          = replies.count
+
+    .panel-collapse.collapse{class: ('in' if status == :yes),
+      role: 'tabpanel',
+      'aria-labelledby' => "heading#{status.to_s.capitalize}",
+      id: "collapse#{status.to_s.capitalize}"}
+
+      %ul.list-group
+        - for reply in replies
+          %li{class: "list-group-item list-group-item-#{class_for(status)}"}
+            = reply.user.username
+            %span.badge
+              = l(reply.updated_at, format: :short)
