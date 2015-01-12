@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     flash[:notice] = 'Event wurde erfolgreich erstellt.' if @event.save
 
-    respond_with(@event, events_path)
+    respond_with(@event, location: events_path)
   end
 
   def update
