@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:edit, :update]
+  before_action :set_report, only: [:create, :edit, :update]
 
   respond_to :html
 
