@@ -7,7 +7,7 @@
         'data-parent' => '#replies',
         'aria-expanded' => true,
         'aria-controls' => "collapse#{status.to_s.capitalize}"}
-          = Reply::STATUSES[status]
+          = I18n.t("reply_status.#{status}")
 
         %span{class: "label label-#{class_for(status)}"}
           = replies.count

@@ -1,7 +1,7 @@
 module EventsHelper
   def event_kind_options
-    Event.kinds.reduce({}) do |memo, (k, _)|
-      memo[Event::KINDS[k.to_sym]] = k
+    Event.kinds.reduce({}) do |memo, (enum, _)|
+      memo[I18n.t("event_kind.#{enum}")] = enum
       memo
     end
   end

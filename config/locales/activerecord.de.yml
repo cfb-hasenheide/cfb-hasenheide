@@ -25,3 +25,17 @@ de:
         status: Bist du dabei?
       report:
         content: Bericht
+
+  # enum translations
+  reply_status:
+    'yes': 'M - Meldung'
+    'no': '0 - Absage'
+    maybee: '? - Unsicher'
+    waiting: 'W - Warteliste'
+    watch: 'Z - Zuschauer'
+  event_kind:
+    league: Liga
+    cup: Pokal
+    tournament: Turnier
+    friendly: Freundschaftsspiel
+    other: Sonstiges

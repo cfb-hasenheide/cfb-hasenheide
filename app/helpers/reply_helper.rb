@@ -1,11 +1,10 @@
 module ReplyHelper
   def status_options
-    # TODO use i18n translation
-    { 'M - Meldung' => 'yes',
-      '0 - Absage' => 'no',
-      '? - Vielleicht' => 'maybee',
-      'W - Warteliste' => 'waiting',
-      'Z - Zuschauer' => 'watch' }
+    Reply.statuses.reduce({}) do |memo, (enum, _)|
+      translated_enum = I18n.t("reply_status.#{enum}")
+      memo[translated_enum] = enum
+      memo
+    end
   end
 
   def reply_for(event, user)

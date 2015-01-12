@@ -11,13 +11,6 @@ class Event < ActiveRecord::Base
 
   before_save :set_teams, if: :teams_changed?
 
-  # TODO translate in local yml
-  KINDS = { league: 'Liga',
-            cup: 'Pokal',
-            tournament: 'Turnier',
-            friendly: 'Freundschaftsspiel',
-            other: 'Sonstiges' }
-
   scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime DESC') }
   scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
 
@@ -27,10 +20,6 @@ class Event < ActiveRecord::Base
 
   def waiting_count
     replies.waiting.count
-  end
-
-  def humanized_kind
-    Event::KINDS[kind.to_sym]
   end
 
   def google_maps_url

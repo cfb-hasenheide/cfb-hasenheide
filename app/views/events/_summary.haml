@@ -1,7 +1,7 @@
 .jumbotron
   %h1
     = event.generated_name
-    %small= event.humanized_kind
+    %small= I18n.t("event_kind.#{event.kind}")
 
   = render 'progress_bar', event: event
 

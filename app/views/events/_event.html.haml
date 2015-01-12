@@ -3,7 +3,7 @@
     %h3.panel-title
       = link_to event.generated_name, event_path(event)
       %small.pull-right
-        = event.humanized_kind
+        = I18n.t("event_kind.#{event.kind}")
 
   .panel-body
     %p
