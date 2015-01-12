@@ -47,8 +47,8 @@ class Event < ActiveRecord::Base
   private
 
   def set_teams
-    self.home_team_id = Team.find_or_create_by(name: home_team).id
-    self.away_team_id = Team.find_or_create_by(name: away_team).id
+    self.home_team_id = Team.find_or_create_by(name: home_team.strip).id
+    self.away_team_id = Team.find_or_create_by(name: away_team.strip).id
   end
 
   def teams_changed?
