@@ -27,6 +27,10 @@ de:
         content: Bericht
 
   # enum translations
+  user_role:
+    fan: Fan
+    player: Spieler
+    admin: Admin
   reply_status:
     'yes': 'M - Meldung'
     'no': '0 - Absage'
