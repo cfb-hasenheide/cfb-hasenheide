@@ -7,14 +7,14 @@ class Reply < ActiveRecord::Base
 
   validates :user_id, :event_id, :status, presence: true
 
-  enum status: { yes: 0, no: 1, maybee: 2, watch: 3, waiting: 4 }
+  enum status: { yes: 0, no: 1, maybee: 2, waiting: 3, watch: 4 }
 
   # TODO translate in local yml
   STATUSES = { yes: 'M - Meldung',
                no: '0 - Absage',
                maybee: '? - Unsicher',
-               watch: 'Z - Zuschauer',
-               waiting: 'W - Warteliste' }
+               waiting: 'W - Warteliste',
+               watch: 'Z - Zuschauer' }
 
   def self.for_event_and_user(event, user)
     find_or_initialize_by(event_id: event, user_id: user)

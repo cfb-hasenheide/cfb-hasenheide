@@ -7,6 +7,7 @@
   .left-half
     .panel-group#replies{role: 'tablist', 'aria-multiselectable' => true}
       = render 'replies', event: @event, replies: @yes_replies, status: :yes
+      = render 'replies', event: @event, replies: @waiting_replies, status: :waiting
       = render 'replies', event: @event, replies: @maybee_replies, status: :maybee
       = render 'replies', event: @event, replies: @no_replies, status: :no
       = render 'replies', event: @event, replies: @watch_replies, status: :watch

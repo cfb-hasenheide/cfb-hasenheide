@@ -33,6 +33,7 @@ module EventsHelper
   def class_for(status)
     case status
     when :yes then'success'
+    when :waiting then'success'
     when :maybee then 'warning'
     when :no then 'danger'
     when :watch then 'info'

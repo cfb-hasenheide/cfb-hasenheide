@@ -4,6 +4,7 @@ module ReplyHelper
     { 'M - Meldung' => 'yes',
       '0 - Absage' => 'no',
       '? - Vielleicht' => 'maybee',
+      'W - Warteliste' => 'waiting',
       'Z - Zuschauer' => 'watch' }
   end
 
