@@ -22,6 +22,10 @@ class Event < ActiveRecord::Base
     replies.yes.count
   end
 
+  def waiting_count
+    replies.waiting.count
+  end
+
   def humanized_kind
     Event::KINDS[kind.to_sym]
   end

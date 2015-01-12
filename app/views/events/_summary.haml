@@ -3,6 +3,8 @@
     = event.generated_name
     %small= event.humanized_kind
 
+  = render 'progress_bar', event: event
+
   %p
     = datetime_icon
     = l(event.datetime)
