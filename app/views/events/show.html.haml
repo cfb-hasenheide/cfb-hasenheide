@@ -2,6 +2,7 @@
 
 = render 'summary', event: @event, reply: @reply
 
+= render 'admin_bar', event: @event if admin?
 
 .half-half
   .left-half
@@ -53,16 +54,3 @@
         %p
           = image_tag @event.google_static_maps_url,
             class: 'img-responsive img-rounded'
-
-- if admin?
-  = link_to edit_event_path(@event), class: 'default-button' do
-    = edit_icon
-    Bearbeiten
-  = link_to '#', data: { confirm: 'Wirklich Aufruf senden?'},
-    class: 'default-button' do
-    = mail_icon
-    Aufruf (TODO)
-  = link_to '#', data: { confirm: 'Wirklich Final Call senden?'},
-    class: 'default-button' do
-    = mail_icon
-    Final Call (TODO)
