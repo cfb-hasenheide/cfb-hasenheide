@@ -14,12 +14,10 @@
         = f.input :home_team
       .right-half
         = f.input :away_team
-    .thirds
-      .third
-        = f.input :replyable
-      .third
+    .half-half
+      .left-half
         = f.input :minimum, collection: 1..100, selected: 7
-      .third
+      .right-half
         = f.input :maximum, collection: 1..100, selected: 11
 
     = f.input :address
