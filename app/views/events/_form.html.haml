@@ -16,9 +16,9 @@
         = f.input :away_team
     .half-half
       .left-half
-        = f.input :minimum, collection: 1..100, selected: 7
+        = f.input :minimum, collection: 1..User.count, selected: f.object.minimum || 7
       .right-half
-        = f.input :maximum, collection: 1..100, selected: 11
+        = f.input :maximum, collection: 1..User.count, selected: f.object.maximum || 11
 
     = f.input :address
     = f.input :description, as: :text
