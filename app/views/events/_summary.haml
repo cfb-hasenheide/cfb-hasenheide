@@ -19,11 +19,17 @@
       = simple_form_for reply_for(event.id, current_user.id) do |f|
         = f.input :event_id, as: :hidden
         = f.input :user_id, as: :hidden
-        = f.input :status,
-          collection: status_options,
-          selected: reply_for(event.id, current_user.id).status,
-          prompt: 'Ausstehend...',
-          input_html: { class: 'input-sm', onchange: 'this.form.submit()' }
+        .input-group
+          = f.input :status,
+            collection: status_options,
+            selected: reply_for(event.id, current_user.id).status,
+            prompt: 'Ausstehend...',
+            input_html: { class: 'input-sm', onchange: 'this.form.submit()' }
+
+          - if reply_for(event.id, current_user.id).status == 'waiting'
+            .input-group-addon
+              W
+              = waiting_position_for(event, current_user)
 
     .right-half
       - if admin?
