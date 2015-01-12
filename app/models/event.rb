@@ -41,7 +41,7 @@ class Event < ActiveRecord::Base
   end
 
   def generated_name
-    "#{home_team} vs. #{away_team}"
+    "#{home_team} : #{away_team}"
   end
 
   private
