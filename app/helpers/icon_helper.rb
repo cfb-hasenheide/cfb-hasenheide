@@ -30,4 +30,8 @@ module IconHelper
   def save_icon
     content_tag(:span, nil, class: 'glyphicon glyphicon-ok')
   end
+
+  def mail_icon
+    content_tag(:span, nil, class: 'glyphicon glyphicon-envelope')
+  end
 end
