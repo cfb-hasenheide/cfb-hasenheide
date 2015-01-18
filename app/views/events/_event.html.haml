@@ -1,18 +1,19 @@
-.panel.panel-primary
-  .panel-body
+.panel{class: (event.past? ? 'panel-default' : 'panel-primary')}
+  .panel-heading
     %h3.panel-title
       = link_to event.generated_name, event_path(event)
-      %small.pull-right
-        = I18n.t("event_kind.#{event.kind}")
+      .pull-right
+        .label.label-default
+          = I18n.t("event_kind.#{event.kind}")
 
   .panel-body
-    %p
-      = datetime_icon
-      = l(event.datetime, format: :long)
-
-      %br
-      = address_icon
-      = event.address
+    .half-half
+      .left-half
+        = datetime_icon
+        = l(event.datetime, format: :long)
+      .right-half
+        = address_icon
+        = event.address
 
     %p= event.description
 

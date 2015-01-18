@@ -11,8 +11,12 @@ class Event < ActiveRecord::Base
 
   before_save :set_teams, if: :teams_changed?
 
-  scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime DESC') }
-  scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
+  # scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
+  # scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
+
+  def past?
+    datetime < Time.now
+  end
 
   def yes_count
     replies.yes.count

@@ -1,29 +1,15 @@
 .page-header
   %h1
     Events
+    %small= page_entries_info(@events)
     - if admin?
       .pull-right
         = link_to new_event_path, class: 'primary-button' do
           = create_icon
           Event erstellen
 
-.half-half
-  .left-half
-    %h2
-      Kommende
-      %small
-        %strong= @upcoming_events.count
-
-    - for event in @upcoming_events
-      = render 'event', event: event
-
-  .right-half
-    %h2
-      Vergangene
-      %small= page_entries_info(@past_events)
-
-    - for event in @past_events
-      = render 'event', event: event
+- for event in @events
+  = render 'event', event: event
 
 .pull-right
-  = paginate @past_events
+  = paginate @events

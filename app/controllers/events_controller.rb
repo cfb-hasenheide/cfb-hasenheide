@@ -4,8 +4,7 @@ class EventsController < ApplicationController
   respond_to :html
 
   def index
-    @upcoming_events = Event.upcoming
-    @past_events = Event.past.page(params[:page])
+    @events = Event.order('datetime DESC').page(params[:page])
   end
 
   def show
