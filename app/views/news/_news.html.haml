@@ -1,11 +1,11 @@
 .panel.panel-primary
-  .panel-body
+  .panel-heading
     %h3.panel-title
-      = news.title
       - if news.internal
-        %span.label.label-primary Intern
-      %small.pull-right
-        = l(news.created_at, format: :short)
+        %span.label.label-default Intern
+      = news.title
+      .pull-right
+        = l(news.created_at)
 
   .panel-body
     = news.content.html_safe
