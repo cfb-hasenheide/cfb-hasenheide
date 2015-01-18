@@ -32,9 +32,8 @@ gem 'simple_form', '>= 3.1.0.rc1'
 gem 'jbuilder', '~> 2.0'
 
 group :development do
-  gem 'spring', group: :development
-  gem 'better_errors', group: :development
-  gem 'binding_of_caller', group: :development
+  gem 'spring'
+  gem 'web-console'
 end
 
 # specs
