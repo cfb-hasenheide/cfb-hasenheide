@@ -19,9 +19,7 @@
       = render 'layouts/flash_messages'
       = yield
 
-    %footer.footer
-      .container
-        %p.text-muted CFB Hasenheide
+    = render 'layouts/footer'
 
     = javascript_include_tag 'application'
     = javascript_include_tag 'http://ergebnisdienst.fussball.de/static/egm//js/egmWidget.js?schluessel=01KOOMFOFC000000VS5DVMPIVTDHL375'

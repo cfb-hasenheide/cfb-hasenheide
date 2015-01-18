@@ -34,4 +34,16 @@ module IconHelper
   def mail_icon
     content_tag(:span, nil, class: 'glyphicon glyphicon-envelope')
   end
+
+  def twitter_icon
+    content_tag(:span, nil, class: 'fa fa-twitter')
+  end
+
+  def facebook_icon
+    content_tag(:span, nil, class: 'fa fa-facebook')
+  end
+
+  def football_icon
+    content_tag(:span, nil, class: 'fa fa-soccer-ball-o')
+  end
 end
