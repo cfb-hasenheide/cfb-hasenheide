@@ -46,4 +46,8 @@ module IconHelper
   def football_icon
     content_tag(:span, nil, class: 'fa fa-soccer-ball-o')
   end
+
+  def youtube_icon
+    content_tag(:span, nil, class: 'fa fa-youtube')
+  end
 end
