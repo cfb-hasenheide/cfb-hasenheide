@@ -25,6 +25,9 @@ de:
         status: Bist du dabei?
       report:
         content: Bericht
+      forum_thread:
+        title: Thema
+        description: Inhalt
 
   # enum translations
   user_role:

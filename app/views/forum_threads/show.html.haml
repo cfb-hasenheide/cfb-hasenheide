@@ -1,0 +1,40 @@
+.panel.panel-primary
+  .panel-heading
+    %h3.panel-title
+      Thema:
+      = @forum_thread.title
+      %small
+        .pull-right
+          Erstellt von
+          = User.find(@forum_thread.user_id).username
+          vor
+          = time_ago_in_words(@forum_thread.created_at)
+
+  .panel-body
+    %p.lead= @forum_thread.description
+
+  %ul.list-group
+    %li.list-group-item
+      .two-ten
+        .two
+          = image_tag('hase.png', class: 'img-thumbnail', size: '100x100')
+        .ten
+          %blockquote
+            %p
+              Mauris varius dignissim gravida. Curabitur scelerisque eleifend dui, ut vestibulum dui ornare vel. Nunc hendrerit neque at fringilla elementum. Phasellus gravida pharetra tincidunt. Duis nec ex velit. Vestibulum in neque faucibus, condimentum lectus non, dictum felis. Praesent in massa et ante pharetra pellentesque ut interdum nunc.
+            %footer
+              = user_icon
+              Hase 1
+              = time_icon
+              vor 11 Minuten
+
+
+  - if @forum_thread.user_id == current_user.id or admin?
+    .panel-footer
+      = link_to edit_forum_thread_path(@forum_thread), class: 'default-button-xs' do
+        = edit_icon
+        Editieren
+      = link_to @forum_thread, method: :delete, class: 'danger-button-xs',
+        data: { confirm: 'Das Thema wirklich löschen?' } do
+        = delete_icon
+        Löschen

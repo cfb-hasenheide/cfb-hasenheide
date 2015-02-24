@@ -50,4 +50,12 @@ module IconHelper
   def youtube_icon
     content_tag(:span, nil, class: 'fa fa-youtube')
   end
+
+  def user_icon
+    content_tag(:span, nil, class: 'fa fa-user')
+  end
+
+  def time_icon
+    content_tag(:span, nil, class: 'fa fa-clock-o')
+  end
 end

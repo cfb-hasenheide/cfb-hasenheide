@@ -1,0 +1,11 @@
+= simple_form_for(@forum_thread) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.association :user, as: :hidden, input_html: { value: current_user.id }
+
+  .form-actions
+    = f.button :submit, 'Speichern', class: 'primary-button'
+    = link_to 'Abbrechen', forum_threads_path, class: 'default-button'

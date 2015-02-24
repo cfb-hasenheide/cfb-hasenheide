@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :forum_threads
+
   resources :news
 
   resources :events

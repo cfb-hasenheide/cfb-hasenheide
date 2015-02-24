@@ -55,7 +55,7 @@ de:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: etwa eine Stunde
+        one: etwa einer Stunde
         other: etwa %{count} Stunden
       about_x_months:
         one: etwa ein Monat

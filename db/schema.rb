@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112163918) do
+ActiveRecord::Schema.define(version: 20150224193343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20150112163918) do
     t.string   "away_team"
     t.integer  "away_team_id"
   end
+
+  create_table "forum_threads", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "forum_threads", ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title"
@@ -100,4 +110,5 @@ ActiveRecord::Schema.define(version: 20150112163918) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "forum_threads", "users"
 end
