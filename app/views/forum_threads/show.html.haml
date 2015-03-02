@@ -3,31 +3,58 @@
     %h3.panel-title
       Thema:
       = @forum_thread.title
-      %small
-        .pull-right
-          Erstellt von
-          = User.find(@forum_thread.user_id).username
-          vor
-          = time_ago_in_words(@forum_thread.created_at)
 
   .panel-body
-    %p.lead= @forum_thread.description
+    %blockquote.blockquote-reverse
+      = @forum_thread.description
+      %footer
+        Erstellt von
+        = user_icon
+        = User.find(@forum_thread.user_id).username
+        = time_icon
+        vor
+        = time_ago_in_words(@forum_thread.created_at)
 
-  %ul.list-group
-    %li.list-group-item
-      .two-ten
-        .two
-          = image_tag('hase.png', class: 'img-thumbnail', size: '100x100')
-        .ten
+  .panel-footer
+    .two-ten
+      .two
+        = link_to 'Antworten', '#answerForm', class: 'primary-button',
+          'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+          'aria-controls' => 'answerForm'
+      .ten
+        .collapse#answerForm
           %blockquote
-            %p
-              Mauris varius dignissim gravida. Curabitur scelerisque eleifend dui, ut vestibulum dui ornare vel. Nunc hendrerit neque at fringilla elementum. Phasellus gravida pharetra tincidunt. Duis nec ex velit. Vestibulum in neque faucibus, condimentum lectus non, dictum felis. Praesent in massa et ante pharetra pellentesque ut interdum nunc.
-            %footer
-              = user_icon
-              Hase 1
-              = time_icon
-              vor 11 Minuten
+            = simple_form_for @forum_thread do |f|
+              = f.input :description
+              = f.submit 'Abschicken', class: 'primary-button-sm'
+              = link_to 'Abbrechen', '#answerForm', class: 'default-button-sm',
+                'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+                'aria-controls' => 'answerForm'
 
+  .panel-body
+    .two-ten
+      .two
+        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
+      .ten
+        %blockquote
+          Mauris varius dignissim gravida. Curabitur scelerisque eleifend dui, ut vestibulum dui ornare vel. Nunc hendrerit neque at fringilla elementum. Phasellus gravida pharetra tincidunt. Duis nec ex velit. Vestibulum in neque faucibus, condimentum lectus non, dictum felis. Praesent in massa et ante pharetra pellentesque ut interdum nunc.
+          %footer
+            = user_icon
+            Hase 4
+            = time_icon
+            3 Minuten her
+
+    .two-ten
+      .two
+        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
+      .ten
+        %blockquote
+          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+          %footer
+            = user_icon
+            Hase 4
+            = time_icon
+            3 Minuten her
 
   - if @forum_thread.user_id == current_user.id or admin?
     .panel-footer
