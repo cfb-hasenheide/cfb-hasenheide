@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224193343) do
+ActiveRecord::Schema.define(version: 20150304204645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20150224193343) do
     t.string   "away_team"
     t.integer  "away_team_id"
   end
+
+  create_table "forum_posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "forum_thread_id"
+    t.text     "comment"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "forum_posts", ["forum_thread_id"], name: "index_forum_posts_on_forum_thread_id", using: :btree
+  add_index "forum_posts", ["user_id"], name: "index_forum_posts_on_user_id", using: :btree
 
   create_table "forum_threads", force: :cascade do |t|
     t.string   "topic"
@@ -110,5 +121,7 @@ ActiveRecord::Schema.define(version: 20150224193343) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "forum_posts", "forum_threads"
+  add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
 end
