@@ -2,8 +2,8 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :title
-    = f.input :description
+    = f.input :topic
+    = f.input :comment
     = f.association :user, as: :hidden, input_html: { value: current_user.id }
 
   .form-actions

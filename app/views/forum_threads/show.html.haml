@@ -2,20 +2,23 @@
   .panel-heading
     %h3.panel-title
       Thema:
-      = @forum_thread.title
-
-  .panel-body
-    %blockquote.blockquote-reverse
-      = @forum_thread.description
-      %footer
-        Erstellt von
-        = user_icon
-        = User.find(@forum_thread.user_id).username
-        = time_icon
-        vor
-        = time_ago_in_words(@forum_thread.created_at)
+      = @forum_thread.topic
 
   .panel-footer
+    .two-ten
+      .two
+        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
+      .ten
+        %blockquote.blockquote
+          = @forum_thread.comment
+          %footer
+            Erstellt von
+            = user_icon
+            = User.find(@forum_thread.user_id).username
+            = time_icon
+            vor
+            = time_ago_in_words(@forum_thread.created_at)
+
     .two-ten
       .two
         = link_to 'Antworten', '#answerForm', class: 'primary-button',
@@ -25,7 +28,7 @@
         .collapse#answerForm
           %blockquote
             = simple_form_for @forum_thread do |f|
-              = f.input :description
+              = f.input :comment
               = f.submit 'Abschicken', class: 'primary-button-sm'
               = link_to 'Abbrechen', '#answerForm', class: 'default-button-sm',
                 'data-toggle' => 'collapse', 'aria-expanded' => 'false',

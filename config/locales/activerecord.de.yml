@@ -26,8 +26,8 @@ de:
       report:
         content: Bericht
       forum_thread:
-        title: Thema
-        description: Inhalt
+        topic: Thema
+        comment: Kommentar
 
   # enum translations
   user_role:

@@ -1,8 +1,8 @@
 class CreateForumThreads < ActiveRecord::Migration
   def change
     create_table :forum_threads do |t|
-      t.string :title
-      t.text :description
+      t.string :topic
+      t.text :comment
       t.references :user, index: true
 
       t.timestamps null: false
