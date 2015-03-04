@@ -1,10 +1,18 @@
 fussballDeWidget =
-  init: ->
-    wettbewerb1 = new fussballdeAPI();
-    wettbewerb1.setzeWettbewerb('01HATI4674000000VV0AG813VS4TGVBL-G');
-    wettbewerb1.setzeMandant('66');
-    wettbewerb1.zeigeTabelle('fussballDeWidget');
+  cfbI: ->
+    ue32FreizeitLandesligaKf = new fussballdeAPI();
+    ue32FreizeitLandesligaKf.setzeWettbewerb('01KT3RIK80000001VV0AG812VV4M9N0A-G');
+    ue32FreizeitLandesligaKf.setzeMandant('01');
+    ue32FreizeitLandesligaKf.zeigeTabelle('cfbIFussballDeWidget');
+
+  cfbII: ->
+    herrenFreizeitLandesSt1Kf = new fussballdeAPI();
+    herrenFreizeitLandesSt1Kf.setzeWettbewerb('01KT3QHBKG000000VV0AG812VV4M9N0A-G');
+    herrenFreizeitLandesSt1Kf.setzeMandant('01');
+    herrenFreizeitLandesSt1Kf.zeigeTabelle('cfbIIFussballDeWidget');
 
 $ ->
-  if $('#fussballDeWidget').length > 0
-    fussballDeWidget.init()
+  if $('#cfbIFussballDeWidget').length > 0
+    fussballDeWidget.cfbI()
+  if $('#cfbIIFussballDeWidget').length > 0
+    fussballDeWidget.cfbII()
