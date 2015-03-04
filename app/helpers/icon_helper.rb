@@ -58,4 +58,8 @@ module IconHelper
   def time_icon
     content_tag(:span, nil, class: 'fa fa-clock-o')
   end
+
+  def spinner_icon
+    content_tag(:span, nil, class: 'fa fa-spinner fa-pulse')
+  end
 end
