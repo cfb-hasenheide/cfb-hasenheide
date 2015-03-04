@@ -13,14 +13,15 @@
         %li{class: ('active' if params[:controller] == 'news')}
           %a{href: news_index_path} News
 
-        %li{class: ('active' if params[:controller] == 'events')}
-          %a{href: events_path} Events
+        - if user_signed_in?
+          %li{class: ('active' if params[:controller] == 'events')}
+            %a{href: events_path} Events
 
-        %li{class: ('active' if params[:controller] == 'reports')}
-          %a{href: reports_path} Spielberichte
+          %li{class: ('active' if params[:controller] == 'reports')}
+            %a{href: reports_path} Spielberichte
 
-        %li{class: ('active' if params[:controller] == 'forum_threads')}
-          %a{href: forum_threads_path} Forum
+          %li{class: ('active' if params[:controller] == 'forum_threads')}
+            %a{href: forum_threads_path} Forum
 
         %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
           %a{href: '/contact'} Kontakt
