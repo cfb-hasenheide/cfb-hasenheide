@@ -17,19 +17,19 @@ gem 'devise'
 gem 'devise_invitable'
 
 # assets
-gem 'sass-rails', '5.0.0.beta1'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'bootstrap-wysihtml5-rails'
 gem 'momentjs-rails' # NOTE: needed for bootstrap3-datetimepicker-rails
-gem 'simple_form', '>= 3.1.0.rc1'
+gem 'simple_form'
 
 # json
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 
 group :development do
   gem 'spring'
