@@ -2,9 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :user
+    = f.association :user, as: :hidden
     = f.input :alias
     = f.input :avatar_url
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, 'Speichern', class: 'primary-button'

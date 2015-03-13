@@ -1,4 +1,5 @@
-%h1 Listing user_profiles
+.page-header
+  %h1 Profile
 
 %table
   %thead
@@ -9,17 +10,12 @@
       %th
       %th
       %th
-      
+
   %tbody
     - @user_profiles.each do |user_profile|
       %tr
-        %td= user_profile.user
+        %td= user_profile.user_id
         %td= user_profile.alias
         %td= user_profile.avatar_url
         %td= link_to 'Show', user_profile
         %td= link_to 'Edit', edit_user_profile_path(user_profile)
-        %td= link_to 'Destroy', user_profile, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New User profile', new_user_profile_path

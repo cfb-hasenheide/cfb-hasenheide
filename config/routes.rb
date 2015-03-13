@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :user_profiles
+  resources :user_profiles, only: [:index, :show, :edit, :update]
 
   resources :forum_threads
 
