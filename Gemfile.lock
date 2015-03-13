@@ -233,6 +233,7 @@ DEPENDENCIES
   pry
   rails
   rails_12factor
+  responders
   rspec-rails
   sass-rails
   simple_form

@@ -5,6 +5,7 @@ ruby '2.2.0'
 # rails 4
 gem 'rails'
 gem 'turbolinks'
+gem 'responders'
 
 # db
 gem 'pg'
