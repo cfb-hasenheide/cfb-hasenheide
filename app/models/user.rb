@@ -29,9 +29,9 @@ class User < ActiveRecord::Base
       return false unless Devise.secure_compare(self.encrypted_password,
                                                 User.legacy_password(password))
 
-      self.attributes = { password:               password,
-                          password_confirmation:  password,
-                          legacy_password:        false }
+      self.attributes = { password:              password,
+                          password_confirmation: password,
+                          legacy_password:       false }
 
       self.save!
     end
