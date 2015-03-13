@@ -9,20 +9,25 @@ namespace :import do
       puts "Usage: rake 'import:users[/PATH/TO/FILE.csv]'" and return
     end
 
+    User.destroy_all
+    puts "DESTROYED: all existing users"
+
     CSV.foreach(csv_file_path, headers: true) do |row|
+      username = row['username']
+
       begin
         user = User.new(
-          username:           row['username'],
+          username:           username,
           encrypted_password: row['password'],
           legacy_password:    true,
-          email:              row['email'] || "#{row['username']}@cfb-hasenheide.de"
+          email:              row['email'] || "#{username}@cfb-hasenheide.de"
         )
 
         user.save!(validate: false)
-        puts "IMPORTED: #{user.username}"
+        puts "IMPORTED: #{username}"
 
       rescue Exception => e
-        puts "SKIPPED: #{user.username} (#{e})"
+        puts "SKIPPED: #{username} (#{e})"
         next
       end
     end
