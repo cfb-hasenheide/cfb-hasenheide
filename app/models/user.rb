@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
+  after_create :create_user_profile
+
   def self.players
     where(role: [1, 2])
   end
@@ -41,5 +43,11 @@ class User < ActiveRecord::Base
   # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def self.legacy_password(password)
     Digest::MD5.hexdigest(password)
+  end
+
+  private
+
+  def create_user_profile
+    UserProfile.create(user: self, alias: username.titleize)
   end
 end
