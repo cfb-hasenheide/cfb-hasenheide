@@ -17,6 +17,10 @@ gem 'kaminari'
 gem 'devise'
 gem 'devise_invitable'
 
+# file uploading
+gem 'fog', require: "fog/aws"
+gem 'carrierwave'
+
 # assets
 gem 'sass-rails'
 gem 'uglifier'
