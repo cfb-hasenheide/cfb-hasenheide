@@ -26,6 +26,8 @@ class UserProfilesController < ApplicationController
     end
 
     def user_profile_params
-      params.require(:user_profile).permit(:user_id, :alias, :avatar)
+      params.require(:user_profile).permit(:user_id, :alias, :avatar,
+                                           :remote_avatar_url, :avatar_cache,
+                                           :remove_avatar)
     end
 end
