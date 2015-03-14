@@ -4,7 +4,7 @@
   .form-inputs
     = f.association :user, as: :hidden
     = f.input :alias
-    = f.input :avatar_url
+    = f.input :avatar, as: :file
 
   .form-actions
     = f.button :submit, 'Speichern', class: 'primary-button'

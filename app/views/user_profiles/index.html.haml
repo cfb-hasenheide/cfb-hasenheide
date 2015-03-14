@@ -6,7 +6,7 @@
     %tr
       %th User
       %th Alias
-      %th Avatar url
+      %th Avatar
       %th
       %th
       %th
@@ -16,6 +16,6 @@
       %tr
         %td= user_profile.user_id
         %td= user_profile.alias
-        %td= user_profile.avatar_url
+        %td= user_profile.avatar
         %td= link_to 'Show', user_profile
         %td= link_to 'Edit', edit_user_profile_path(user_profile)
