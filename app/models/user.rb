@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     User.where(id: ids)
   end
 
-  # TODO: Workaround to migrate users from legacy app
+  # NOTE: Workaround to migrate users from legacy app
   # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def valid_password?(password)
     if legacy_password?
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     super password
   end
 
-  # TODO: Workaround to migrate users from legacy app
+  # NOTE: Workaround to migrate users from legacy app
   # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def self.legacy_password(password)
     Digest::MD5.hexdigest(password)
