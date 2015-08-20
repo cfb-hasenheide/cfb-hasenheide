@@ -1,4 +1,6 @@
 .page-header
-  %h1 Event bearbeiten
+  %h1
+    Event bearbeiten
+    %small= @event.generated_name
 
 = render 'form'

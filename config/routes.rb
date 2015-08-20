@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users, only: [:index, :update]
-  resources :teams, only: [:index, :update]
+  resources :teams, only: [:index, :new, :create, :edit, :update]
   resources :reports
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

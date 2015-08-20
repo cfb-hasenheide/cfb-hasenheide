@@ -22,7 +22,7 @@
               'aria-controls' => 'collapseMissing'}
                 Ausstehend
 
-              %span.label.label-default= @no_reply_players.count
+              %small= @no_reply_players.count
 
           .panel-collapse.collapse#collapseMissing{role: 'tabpanel',
             'aria-labelledby' => 'headingMissing'}

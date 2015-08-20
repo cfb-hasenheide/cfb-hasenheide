@@ -11,14 +11,31 @@
           as: :string
     .half-half
       .left-half
-        = f.input :home_team
+        = f.input :name
       .right-half
-        = f.input :away_team
+        = f.input :home
     .half-half
       .left-half
-        = f.input :minimum, collection: 1..User.count, selected: f.object.minimum || 7
+        = f.input :club_team_id,
+                  collection: Team.club,
+                  prompt: 'bitte wählen',
+                  selected: f.object.club_team_id
       .right-half
-        = f.input :maximum, collection: 1..User.count, selected: f.object.maximum || 11
+        = f.input :rival_team_id,
+                  collection: Team.rivals,
+                  prompt: 'bitte wählen',
+                  selected: f.object.rival_team_id
+    .half-half
+      .left-half
+        = f.input :minimum,
+                  collection: 1..User.count,
+                  selected: f.object.minimum || 7,
+                  include_blank: true
+      .right-half
+        = f.input :maximum,
+                  collection: 1..User.count,
+                  selected: f.object.maximum || 11,
+                  include_blank: true
 
     = f.input :address
     = f.input :description, as: :text

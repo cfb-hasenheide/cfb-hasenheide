@@ -1,18 +1,20 @@
 class Event < ActiveRecord::Base
-  has_many :replies
-  has_one :report
+  has_many   :replies,    dependent: :destroy
+  has_one    :report,     dependent: :destroy
+  belongs_to :club_team,  class_name: 'Team'
+  belongs_to :rival_team, class_name: 'Team'
 
   enum kind: { league: 0, cup: 1, tournament: 2, friendly: 3, other: 4 }
 
-  validates :kind, :datetime, :home_team, :away_team, presence: true
+  # TODO: Validate name unless rival_team_id.present?
+  validates :kind, :datetime, :club_team_id, presence: true
+  validates :name, presence: true, unless: "rival_team_id.present?"
   validates :minimum,
     numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
   validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
-  before_save :set_teams, if: :teams_changed?
-
-  # scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
-  # scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
+  scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
+  scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
 
   def past?
     datetime < Time.now
@@ -41,17 +43,11 @@ class Event < ActiveRecord::Base
   end
 
   def generated_name
-    "#{home_team} : #{away_team}"
-  end
-
-  private
-
-  def set_teams
-    self.home_team_id = Team.find_or_create_by(name: home_team.strip).id
-    self.away_team_id = Team.find_or_create_by(name: away_team.strip).id
-  end
-
-  def teams_changed?
-    home_team_changed? || away_team_changed?
+    return name if name.present?
+    if home?
+      club_team.name + ' : ' + rival_team.name
+    else
+      rival_team.name + ' : ' + club_team.name
+    end
   end
 end

@@ -1,0 +1,16 @@
+= simple_form_for(@team) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .half-half
+      .left-half
+        = f.input :name
+      .right-half
+        = f.input :description
+    .half-half
+      .left-half
+        = f.input :club
+
+  .form-actions
+    = f.button :submit, 'Speichern', class: 'primary-button'
+    = link_to 'Abbrechen', teams_path, class: 'default-button'

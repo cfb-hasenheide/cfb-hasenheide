@@ -23,7 +23,6 @@ Rails.application.configure do
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
-
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
@@ -35,5 +34,13 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_view.raise_on_missing_translations = true
+
+  # DEPRECATION WARNING: Currently, Active Record suppresses errors raised
+  # within `after_rollback`/`after_commit` callbacks and only print them to
+  # the logs. In the next version, these errors will no longer be suppressed.
+  # Instead, the errors will propagate normally just like in other Active
+  # Record callbacks.
+  # You can opt into the new behavior and remove this warning by setting:
+  config.active_record.raise_in_transactional_callbacks = true
 end

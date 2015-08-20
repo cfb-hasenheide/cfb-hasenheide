@@ -1,13 +1,27 @@
 .page-header
-  %h1 Teams
+  %h1
+    Mannschaften
+    %small= page_entries_info(@teams)
+    - if admin?
+      .pull-right
+        = link_to new_team_path, class: 'primary-button' do
+          = create_icon
+          Mannschaft erstellen
 
 .table-responsive
   %table
     %thead
       %tr
-        %th= User.human_attribute_name(:name)
+        %th= Team.human_attribute_name(:name)
+        %th= Team.human_attribute_name(:description)
+        %th= Team.human_attribute_name(:club)
 
     %tbody
       - for team in @teams
         %tr
           %td= team.name
+          %td= team.description
+          %td= team.club
+
+.pull-right
+  = paginate @teams

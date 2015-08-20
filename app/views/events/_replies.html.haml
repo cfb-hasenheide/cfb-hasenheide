@@ -9,7 +9,7 @@
         'aria-controls' => "collapse#{status.to_s.capitalize}"}
           = I18n.t("reply_status.#{status}")
 
-        %span{class: "label label-#{class_for(status)}"}
+        %small{class: "label label-#{class_for(status)}"}
           = replies.count
 
     .panel-collapse.collapse{class: ('in' if status == :yes),

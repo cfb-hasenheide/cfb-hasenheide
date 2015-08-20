@@ -1,34 +1,39 @@
 class TeamsController < ApplicationController
-  before_action :admin_check
-  before_action :set_team, only: :update
+  before_action :set_team, only: [:edit, :update]
 
   respond_to :html
 
   def index
-    @teams = Team.all.order('name')
+    @teams = Team.order('name').page(params[:page])
+  end
 
-    respond_with(@teams)
+  def new
+    @team = Team.new
+  end
+
+  def edit
+  end
+
+  def create
+    @team = Team.new(team_params)
+    @team.save
+
+    respond_with(@team, location: teams_path)
   end
 
   def update
-    if @team.update(team_attributes)
-      flash[:notice] = 'Team wurde erfolgreich aktualisiert'
-    end
+    @team.update(team_params)
 
     respond_with(@team, location: teams_url)
   end
 
   private
 
-  def admin_check
-    redirect_to :root and return unless current_user.admin?
-  end
-
   def set_team
     @team = Team.find(params[:id])
   end
 
-  def user_params
-    params.require(:team).permit(:name)
+  def team_params
+    params.require(:team).permit(:name, :description, :club)
   end
 end

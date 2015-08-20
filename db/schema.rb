@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314224338) do
+ActiveRecord::Schema.define(version: 20150820221420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,15 +20,15 @@ ActiveRecord::Schema.define(version: 20150314224338) do
     t.datetime "datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description",  limit: 255
-    t.string   "address",      limit: 255
+    t.string   "description",   limit: 255
+    t.string   "address",       limit: 255
     t.integer  "minimum"
     t.integer  "maximum"
     t.integer  "kind"
-    t.string   "home_team"
-    t.integer  "home_team_id"
-    t.string   "away_team"
-    t.integer  "away_team_id"
+    t.string   "name"
+    t.integer  "club_team_id"
+    t.integer  "rival_team_id"
+    t.boolean  "home"
   end
 
   create_table "forum_posts", force: :cascade do |t|
@@ -82,9 +82,11 @@ ActiveRecord::Schema.define(version: 20150314224338) do
   add_index "reports", ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
+    t.boolean  "club"
   end
 
   add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree

@@ -22,6 +22,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+
     respond_with(@event)
   end
 
@@ -30,22 +31,19 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    flash[:notice] = 'Event wurde erfolgreich erstellt.' if @event.save
+    @event.save
 
     respond_with(@event, location: events_path)
   end
 
   def update
-    if @event.update(event_params)
-      flash[:notice] = 'Event wurde erfolgreich aktualisiert.'
-    end
+    @event.update(event_params)
 
     respond_with(@event)
   end
 
   def destroy
     @event.destroy
-    flash[:notice] = 'Event wurde erfolgreich gelöscht.'
 
     respond_with(@event)
   end
@@ -57,8 +55,8 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:kind, :name, :datetime, :home_team,
-                                  :away_team, :description, :address,
-                                  :minimum, :maximum)
+    params.require(:event).permit(:kind, :name, :datetime, :club_team_id,
+                                  :rival_team_id, :description, :address,
+                                  :minimum, :maximum, :home)
   end
 end

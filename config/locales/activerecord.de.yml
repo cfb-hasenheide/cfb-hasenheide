@@ -1,6 +1,32 @@
 de:
   activerecord:
+    models:
+      team: Mannschaft
     attributes:
+      event:
+        kind: Typ
+        datetime: Datum / Uhrzeit
+        club_team_id: Vereinsmannschaft
+        rival_team_id: Gegnermannschaft
+        description: Beschreibung
+        address: Adresse
+        minimum: Mindestanzahl Teilnehmer
+        maximum: Maximalanzahl Teilnehmer
+        home: Heimspiel?
+      forum_thread:
+        topic: Thema
+        comment: Kommentar
+      news:
+        title: Titel
+        content: Inhalt
+        internal: Intern
+      reply:
+        status: Bist du dabei?
+      report:
+        content: Bericht
+      team:
+        description: Beschreibung
+        club: Vereinsmannschaft?
       user:
         email: E-Mail
         password: Passwort
@@ -8,41 +34,25 @@ de:
         current_password: Aktuelles Passwort
         remember_me: Angemeldet bleiben
         role: Rolle
-      news:
-        title: Titel
-        content: Inhalt
-        internal: Intern
-      event:
-        kind: Typ
-        datetime: Datum / Uhrzeit
-        home_team: Heimmannschaft
-        away_team: Auswärtsmannschaft
-        description: Beschreibung
-        address: Adresse
-        minimum: Mindestanzahl Teilnehmer
-        maximum: Maximalanzahl Teilnehmer
-      reply:
-        status: Bist du dabei?
-      report:
-        content: Bericht
-      forum_thread:
-        topic: Thema
-        comment: Kommentar
 
   # enum translations
-  user_role:
-    fan: Fan
-    player: Spieler
-    admin: Admin
-  reply_status:
-    'yes': 'M - Meldung'
-    'no': '0 - Absage'
-    maybee: '? - Unsicher'
-    waiting: 'W - Warteliste'
-    watch: 'Z - Zuschauer'
   event_kind:
     league: Liga
     cup: Pokal
     tournament: Turnier
     friendly: Freundschaftsspiel
     other: Sonstiges
+  reply_status:
+    'yes': 'M - Meldung'
+    'no': '0 - Absage'
+    maybee: '? - Unsicher'
+    waiting: 'W - Warteliste'
+    watch: 'Z - Zuschauer'
+  team_kind:
+    other: Andere
+    club: Vereinsmannschaft
+    current_season: Aktuelle Saison
+  user_role:
+    fan: Fan
+    player: Spieler
+    admin: Admin
