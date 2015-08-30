@@ -1,4 +1,4 @@
-module IconHelper
+module IconsHelper
   def report_icon
     content_tag(:span, nil, class: 'glyphicon glyphicon-list-alt')
   end
@@ -35,20 +35,32 @@ module IconHelper
     content_tag(:span, nil, class: 'glyphicon glyphicon-envelope')
   end
 
-  def twitter_icon
-    content_tag(:span, nil, class: 'fa fa-twitter')
+  def facebook_link_icon
+    content_tag(:span, nil, class: 'fa-stack fa-lg') do
+      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
+      content_tag(:i, nil, class: 'fa fa-facebook fa-stack-1x fa-inverse')
+    end
   end
 
-  def facebook_icon
-    content_tag(:span, nil, class: 'fa fa-facebook')
+  def twitter_link_icon
+    content_tag(:span, nil, class: 'fa-stack fa-lg') do
+      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
+      content_tag(:i, nil, class: 'fa fa-twitter fa-stack-1x fa-inverse')
+    end
   end
 
-  def football_icon
-    content_tag(:span, nil, class: 'fa fa-soccer-ball-o')
+  def youtube_link_icon
+    content_tag(:span, nil, class: 'fa-stack fa-lg') do
+      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
+      content_tag(:i, nil, class: 'fa fa-youtube fa-stack-1x fa-inverse')
+    end
   end
 
-  def youtube_icon
-    content_tag(:span, nil, class: 'fa fa-youtube')
+  def fussballde_link_icon
+    content_tag(:span, nil, class: 'fa-stack fa-lg') do
+      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
+      content_tag(:i, nil, class: 'fa fa-soccer-ball-o fa-stack-1x fa-inverse')
+    end
   end
 
   def user_icon

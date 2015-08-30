@@ -16,10 +16,16 @@
  */
 
 $brand-primary: #335032
-$navbar-default-bg: #335032
+$navbar-default-bg: $brand-primary
 $navbar-default-link-color: #fff
-$navbar-default-link-hover-color: #bbb
-$navbar-default-link-active-color: #eee
+// $navbar-default-link-color: #4F5D2F
+// $navbar-default-link-hover-color: #bbb
+$navbar-default-link-hover-color: #D5A021
+// $navbar-default-link-active-color: #eee
+$navbar-default-link-active-color: #D5A021
+$link-color: #D5A021
+$link-hover-color: #D5A021
+$link-active-color: #D5A021
 
 body
   padding-top: 60px
@@ -28,33 +34,36 @@ body
 @import 'bootstrap-sprockets'
 @import 'bootstrap'
 @import 'bootstrap-datetimepicker'
+@import 'bootstrap3-switch'
+@import 'font-awesome-sprockets'
+@import 'font-awesome'
 
 .main-area
   @extend .row
 
   .main-content
-    @extend .col-lg-8
+    @extend .col-md-8
 
   .sidebar
-    @extend .col-lg-2
+    @extend .col-md-2
 
 .half-half
   @extend .row
 
   .left-half
-    @extend .col-lg-6
+    @extend .col-md-6
 
   .right-half
-    @extend .col-lg-6
+    @extend .col-md-6
 
 .two-ten
   @extend .row
 
   .two
-    @extend .col-lg-2
+    @extend .col-md-2
 
   .ten
-    @extend .col-lg-10
+    @extend .col-md-10
 
 .primary-button
   @extend .btn
@@ -111,15 +120,19 @@ body
   width: 100%
   /* Set the fixed height of the footer here */
   height: 60px
-  background-color: #335032
+  background-color: $brand-primary
 
-.footer .text-muted
-  margin: 20px 0
-  color: white
+.footer p
+  margin: 10px 0
 
 .footer a
-  margin: 20px 0
-  color: white
+  margin: 10px 0
+  color: $brand-primary
+  text-decoration: none
+  &:hover
+    color: $navbar-default-link-hover-color
+  &:active
+    color: $navbar-default-link-active-color
 
 blockquote
   font-size: 14px
