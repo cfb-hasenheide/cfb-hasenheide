@@ -1,14 +1,18 @@
 %footer.footer
   .container
     %p
-      = link_to 'https://www.facebook.com/pages/CFB-Hasenheide/108068245890235?fref=ts' do
+      = link_to 'https://www.facebook.com/pages/CFB-Hasenheide/108068245890235?fref=ts',
+        'data-toggle' => 'tooltip', title: 'CFB @ Facebook' do
         = facebook_link_icon
 
-      = link_to 'https://twitter.com/cfbhasenheide' do
+      = link_to 'https://twitter.com/cfbhasenheide',
+        'data-toggle' => 'tooltip', title: 'CFB @ Twitter' do
         = twitter_link_icon
 
-      = link_to 'https://www.youtube.com/user/cfb' do
+      = link_to 'https://www.youtube.com/user/cfb',
+        'data-toggle' => 'tooltip', title: 'CFB @ Youtube' do
         = youtube_link_icon
 
-      = link_to 'http://www.fussball.de/verein/cfb-hasenheide-berlin/-/id/00UQ28BQH0000000VV0AG811VTK9TF5P#!/section/stage' do
+      = link_to 'http://www.fussball.de/verein/cfb-hasenheide-berlin/-/id/00UQ28BQH0000000VV0AG811VTK9TF5P#!/section/stage',
+        'data-toggle' => 'tooltip', title: 'CFB @ Fussball.de' do
         = fussballde_link_icon
