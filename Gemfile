@@ -18,7 +18,7 @@ gem 'devise'
 gem 'devise_invitable'
 
 # file uploading
-gem 'fog', require: "fog/aws"
+gem 'fog-aws'
 gem 'carrierwave'
 
 # assets
