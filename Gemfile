@@ -40,6 +40,8 @@ gem 'jbuilder'
 group :development do
   gem 'spring'
   gem 'web-console'
+  gem 'rubocop'
+  gem 'rails_best_practices'
 end
 
 # specs

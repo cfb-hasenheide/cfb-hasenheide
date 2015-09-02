@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+LC_ALL=en_US.UTF-8
+
+echo ''
+echo 'Executing pre-push hook.'
+echo ''
+
+echo -ne "** Gathering data:\t\t\t"
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+relevant_files=$(git diff --diff-filter=ACMRTUXB --stat --name-status origin/$branch | grep '\.rb$' | grep -v '^D' | cut -f2 | egrep -v '^(config/|db/|bin/)')
+parameter_list=$(printf "%s\n\n" $relevant_files | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' | sed 's/ *$//' | sed 's/^ *//')
+be='bundle exec'
+rubocop_version=`$be rubocop -v`
+rbp_version=`$be rails_best_practices -v`
+uname=`uname`
+
+final_exit_status=0
+say_git_message=0
+
+red=$'\e[0;31m'
+reset=$'\e[0m'
+green=$'\e[0;32m'
+
+function green {
+  echo $green $1 $reset
+}
+
+function red {
+  echo $red $1 $reset
+}
+
+function say_ok {
+  green '✔'
+}
+
+function say_fail {
+  red '✘'
+}
+
+#gathering data -> done
+say_ok
+
+echo -ne "** RUBOCOP v$rubocop_version:\t\t\t"
+if [[ "$parameter_list" != "" ]] ; then
+  $be rubocop -R --format files $parameter_list > /dev/null
+  if [ $? -eq 0 ] ; then
+    say_ok
+  else
+    say_fail
+    $be rubocop -R -f simple $parameter_list
+    final_exit_status=1
+    say_git_message=1
+  fi
+else
+  say_ok
+fi
+
+
+echo -ne "** RAILS BEST PRACTICES v$rbp_version:\t"
+if [[ "$parameter_list" != "" ]] ; then
+  $be rails_best_practices --silent . > /dev/null
+  if [ $? -eq 0 ] ; then
+    say_ok
+  else
+    say_fail
+    $be rails_best_practices
+    final_exit_status=1
+    say_git_message=1
+  fi
+else
+  say_ok
+fi
+
+
+if [ $final_exit_status -eq 0 ] ; then
+  echo ''
+  green 'Everything alright, pushing commits.'
+  echo ''
+else
+  echo ''
+  red 'Problems found, unable to push commits.'
+  if [ $say_git_message -eq 1 ] ; then
+    echo "Use 'git push --no-verify' to make commits towards fixing this issue"
+  fi
+  echo ''
+fi
+
+
+
+exit $final_exit_status
