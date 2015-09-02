@@ -1,45 +1,99 @@
-= simple_form_for(@event) do |f|
-  = f.error_notification
+.row
+  .col-md-6
+    = form_for @event, html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label :kind, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :kind,
+            options_for_select(event_kind_options, @event.kind),
+            {},
+            class: 'form-control'
 
-  .form-inputs
-    .half-half
-      .left-half
-        = f.input :kind, collection: event_kind_options, selected: @event.kind
-      .right-half
-        = f.input :datetime,
-          input_html: {id: 'datetimepicker'},
-          as: :string
-    .half-half
-      .left-half
-        = f.input :name
-      .right-half
-        = f.input :home
-    .half-half
-      .left-half
-        = f.input :club_team_id,
-                  collection: Team.club,
-                  prompt: 'bitte wählen',
-                  selected: f.object.club_team_id
-      .right-half
-        = f.input :rival_team_id,
-                  collection: Team.rivals,
-                  prompt: 'bitte wählen',
-                  selected: f.object.rival_team_id
-    .half-half
-      .left-half
-        = f.input :minimum,
-                  collection: 1..User.count,
-                  selected: f.object.minimum || 7,
-                  include_blank: true
-      .right-half
-        = f.input :maximum,
-                  collection: 1..User.count,
-                  selected: f.object.maximum || 11,
-                  include_blank: true
+      .form-group
+        = f.label :club_team_id, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :club_team_id,
+            options_from_collection_for_select(Team.club, :id, :name, @event.club_team_id),
+            {},
+            class: 'form-control'
+          %span.help-block
+            %small
+              = link_to new_team_path(home: true) do
+                = create_icon
+                hinzufügen
 
-    = f.input :address
-    = f.input :description, as: :text
+      .form-group
+        = f.label :rival_team_id, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :rival_team_id,
+            options_from_collection_for_select(Team.rivals, :id, :name, @event.rival_team_id),
+            {},
+            class: 'form-control'
+          %span.help-block
+            %small
+              = link_to new_team_path(home: false) do
+                = create_icon
+                hinzufügen
 
-  .form-actions
-    = f.button :submit, 'Speichern', class: 'primary-button'
-    = link_to 'Abbrechen', events_path, class: 'default-button'
+      .form-group
+        = f.label :home, class: 'col-md-4 control-label'
+        .col-md-8
+          .radio-inline
+            = f.radio_button :home, true
+            Heimspiel
+          .radio-inline
+            = f.radio_button :home, false
+            Auswärtsspiel
+
+      .form-group
+        = f.label :name, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.text_field :name, class: 'form-control',
+            placeholder: 'Leer lassen für "Heimteam" : "Auswärtsteam"'
+
+      .form-group
+        = f.label :kind, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :kind,
+            options_for_select(event_kind_options, @event.kind),
+            {},
+            class: 'form-control'
+
+      .form-group
+        = f.label :minimum, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :minimum,
+            options_for_select(1..User.count, f.object.minimum || 7),
+            {},
+            class: 'form-control'
+
+      .form-group
+        = f.label :maximum, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.select :maximum,
+            options_for_select(1..User.count, f.object.maximum || 11),
+            {},
+            class: 'form-control'
+
+      .form-group
+        = f.label :datetime, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.text_field :datetime, class: 'form-control', id: 'datetimepicker'
+
+      .form-group
+        = f.label :address, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.text_field :address, class: 'form-control'
+
+      .form-group
+        = f.label :description, class: 'col-md-4 control-label'
+        .col-md-8
+          = f.text_area :description, class: 'form-control'
+
+      .form-group
+        .col-md-offset-4.col-md-8
+          = f.submit class: 'primary-button'
+          = link_to 'Abbrechen', events_path, class: 'default-button pull-right'
+
+  .col-md-6
+    .well Test

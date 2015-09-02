@@ -13,6 +13,9 @@ class Event < ActiveRecord::Base
     numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
   validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
+  validates :home, inclusion: { in: [true, false] }
+  validates :home, exclusion: { in: [nil] }
+
   scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
   scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
 
