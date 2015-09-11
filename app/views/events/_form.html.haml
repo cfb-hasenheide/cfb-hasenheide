@@ -64,11 +64,7 @@
       .form-group
         = f.label :datetime, class: 'col-md-4 control-label'
         .col-md-8
-          .input-group
-            = f.text_field :datetime, value: l(f.object.datetime),
-              class: 'form-control', id: 'datetimepicker'
-            %span.input-group-addon
-              = datetime_icon
+          = f.datetime_select :datetime, class: 'form-control'
 
       .form-group
         = f.label :address, class: 'col-md-4 control-label'
