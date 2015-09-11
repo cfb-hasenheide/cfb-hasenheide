@@ -28,29 +28,26 @@
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          - if current_user.admin?
-            %li.dropdown
-              %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
-                role: 'button', 'aria-expanded' => false}
-                Admin
-                %span.caret
-              %ul.dropdown-menu{role: 'menu'}
+          %li.dropdown
+            %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
+              role: 'button', 'aria-expanded' => 'false' }
+              = current_user.admin? ? admin_icon : user_icon
+              #{current_user.user_profile.alias}
+              %span.caret
+            %ul.dropdown-menu{role: 'menu'}
+              - if current_user.admin?
+                %li.dropdown-header Admin Einstellungen
                 %li
                   %a{href: users_path} User verwalten
                 %li
                   %a{href: teams_path} Teams verwalten
-
-          %li.dropdown
-            %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
-              role: 'button', 'aria-expanded' => 'false' }
-              #{current_user.user_profile.alias}
-              (#{I18n.t("user_role.#{current_user.role}")})
-              %span.caret
-            %ul.dropdown-menu{role: 'menu'}
+                %li.divider
+              %li.dropdown-header User Einstellungen
               %li= link_to 'Account bearbeiten', edit_user_registration_path
               %li= link_to 'Profil bearbeiten', edit_user_profile_path(current_user.user_profile)
               %li.divider
               %li= link_to 'Logout', destroy_user_session_path, method: :delete
+
         - else
           %li
             = link_to 'Login', new_user_session_path

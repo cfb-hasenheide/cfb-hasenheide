@@ -67,6 +67,10 @@ module IconsHelper
     content_tag(:span, nil, class: 'fa fa-user')
   end
 
+  def admin_icon
+    content_tag(:span, nil, class: 'fa fa-user-plus')
+  end
+
   def time_icon
     content_tag(:span, nil, class: 'fa fa-clock-o')
   end
