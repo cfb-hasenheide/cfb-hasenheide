@@ -19,7 +19,7 @@ gem 'devise_invitable'
 
 # file uploading
 gem 'fog-aws'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # assets
 gem 'sass-rails'
