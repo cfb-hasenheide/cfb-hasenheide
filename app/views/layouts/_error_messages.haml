@@ -1,0 +1,6 @@
+- if model.errors.any?
+  .alert.alert-danger
+    %strong Folgende Fehler sind aufgetreten:
+    %ul
+      - for message in model.errors.full_messages
+        %li= message

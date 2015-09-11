@@ -38,42 +38,28 @@
       .form-group
         = f.label :home, class: 'col-md-4 control-label'
         .col-md-8
-          .radio-inline
-            = f.radio_button :home, true
-            Heimspiel
-          .radio-inline
-            = f.radio_button :home, false
-            Auswärtsspiel
+          .btn-group.btn-group-justified{'data-toggle' => 'buttons'}
+            %label.btn.btn-default{class: ('active' if f.object.home == true)}
+              = f.radio_button :home, true
+              Heimspiel
+            %label.btn.btn-default{class: ('active' if f.object.home == false)}
+              = f.radio_button :home, false
+              Auswärtsspiel
 
       .form-group
         = f.label :name, class: 'col-md-4 control-label'
         .col-md-8
-          = f.text_field :name, class: 'form-control',
-            placeholder: 'Leer lassen für "Heimteam" : "Auswärtsteam"'
+          = f.text_field :name, class: 'form-control'
+          %small.help-block Leer lassen für "Heimteam" : "Auswärtsteam"
 
       .form-group
-        = f.label :kind, class: 'col-md-4 control-label'
+        = label_tag 'Teilnehmer', nil, class: 'col-md-4 control-label'
         .col-md-8
-          = f.select :kind,
-            options_for_select(event_kind_options, @event.kind),
-            {},
-            class: 'form-control'
-
-      .form-group
-        = f.label :minimum, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.select :minimum,
-            options_for_select(1..User.count, f.object.minimum || 7),
-            {},
-            class: 'form-control'
-
-      .form-group
-        = f.label :maximum, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.select :maximum,
-            options_for_select(1..User.count, f.object.maximum || 11),
-            {},
-            class: 'form-control'
+          .input-group
+            %span.input-group-addon min
+            = f.number_field :minimum, value: 7, class: 'form-control'
+            %span.input-group-addon max
+            = f.number_field :maximum, value: 11, class: 'form-control'
 
       .form-group
         = f.label :datetime, class: 'col-md-4 control-label'
@@ -87,12 +73,15 @@
       .form-group
         = f.label :address, class: 'col-md-4 control-label'
         .col-md-8
-          = f.text_field :address, class: 'form-control'
+          .input-group
+            = f.text_field :address, class: 'form-control'
+            %span.input-group-addon
+              = address_icon
 
       .form-group
         = f.label :description, class: 'col-md-4 control-label'
         .col-md-8
-          = f.text_area :description, class: 'form-control'
+          = f.text_area :description, rows: 5, class: 'form-control'
 
       .form-group
         .col-md-offset-4.col-md-8
@@ -100,4 +89,4 @@
           = link_to 'Abbrechen', events_path, class: 'default-button pull-right'
 
   .col-md-6
-    .well Test
+    = render 'layouts/error_messages', model: @event
