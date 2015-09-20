@@ -1,5 +1,24 @@
-.panel{class: (event.past? ? 'panel-default' : 'panel-primary')}
-  .panel-heading
+%a.list-group-item{href: event_path(event), class: ('active' unless event.past?)}
+  %h4.list-group-item-heading
+    = event.generated_name
+    %small= I18n.t("event_kind.#{event.kind}")
+    %span.label.label-success.pull-right Gewonnen
+  .row
+    .col-md-4
+      = date_icon
+      -# = l(event.datetime, format: :long)
+      = event.datetime_date
+    .col-md-4
+      = time_icon
+      -# = l(event.datetime, format: :long)
+      = event.datetime_time
+      Uhr
+    .col-md-4
+      = address_icon
+      = event.address
+
+-# .panel{class: (event.past? ? 'panel-default' : 'panel-primary')}
+  .panel-body
     %h3.panel-title
       = link_to event.generated_name, event_path(event)
       .pull-right
@@ -9,7 +28,7 @@
   .panel-body
     .half-half
       .left-half
-        = datetime_icon
+        = date_icon
         = l(event.datetime, format: :long)
       .right-half
         = address_icon

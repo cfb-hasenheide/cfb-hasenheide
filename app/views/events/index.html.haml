@@ -8,8 +8,9 @@
           = create_icon
           Event erstellen
 
-- for event in @events
-  = render 'event', event: event
+.list-group
+  - for event in @events
+    = render 'event', event: event
 
 .pull-right
   = paginate @events
