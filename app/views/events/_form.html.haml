@@ -14,7 +14,7 @@
         .col-md-8
           = f.select :club_team_id,
             options_from_collection_for_select(Team.club, :id, :name, @event.club_team_id),
-            {},
+            { prompt: '- Wählen -' },
             class: 'form-control'
           %span.help-block
             %small
@@ -27,7 +27,7 @@
         .col-md-8
           = f.select :rival_team_id,
             options_from_collection_for_select(Team.rivals, :id, :name, @event.rival_team_id),
-            {},
+            { include_blank: '- Wählen -' },
             class: 'form-control'
           %span.help-block
             %small
@@ -49,16 +49,15 @@
       .form-group
         = f.label :name, class: 'col-md-4 control-label'
         .col-md-8
-          = f.text_field :name, class: 'form-control'
+          = f.text_field :name, class: 'form-control', placeholder: 'optional'
           %small.help-block Leer lassen für "Heimteam" : "Auswärtsteam"
 
       .form-group
-        = label_tag 'Teilnehmer', nil, class: 'col-md-4 control-label'
+        = f.label :minimum, class: 'col-md-4 control-label'
         .col-md-8
           .input-group
-            %span.input-group-addon min
             = f.number_field :minimum, value: 7, class: 'form-control'
-            %span.input-group-addon max
+            %span.input-group-addon= minus_icon
             = f.number_field :maximum, value: 11, class: 'form-control'
 
       .form-group
@@ -82,13 +81,12 @@
         .col-md-8
           .input-group
             = f.text_field :address, class: 'form-control'
-            %span.input-group-addon
-              = address_icon
+            %span.input-group-addon= address_icon
 
       .form-group
         = f.label :description, class: 'col-md-4 control-label'
         .col-md-8
-          = f.text_area :description, rows: 5, class: 'form-control'
+          = f.text_area :description, rows: 3, class: 'form-control'
 
       .form-group
         .col-md-offset-4.col-md-8

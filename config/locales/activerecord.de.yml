@@ -11,9 +11,8 @@ de:
         rival_team_id: Gegnermannschaft
         description: Beschreibung
         address: Adresse
-        minimum: Mindestanzahl Teilnehmer
-        maximum: Maximalanzahl Teilnehmer
-        home: Heimspiel?
+        minimum: Teilnehmeranzahl
+        home: Heim / Auswärts?
       forum_thread:
         topic: Thema
         comment: Kommentar
