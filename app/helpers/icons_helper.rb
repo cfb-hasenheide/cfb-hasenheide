@@ -20,7 +20,7 @@ module IconsHelper
   end
 
   def address_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-map-marker')
+    content_tag(:span, nil, class: 'fa fa-map-marker fa-fw')
   end
 
   def create_icon
@@ -37,6 +37,10 @@ module IconsHelper
 
   def mail_icon
     content_tag(:span, nil, class: 'glyphicon glyphicon-envelope')
+  end
+
+  def minus_icon
+    content_tag(:span, nil, class: 'fa fa-minus fa-fw')
   end
 
   def facebook_link_icon
@@ -68,11 +72,11 @@ module IconsHelper
   end
 
   def user_icon
-    content_tag(:span, nil, class: 'fa fa-user')
+    content_tag(:span, nil, class: 'fa fa-user fa-fw')
   end
 
   def admin_icon
-    content_tag(:span, nil, class: 'fa fa-user-plus')
+    content_tag(:span, nil, class: 'fa fa-user-plus fa-fw')
   end
 
   def spinner_icon
