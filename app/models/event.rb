@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  before_save :convert_to_datetime
+
   has_many   :replies,    dependent: :destroy
   has_one    :report,     dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
@@ -53,4 +55,30 @@ class Event < ActiveRecord::Base
       rival_team.name + ' : ' + club_team.name
     end
   end
+
+  # NOTE: Virtual attributes for datetime input fields
+
+  def datetime_date
+    datetime.strftime("%d.%m.%Y") if datetime.present?
+  end
+
+  def datetime_time
+    datetime.strftime("%H:%M") if datetime.present?
+  end
+
+  def datetime_date=(date)
+    # Change back to datetime friendly format
+    @datetime_date = Date.parse(date).strftime("%d.%m.%Y")
+  end
+
+  def datetime_time=(time)
+    # Change back to datetime friendly format
+    @datetime_time = Time.parse(time).strftime("%H:%M:%S %Z")
+  end
+
+  def convert_to_datetime
+    self.datetime = DateTime.parse("#{@datetime_date} #{@datetime_time}")
+  end
+
+  # NOTE: End of Virtual attributes for datetime input fields
 end

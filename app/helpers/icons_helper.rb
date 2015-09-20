@@ -11,8 +11,12 @@ module IconsHelper
     content_tag(:span, nil, class: 'glyphicon glyphicon-trash')
   end
 
-  def datetime_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-calendar')
+  def date_icon
+    content_tag(:span, nil, class: 'fa fa-calendar fa-fw')
+  end
+
+  def time_icon
+    content_tag(:span, nil, class: 'fa fa-clock-o fa-fw')
   end
 
   def address_icon
@@ -69,10 +73,6 @@ module IconsHelper
 
   def admin_icon
     content_tag(:span, nil, class: 'fa fa-user-plus')
-  end
-
-  def time_icon
-    content_tag(:span, nil, class: 'fa fa-clock-o')
   end
 
   def spinner_icon

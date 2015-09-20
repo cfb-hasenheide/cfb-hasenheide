@@ -5,7 +5,8 @@ de:
     attributes:
       event:
         kind: Typ
-        datetime: Datum / Uhrzeit
+        datetime_date: Datum
+        datetime_time: Anstoß
         club_team_id: Vereinsmannschaft
         rival_team_id: Gegnermannschaft
         description: Beschreibung

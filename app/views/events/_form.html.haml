@@ -62,9 +62,20 @@
             = f.number_field :maximum, value: 11, class: 'form-control'
 
       .form-group
-        = f.label :datetime, class: 'col-md-4 control-label'
+        = f.label :datetime_date, class: 'col-md-4 control-label'
         .col-md-8
-          = f.datetime_select :datetime, class: 'form-control'
+          .input-group.date#datetimepickerDate
+            = f.text_field :datetime_date, class: 'form-control',
+              placeholder: "z.B. #{l(Date.current)}"
+            .input-group-addon= date_icon
+
+      .form-group
+        = f.label :datetime_time, class: 'col-md-4 control-label'
+        .col-md-8
+          .input-group.date#datetimepickerTime
+            = f.text_field :datetime_time, class: 'form-control',
+              placeholder: "z.B. #{l(Time.zone.now, format: :time)}"
+            .input-group-addon= time_icon
 
       .form-group
         = f.label :address, class: 'col-md-4 control-label'
