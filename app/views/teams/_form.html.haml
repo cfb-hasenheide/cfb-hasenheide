@@ -7,9 +7,13 @@
         = f.input :name
       .right-half
         = f.input :description
-    .half-half
-      .left-half
+    .thirds
+      .third
         = f.input :club
+      .third
+        = f.input :player_pass_needed
+      .third
+        = f.input :current_season
 
   .form-actions
     = f.button :submit, 'Speichern', class: 'primary-button'

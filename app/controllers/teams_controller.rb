@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   respond_to :html
 
   def index
-    @teams = Team.order('name').page(params[:page])
+    @teams = Team.order('club DESC, current_season DESC, name').page(params[:page])
   end
 
   def new

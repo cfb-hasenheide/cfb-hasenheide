@@ -27,6 +27,8 @@ de:
       team:
         description: Beschreibung
         club: Vereinsmannschaft?
+        player_pass_needed: Spielerpass?
+        current_season: Aktuelle Saison?
       user:
         email: E-Mail
         password: Passwort

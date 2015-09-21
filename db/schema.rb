@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820221420) do
+ActiveRecord::Schema.define(version: 20150921205337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.datetime "datetime"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description",   limit: 255
@@ -29,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150820221420) do
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
     t.boolean  "home"
+    t.datetime "datetime"
   end
 
   create_table "forum_posts", force: :cascade do |t|
@@ -82,11 +82,13 @@ ActiveRecord::Schema.define(version: 20150820221420) do
   add_index "reports", ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
     t.boolean  "club"
+    t.boolean  "player_pass_needed", default: false, null: false
+    t.boolean  "current_season",     default: false, null: false
   end
 
   add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
