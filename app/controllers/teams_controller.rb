@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:edit, :update]
+  before_action :authorize_admin!
 
   respond_to :html
 

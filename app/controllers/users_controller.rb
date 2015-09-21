@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin_check, only: :index
+  before_action :authorize_admin, only: :index
   before_action :set_user, only: :update
 
   respond_to :html
@@ -19,10 +19,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def admin_check
-    redirect_to :root and return unless current_user.admin?
-  end
 
   def set_user
     @user = User.find(params[:id])

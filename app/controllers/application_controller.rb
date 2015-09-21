@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
                :password_confirmation, :invitation_token)
     end
   end
+
+  def authorize_admin!
+    current_user.admin? or redirect_to :root and return
+  end
 end
