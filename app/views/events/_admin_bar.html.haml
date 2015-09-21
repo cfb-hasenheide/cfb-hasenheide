@@ -11,4 +11,6 @@
     class: 'default-button' do
     = mail_icon
     Final Call (TODO)
-
+  = link_to event_path(@event), method: :delete, class: 'danger-button',
+    data: { confirm: 'Event wirklich löschen?' } do
+    Löschen
