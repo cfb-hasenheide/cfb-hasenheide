@@ -6,13 +6,10 @@
   .row
     .col-md-4
       = date_icon
-      -# = l(event.datetime, format: :long)
-      = event.datetime_date
+      = l(event.datetime, format: :date_only)
     .col-md-4
       = time_icon
-      -# = l(event.datetime, format: :long)
-      = event.datetime_time
-      Uhr
+      = l(event.datetime, format: :time_only)
     .col-md-4
       = address_icon
       = event.address

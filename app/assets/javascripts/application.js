@@ -13,9 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require moment
-//= require moment/de
-//= require bootstrap-datetimepicker
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/locales/de-DE
 //= require bootstrap-switch
