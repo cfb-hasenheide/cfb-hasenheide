@@ -5,7 +5,8 @@ class TeamsController < ApplicationController
   respond_to :html
 
   def index
-    @teams = Team.order('club DESC, current_season DESC, name').page(params[:page])
+    @teams =
+      Team.order('club DESC, current_season DESC, name').page(params[:page])
   end
 
   def new
@@ -35,6 +36,7 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:name, :description, :club)
+    params.require(:team).permit(:name, :description, :club,
+                                 :player_pass_needed, :current_season)
   end
 end

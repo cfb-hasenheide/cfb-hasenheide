@@ -63,6 +63,7 @@ GEM
       railties (>= 3.0)
     bootstrap3-datetimepicker-rails (4.15.35)
       momentjs-rails (>= 2.8.1)
+    bootstrap_form (2.3.0)
     builder (3.2.2)
     code_analyzer (0.4.5)
       sexp_processor
@@ -280,6 +281,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-wysihtml5-rails
   bootstrap3-datetimepicker-rails
+  bootstrap_form
   carrierwave!
   coffee-rails
   devise

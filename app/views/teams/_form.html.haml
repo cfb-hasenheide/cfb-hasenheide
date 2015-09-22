@@ -1,20 +1,23 @@
-= simple_form_for(@team) do |f|
-  = f.error_notification
+.halfs
+  .half
+    = bootstrap_form_for @team, layout: :horizontal, label_col: "col-sm-4",
+      control_col: "col-sm-8" do |f|
 
-  .form-inputs
-    .half-half
-      .left-half
-        = f.input :name
-      .right-half
-        = f.input :description
-    .thirds
-      .third
-        = f.input :club
-      .third
-        = f.input :player_pass_needed
-      .third
-        = f.input :current_season
+      = f.text_field :name
 
-  .form-actions
-    = f.button :submit, 'Speichern', class: 'primary-button'
-    = link_to 'Abbrechen', teams_path, class: 'default-button'
+      = f.text_field :description
+
+      = f.form_group do
+        = f.check_box :club
+
+      = f.form_group do
+        = f.check_box :player_pass_needed
+
+      = f.form_group do
+        = f.check_box :current_season
+
+      = f.form_group do
+        = f.submit class: 'btn btn-primary'
+        = link_to 'Abbrechen', teams_path, class: 'btn btn-default pull-right'
+
+  .half
