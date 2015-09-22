@@ -33,6 +33,7 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'momentjs-rails' # NOTE: needed for bootstrap3-datetimepicker-rails
 gem 'simple_form'
 gem 'bootstrap_form'
+gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
 
 # json

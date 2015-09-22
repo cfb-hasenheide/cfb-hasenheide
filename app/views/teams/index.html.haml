@@ -1,7 +1,6 @@
 .page-header
   %h1
     Mannschaften
-    %small= page_entries_info(@teams)
     .pull-right
       = link_to new_team_path, class: 'primary-button' do
         = create_icon
@@ -23,11 +22,18 @@
         %tr
           %td.col-md-3= team.name
           %td.col-md-5= team.description
-          %td.col-md-1= team.club?
           %td.col-md-1
-            = team.player_pass_needed? if team.club?
+            - if team.club?
+              .label.label-success Ja
           %td.col-md-1
-            = team.current_season? unless team.club?
+            - if team.club? && team.player_pass_needed?
+              .label.label-success Ja
+          %td.col-md-1
+            = form_for team, remote: true do |f|
+              = f.check_box :current_season, class: 'bootstrap-switch',
+                'data-size' => 'mini', 'data-on-color' => 'success',
+                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
+                onchange: '$(this.form).submit();'
           %td.col-md-1.text-right
             = link_to edit_team_path(team), class: 'default-button-xs' do
               = edit_icon
@@ -35,5 +41,7 @@
               'data-confirm' => 'Team wirklich löschen?' do
               = delete_icon
 
-.pull-right
+.text-center.text-muted
+  = page_entries_info(@teams)
+.text-center
   = paginate @teams

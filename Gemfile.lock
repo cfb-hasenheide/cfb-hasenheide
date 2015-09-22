@@ -59,6 +59,7 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bootstrap-switch-rails (3.3.3)
     bootstrap-wysihtml5-rails (0.3.3.7)
       railties (>= 3.0)
     bootstrap3-datetimepicker-rails (4.15.35)
@@ -279,6 +280,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bootstrap-switch-rails
   bootstrap-wysihtml5-rails
   bootstrap3-datetimepicker-rails
   bootstrap_form
