@@ -8,15 +8,16 @@ class Event < ActiveRecord::Base
 
   enum kind: { league: 0, cup: 1, tournament: 2, friendly: 3, other: 4 }
 
-  # TODO: Validate name unless rival_team_id.present?
   validates :kind, :datetime, :club_team_id, presence: true
-  validates :name, presence: true, unless: "rival_team_id.present?"
+
   validates :minimum,
     numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
   validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
   validates :home, inclusion: { in: [true, false] }
   validates :home, exclusion: { in: [nil] }
+
+  validate :rival_team_id_or_name
 
   scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
   scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }

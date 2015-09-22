@@ -1,97 +1,39 @@
-.row
-  .col-md-6
-    = form_for @event, html: { class: 'form-horizontal' } do |f|
-      .form-group
-        = f.label :kind, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.select :kind,
-            options_for_select(event_kind_options, @event.kind),
-            {},
-            class: 'form-control'
+.halfs
+  .half
+    = bootstrap_form_for @event, layout: :horizontal, label_col: "col-sm-4",
+      control_col: "col-sm-8" do |f|
 
-      .form-group
-        = f.label :club_team_id, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.select :club_team_id,
-            options_from_collection_for_select(Team.club, :id, :name, @event.club_team_id),
-            { prompt: '- Wählen -' },
-            class: 'form-control'
-          %span.help-block
-            %small
-              = link_to new_team_path(home: true) do
-                = create_icon
-                hinzufügen
+      = f.select :kind,
+        options_for_select(event_kind_options, @event.kind),
+        {},
+        class: 'form-control'
 
-      .form-group
-        = f.label :rival_team_id, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.select :rival_team_id,
-            options_from_collection_for_select(Team.rivals, :id, :name, @event.rival_team_id),
-            { include_blank: '- Wählen -' },
-            class: 'form-control'
-          %span.help-block
-            %small
-              = link_to new_team_path(home: false) do
-                = create_icon
-                hinzufügen
+      = f.collection_select :club_team_id, Team.club, :id, :name,
+        prompt: '- Wählen -', class: 'form-control'
 
-      .form-group
-        = f.label :home, class: 'col-md-4 control-label'
-        .col-md-8
-          .btn-group.btn-group-justified{'data-toggle' => 'buttons'}
-            %label.btn.btn-default{class: ('active' if f.object.home == true)}
-              = f.radio_button :home, true
-              Heimspiel
-            %label.btn.btn-default{class: ('active' if f.object.home == false)}
-              = f.radio_button :home, false
-              Auswärtsspiel
+      = f.select :rival_team_id,
+        grouped_options_for_select(grouped_team_options),
+        include_blank: '- Wählen -', class: 'form-control'
 
-      .form-group
-        = f.label :name, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.text_field :name, class: 'form-control', placeholder: 'optional'
-          %small.help-block Leer lassen für "Heimteam" : "Auswärtsteam"
+      = f.form_group :home do
+        = f.radio_button :home, 1, label: 'Heimspiel', inline: true
+        = f.radio_button :home, 0, label: 'Auswärtsspiel', inline: true
 
-      .form-group
-        = f.label :minimum, class: 'col-md-4 control-label'
-        .col-md-8
-          .input-group
-            = f.number_field :minimum, value: 7, class: 'form-control'
-            %span.input-group-addon= minus_icon
-            = f.number_field :maximum, value: 11, class: 'form-control'
+      = f.text_field :name,
+        placeholder: '"Heimmannschaft" : "Auswärtsmannschaft"'
 
-      .form-group
-        = f.label :datetime_date, class: 'col-md-4 control-label'
-        .col-md-8
-          .input-group.date#datetimepickerDate
-            = f.text_field :datetime_date, class: 'form-control',
-              placeholder: "z.B. #{l(Date.current)}"
-            .input-group-addon= date_icon
+      = f.number_field :minimum, icon: 'user', value: 7
 
-      .form-group
-        = f.label :datetime_time, class: 'col-md-4 control-label'
-        .col-md-8
-          .input-group.date#datetimepickerTime
-            = f.text_field :datetime_time, class: 'form-control',
-              placeholder: "z.B. #{l(Time.zone.now, format: :time)}"
-            .input-group-addon= time_icon
+      = f.number_field :maximum, icon: 'user', value: 11
 
-      .form-group
-        = f.label :address, class: 'col-md-4 control-label'
-        .col-md-8
-          .input-group
-            = f.text_field :address, class: 'form-control'
-            %span.input-group-addon= address_icon
+      = f.datetime_select :datetime
 
-      .form-group
-        = f.label :description, class: 'col-md-4 control-label'
-        .col-md-8
-          = f.text_area :description, rows: 3, class: 'form-control'
+      = f.text_field :address, icon: 'map-marker'
 
-      .form-group
-        .col-md-offset-4.col-md-8
-          = f.submit class: 'primary-button'
-          = link_to 'Abbrechen', events_path, class: 'default-button pull-right'
+      = f.text_area :description
 
-  .col-md-6
-    = render 'layouts/error_messages', model: @event
+      = f.form_group do
+        = f.submit class: 'primary-button'
+        = link_to 'Abbrechen', events_path, class: 'default-button pull-right'
+
+  .half

@@ -4,15 +4,15 @@ de:
       team: Mannschaft
     attributes:
       event:
-        kind: Typ
-        datetime_date: Datum
-        datetime_time: Anstoß
-        club_team_id: Vereinsmannschaft
-        rival_team_id: Gegnermannschaft
-        description: Beschreibung
         address: Adresse
-        minimum: Teilnehmeranzahl
+        club_team_id: Vereinsmannschaft
+        datetime: Datum / Anstoß
+        description: Beschreibung
         home: Heim / Auswärts?
+        kind: Typ
+        minimum: Min. Spieler
+        minimum: Max. Spieler
+        rival_team_id: Gegnermannschaft
       forum_thread:
         topic: Thema
         comment: Kommentar
