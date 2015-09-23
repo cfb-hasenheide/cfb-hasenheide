@@ -34,12 +34,13 @@
                 'data-size' => 'mini', 'data-on-color' => 'success',
                 'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
                 onchange: '$(this.form).submit();'
-          %td.col-md-1.text-right
-            = link_to edit_team_path(team), class: 'default-button-xs' do
-              = edit_icon
-            = link_to team_path(team), method: :delete, class: 'danger-button-xs',
-              'data-confirm' => 'Team wirklich löschen?' do
-              = delete_icon
+          %td.col-md-1
+            .btn-toolbar.pull-right
+              = link_to edit_team_path(team), class: 'default-button-xs' do
+                = edit_icon
+              = link_to team_path(team), method: :delete, class: 'danger-button-xs',
+                'data-confirm' => 'Team wirklich löschen?' do
+                = delete_icon
 
 .text-center.text-muted
   = page_entries_info(@teams)
