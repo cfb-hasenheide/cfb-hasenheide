@@ -1,54 +1,19 @@
-%a.list-group-item{href: event_path(event), class: ('active' unless event.past?)}
-  %h4.list-group-item-heading
-    = event.generated_name
-    %small= I18n.t("event_kind.#{event.kind}")
-    %span.label.label-success.pull-right Gewonnen
-  .row
-    .col-md-4
-      = date_icon
-      = l(event.datetime, format: :date_only)
-    .col-md-4
-      = time_icon
-      = l(event.datetime, format: :time_only)
-    .col-md-4
-      = address_icon
-      = event.address
+.panel{class: ('panel-' + css_class_for_event(event))}
+  = link_to event_path(event), style: 'color:inherit;text-decoration:none' do
+    .panel-body
+      %p.lead= event.generated_name
 
--# .panel{class: (event.past? ? 'panel-default' : 'panel-primary')}
-  .panel-body
-    %h3.panel-title
-      = link_to event.generated_name, event_path(event)
+      %ul.list-unstyled
+        %li
+          = date_icon
+          = l(event.datetime, format: :date_only)
+        %li
+          = time_icon
+          = l(event.datetime, format: :time_only)
+        %li
+          = address_icon
+          = event.address
+
+      .label.label-default= I18n.t("event_kind.#{event.kind}")
       .pull-right
-        .label.label-default
-          = I18n.t("event_kind.#{event.kind}")
-
-  .panel-body
-    .half-half
-      .left-half
-        = date_icon
-        = l(event.datetime, format: :long)
-      .right-half
-        = address_icon
-        = event.address
-
-    %p= event.description
-
-  .panel-footer
-    - if event.report.present?
-      = link_to report_path(event.report), class: 'default-button-xs' do
-        = report_icon
-        Bericht
-    - else
-      = link_to new_report_path(event),
-        class: 'primary-button-xs' do
-        = create_icon
-        Bericht
-
-    - if admin?
-      = link_to edit_event_path(event), class: 'default-button-xs' do
-        = edit_icon
-        Bearbeiten
-      = link_to event, method: :delete, class: 'danger-button-xs',
-        data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
-        = delete_icon
-        Löschen
+        %span.label{class: ('label-' + css_class_for_event(event))} 7 : 2

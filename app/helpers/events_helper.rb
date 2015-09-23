@@ -30,6 +30,15 @@ module EventsHelper
     event.yes_count + event.waiting_count >= event.minimum
   end
 
+  def css_class_for_event(event)
+    return 'default' unless event.past?
+    # return 'primary' if event.repliable?
+    # return 'success' if event.won?
+    # return 'warning' if event.drawed?
+    # return 'danger' if event.lost?
+    'danger'
+  end
+
   def class_for(status)
     case status
     when :yes then'success'
