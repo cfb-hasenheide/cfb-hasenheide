@@ -8,3 +8,11 @@
         = link_to new_report_path, class: 'primary-button' do
           = create_icon
           Bericht erstellen
+
+%ul
+  - for report in @reports
+    %li
+      = link_to edit_report_path(report) do
+        = report.event.generated_name
+        = surround '(', ')' do
+          = report.final_score
