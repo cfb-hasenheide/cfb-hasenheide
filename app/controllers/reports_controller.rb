@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:create, :edit, :update]
+  before_action :set_report, only: [:edit, :update]
 
   respond_to :html
 
@@ -18,7 +18,6 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report = Report.find(params[:id])
   end
 
   def update
@@ -32,7 +31,7 @@ class ReportsController < ApplicationController
   private
 
   def set_report
-    @report = Report.new(report_params)
+    @report = Report.find(params[:id])
   end
 
   def report_params
