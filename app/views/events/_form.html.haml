@@ -12,12 +12,12 @@
         prompt: '- Wählen -', class: 'form-control'
 
       = f.select :rival_team_id,
-        grouped_options_for_select(grouped_team_options),
+        grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
         include_blank: '- Wählen -', class: 'form-control'
 
       = f.form_group :home do
-        = f.radio_button :home, 1, label: 'Heimspiel', inline: true
-        = f.radio_button :home, 0, label: 'Auswärtsspiel', inline: true
+        = f.radio_button :home, true, label: 'Heimspiel', inline: true
+        = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
 
       = f.text_field :name,
         placeholder: '"Heimmannschaft" : "Auswärtsmannschaft"'
