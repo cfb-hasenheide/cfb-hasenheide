@@ -62,6 +62,21 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def won?
+    return false unless report.present? && report.final_score_present?
+    report.club_final_score > report.rival_final_score
+  end
+
+  def lost?
+    return false unless report.present? && report.final_score_present?
+    report.club_final_score < report.rival_final_score
+  end
+
+  def drawed?
+    return false unless report.present? && report.final_score_present?
+    report.club_final_score == report.rival_final_score
+  end
+
   private
 
   def rival_team_id_or_name

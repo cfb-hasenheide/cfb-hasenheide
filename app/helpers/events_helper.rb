@@ -33,9 +33,9 @@ module EventsHelper
   def css_class_for_event(event)
     return 'default' unless event.past?
     # return 'primary' if event.repliable?
-    # return 'success' if event.won?
-    # return 'warning' if event.drawed?
-    # return 'danger' if event.lost?
+    return 'success' if event.won?
+    return 'warning' if event.drawed?
+    return 'danger' if event.lost?
     'danger'
   end
 

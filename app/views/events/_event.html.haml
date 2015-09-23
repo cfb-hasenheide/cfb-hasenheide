@@ -15,5 +15,8 @@
           = event.address
 
       .label.label-default= I18n.t("event_kind.#{event.kind}")
-      .pull-right
-        %span.label{class: ('label-' + css_class_for_event(event))} 7 : 2
+      - if event.report.present?
+        .pull-right
+          %span.label{class: ('label-' + css_class_for_event(event))}
+            = event.report.final_score
+
