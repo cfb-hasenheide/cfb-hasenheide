@@ -22,6 +22,11 @@ class Event < ActiveRecord::Base
 
   paginates_per 15
 
+  def self.without_report
+    ids = Report.all.pluck(:event_id)
+    where.not(id: ids)
+  end
+
   def past?
     datetime < Time.now
   end

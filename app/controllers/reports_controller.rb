@@ -12,9 +12,10 @@ class ReportsController < ApplicationController
   end
 
   def create
+    @report = Report.new(report_params)
     flash[:notice] = 'Bericht wurde erfolgreich erstellt.' if @report.save
 
-    respond_with(@report)
+    respond_with @report, location: reports_path
   end
 
   def edit
@@ -25,7 +26,7 @@ class ReportsController < ApplicationController
       flash[:notice] = 'Bericht wurde erfolgreich aktualisiert.'
     end
 
-    respond_with(@report)
+    respond_with @report, location: reports_path
   end
 
   private
@@ -35,6 +36,8 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:event_id, :content)
+    params.require(:report).permit(:event_id, :content, :club_final_score,
+                                  :rival_final_score, :club_half_time_score,
+                                  :rival_half_time_score)
   end
 end

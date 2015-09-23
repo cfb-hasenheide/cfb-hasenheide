@@ -1,11 +1,36 @@
-= simple_form_for(report) do |f|
-  = f.error_notification
+= bootstrap_form_for @report, layout: :horizontal, label_col: 'col-md-2',
+  control_col: 'col-md-10' do |f|
 
-  .form-inputs
-    = f.association :event, collection: Event.past,
-      label_method: :generated_name, value_method: :id, prompt: 'Event wählen'
-    = f.input :content, as: :text, input_html: { class: 'wysihtml5' }
+  - if f.object.event_id.blank?
+    = f.collection_select :event_id, Event.without_report, :id,
+      :generated_name, prompt: true, control_col: 'col-md-4'
 
-  .form-actions
-    = f.button :submit, class: 'primary-button'
-    = link_to 'Abbrechen', reports_path, class: 'default-button'
+  .form-group
+    %label.col-md-2.control-label Endstand
+    .col-md-4
+      .input-group
+        %span.input-group-addon CFB
+        = f.number_field_without_bootstrap :club_final_score, min: 0,
+          class: 'form-control'
+        %span.input-group-addon :
+        = f.number_field_without_bootstrap :rival_final_score, min: 0,
+          class: 'form-control'
+        %span.input-group-addon Gegner
+
+  .form-group
+    %label.col-md-2.control-label Halbzeitstand
+    .col-md-4
+      .input-group
+        %span.input-group-addon CFB
+        = f.number_field_without_bootstrap :club_half_time_score, min: 0,
+          class: 'form-control'
+        %span.input-group-addon :
+        = f.number_field_without_bootstrap :rival_half_time_score, min: 0,
+          class: 'form-control'
+        %span.input-group-addon Gegner
+
+  = f.text_area :content, class: 'wysihtml5'
+
+  = f.form_group do
+    = f.submit class: 'btn btn-primary'
+    = link_to 'Abbrechen', reports_path, class: 'btn btn-default pull-right'
