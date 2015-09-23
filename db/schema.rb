@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921205337) do
+ActiveRecord::Schema.define(version: 20150923212803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(version: 20150921205337) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "club_final_score",      limit: 2
+    t.integer  "rival_final_score",     limit: 2
+    t.integer  "club_half_time_score",  limit: 2
+    t.integer  "rival_half_time_score", limit: 2
   end
 
   add_index "reports", ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
