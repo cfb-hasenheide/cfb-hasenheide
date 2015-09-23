@@ -20,6 +20,8 @@ class Event < ActiveRecord::Base
   scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
   scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
 
+  paginates_per 15
+
   def past?
     datetime < Time.now
   end
