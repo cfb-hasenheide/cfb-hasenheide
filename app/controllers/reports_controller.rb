@@ -7,6 +7,10 @@ class ReportsController < ApplicationController
     @reports = Report.all.page(params[:page])
   end
 
+  def show
+    @report = Report.where(event_id: params[:event_id]).first or not_found
+  end
+
   def new
     @report = Report.new(params['event_id'])
   end

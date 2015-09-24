@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   resources :news
 
-  resources :events
+  resources :events do
+    resources :replies, only: [:index]
+    resource :report, only: [:show]
+  end
+
   resources :replies, only: [:create, :update] do
     post :create_multiple, on: :collection
   end

@@ -11,6 +11,18 @@ class RepliesController < ApplicationController
     redirect_to :back
   end
 
+  def index
+    @event = Event.find(params[:event_id])
+    @players = User.players
+    @yes_replies = Reply.by_event_and_status(@event, :yes)
+    @no_replies = Reply.by_event_and_status(@event, :no)
+    @waiting_replies = Reply.by_event_and_status(@event, :waiting)
+    @maybee_replies = Reply.by_event_and_status(@event, :maybee)
+    @watch_replies = Reply.by_event_and_status(@event, :watch)
+    @no_reply_players = User.didnt_reply_to_event(@event.id)
+    @reply = Reply.for_event_and_user(@event, current_user)
+  end
+
   # TODO: this is not the yellow of the egg
   def create_multiple
     event_id = params[:event_id]

@@ -27,6 +27,11 @@ class Event < ActiveRecord::Base
     where.not(id: ids)
   end
 
+  # TODO: placeholder for migrated field
+  def replyable?
+    true
+  end
+
   def past?
     datetime < Time.now
   end

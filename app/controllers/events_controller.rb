@@ -8,14 +8,8 @@ class EventsController < ApplicationController
   end
 
   def show
-    @players = User.players
-    @yes_replies = Reply.by_event_and_status(@event, :yes)
-    @no_replies = Reply.by_event_and_status(@event, :no)
-    @waiting_replies = Reply.by_event_and_status(@event, :waiting)
-    @maybee_replies = Reply.by_event_and_status(@event, :maybee)
-    @watch_replies = Reply.by_event_and_status(@event, :watch)
-    @no_reply_players = User.didnt_reply_to_event(@event.id)
-    @reply = Reply.for_event_and_user(@event, current_user)
+    redirect_to event_report_path(@event) and return if @event.report.present?
+    redirect_to event_replies_path(@event) and return if @event.replyable?
 
     respond_with(@event)
   end
