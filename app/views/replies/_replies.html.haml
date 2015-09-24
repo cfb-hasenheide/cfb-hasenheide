@@ -20,6 +20,6 @@
       %ul.list-group
         - for reply in replies
           %li{class: "list-group-item list-group-item-#{class_for(status)}"}
-            = reply.user.username
+            = reply.user.user_profile.alias
             %span.badge
               = l(reply.updated_at, format: :short)
