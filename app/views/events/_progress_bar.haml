@@ -1,16 +1,16 @@
 .progress
-  .progress-bar{ role: 'progress-bar',
+  .progress-bar{role: 'progress-bar',
     class: ('progress-bar-success' if minimum_reached?(event)),
     'aria-valuenow' => 1, 'aria-valuemin' => event.minimum,
-    'aria-valuemax' => progress_bar_maximum_for(event),
-    style: "width: #{yes_quota_for(event) * 100}%;"}
+    'aria-valuemax' => progress_bar_maximum_for(event), min_width: '20px',
+    style: "min-width: 2em; width: #{yes_quota_for(event) * 100}%;"}
 
-    #{event.yes_count} / #{event.minimum}-#{event.maximum} M
+    = event.yes_count.zero? ? '0' : event.yes_count + 'M'
 
   .progress-bar{role: 'progress-bar',
-    class: ('progress-bar-success progress-bar-striped' if minimum_reached?(event)),
+    class: ('progress-bar-warning' if minimum_reached?(event)),
     'aria-valuenow' => 1, 'aria-valuemin' => event.minimum,
     'aria-valuemax' => progress_bar_maximum_for(event),
     style: "width: #{waiting_quota_for(event) * 100}%;"}
 
-    #{event.waiting_count} W
+    = event.waiting_count.zero? ? '' : '+' + event.waiting_count + 'W'
