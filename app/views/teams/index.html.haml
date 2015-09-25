@@ -21,19 +21,24 @@
       - for team in @teams
         %tr
           %td.col-md-3= team.name
+
           %td.col-md-5= team.description
+
           %td.col-md-1
             - if team.club?
               .label.label-success Ja
+
           %td.col-md-1
             - if team.club? && team.player_pass_needed?
               .label.label-success Ja
+
           %td.col-md-1
             = form_for team, remote: true do |f|
               = f.check_box :current_season, class: 'bootstrap-switch',
                 'data-size' => 'mini', 'data-on-color' => 'success',
                 'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
                 onchange: '$(this.form).submit();'
+
           %td.col-md-1
             .btn-toolbar.pull-right
               = link_to edit_team_path(team), class: 'default-button-xs' do
