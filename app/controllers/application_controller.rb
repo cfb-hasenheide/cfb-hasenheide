@@ -36,6 +36,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin!
-    current_user.admin? or redirect_to :root and return
+    return true if current_user.admin?
+    alert = 'Du hast keine Berechtigung für den Admin Bereich!'
+      redirect_to :root, alert: alert and return
   end
 end
