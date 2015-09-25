@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post :create_multiple, on: :collection
   end
 
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: [:index, :update]
   resources :teams, only: [:index, :new, :create, :edit, :update]
   resources :reports, only: [:index, :new, :create, :edit, :update]
