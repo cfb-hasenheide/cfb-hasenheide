@@ -11,7 +11,7 @@
 
           - resource.class.invite_key_fields.each do |field|
             = f.label field
-            = f.text_field field
+            = f.text_field field, class: 'form-control'
 
         .panel-footer
           = f.submit t("devise.invitations.new.submit_button"),
