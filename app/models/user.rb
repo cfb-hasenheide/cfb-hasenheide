@@ -6,15 +6,11 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: { fan: 0, player: 1, admin: 2 }
-
   validates :username, presence: true, uniqueness: true
 
   after_create :create_user_profile
 
-  def self.players
-    where(role: [1, 2])
-  end
+  scope :players, -> { where(player: true) }
 
   def self.didnt_reply_to_event(event_id)
     ids = User.players.pluck(:id) - Reply.where(event_id: event_id).pluck(:user_id)

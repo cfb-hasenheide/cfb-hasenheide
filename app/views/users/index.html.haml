@@ -1,40 +1,58 @@
 .page-header
-  %h1 Userverwaltung
+  %h1
+    Userverwaltung
+    .pull-right
+      = link_to root_path, class: 'primary-button' do
+        = create_icon
+        %span.hidden-xs User erstellen
 
 .table-responsive
   %table
     %thead
       %tr
-        %th= User.human_attribute_name(:username)
-        %th= User.human_attribute_name(:email)
-        %th= User.human_attribute_name(:role)
+        %th.col-md-2= User.human_attribute_name(:username)
+        %th.col-md-2= UserProfile.human_attribute_name(:alias)
+        %th.col-md-2= User.human_attribute_name(:admin)
+        %th.col-md-2= User.human_attribute_name(:player)
+        %th.col-md-2= User.human_attribute_name(:player_pass)
+        %th.col-md-2.text-right.text-muted Aktionen
 
     %tbody
       - for user in @users
-        %tr{class: table_row_class_for(user)}
-          %td.col-lg-3
-            = form_for(user) do |f|
-              .form-inputs
-                .input-group
-                  = f.text_field :username, class: 'form-control input-sm'
-                  %span.input-group-btn
-                    = button_tag :submit, class: 'primary-button-sm' do
-                      = save_icon
+        %tr
+          %td.col-md-2= user.username
 
-          %td.col-lg-3
-            = form_for(user) do |f|
-              .form-inputs
-                .input-group
-                  = f.text_field :email, class: 'form-control input-sm'
-                  %span.input-group-btn
-                    = button_tag :submit, class: 'primary-button-sm' do
-                      = save_icon
+          %td.col-md-2= user.user_profile.alias
 
-          %td.col-lg-3
-            = form_for(user) do |f|
-              .form-inputs
-                = f.select :role,
-                  options_for_select(User.roles.keys, user.role),
-                  {},
-                  class: 'form-control input-sm',
-                  onchange: 'this.form.submit()'
+          %td.col-md-2
+            - if user.admin?
+              .label.label-success Ja
+
+          %td.col-md-2
+            = form_for user, remote: true do |f|
+              = f.check_box :player, class: 'bootstrap-switch',
+                'data-size' => 'mini', 'data-on-color' => 'success',
+                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
+                onchange: '$(this.form).submit();'
+
+          %td.col-md-2
+            = form_for user, remote: true do |f|
+              = f.check_box :player_pass, class: 'bootstrap-switch',
+                'data-size' => 'mini', 'data-on-color' => 'success',
+                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
+                onchange: '$(this.form).submit();'
+
+          %td.col-md-2
+            .btn-toolbar.pull-right
+              = link_to root_path, class: 'default-button-xs' do
+                = edit_icon
+              = link_to registration_path(user),
+                'data-confirm' => 'Wirklich unwiderruflich löschen?',
+                method: :delete,
+                class: 'danger-button-xs' do
+                = delete_icon
+
+.text-center.text-muted
+  = page_entries_info(@users)
+.text-center
+  = paginate @users

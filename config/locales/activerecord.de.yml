@@ -27,15 +27,19 @@ de:
       team:
         description: Beschreibung
         club: Vereinsmannschaft?
-        player_pass_needed: Spielerpass?
+        player_pass_needed: Spielerpass benötigt?
         current_season: Aktuelle Saison?
       user:
+        admin: Admin?
+        current_password: Aktuelles Passwort
         email: E-Mail
         password: Passwort
         password_confirmation: Passwort wiederholen
-        current_password: Aktuelles Passwort
+        player: Spieler?
+        player_pass: Spielerpass?
         remember_me: Angemeldet bleiben
-        role: Rolle
+      user_profile:
+        alias: Alias
 
   # enum translations
   event_kind:
@@ -54,7 +58,3 @@ de:
     other: Andere
     club: Vereinsmannschaft
     current_season: Aktuelle Saison
-  user_role:
-    fan: Fan
-    player: Spieler
-    admin: Admin
