@@ -3,7 +3,7 @@ class Reply < ActiveRecord::Base
   belongs_to :event
   has_one :user_profile, through: :user
 
-  before_save :check_maximum_replies, if: :status_changed_to_yes
+  # before_save :check_maximum_replies, if: :status_changed_to_yes
 
   validates :user_id, :event_id, :status, presence: true
 
@@ -21,10 +21,11 @@ class Reply < ActiveRecord::Base
     status_changed? && status == 'yes'
   end
 
-  # TODO: Is there any better name for me please?
-  def check_maximum_replies
-    if event.yes_count + event.waiting_count >= event.maximum
-      self.status = 'waiting'
-    end
-  end
+  # # TODO: Is there any better name for me please?
+  # def check_maximum_replies
+  #   require 'pry'; binding.pry
+  #   if event.yes_count + event.waiting_count >= event.maximum
+  #     self.status = 'waiting'
+  #   end
+  # end
 end
