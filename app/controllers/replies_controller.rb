@@ -13,13 +13,11 @@ class RepliesController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
-    @players = User.players
-    @yes_replies = Reply.by_event_and_status(@event, :yes)
-    @no_replies = Reply.by_event_and_status(@event, :no)
-    @waiting_replies = Reply.by_event_and_status(@event, :waiting)
-    @maybee_replies = Reply.by_event_and_status(@event, :maybee)
-    @watch_replies = Reply.by_event_and_status(@event, :watch)
-    @no_reply_players = User.didnt_reply_to_event(@event.id)
+    @replies = Reply.event(params[:event_id])
+      .includes(:user_profile).order('user_profiles.alias')
+    # @players = User.players_for_event(event_id)
+    @pending_players = User.pending_players_for_event(params[:event_id])
+      .includes(:user_profile).order('user_profiles.alias')
     @reply = Reply.for_event_and_user(@event, current_user)
   end
 

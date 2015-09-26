@@ -5,7 +5,7 @@
     'aria-valuemax' => progress_bar_maximum_for(event), min_width: '20px',
     style: "min-width: 2em; width: #{yes_quota_for(event) * 100}%;"}
 
-    = event.yes_count.zero? ? '0' : event.yes_count + 'M'
+    = event.yes_count.zero? ? '0' : "#{event.yes_count} M"
 
   .progress-bar{role: 'progress-bar',
     class: ('progress-bar-warning' if minimum_reached?(event)),
@@ -13,4 +13,4 @@
     'aria-valuemax' => progress_bar_maximum_for(event),
     style: "width: #{waiting_quota_for(event) * 100}%;"}
 
-    = event.waiting_count.zero? ? '' : '+' + event.waiting_count + 'W'
+    = event.waiting_count.zero? ? '' : "+ #{event.waiting_count} W"

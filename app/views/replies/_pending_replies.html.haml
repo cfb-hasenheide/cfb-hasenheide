@@ -1,0 +1,13 @@
+- if players.present?
+  = link_to '#pending', class: 'list-group-item', role: 'button',
+    'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+    'aria-controls' => 'pending' do
+
+    %span.badge= players.count
+    %h4.list-group-item-heading Ausstehend
+
+    .collapse.list-group-item-text#pending
+      %ul.list-unstyled
+        - for player in players
+          %li
+            = player.user_profile.alias

@@ -33,9 +33,9 @@
     = bootstrap_form_for @reply, layout: :horizontal, label_col: 'col-sm-4',
       control_col: 'col-sm-8' do |f|
 
-      = f.hidden_field :event_id
+      = f.hidden_field :event_id, value: params[:event_id]
 
-      = f.hidden_field :user_id
+      = f.hidden_field :user_id, value: current_user.id
 
       = f.collection_select :status, status_options, :last, :first,
         { prompt: 'Ausstehend...' }, { onchange: 'this.form.submit()' }
@@ -75,31 +75,17 @@
 
 .halfs
   .half
-    .panel-group#replies{role: 'tablist', 'aria-multiselectable' => true}
-      = render 'replies', event: @event, replies: @yes_replies, status: :yes
-      = render 'replies', event: @event, replies: @waiting_replies, status: :waiting
-      = render 'replies', event: @event, replies: @maybee_replies, status: :maybee
-      = render 'replies', event: @event, replies: @no_replies, status: :no
-      = render 'replies', event: @event, replies: @watch_replies, status: :watch
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Meldeliste
 
-      - if @no_reply_players.present?
-        .panel.panel-default
-          .panel-heading#headingMissing{role: 'tab'}
-            %h3.panel-title
-              %a{href: '#collapseMissing', 'data-toggle' => 'collapse',
-              'data-parent' => '#replies', 'aria-expanded' => true,
-              'aria-controls' => 'collapseMissing'}
-                Ausstehend
-
-              %small= @no_reply_players.count
-
-          .panel-collapse.collapse#collapseMissing{role: 'tabpanel',
-            'aria-labelledby' => 'headingMissing'}
-
-            %ul.list-group
-              - for player in @no_reply_players
-                %li.list-group-item.list-group-item-default
-                  = player.user_profile.alias
+      %ul.list-group
+        = render 'replies', event: @event, replies: @replies.yes, status: :yes
+        = render 'replies', event: @event, replies: @replies.waiting, status: :waiting
+        = render 'replies', event: @event, replies: @replies.maybee, status: :maybee
+        = render 'replies', event: @event, replies: @replies.no, status: :no
+        = render 'replies', event: @event, replies: @replies.watch, status: :watch
+        = render 'pending_replies', players: @pending_players
 
   .half
     .panel.panel-default

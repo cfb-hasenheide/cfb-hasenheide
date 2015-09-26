@@ -11,10 +11,17 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
 
   scope :players, -> { where(player: true) }
+  scope :player_pass, -> (boolean) { where(player_pass: boolean) }
 
-  def self.didnt_reply_to_event(event_id)
-    ids = User.players.pluck(:id) - Reply.where(event_id: event_id).pluck(:user_id)
-    User.where(id: ids)
+  def self.players_for_event(event_id)
+    club_team_id = Event.find(event_id).club_team_id
+    player_pass_needed = Team.find(club_team_id).player_pass_needed?
+    players.player_pass(player_pass_needed)
+  end
+
+  def self.pending_players_for_event(event_id)
+    players_for_event(event_id)
+      .where.not(id: Reply.event(event_id).pluck(:user_id))
   end
 
   # NOTE: Workaround to migrate users from legacy app

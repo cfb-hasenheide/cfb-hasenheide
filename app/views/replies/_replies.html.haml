@@ -1,25 +1,14 @@
 - if replies.present?
-  .panel.panel-default
-    .panel-heading{role: 'tab', id: "heading#{status.to_s.capitalize}"}
-      %h3.panel-title
-        %a{href: "#collapse#{status.to_s.capitalize}",
-        'data-toggle' => 'collapse',
-        'data-parent' => '#replies',
-        'aria-expanded' => true,
-        'aria-controls' => "collapse#{status.to_s.capitalize}"}
-          = I18n.t("reply_status.#{status}")
+  = link_to "##{status}", class: 'list-group-item', role: 'button',
+    'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+    'aria-controls' => status do
 
-        %small{class: "label label-#{class_for(status)}"}
-          = replies.count
+    %span.badge= replies.count
+    %h4.list-group-item-heading= I18n.t("reply_status.#{status}")
 
-    .panel-collapse.collapse{class: ('in' if status == :yes),
-      role: 'tabpanel',
-      'aria-labelledby' => "heading#{status.to_s.capitalize}",
-      id: "collapse#{status.to_s.capitalize}"}
-
-      %ul.list-group
+    .collapse.list-group-item-text{id: status, class: ('in' if status == :yes)}
+      %ul.list-unstyled
         - for reply in replies
-          %li{class: "list-group-item list-group-item-#{class_for(status)}"}
+          %li
             = reply.user.user_profile.alias
-            %span.badge
-              = l(reply.updated_at, format: :short)
+            %small.text-muted.pull-right= l(reply.updated_at, format: :short)
