@@ -30,7 +30,29 @@
 
 .halfs
   .half
-    = bootstrap_form_for @reply, layout: :horizontal, label_col: 'col-sm-4',
+    .btn-group.btn-group-justified{role: 'group', 'aria-label' => '...'}
+      .btn-group{role: 'group'}
+        %button.btn.btn-default{type: 'button'}
+          M
+          %span.hidden-xs - Meldung
+      .btn-group{role: 'group'}
+        %button.btn.btn-default{type: 'button'}
+          W
+          %span.hidden-xs - Warteliste
+      .btn-group{role: 'group'}
+        %button.btn.btn-default{type: 'button'}
+          ?
+          %span.hidden-xs - Unsicher
+      .btn-group{role: 'group'}
+        %button.btn.btn-default{type: 'button'}
+          Z
+          %span.hidden-xs - Zuschauer
+      .btn-group{role: 'group'}
+        %button.btn.btn-default{type: 'button'}
+          0
+          %span.hidden-xs - Absage
+
+    -# = bootstrap_form_for @reply, layout: :horizontal, label_col: 'col-sm-4',
       control_col: 'col-sm-8' do |f|
 
       = f.hidden_field :event_id, value: params[:event_id]
@@ -39,6 +61,8 @@
 
       = f.collection_select :status, status_options, :last, :first,
         { prompt: 'Ausstehend...' }, { onchange: 'this.form.submit()' }
+
+      -# = f.collection_radio_buttons :status, status_options, :last, :first
 
       -# - unless reply_for(@event.id, current_user.id).status == 'waiting'
         .help-block
