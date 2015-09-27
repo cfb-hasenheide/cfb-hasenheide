@@ -2,12 +2,12 @@
   = f.error_notification
 
   .form-inputs
-    .half-half
-      .left-half
+    .halfs
+      .half
         = f.association :user, as: :hidden
         = f.input :alias
 
-      .right-half
+      .half
         .well.well-sm
           = image_tag(@user_profile.avatar_url, class: 'img-thumbnail') if @user_profile.avatar?
           = f.input :avatar, as: :file
