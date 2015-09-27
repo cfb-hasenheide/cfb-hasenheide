@@ -27,9 +27,8 @@ class Event < ActiveRecord::Base
     where.not(id: ids)
   end
 
-  # TODO: placeholder for migrated field
-  def replyable?
-    true
+  def upcoming?
+    datetime >= Time.now
   end
 
   def past?
@@ -80,6 +79,28 @@ class Event < ActiveRecord::Base
   def drawed?
     return false unless report.present? && report.final_score_present?
     report.club_final_score == report.rival_final_score
+  end
+
+  def open!
+    return if replyable?
+
+    ActiveRecord::Base.transaction do
+      User.pending_players_for_event(id).pluck(:id).each do |user_id|
+        Reply.create!(user_id: user_id, event_id: id, status: :pending)
+      end
+
+      update!(replyable: true)
+    end
+  end
+
+  def close!
+    return unless replyable?
+
+    ActiveRecord::Base.transaction do
+      Reply.event(id).pending.delete_all
+
+      update!(replyable: false)
+    end
   end
 
   private

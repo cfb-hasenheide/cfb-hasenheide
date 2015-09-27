@@ -1,0 +1,27 @@
+.modal.fade.in#adminModal{tabindex: '-1', role: 'dialog',
+'aria-labelledby' => 'adminModalTitle'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', 'data-dismiss' => 'modal',
+        'aria-label' => 'Close'}
+          %span{'aria-hidden' => 'true'} &times;
+        %h4.modal-title#adminModalTitle Meldeliste bearbeiten
+
+      .modal-body
+        .container-fluid
+          - for reply in replies
+            = bootstrap_form_for reply, authenticity_token: true,
+              remote: true, layout: :horizontal, label_col: 'col-sm-4',
+              control_col: 'col-sm-8' do |f|
+
+              = f.hidden_field :event_id
+              = f.hidden_field :user_id
+
+              = f.collection_select :status, status_options, :last, :first,
+                { label: reply.user_profile.alias },
+                { onchange: '$(this.form).submit()' }
+
+      .modal-footer
+        = button_tag 'Schließen', class: 'default-button',
+          'data-dismiss' => 'modal'

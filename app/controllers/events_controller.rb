@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :open, :close]
 
   respond_to :html
 
@@ -8,10 +8,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    redirect_to event_report_path(@event) and return if @event.report.present?
-    redirect_to event_replies_path(@event) and return if @event.replyable?
-
-    respond_with(@event)
   end
 
   def new
@@ -40,6 +36,26 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_with(@event)
+  end
+
+  def open
+    if @event.open!
+      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
+    else
+      flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
+    end
+
+    respond_with(@event, location: event_replies_path(@event))
+  end
+
+  def close
+    if @event.close!
+      flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'
+    else
+      flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
+    end
+
+    respond_with(@event, location: event_replies_path(@event))
   end
 
   private

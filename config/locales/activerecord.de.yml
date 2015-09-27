@@ -49,11 +49,12 @@ de:
     friendly: Freundschaftsspiel
     other: Sonstiges
   reply_status:
-    'yes': 'M - Meldung'
-    'no': '0 - Absage'
     maybee: '? - Unsicher'
+    'no': '0 - Absage'
+    pending: 'Ausstehend'
     waiting: 'W - Warteliste'
     watch: 'Z - Zuschauer'
+    'yes': 'M - Meldung'
   team_kind:
     other: Andere
     club: Vereinsmannschaft

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :news
 
   resources :events do
+    post :open, on: :member
+    post :close, on: :member
+
     resources :replies, only: [:index]
     resource :report, only: [:show]
   end

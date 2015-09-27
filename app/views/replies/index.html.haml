@@ -30,72 +30,15 @@
 
 .halfs
   .half
-    .btn-group.btn-group-justified{role: 'group', 'aria-label' => '...'}
-      .btn-group{role: 'group'}
-        %button.btn.btn-default{type: 'button'}
-          M
-          %span.hidden-xs - Meldung
-      .btn-group{role: 'group'}
-        %button.btn.btn-default{type: 'button'}
-          W
-          %span.hidden-xs - Warteliste
-      .btn-group{role: 'group'}
-        %button.btn.btn-default{type: 'button'}
-          ?
-          %span.hidden-xs - Unsicher
-      .btn-group{role: 'group'}
-        %button.btn.btn-default{type: 'button'}
-          Z
-          %span.hidden-xs - Zuschauer
-      .btn-group{role: 'group'}
-        %button.btn.btn-default{type: 'button'}
-          0
-          %span.hidden-xs - Absage
-
-    -# = bootstrap_form_for @reply, layout: :horizontal, label_col: 'col-sm-4',
-      control_col: 'col-sm-8' do |f|
-
-      = f.hidden_field :event_id, value: params[:event_id]
-
-      = f.hidden_field :user_id, value: current_user.id
-
-      = f.collection_select :status, status_options, :last, :first,
-        { prompt: 'Ausstehend...' }, { onchange: 'this.form.submit()' }
-
-      -# = f.collection_radio_buttons :status, status_options, :last, :first
-
-      -# - unless reply_for(@event.id, current_user.id).status == 'waiting'
-        .help-block
-          W
-          = waiting_position_for(@event, current_user)
+    - if @event.replyable?
+      .well.well-sm
+        = render 'status_bar', reply: @reply
 
   .half
     - if admin?
-      .btn-toolbar
-        .btn-group.btn-group-justified
-          = link_to edit_event_path(@event), class: 'default-button' do
-            = edit_icon
-            Bearbeiten
-          = link_to '#', data: { confirm: 'Wirklich Aufruf senden?'},
-            class: 'default-button' do
-            = mail_icon
-            Aufruf (TODO)
-          = link_to '#', data: { confirm: 'Wirklich Final Call senden?'},
-            class: 'default-button' do
-            = mail_icon
-            Final Call (TODO)
-          = link_to event_path(@event), method: :delete, class: 'danger-button',
-            data: { confirm: 'Event wirklich löschen?' } do
-            Löschen
-
-      -# = form_tag '/replies/create_multiple' do
-        = hidden_field_tag :event_id, @event.id
-        = label_tag :user_ids, 'Spieler melden'
-        = select_tag :user_ids,
-          options_from_collection_for_select(User.players, :id, :username, @yes_replies.map(&:user_id)),
-          multiple: true,
-          class: 'form-control'
-        = submit_tag 'Melden', class: 'primary-button'
+      .well.well-sm
+        = render 'admin_bar', event: @event
+        = render 'admin_modal', replies: @replies
 
 .halfs
   .half
@@ -103,13 +46,18 @@
       .panel-heading
         %h3.panel-title Meldeliste
 
-      %ul.list-group
-        = render 'replies', event: @event, replies: @replies.yes, status: :yes
-        = render 'replies', event: @event, replies: @replies.waiting, status: :waiting
-        = render 'replies', event: @event, replies: @replies.maybee, status: :maybee
-        = render 'replies', event: @event, replies: @replies.no, status: :no
-        = render 'replies', event: @event, replies: @replies.watch, status: :watch
-        = render 'pending_replies', players: @pending_players
+      - if @event.replyable?
+        %ul.list-group
+          = render 'replies', event: @event, replies: @replies.yes, status: :yes
+          = render 'replies', event: @event, replies: @replies.waiting, status: :waiting
+          = render 'replies', event: @event, replies: @replies.maybee, status: :maybee
+          = render 'replies', event: @event, replies: @replies.no, status: :no
+          = render 'replies', event: @event, replies: @replies.watch, status: :watch
+          = render 'replies', event: @event, replies: @replies.pending, status: :pending
+
+      - else
+        .panel-body
+          %p.text-muted Geschlossen
 
   .half
     .panel.panel-default

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925201905) do
+ActiveRecord::Schema.define(version: 20150927182635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150925201905) do
     t.integer  "rival_team_id"
     t.boolean  "home"
     t.datetime "datetime"
+    t.boolean  "replyable",                 default: false, null: false
   end
 
   create_table "forum_posts", force: :cascade do |t|
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150925201905) do
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.integer  "status"
+    t.integer  "status",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

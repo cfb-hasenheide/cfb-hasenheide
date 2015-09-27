@@ -7,7 +7,7 @@ class Reply < ActiveRecord::Base
 
   validates :user_id, :event_id, :status, presence: true
 
-  enum status: { yes: 0, no: 1, maybee: 2, waiting: 3, watch: 4 }
+  enum status: { pending: 0, yes: 1, waiting: 2, maybee: 3, watch: 4, no: 5 }
 
   scope :event, -> (event_id) { where(event_id: event_id) }
 
@@ -18,12 +18,11 @@ class Reply < ActiveRecord::Base
   private
 
   def status_changed_to_yes
-    status_changed? && status == 'yes'
+    status_changed? && yes?
   end
 
   # # TODO: Is there any better name for me please?
   # def check_maximum_replies
-  #   require 'pry'; binding.pry
   #   if event.yes_count + event.waiting_count >= event.maximum
   #     self.status = 'waiting'
   #   end

@@ -31,12 +31,11 @@ module EventsHelper
   end
 
   def css_class_for_event(event)
-    return 'default' unless event.past?
-    # return 'primary' if event.repliable?
+    return 'primary' if event.replyable?
     return 'success' if event.won?
     return 'warning' if event.drawed?
     return 'danger' if event.lost?
-    'danger'
+    'default'
   end
 
   def class_for(status)
@@ -47,6 +46,16 @@ module EventsHelper
     when :no then 'danger'
     when :watch then 'info'
     else 'default'
+    end
+  end
+
+  def event_show_path(event)
+    if event.upcoming? && event.replyable?
+      event_replies_path(event)
+    elsif event.past? && event.report.present?
+      event_report_path(event)
+    else
+      event_path(event)
     end
   end
 end

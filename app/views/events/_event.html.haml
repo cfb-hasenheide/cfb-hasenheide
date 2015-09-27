@@ -1,5 +1,5 @@
 .panel{class: ('panel-' + css_class_for_event(event))}
-  = link_to event_path(event), style: 'color:inherit;text-decoration:none' do
+  = link_to event_show_path(event), style: 'color:inherit;text-decoration:none' do
     .panel-body
       %p.lead= event.generated_name
 
@@ -15,8 +15,13 @@
           = event.address
 
       .label.label-default= I18n.t("event_kind.#{event.kind}")
-      - if event.report.present?
-        .pull-right
+
+      .pull-right
+        - if !event.past? && event.replyable?
+          %span.label.label-primary
+            - status = Reply.for_event_and_user(event, current_user).status
+            = I18n.t("reply_status.#{status}")
+
+        - elsif event.past? && event.report.present?
           %span.label{class: ('label-' + css_class_for_event(event))}
             = event.report.final_score
-

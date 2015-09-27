@@ -15,9 +15,6 @@ class RepliesController < ApplicationController
     @event = Event.find(params[:event_id])
     @replies = Reply.event(params[:event_id])
       .includes(:user_profile).order('user_profiles.alias')
-    # @players = User.players_for_event(event_id)
-    @pending_players = User.pending_players_for_event(params[:event_id])
-      .includes(:user_profile).order('user_profiles.alias')
     @reply = Reply.for_event_and_user(@event, current_user)
   end
 
@@ -41,7 +38,7 @@ class RepliesController < ApplicationController
   end
 
   def update
-    reply = Reply.find_by(reply_params.slice(:event_id, :user_id))
+    reply = Reply.find(params[:id])
 
     if reply.update(reply_params)
       flash[:notice] = 'Deine Meldung wurde aktualisiert!'

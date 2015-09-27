@@ -11,4 +11,5 @@
         - for reply in replies
           %li
             = reply.user.user_profile.alias
-            %small.text-muted.pull-right= l(reply.updated_at, format: :short)
+            - unless reply.pending?
+              %small.text-muted.pull-right= l(reply.updated_at, format: :short)
