@@ -1,8 +1,11 @@
-.panel{class: ('panel-' + css_class_for_event(event))}
-  = link_to event_show_path(event), style: 'color:inherit;text-decoration:none' do
-    .panel-body
-      %p.lead= event.generated_name
+.list-group
+  = link_to event_show_path(event),
+    class: event_list_group_item_css_class(event) do
 
+    %h4.list-group-item-heading
+      = event.generated_name
+
+    %p.list-group-item-text
       %ul.list-unstyled
         %li
           = date_icon
@@ -23,5 +26,5 @@
             = I18n.t("reply_status.#{status}")
 
         - elsif event.past? && event.report.present?
-          %span.label{class: ('label-' + css_class_for_event(event))}
+          %span.label{class: event_label_css_class(event)}
             = event.report.final_score

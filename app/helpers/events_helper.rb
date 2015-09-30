@@ -30,23 +30,21 @@ module EventsHelper
     event.yes_count + event.waiting_count >= event.minimum
   end
 
-  def css_class_for_event(event)
-    return 'primary' if event.replyable?
-    return 'success' if event.won?
-    return 'warning' if event.drawed?
-    return 'danger' if event.lost?
-    'default'
+  ### events#index
+
+  def event_label_css_class(event)
+    return 'label-default' unless event.report.present? || event.replyable?
+    return 'label-success' if event.won?
+    return 'label-warning' if event.drawed?
+    return 'label-danger' if event.lost?
+
+    'label-primary'
   end
 
-  def class_for(status)
-    case status
-    when :yes then'success'
-    when :waiting then'success'
-    when :maybee then 'warning'
-    when :no then 'danger'
-    when :watch then 'info'
-    else 'default'
-    end
+  def event_list_group_item_css_class(event)
+    return 'list-group-item disabled' if event.upcoming? && !event.replyable?
+
+    'list-group-item'
   end
 
   def event_show_path(event)
