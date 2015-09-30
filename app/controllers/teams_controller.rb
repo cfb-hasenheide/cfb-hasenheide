@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:edit, :update]
   before_action :authorize_admin!
+  before_action :set_team, only: [:edit, :update, :destroy]
 
   respond_to :html
 
@@ -25,6 +25,12 @@ class TeamsController < ApplicationController
 
   def update
     @team.update(team_params)
+
+    respond_with(@team, location: teams_url)
+  end
+
+  def destroy
+    @team.destroy
 
     respond_with(@team, location: teams_url)
   end
