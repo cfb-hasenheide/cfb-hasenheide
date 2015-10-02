@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-  before_action :authorize_admin, only: :update_multiple
+  before_action :authorize_admin!, only: :update_multiple
 
   def create
     reply = Reply.new(reply_params)
