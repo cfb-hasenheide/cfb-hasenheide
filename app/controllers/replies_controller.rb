@@ -1,11 +1,13 @@
 class RepliesController < ApplicationController
+  before_action :authorize_admin, only: :update_multiple
+
   def create
     reply = Reply.new(reply_params)
 
     if reply.save
-      flash[:notice] = 'Deine Meldung wurde gespeichert!'
+      flash[:notice] = 'Deine Meldung wurde gespeichert.'
     else
-      flash[:error] = 'Deine Meldung konnte nicht gespeichert werden!'
+      flash[:alert] = 'Deine Meldung konnte nicht gespeichert werden!'
     end
 
     redirect_to :back
@@ -18,23 +20,15 @@ class RepliesController < ApplicationController
     @reply = Reply.for_event_and_user(@event, current_user)
   end
 
-  # TODO: this is not the yellow of the egg
-  def create_multiple
-    event_id = params[:event_id]
-    user_ids = params[:user_ids]
-
-    redirect_to :back and return unless user_ids
-
-    Reply.yes.where(event_id: event_id).delete_all
-
-    user_ids.each do |user_id|
-      Reply.for_event_and_user(event_id, user_id).delete
-      Reply.create(event_id: event_id, user_id: user_id, status: 'yes')
+  def update_multiple
+    if Reply.update(replies_params.keys, replies_params.values)
+      flash[:notice] = 'Deine Meldungen wurden gespeichert.'
+    else
+      flash[:alert] = 'Deine Meldungen konnten nicht gespeichert werden!'
     end
 
-    flash[:notice] = "#{user_ids.count} Spieler erfolgreich gemeldet."
-
-    redirect_to :back
+    event_id = Reply.find(replies_params.keys.first).event_id
+    respond_with event_id, location: event_replies_path(event_id)
   end
 
   def update
@@ -53,6 +47,10 @@ class RepliesController < ApplicationController
 
   def reply_params
     params.require(:reply).permit(:event_id, :user_id, :status)
+  end
+
+  def replies_params
+    params.require(:replies).permit!
   end
 
   def sanitized_params

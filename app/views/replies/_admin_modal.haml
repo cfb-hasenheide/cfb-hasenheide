@@ -8,20 +8,21 @@
           %span{'aria-hidden' => 'true'} &times;
         %h4.modal-title#adminModalTitle Meldeliste bearbeiten
 
-      .modal-body
-        .container-fluid
-          - for reply in replies
-            = bootstrap_form_for reply, authenticity_token: true,
-              remote: true, layout: :horizontal, label_col: 'col-sm-4',
-              control_col: 'col-sm-8' do |f|
+      = bootstrap_form_tag url: update_multiple_replies_path, method: :put,
+        layout: :horizontal, label_col: 'col-sm-4',
+        control_col: 'col-sm-8' do |f|
 
-              = f.hidden_field :event_id
-              = f.hidden_field :user_id
+        .modal-body
+          .container-fluid
+            - for reply in replies
+              = f.fields_for 'replies[]', reply, layout: :horizontal,
+                label_col: 'col-sm-4', label_col: 'col-sm-4' do |r|
+                = r.collection_select :status, status_options, :last, :first,
+                  label: reply.user_profile.alias
 
-              = f.collection_select :status, status_options, :last, :first,
-                { label: reply.user_profile.alias },
-                { onchange: '$(this.form).submit()' }
-
-      .modal-footer
-        = button_tag 'Schließen', class: 'default-button',
-          'data-dismiss' => 'modal'
+        .modal-footer
+          .container-fluid
+            = f.form_group do
+              = f.submit 'Speichern', class: 'primary-button pull-left'
+              = button_tag 'Schließen', class: 'default-button',
+                'data-dismiss' => 'modal'

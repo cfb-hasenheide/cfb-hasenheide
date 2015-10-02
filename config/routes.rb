@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :replies, only: [:create, :update] do
-    post :create_multiple, on: :collection
+    put :update_multiple, on: :collection
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }
