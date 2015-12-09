@@ -1,7 +1,7 @@
 class Report < ActiveRecord::Base
   belongs_to :event
 
-  validates :event_id, presence: true
+  validates :event_id, presence: true, uniqueness: true
 
   def final_score
     return "#{club_final_score} : #{rival_final_score}" if event.home?

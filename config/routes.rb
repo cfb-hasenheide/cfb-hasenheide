@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post :close, on: :member
 
     resources :replies, only: [:index]
-    resource :report, only: [:show]
+    resource :report, only: [:show, :new]
   end
 
   resources :replies, only: [:create, :update] do

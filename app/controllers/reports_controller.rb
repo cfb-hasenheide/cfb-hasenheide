@@ -8,11 +8,13 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = Report.where(event_id: params[:event_id]).first or not_found
+    @report = Report.where(event_id: params[:event_id]).first
+
+    redirect_to action: :new and return unless @report.present?
   end
 
   def new
-    @report = Report.new(params['event_id'])
+    @report = Report.new(event_id: params[:event_id])
   end
 
   def create
