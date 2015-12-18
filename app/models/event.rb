@@ -17,8 +17,8 @@ class Event < ActiveRecord::Base
 
   validate :rival_team_id_or_name
 
-  scope :upcoming, -> { where('datetime >= ?', Time.now).order('datetime ASC') }
-  scope :past,     -> { where('datetime < ?', Time.now).order('datetime DESC') }
+  scope :upcoming, -> (limit = nil) { where('datetime >= ?', Time.now).order('datetime ASC').limit(limit) }
+  scope :past,     -> (limit = nil) { where('datetime < ?', Time.now).order('datetime DESC').limit(limit) }
 
   paginates_per 15
 
