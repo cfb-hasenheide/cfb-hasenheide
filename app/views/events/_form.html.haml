@@ -22,9 +22,9 @@
       = f.text_field :name,
         placeholder: '"Heimmannschaft" : "Auswärtsmannschaft"'
 
-      = f.number_field :minimum, icon: 'user', value: 7
+      = f.number_field :minimum, icon: 'user', value: @event.minimum || 7
 
-      = f.number_field :maximum, icon: 'user', value: 11
+      = f.number_field :maximum, icon: 'user', value: @event.maximum || 11
 
       = f.date_select :datetime, label: 'Datum'
 
