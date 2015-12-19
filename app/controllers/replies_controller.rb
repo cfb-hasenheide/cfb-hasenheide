@@ -15,6 +15,8 @@ class RepliesController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
+    @previous_events = Event.previous(params[:event_id])
+
     @replies = Reply.event(params[:event_id])
       .includes(:user_profile).order('user_profiles.alias')
     @reply = Reply.for_event_and_user(@event, current_user)

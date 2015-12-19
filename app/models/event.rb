@@ -27,6 +27,11 @@ class Event < ActiveRecord::Base
     where.not(id: ids)
   end
 
+  def self.previous(event_id)
+    rival_team_id = find(event_id).rival_team_id
+    where(rival_team_id: rival_team_id).where.not(id: event_id)
+  end
+
   def upcoming?
     datetime >= Time.now
   end

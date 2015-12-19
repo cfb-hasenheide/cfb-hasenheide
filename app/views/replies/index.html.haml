@@ -63,8 +63,7 @@
     .panel.panel-default
       .panel-heading
         %h3.panel-title Letzte Begegnungen
-      .panel-body
-        .text-muted Keine
+      = render 'events/list_short', events: @previous_events
 
     .panel.panel-default
       .panel-heading

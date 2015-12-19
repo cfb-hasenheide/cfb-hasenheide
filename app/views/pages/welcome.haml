@@ -17,25 +17,11 @@
       .panel-heading
         %h3.panel-title Events
       .panel-body
-        Kommende
-      .list-group
-        - @upcoming_events.each do |upcoming_event|
-          .list-group-item
-            = upcoming_event.generated_name
+        .text-muted Kommende
+      = render 'events/list_short', events: @upcoming_events
       .panel-body
-        Vergangene
-      .list-group
-        - @past_events.each do |past_event|
-          = link_to event_path(past_event), class: 'list-group-item' do
-            %h5.list-group-item-heading
-              = past_event.generated_name
-              - if past_event.past? && past_event.report.present?
-                %span.pull-right.label{class: event_label_css_class(past_event)}
-                  = past_event.report.final_score
-            %p.list-group-item-text
-              = date_icon
-              = l(past_event.datetime, format: :date_only)
-
+        .text-muted Vergangene
+      = render 'events/list_short', events: @past_events
 
 .halfs
   .half
