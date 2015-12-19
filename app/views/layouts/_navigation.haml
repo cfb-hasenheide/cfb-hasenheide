@@ -1,12 +1,17 @@
 %nav.navbar.navbar-fixed-top.navbar-default{role: 'navigation'}
   .container
     .navbar-header
-      %button.navbar-toggle{'data-target' => '#navigation', 'data-toggle' => 'collapse', type: 'button'}
+      %button.navbar-toggle{'data-target' => '#navigation',
+        'data-toggle' => 'collapse', type: 'button'}
         %span.sr-only Navigation aus-/einklappen
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{href: root_path} CFB Hasenheide
+      %a.pull-left{href: root_path}
+        = image_tag 'logo_navbar.png', alt: 'CFB Hasenheide Logo',
+          class: 'logoNavbar'
+      %a.navbar-brand{href: root_path}
+        CFB Hasenheide
 
     #navigation.collapse.navbar-collapse
       %ul.nav.navbar-nav

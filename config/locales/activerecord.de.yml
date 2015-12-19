@@ -11,7 +11,7 @@ de:
         home: Heim / Auswärts?
         kind: Typ
         minimum: Min. Spieler
-        minimum: Max. Spieler
+        maximum: Max. Spieler
         rival_team_id: Gegnermannschaft
       forum_thread:
         topic: Thema
