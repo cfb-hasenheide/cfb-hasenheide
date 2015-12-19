@@ -26,9 +26,7 @@
 
       = f.number_field :maximum, icon: 'user', value: @event.maximum || 11
 
-      = f.date_select :datetime, label: 'Datum'
-
-      = f.time_select :datetime, label: 'Anstoß'
+      = f.datetime_select :datetime
 
       = f.text_field :address, icon: 'map-marker'
 
