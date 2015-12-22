@@ -1,5 +1,5 @@
 .page-header
-  %h1 Willkommen!
+  %h1 Willkommen beim CFB Hasenheide!
 
 .panel.panel-primary
   .panel-body
@@ -8,14 +8,14 @@
     = link_to 'http://www.cfb-hasenheide.de', 'http://www.cfb-hasenheide.de'
 
 .row
-  .col-md-9
+  .col-md-8
     - @news.each do |news|
       = render 'news/news', news: news
 
-  .col-md-3
+  .col-md-4
     .panel.panel-primary
       .panel-heading
-        %h3.panel-title Events
+        %h2.panel-title Events
       .panel-body
         .text-muted Kommende
       = render 'events/list_short', events: @upcoming_events
@@ -23,20 +23,17 @@
         .text-muted Vergangene
       = render 'events/list_short', events: @past_events
 
-.halfs
-  .half
     .panel.panel-primary
       .panel-heading
-        %h3.panel-title CFB Hasenheide I - Ü32 Freizeit Landesliga KF
+        %h2.panel-title Tabelle - CFB I
       .panel-body
         #cfbIFussballDeWidget
           = spinner_icon
           Lade Tabelle
 
-  .half
     .panel.panel-primary
       .panel-heading
-        %h3.panel-title CFB Hasenheide II - Herren Freizeit Landesliga St.1 KF
+        %h2.panel-title Tabelle - CFB I
       .panel-body
         #cfbIIFussballDeWidget
           = spinner_icon
