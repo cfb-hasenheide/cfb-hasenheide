@@ -1,13 +1,10 @@
 .panel.panel-primary
-  .panel-heading
-    %h3.panel-title
+  .panel-body
+    %h3
       - if news.internal
         %span.label.label-default Intern
       = news.title
-      .pull-right
-        = l(news.created_at)
 
-  .panel-body
     = news.content.html_safe
 
   - if admin?

@@ -1,5 +1,5 @@
 .page-header
-  %h1 Willkommen beim CFB Hasenheide!
+  %h1 Willkommen
 
 .panel.panel-primary
   .panel-body
@@ -9,6 +9,13 @@
 
 .row
   .col-md-8
+    .panel.panel-primary
+      .panel-heading
+        %h2.panel-title
+          Neuigkeiten
+          .pull-right
+            = link_to 'Alle anzeigen', news_index_path
+
     - @news.each do |news|
       = render 'news/news', news: news
 
@@ -33,7 +40,7 @@
 
     .panel.panel-primary
       .panel-heading
-        %h2.panel-title Tabelle - CFB I
+        %h2.panel-title Tabelle - CFB II
       .panel-body
         #cfbIIFussballDeWidget
           = spinner_icon
