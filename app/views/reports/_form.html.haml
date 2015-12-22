@@ -3,7 +3,7 @@
 
   - if f.object.event_id.blank?
     = f.collection_select :event_id, Event.without_report, :id,
-      :generated_name, prompt: true, control_col: 'col-md-4'
+      :name, prompt: true, control_col: 'col-md-4'
 
   .form-group
     %label.col-md-2.control-label Endstand

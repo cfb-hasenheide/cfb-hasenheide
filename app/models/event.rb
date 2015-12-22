@@ -37,14 +37,22 @@ class Event < ActiveRecord::Base
     super.presence || 'unbekannt'
   end
 
-  def past?
-    datetime < Time.now
+  def name
+    super.presence || begin
+    if home?
+      club_team.name + ' : ' + rival_team.name
+    else
+      rival_team.name + ' : ' + club_team.name
+    end
+    end
   end
 
   def upcoming?
     datetime >= Time.now
   end
 
+  def past?
+    datetime < Time.now
   end
 
   def google_maps_url

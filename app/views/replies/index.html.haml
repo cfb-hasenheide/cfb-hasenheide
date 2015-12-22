@@ -2,12 +2,12 @@
   %li
     = link_to 'Events', events_path
   %li.active
-    = @event.generated_name
+    = @event.name
   %li.active
     Meldeliste
 
 %h1
-  = @event.generated_name
+  = @event.name
   %small= I18n.t("event_kind.#{@event.kind}")
 
 = render 'events/progress_bar', event: @event

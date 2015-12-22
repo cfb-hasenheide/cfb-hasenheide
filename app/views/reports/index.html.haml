@@ -12,7 +12,7 @@
   - for report in @reports
     %li
       = link_to edit_report_path(report) do
-        = report.event.generated_name
+        = report.event.name
         = surround '(', ')' do
           = report.final_score
 

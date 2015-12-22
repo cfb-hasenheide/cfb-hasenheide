@@ -3,7 +3,7 @@
     - events.each do |event|
       = link_to event_path(event), class: 'list-group-item' do
         %h5.list-group-item-heading
-          = event.generated_name
+          = event.name
           %small.pull-right= I18n.t("event_kind.#{event.kind}")
 
         %p.list-group-item-text
