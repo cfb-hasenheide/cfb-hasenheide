@@ -33,14 +33,16 @@ class Event < ActiveRecord::Base
     where(rival_team_id: rival_team_id).where.not(id: event_id)
   end
 
-  def upcoming?
-    datetime >= Time.now
+  def address
+    super.presence || 'unbekannt'
   end
 
   def past?
     datetime < Time.now
   end
 
+  def upcoming?
+    datetime >= Time.now
   end
 
   end
