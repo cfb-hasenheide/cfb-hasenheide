@@ -14,7 +14,6 @@
             = f.email_field :email, autofocus: true, class: 'form-control'
 
         .panel-footer
-          = f.submit "'Passwort zurücksetzen' E-Mail anfordern",
-            class: 'btn btn-primary btn-block'
+          = f.submit 'Passwort zurücksetzen', class: 'btn btn-primary btn-block'
 
     = render 'devise/shared/links'
