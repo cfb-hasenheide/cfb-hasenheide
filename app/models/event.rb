@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
-  has_many   :replies,    dependent: :destroy
+  include Replyable
+
   has_one    :report,     dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
@@ -40,12 +41,8 @@ class Event < ActiveRecord::Base
     datetime < Time.now
   end
 
-  def yes_count
-    replies.yes.count
   end
 
-  def waiting_count
-    replies.waiting.count
   end
 
   def google_maps_url
@@ -60,15 +57,6 @@ class Event < ActiveRecord::Base
     '&size=400x400' \
     '&sensor=false' \
     '&scale=2'
-  end
-
-  def generated_name
-    return name if name.present?
-    if home?
-      club_team.name + ' : ' + rival_team.name
-    else
-      rival_team.name + ' : ' + club_team.name
-    end
   end
 
   def won?
@@ -86,26 +74,8 @@ class Event < ActiveRecord::Base
     report.club_final_score == report.rival_final_score
   end
 
-  def open!
-    return if replyable?
-
-    ActiveRecord::Base.transaction do
-      User.pending_players_for_event(id).pluck(:id).each do |user_id|
-        Reply.create!(user_id: user_id, event_id: id, status: :pending)
-      end
-
-      update!(replyable: true)
-    end
-  end
-
-  def close!
-    return unless replyable?
-
-    ActiveRecord::Base.transaction do
-      Reply.event(id).pending.delete_all
-
-      update!(replyable: false)
-    end
+  def replies_quota
+    yes_and_waiting_count.to_f / maximum
   end
 
   private

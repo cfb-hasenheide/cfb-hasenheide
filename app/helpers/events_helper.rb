@@ -6,28 +6,15 @@ module EventsHelper
     end
   end
 
-  def yes_quota_for(event)
-    yeses = event.yes_count.to_f
-    maximum = progress_bar_maximum_for(event).to_f
-
-    return 0 if (yeses.zero? || maximum.zero?)
-    yeses / maximum
-  end
-
-  def waiting_quota_for(event)
-    waitees = event.waiting_count.to_f
-    maximum = progress_bar_maximum_for(event).to_f
-
-    return 0 if (waitees.zero? || maximum.zero?)
-    waitees / maximum
-  end
-
-  def progress_bar_maximum_for(event)
-    [event.maximum, event.yes_count + event.waiting_count].max
-  end
-
-  def minimum_reached?(event)
-    event.yes_count + event.waiting_count >= event.minimum
+  def event_progress_bar_css_class(event)
+    if event.yes_and_waiting_count < event.minimum
+      'progress-bar-danger'
+    elsif event.yes_and_waiting_count >= event.minimum &&
+      event.yes_and_waiting_count < event.minimum + 3
+      'progress-bar-warning'
+    else
+      'progress-bar-success'
+    end
   end
 
   ### events#index
