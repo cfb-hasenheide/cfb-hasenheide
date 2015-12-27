@@ -1,5 +1,8 @@
-.page-header
-  %h1 Willkommen
+.jumbotron
+  %h1 Willkommen beim CFB Hasenheide
+  %p
+    Cola, Fanta, Bier - die Hasenheide ist hier! Wir spielen auch das nächste
+    Turnier - und dann, dann gewinnen wir!
 
 .panel.panel-primary
   .panel-body
@@ -13,8 +16,9 @@
       .panel-heading
         %h2.panel-title
           Neuigkeiten
-          .pull-right
-            = link_to 'Alle anzeigen', news_index_path
+          %small
+            .pull-right
+              = link_to 'Alle anzeigen', news_index_path
 
     - @news.each do |news|
       = render 'news/news', news: news
@@ -22,7 +26,11 @@
   .col-md-4
     .panel.panel-primary
       .panel-heading
-        %h2.panel-title Events
+        %h2.panel-title
+          Events
+          %small
+            .pull-right
+              = link_to 'Alle anzeigen', news_index_path
       .panel-body
         .text-muted Kommende
       = render 'events/list_short', events: @upcoming_events
