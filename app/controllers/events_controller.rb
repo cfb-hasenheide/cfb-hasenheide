@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.new(type: params[:type])
 
     respond_with(@event)
   end
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   def update
     @event.update(event_params)
 
-    respond_with(@event)
+    respond_with(@event, location: events_path)
   end
 
   def destroy
@@ -65,8 +65,18 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:kind, :name, :datetime,
-                                  :club_team_id, :rival_team_id, :description,
-                                  :address, :minimum, :maximum, :home)
+    event_type = params[:type].underscore.to_sym
+
+    params.require(event_type).permit(
+      :address,
+      :club_team_id,
+      :datetime,
+      :description,
+      :home,
+      :maximum,
+      :minimum,
+      :name,
+      :rival_team_id
+    ).merge(params.slice(:type))
   end
 end

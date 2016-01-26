@@ -1,11 +1,4 @@
 module EventsHelper
-  def event_kind_options
-    Event.kinds.reduce({}) do |memo, (enum, _)|
-      memo[I18n.t("event_kind.#{enum}")] = enum
-      memo
-    end
-  end
-
   def event_progress_bar_css_class(event)
     if event.yes_and_waiting_count < event.minimum
       'progress-bar-danger'
