@@ -1,0 +1,25 @@
+.halfs
+  .half
+    = bootstrap_form_for event, layout: :horizontal,
+      label_col: "col-sm-4", control_col: "col-sm-8" do |f|
+
+      = f.text_field :name
+
+      = f.collection_select :club_team_id, Team.club, :id, :name,
+        prompt: true, class: 'form-control'
+
+      = f.number_field :minimum, icon: 'user', value: event.minimum || 7
+
+      = f.number_field :maximum, icon: 'user', value: event.maximum || 11
+
+      = f.datetime_select :datetime
+
+      = f.text_field :address, icon: 'map-marker'
+
+      = f.text_area :description
+
+      = f.form_group do
+        = f.submit class: 'primary-button'
+        = link_to 'Abbrechen', events_path, class: 'default-button pull-right'
+
+  .half

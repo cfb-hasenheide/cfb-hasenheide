@@ -1,6 +1,9 @@
 de:
   activerecord:
     models:
+      league_match: Ligaspiel
+      cup_match: Pokalspiel
+      other: Sonstiges
       team: Mannschaft
     attributes:
       event:
@@ -9,7 +12,6 @@ de:
         datetime: Datum / Anstoß
         description: Beschreibung
         home: Heim / Auswärts?
-        kind: Typ
         minimum: Min. Spieler
         maximum: Max. Spieler
         rival_team_id: Gegnermannschaft
@@ -42,12 +44,6 @@ de:
         alias: Alias
 
   # enum translations
-  event_kind:
-    league: Liga
-    cup: Pokal
-    tournament: Turnier
-    friendly: Freundschaftsspiel
-    other: Sonstiges
   reply_status:
     maybee: '? - Unsicher'
     'no': '0 - Absage'

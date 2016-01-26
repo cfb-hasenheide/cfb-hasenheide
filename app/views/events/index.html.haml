@@ -3,9 +3,18 @@
     Events
     - if admin?
       .pull-right
-        = link_to new_event_path, class: 'primary-button' do
-          = create_icon
-          %span.hidden-xs Event erstellen
+        .btn-group
+          %button.primary-button.dropdown-toggle{type: 'button',
+            'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
+            'aria-expanded' => 'false'}
+            = create_icon
+            %span.hidden-xs Event erstellen
+            %span.caret
+
+          %ul.dropdown-menu.pull-right
+            %li= link_to LeagueMatch.model_name.human, new_event_path(type: 'LeagueMatch')
+            %li= link_to CupMatch.model_name.human, new_event_path(type: 'CupMatch')
+            %li= link_to Other.model_name.human, new_event_path(type: 'Other')
 
 - @events.in_groups_of(4) do |events|
   .row

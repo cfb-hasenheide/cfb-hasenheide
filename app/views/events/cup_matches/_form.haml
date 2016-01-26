@@ -1,30 +1,22 @@
 .halfs
   .half
-    = bootstrap_form_for @event, layout: :horizontal, label_col: "col-sm-4",
-      control_col: "col-sm-8" do |f|
-
-      = f.select :kind,
-        options_for_select(event_kind_options, @event.kind),
-        {},
-        class: 'form-control'
+    = bootstrap_form_for event, layout: :horizontal,
+      label_col: "col-sm-4", control_col: "col-sm-8" do |f|
 
       = f.collection_select :club_team_id, Team.club, :id, :name,
-        prompt: '- Wählen -', class: 'form-control'
+        prompt: true, class: 'form-control'
 
       = f.select :rival_team_id,
         grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
-        include_blank: '- Wählen -', class: 'form-control'
+        prompt: true, class: 'form-control'
 
       = f.form_group :home do
         = f.radio_button :home, true, label: 'Heimspiel', inline: true
         = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
 
-      = f.text_field :name,
-        placeholder: '"Heimmannschaft" : "Auswärtsmannschaft"'
+      = f.number_field :minimum, icon: 'user', value: event.minimum || 7
 
-      = f.number_field :minimum, icon: 'user', value: @event.minimum || 7
-
-      = f.number_field :maximum, icon: 'user', value: @event.maximum || 11
+      = f.number_field :maximum, icon: 'user', value: event.maximum || 11
 
       = f.datetime_select :datetime
 

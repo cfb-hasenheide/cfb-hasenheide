@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resource :report, only: [:show, :new]
   end
 
+  resources :league_matches, controller: 'events', type: 'LeagueMatch', only: [:create, :update]
+  resources :cup_matches, controller: 'events', type: 'CupMatch', only: [:create, :update]
+  resources :others, controller: 'events', type: 'Other', only: [:create, :update]
+
   resources :replies, only: [:create, :update] do
     put :update_multiple, on: :collection
   end

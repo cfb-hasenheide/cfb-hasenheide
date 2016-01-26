@@ -17,7 +17,7 @@
           = address_icon
           = event.address
 
-      .label.label-default= I18n.t("event_kind.#{event.kind}")
+      .label.label-default= event.model_name.human
 
       .pull-right
         - if !event.past? && event.replyable?

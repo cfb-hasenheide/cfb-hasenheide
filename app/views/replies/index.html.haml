@@ -8,7 +8,7 @@
 
 %h1
   = @event.name
-  %small= I18n.t("event_kind.#{@event.kind}")
+  %small= @event.model_name.human
 
 = render 'events/progress_bar', event: @event
 
