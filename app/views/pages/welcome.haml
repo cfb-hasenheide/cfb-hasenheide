@@ -33,7 +33,7 @@
               = link_to 'Alle anzeigen', news_index_path
       .panel-body
         .text-muted Kommende
-      = render 'events/list_short', events: @upcoming_events
+      = render 'events/list_short', events: @future_events
       .panel-body
         .text-muted Vergangene
       = render 'events/list_short', events: @past_events
