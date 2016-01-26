@@ -131,7 +131,7 @@ de:
         other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
   helpers:
     select:
-      prompt: Bitte wählen
+      prompt: '- Bitte wählen -'
     submit:
       create: ! '%{model} erstellen'
       submit: ! '%{model} speichern'
