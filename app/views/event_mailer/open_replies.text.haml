@@ -1,0 +1,15 @@
+Hallo Hasen,
+\
+auf der Page werden jetzt Meldungen für folgendes Event entgegen genommen:
+\
+#{@event.name} (#{@event.model_name.human})
+\
+Wann: #{l(@event.datetime)}
+\
+Wo: #{@event.address}
+\
+- if @event.description.present?
+  = @event.description
+  \
+Melden!
+= event_url(@event)
