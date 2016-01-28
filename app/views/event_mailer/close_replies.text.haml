@@ -1,0 +1,16 @@
+Final Call für das Event:
+\
+#{@event.name} (#{@event.model_name.human})
+\
+Wann: #{l(@event.datetime)}
+\
+Wo: #{@event.address}
+\
+Halbe Stunde vorher treffen (#{l(@event.datetime - 30.minutes, format: :time_only)})!
+\
+- if @event.description.present?
+  = @event.description
+  \
+Gemeldet sind:
+- @event.replies.each do |reply|
+  \- #{UserProfile.find(reply.user_id).alias}
