@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :open, :close]
+  before_action :set_event,
+                only: [:show, :edit, :update, :destroy, :open, :close]
 
   respond_to :html
 
@@ -8,6 +9,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    @reply = Reply.find_or_initialize_by(event_id: @event.id,
+                                         user_id: current_user.id)
   end
 
   def new
@@ -35,7 +38,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
 
-    respond_with(@event)
+    respond_with(@event, location: events_path)
   end
 
   def open
@@ -45,7 +48,7 @@ class EventsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
 
-    respond_with(@event, location: event_replies_path(@event))
+    redirect_to :back
   end
 
   def close
@@ -55,7 +58,7 @@ class EventsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
     end
 
-    respond_with(@event, location: event_replies_path(@event))
+    redirect_to :back
   end
 
   private
@@ -67,16 +70,14 @@ class EventsController < ApplicationController
   def event_params
     event_type = params[:type].underscore.to_sym
 
-    params.require(event_type).permit(
-      :address,
-      :club_team_id,
-      :datetime,
-      :description,
-      :home,
-      :maximum,
-      :minimum,
-      :name,
-      :rival_team_id
-    ).merge(params.slice(:type))
+    params.require(event_type).permit(:address,
+                                      :club_team_id,
+                                      :datetime,
+                                      :description,
+                                      :home,
+                                      :maximum,
+                                      :minimum,
+                                      :name,
+                                      :rival_team_id).merge(params.slice(:type))
   end
 end

@@ -1,5 +1,18 @@
 class RepliesController < ApplicationController
-  before_action :authorize_admin!, only: :update_multiple
+  before_action :authorize_admin!,
+                only: [:edit_multiple, :update_multiple]
+
+  def index
+    @event = Event.find(params[:event_id])
+
+    @previous_events = Event.previous(params[:event_id])
+
+    @replies = Reply.event(params[:event_id])
+                    .includes(:user_profile)
+                    .order('user_profiles.alias')
+
+    @reply = Reply.for_event_and_user(@event, current_user)
+  end
 
   def create
     reply = Reply.new(reply_params)
@@ -13,13 +26,9 @@ class RepliesController < ApplicationController
     redirect_to :back
   end
 
-  def index
+  def edit_multiple
     @event = Event.find(params[:event_id])
-    @previous_events = Event.previous(params[:event_id])
-
-    @replies = Reply.event(params[:event_id])
-      .includes(:user_profile).order('user_profiles.alias')
-    @reply = Reply.for_event_and_user(@event, current_user)
+    @replies = @event.replies
   end
 
   def update_multiple
@@ -56,7 +65,7 @@ class RepliesController < ApplicationController
   end
 
   def sanitized_params
-    # TODO refactor me
+    # TODO: refactor me
     reply_params.reduce({}) do |memo, (k, v)|
       memo[k] = v.to_i
       memo

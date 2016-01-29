@@ -3,7 +3,7 @@ module EventsHelper
     if event.yes_and_waiting_count < event.minimum
       'progress-bar-danger'
     elsif event.yes_and_waiting_count >= event.minimum &&
-      event.yes_and_waiting_count < event.minimum + 3
+          event.yes_and_waiting_count < event.minimum + 3
       'progress-bar-warning'
     else
       'progress-bar-success'
@@ -25,15 +25,5 @@ module EventsHelper
     return 'list-group-item disabled' if event.future? && !event.replyable?
 
     'list-group-item'
-  end
-
-  def event_show_path(event)
-    if event.future? && event.replyable?
-      event_replies_path(event)
-    elsif event.past? && event.report.present?
-      event_report_path(event)
-    else
-      event_path(event)
-    end
   end
 end

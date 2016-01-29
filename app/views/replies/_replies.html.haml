@@ -1,15 +1,12 @@
-- if replies.present?
-  = link_to "##{status}", class: 'list-group-item', role: 'button',
-    'data-toggle' => 'collapse', 'aria-expanded' => 'false',
-    'aria-controls' => status do
+%ul.list-group
+  - %i(yes waiting maybee no watch pending).each do |status|
+    = link_to "##{status}", class: 'list-group-item', role: 'button',
+      'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+      'aria-controls' => status do
 
-    %span.badge= replies.count
-    %h4.list-group-item-heading= I18n.t("reply_status.#{status}")
+      %span.badge= replies.send(status).count
+      %h4.list-group-item-heading= I18n.t("reply_status.#{status}")
 
-    .collapse.list-group-item-text{id: status, class: ('in' if status == :yes)}
-      %ul.list-unstyled
-        - for reply in replies
-          %li
-            = reply.user.user_profile.alias
-            - unless reply.pending?
-              %small.text-muted.pull-right= l(reply.updated_at, format: :short)
+      .collapse.list-group-item-text{id: status, class: ('in' if status == :yes)}
+        %ul.list-unstyled
+          = render replies.send(status) || 'Keine Meldungen vorhanden'

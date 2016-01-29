@@ -9,17 +9,19 @@ Rails.application.routes.draw do
     post :open, on: :member
     post :close, on: :member
 
-    resources :replies, only: [:index]
+    resources :replies, only: [:index] do
+      get :edit_multiple, on: :collection
+      put :update_multiple, on: :collection
+    end
+
     resource :report, only: [:show, :new]
   end
 
-  resources :league_matches, controller: 'events', type: 'LeagueMatch', only: [:create, :update]
-  resources :cup_matches, controller: 'events', type: 'CupMatch', only: [:create, :update]
-  resources :others, controller: 'events', type: 'Other', only: [:create, :update]
+  resources :league_matches, controller: 'events', type: 'LeagueMatch', only: [:create, :edit, :update]
+  resources :cup_matches, controller: 'events', type: 'CupMatch', only: [:create, :edit, :update]
+  resources :others, controller: 'events', type: 'Other', only: [:create, :edit, :update]
 
-  resources :replies, only: [:create, :update] do
-    put :update_multiple, on: :collection
-  end
+  resources :replies, only: [:create, :update]
 
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: [:index, :update]
