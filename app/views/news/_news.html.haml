@@ -1,9 +1,10 @@
 .panel.panel-primary
   .panel-body
     %h3
-      - if news.internal
-        %span.label.label-default Intern
       = news.title
+      %small
+        %strong.text-muted= 'Intern' if news.internal
+        %span.pull-right= l(news.created_at, format: :date_only)
 
     = news.content.html_safe
 
@@ -12,6 +13,7 @@
       = link_to edit_news_path(news), class: 'default-button-xs' do
         = edit_icon
         Bearbeiten
+
       = link_to news,
         method: :delete,
         class: 'default-button-xs',

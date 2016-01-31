@@ -1,11 +1,8 @@
-= simple_form_for(@news) do |f|
-  = f.error_notification
+= bootstrap_form_for(@news) do |f|
+  = f.text_field :title
+  = f.text_area :content, as: :text, class: 'wysihtml5'
+  = f.check_box :internal
 
-  .form-inputs
-    = f.input :title
-    = f.input :content, as: :text, input_html: { class: 'wysihtml5' }
-    = f.input :internal
-
-  .form-actions
-    = f.button :submit, class: 'primary-button'
+  = f.form_group do
+    = f.submit class: 'primary-button'
     = link_to 'Abbrechen', news_index_path, class: 'default-button'
