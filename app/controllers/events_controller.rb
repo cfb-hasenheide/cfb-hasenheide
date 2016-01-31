@@ -32,13 +32,13 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.save
 
-    respond_with(@event, location: events_path)
+    respond_with(@event)
   end
 
   def update
     @event.update(event_params)
 
-    respond_with(@event, location: events_path)
+    respond_with(@event)
   end
 
   def destroy
