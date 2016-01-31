@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'pages#welcome'
 
+  get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
 
   # Example of regular route:

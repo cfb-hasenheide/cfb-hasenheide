@@ -5,6 +5,9 @@ class PagesController < PublicController
     @future_events = Event.future(3)
   end
 
+  def fussball_de
+  end
+
   def contact
   end
 end

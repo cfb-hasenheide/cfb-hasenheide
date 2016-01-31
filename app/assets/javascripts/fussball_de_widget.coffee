@@ -1,14 +1,29 @@
 fussballDeWidget =
-  cfbI: ->
+  tableCFBI: ->
     new fussballdeWidgetAPI()
-      .showWidget('cfbIFussballDeWidget', '01QM1V8174000000VS541L4HVTCBDGUL')
+      .showWidget('fussballDeTableCFBI', '01QM1V8174000000VS541L4HVTCBDGUL')
 
-  cfbII: ->
+  tableCFBII: ->
     new fussballdeWidgetAPI()
-      .showWidget('cfbIIFussballDeWidget', '01QM1UNBN4000000VS541L4GVVM3DHU5')
+      .showWidget('fussballDeTableCFBII', '01QM1UNBN4000000VS541L4GVVM3DHU5')
+
+  matchScheduleCFBI: ->
+    new fussballdeWidgetAPI()
+      .showWidget('fussballDeMatchScheduleCFBI', '01R2PCLE9O000000VS541L4IVUIUK64H')
+
+  matchScheduleCFBII: ->
+    new fussballdeWidgetAPI()
+      .showWidget('fussballDeMatchScheduleCFBII', '01R2OPR4PK000000VS541L4GVTUQ91SG')
 
 $ ->
-  if $('#cfbIFussballDeWidget').length > 0
-    fussballDeWidget.cfbI()
-  if $('#cfbIIFussballDeWidget').length > 0
-    fussballDeWidget.cfbII()
+  if $('#fussballDeTableCFBI').length > 0
+    fussballDeWidget.tableCFBI()
+
+  if $('#fussballDeTableCFBII').length > 0
+    fussballDeWidget.tableCFBII()
+
+  if $('#fussballDeMatchScheduleCFBI').length > 0
+    fussballDeWidget.matchScheduleCFBI()
+
+  if $('#fussballDeMatchScheduleCFBII').length > 0
+    fussballDeWidget.matchScheduleCFBII()

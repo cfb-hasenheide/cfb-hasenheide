@@ -1,0 +1,27 @@
+.page-header
+  %h1
+    = fussball_de_icon
+    CFB @
+    = link_to 'Fussball.de',
+      'http://www.fussball.de/verein/cfb-hasenheide-berlin/-/id/00UQ28BQH0000000VV0AG811VTK9TF5P#!/section/stage'
+
+.halfs
+  .half
+    .panel.panel-primary
+      .panel-heading
+        %h2.panel-title CFB I
+
+      .panel-body
+        .fussballDeWidget#fussballDeMatchScheduleCFBI
+          = spinner_icon
+          Lade Mannschaftsspielplan von fussball.de ...
+
+  .half
+    .panel.panel-primary
+      .panel-heading
+        %h2.panel-title CFB II
+
+      .panel-body
+        .fussballDeWidget#fussballDeMatchScheduleCFBII
+          = spinner_icon
+          Lade Mannschaftsspielplan von fussball.de ...
