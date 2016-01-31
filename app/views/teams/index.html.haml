@@ -43,9 +43,11 @@
             .btn-toolbar.pull-right
               = link_to edit_team_path(team), class: 'default-button-xs' do
                 = edit_icon
-              = link_to team_path(team), method: :delete, class: 'danger-button-xs',
+              = link_to team_path(team), method: :delete,
+                class: 'default-button-xs',
                 'data-confirm' => 'Team wirklich löschen?' do
-                = delete_icon
+                %span.text-danger
+                  = delete_icon
 
 .text-center.text-muted
   = page_entries_info(@teams)

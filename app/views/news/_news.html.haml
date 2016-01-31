@@ -14,7 +14,8 @@
         Bearbeiten
       = link_to news,
         method: :delete,
-        class: 'danger-button-xs',
+        class: 'default-button-xs',
         data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
-        = delete_icon
-        Löschen
+        %span.text-danger
+          = delete_icon
+          Löschen

@@ -41,6 +41,8 @@
     = edit_icon
     Meldeliste bearbeiten
 
-  = link_to event_path(event), method: :delete, class: 'danger-button',
+  = link_to event_path(event), method: :delete, class: 'default-button',
     data: { confirm: 'Event wirklich löschen?' } do
-    Event Löschen
+    %span.text-danger
+      = delete_icon
+      Event Löschen

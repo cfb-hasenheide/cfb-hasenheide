@@ -49,8 +49,9 @@
               = link_to registration_path(user),
                 'data-confirm' => 'Wirklich unwiderruflich löschen?',
                 method: :delete,
-                class: 'danger-button-xs' do
-                = delete_icon
+                class: 'default-button-xs' do
+                %span.text-danger
+                  = delete_icon
 
 .text-center.text-muted
   = page_entries_info(@users)

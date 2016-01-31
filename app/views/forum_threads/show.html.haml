@@ -64,7 +64,8 @@
       = link_to edit_forum_thread_path(@forum_thread), class: 'default-button-xs' do
         = edit_icon
         Editieren
-      = link_to @forum_thread, method: :delete, class: 'danger-button-xs',
+      = link_to @forum_thread, method: :delete, class: 'default-button-xs',
         data: { confirm: 'Das Thema wirklich löschen?' } do
-        = delete_icon
-        Löschen
+        %span.text-danger
+          = delete_icon
+          Löschen
