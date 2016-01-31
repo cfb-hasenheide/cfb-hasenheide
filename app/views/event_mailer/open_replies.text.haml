@@ -11,5 +11,8 @@ Wo: #{@event.address}
 - if @event.description.present?
   = @event.description
   \
+- if @message.present?
+  = @message
+  \
 Melden!
 = event_url(@event)

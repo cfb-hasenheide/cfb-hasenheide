@@ -1,6 +1,7 @@
 class EventMailer < ApplicationMailer
-  def open_replies(event_id)
+  def open_replies(event_id, message: nil)
     @event = Event.find(event_id)
+    @message = message.presence
 
     mail(to: 'to@example.com',
          subject: 'Neuer Termin in der Meldeliste freigegeben')

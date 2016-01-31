@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
-  before_action :set_event,
-                only: [:show, :edit, :update, :destroy, :open, :close]
+  before_action :set_event, only: [:show,
+                                   :edit,
+                                   :update,
+                                   :destroy,
+                                   :open,
+                                   :open_with_mail,
+                                   :close,
+                                   :open_replies_mail]
 
   respond_to :html
 
@@ -51,6 +57,18 @@ class EventsController < ApplicationController
     redirect_to :back
   end
 
+  def open_with_mail
+    if @event.open!
+      EventMailer.open_replies(@event.id, message: params[:message]).deliver_later
+      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
+
+      respond_with @event, location: event_path(@event)
+    else
+      flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
+      redirect_to :back
+    end
+  end
+
   def close
     if @event.close!
       flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'
@@ -59,6 +77,11 @@ class EventsController < ApplicationController
     end
 
     redirect_to :back
+  end
+
+  def open_replies_mail
+    @user_aliases =
+      User.players_for_event(@event).includes(:user_profile).pluck(:alias).sort
   end
 
   private

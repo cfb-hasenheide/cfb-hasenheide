@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :news
 
   resources :events do
+    get :open_replies_mail, on: :member
     post :open, on: :member
+    post :open_with_mail, on: :member
     post :close, on: :member
 
     resources :replies, only: [:index] do

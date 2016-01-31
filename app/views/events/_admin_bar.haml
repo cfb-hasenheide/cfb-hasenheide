@@ -33,7 +33,7 @@
           = link_to open_event_path(event), method: :post do
             ohne E-Mail
         %li
-          = link_to '#' do
+          = link_to open_replies_mail_event_path(event) do
             = mail_icon
             mit E-Mail
 

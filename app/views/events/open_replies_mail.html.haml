@@ -1,0 +1,45 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Events', events_path
+  %li
+    = link_to @event.name, event_path(@event)
+  %li.active
+    Neuer Termin Mail
+
+.page-header
+  %h1
+    Neuer Termin Mail
+    %small
+      = @event.name
+      = surround '(', ')' do
+        = @event.model_name.human
+
+.row
+  .col-md-3
+    .panel.panel-primary
+      .panel-heading
+        %h2.panel-title
+          Empfänger
+          %small= @user_aliases.count
+
+      %ul.list-group
+        - @user_aliases.each do |user_alias|
+          %li.list-group-item= user_alias
+
+  .col-md-9
+    .panel.panel-primary
+      .panel-heading
+        %h2.panel-title Vorschau
+
+      .panel-body
+        = render 'event_mailer/open_replies', event: @event, message: nil
+
+      .panel-footer
+        = bootstrap_form_tag url: open_with_mail_event_path(@event) do |f|
+          = f.text_area :message, label: 'Nachricht hinzufügen?'
+
+          = button_tag type: 'submit', class: 'primary-button' do
+            = mail_icon
+            Meldeliste öffnen und Mail versenden
+
+          = link_to 'Abbrechen', event_path(@event), class: 'default-button'
