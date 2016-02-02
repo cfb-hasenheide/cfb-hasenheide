@@ -1,20 +1,24 @@
 class Event < ActiveRecord::Base
   include Replyable
 
-  has_one    :report,     dependent: :destroy
+  has_one :report, dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
 
   validates :type, :minimum, :maximum, :datetime, :address, presence: true
 
   validates :minimum,
-    numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
+            numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
   validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
-  scope :future, -> (limit = nil) { where('datetime >= ?', Time.now).order('datetime ASC').limit(limit) }
-  scope :past,   -> (limit = nil) { where('datetime < ?', Time.now).order('datetime DESC').limit(limit) }
 
   paginates_per 15
+  scope :future, lambda { |limit = nil|
+    where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
+  }
+  scope :past, lambda { |limit = nil|
+    where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
+  }
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
@@ -26,13 +30,7 @@ class Event < ActiveRecord::Base
     where(rival_team_id: rival_team_id).where.not(id: event_id)
   end
 
-  def future?
-    datetime.future?
-  end
-
-  def past?
-    datetime.past?
-  end
+  delegate :future?, :past?, to: :datetime
 
   def google_maps_url
     "http://maps.google.com/?q=#{address}"

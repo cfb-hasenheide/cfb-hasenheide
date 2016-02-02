@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   def valid_password?(password)
     if legacy_password?
       # Use Devise's secure_compare to avoid timing attacks
-      return false unless Devise.secure_compare(self.encrypted_password,
+      return false unless Devise.secure_compare(encrypted_password,
                                                 User.legacy_password(password))
 
       self.attributes = { password:              password,
