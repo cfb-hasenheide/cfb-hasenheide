@@ -100,4 +100,12 @@ module IconsHelper
   def spinner_icon
     content_tag(:span, nil, class: 'fa fa-spinner fa-pulse')
   end
+
+  def login_icon
+    content_tag(:span, nil, class: 'fa fa-sign-in fa-fw')
+  end
+
+  def logout_icon
+    content_tag(:span, nil, class: 'fa fa-sign-out fa-fw')
+  end
 end

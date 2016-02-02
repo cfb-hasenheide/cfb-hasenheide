@@ -51,8 +51,13 @@
               %li= link_to 'Account bearbeiten', edit_user_registration_path
               %li= link_to 'Profil bearbeiten', edit_user_profile_path(current_user.user_profile)
               %li.divider
-              %li= link_to 'Logout', destroy_user_session_path, method: :delete
+              %li
+                = link_to destroy_user_session_path, method: :delete do
+                  = logout_icon
+                  Logout
 
         - else
           %li
-            = link_to 'Login', new_user_session_path
+            = link_to new_user_session_path do
+              = login_icon
+              Login
