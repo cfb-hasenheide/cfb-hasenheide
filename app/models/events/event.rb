@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   include Replyable
 
+  paginates_per 12
+
   has_one :report, dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
@@ -11,8 +13,6 @@ class Event < ActiveRecord::Base
             numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
   validates :maximum, numericality: { less_than_or_equal_to: User.count }
 
-
-  paginates_per 15
   scope :future, lambda { |limit = nil|
     where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
   }
