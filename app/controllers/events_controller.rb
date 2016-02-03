@@ -9,6 +9,8 @@ class EventsController < ApplicationController
                                    :open_replies_mail,
                                    :close_replies_mail]
 
+  before_action :authorize_admin!, except: [:index, :show]
+
   respond_to :html
 
   def index
