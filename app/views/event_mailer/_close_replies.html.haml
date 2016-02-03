@@ -1,0 +1,28 @@
+%p Final Call für das Event:
+
+%p
+  %strong= event.name
+  = surround '(', ')' do
+    = event.model_name.human
+
+%p
+  Wann:
+  = l(event.datetime)
+
+%p
+  Wo:
+  = event.address
+
+%p
+  Halbe Stunde vorher treffen
+  = succeed '!' do
+    = surround '(', ')' do
+      = l(event.datetime - 30.minutes, format: :time_only)
+
+- if event.description.present?
+  = event.description
+
+Gemeldet sind:
+%ul
+- event.attending_players.each do |user|
+  %li= user.user_profile.alias

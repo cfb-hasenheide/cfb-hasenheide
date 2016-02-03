@@ -20,7 +20,7 @@ module Replyable
       return if replyable?
 
       ActiveRecord::Base.transaction do
-        User.pending_players_for_event(id).pluck(:id).each do |user_id|
+        pending_players.pluck(:id).each do |user_id|
           Reply.create!(user_id: user_id, event_id: id, status: :pending)
         end
 

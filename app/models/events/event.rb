@@ -64,4 +64,27 @@ class Event < ActiveRecord::Base
   def replies_quota
     yes_and_waiting_count.to_f / maximum
   end
+
+  def possible_players
+    player_pass_needed = Team.find(club_team_id).player_pass_needed?
+
+    players = User.players
+    players = players.with_player_pass if player_pass_needed
+    players
+  end
+
+  def attending_players
+    user_ids = Reply
+               .by_event(id)
+               .where(status: [1, 2])
+               .order(:status, :updated_at)
+               .limit(maximum)
+               .pluck(:user_id)
+
+    User.where(id: user_ids).includes(:user_profile).order('user_profiles.alias')
+  end
+
+  def pending_players
+    possible_players.where.not(id: Reply.event(id).pluck(:user_id))
+  end
 end

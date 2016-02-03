@@ -16,7 +16,7 @@
           = link_to close_event_path(event), method: :post do
             ohne E-Mail
         %li
-          = link_to '#' do
+          = link_to close_replies_mail_event_path(event) do
             = mail_icon
             Final Call
 
