@@ -9,7 +9,7 @@ class Reply < ActiveRecord::Base
 
   enum status: { pending: 0, yes: 1, waiting: 2, maybee: 3, watch: 4, no: 5 }
 
-  scope :event, -> (event_id) { where(event_id: event_id) }
+  scope :by_event, -> (event_id) { where(event_id: event_id) }
 
   def self.for_event_and_user(event, user)
     find_or_initialize_by(event_id: event, user_id: user)

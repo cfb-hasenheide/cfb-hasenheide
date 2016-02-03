@@ -7,7 +7,7 @@ class RepliesController < ApplicationController
 
     @previous_events = Event.previous(params[:event_id])
 
-    @replies = Reply.event(params[:event_id])
+    @replies = Reply.by_event(params[:event_id])
                     .includes(:user_profile)
                     .order('user_profiles.alias')
 
@@ -62,13 +62,5 @@ class RepliesController < ApplicationController
 
   def replies_params
     params.require(:replies).permit!
-  end
-
-  def sanitized_params
-    # TODO: refactor me
-    reply_params.reduce({}) do |memo, (k, v)|
-      memo[k] = v.to_i
-      memo
-    end
   end
 end
