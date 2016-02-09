@@ -7,7 +7,8 @@ class EventsController < ApplicationController
                                    :open_with_mail,
                                    :close,
                                    :open_replies_mail,
-                                   :close_replies_mail]
+                                   :close_replies_mail,
+                                   :close_with_mail]
 
   before_action :authorize_admin!, except: [:index, :show]
 
@@ -74,7 +75,7 @@ class EventsController < ApplicationController
         .open_replies(@event.id, message: params[:message])
         .deliver_later
 
-      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
+      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet und Mail versendet.'
     else
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
@@ -98,6 +99,20 @@ class EventsController < ApplicationController
                     .includes(:user_profile)
                     .pluck(:alias)
                     .sort
+  end
+
+  def close_with_mail
+    if @event.close!
+      EventMailer
+        .close_replies(@event.id, message: params[:message])
+        .deliver_later
+
+      flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen und Final Call versendet.'
+    else
+      flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
+    end
+
+    redirect_to :back
   end
 
   private

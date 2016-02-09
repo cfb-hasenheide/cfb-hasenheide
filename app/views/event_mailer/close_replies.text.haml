@@ -11,6 +11,9 @@ Halbe Stunde vorher treffen (#{l(@event.datetime - 30.minutes, format: :time_onl
 - if @event.description.present?
   = @event.description
   \
+- if @message.present?
+  = @message
+  \
 Gemeldet sind:
-- @event.replies.each do |reply|
-  \- #{UserProfile.find(reply.user_id).alias}
+- @event.attending_players.each do |user|
+  \- #{user.user_profile.alias}

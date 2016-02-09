@@ -85,6 +85,6 @@ class Event < ActiveRecord::Base
   end
 
   def pending_players
-    possible_players.where.not(id: Reply.event(id).pluck(:user_id))
+    possible_players.where.not(id: Reply.by_event(id).pluck(:user_id))
   end
 end

@@ -32,7 +32,7 @@ module Replyable
       return unless replyable?
 
       ActiveRecord::Base.transaction do
-        Reply.event(id).pending.delete_all
+        Reply.by_event(id).pending.delete_all
 
         update!(replyable: false)
       end

@@ -19,10 +19,11 @@
     = surround '(', ')' do
       = l(event.datetime - 30.minutes, format: :time_only)
 
-- if event.description.present?
-  = event.description
+%p= event.description.presence
 
 Gemeldet sind:
 %ul
 - event.attending_players.each do |user|
   %li= user.user_profile.alias
+
+%p= message.presence
