@@ -50,5 +50,10 @@ gem 'rspec-rails', group: [:development, :test]
 # debugging
 gem 'pry', group: [:development, :test]
 
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+end
+
 # heroku
 gem 'rails_12factor', group: :production
