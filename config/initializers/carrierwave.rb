@@ -1,20 +1,22 @@
-aws_credentials = YAML
-  .load(ERB.new(File.read('config/aws_credentials.yml')).result)
-  .fetch(Rails.env)
-
 # NOTE: For configuration options see:
 # https://github.com/carrierwaveuploader/carrierwave#using-amazon-s3
 CarrierWave.configure do |config|
-  config.fog_provider = 'fog/aws'
+  if Rails.env.test?
+    config.storage = :file
+    config.enable_processing = false
+  else
+    config.storage = :fog
+    config.fog_provider = 'fog/aws'
 
-  config.fog_credentials = {
-    provider:              'AWS',
-    aws_access_key_id:     aws_credentials['aws_access_key_id'],
-    aws_secret_access_key: aws_credentials['aws_secret_access_key'],
-    region:                aws_credentials['region'],
-  }
+    config.fog_credentials = {
+      provider:              'AWS',
+      aws_access_key_id:     Rails.application.secrets.aws_access_key_id,
+      aws_secret_access_key: Rails.application.secrets.aws_secret_access_key,
+      region:                Rails.application.secrets.aws_region,
+    }
 
-  config.fog_directory  = aws_credentials['s3_bucket']
-  config.fog_public     = false
-  config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
+    config.fog_directory  = Rails.application.secrets.aws_bucket
+    config.fog_public     = false
+    config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
+  end
 end
