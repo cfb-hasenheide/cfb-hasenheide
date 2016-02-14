@@ -1,9 +1,11 @@
 class EventMailer < ApplicationMailer
+  default from: 'cfb@cfb-hasenheide.de'
+
   def open_replies(event_id, message: nil)
     @event = Event.find(event_id)
     @message = message.presence
 
-    mail(to: 'to@example.com',
+    mail(to: 'thilo@cfb-hasenheide.de',
          subject: 'Neuer Termin in der Meldeliste freigegeben')
   end
 
