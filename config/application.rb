@@ -26,5 +26,9 @@ module CfbHasenheide
 
     # Load models in subfolders
     config.autoload_paths += %W(#{config.root}/app/models/events)
+
+    # Do not suppress ActiveRecord errors raised within `after_rollback`/
+    # `after_commit` callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
