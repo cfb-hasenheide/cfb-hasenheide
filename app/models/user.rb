@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(password)
   end
 
+  def email_with_name
+    %("#{user_profile.alias}" <#{username}@cfb-hasenheide.de>)
+  end
+
   private
 
   def create_user_profile

@@ -14,28 +14,39 @@
       = surround '(', ')' do
         = @event.model_name.human
 
-.row
-  .col-md-3
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Empfänger
-          %small= @user_aliases.count
+= bootstrap_form_tag url: open_with_mail_event_path(@event) do |f|
 
-      %ul.list-group
-        - @user_aliases.each do |user_alias|
-          %li.list-group-item= user_alias
+  .row
+    .col-md-3
+      .panel.panel-primary
+        .panel-heading
+          %h2.panel-title
+            Empfänger
+            %small= @possible_user_ids.count
 
-  .col-md-9
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Vorschau
+            .pull-right
+              %small
+                = link_to 'bearbeiten',
+                  '#editRecipients',
+                  'data-toggle' => 'collapse'
 
-      .panel-body
-        = render 'event_mailer/open_replies', event: @event, message: nil
+        .panel-body.collapse#editRecipients
+          = f.collection_check_boxes 'user_ids[]',
+            @all_users,
+            :id,
+            :email_with_name,
+            checked: @possible_user_ids,
+            hide_label: true
 
-      .panel-footer
-        = bootstrap_form_tag url: open_with_mail_event_path(@event) do |f|
+    .col-md-9
+      .panel.panel-primary
+        .panel-heading
+          %h2.panel-title Vorschau
+
+        .panel-body
+          = render 'event_mailer/open_replies', event: @event, message: nil
+
+        .panel-footer
           = f.text_area :message, label: 'Nachricht hinzufügen?'
 
           = button_tag type: 'submit', class: 'primary-button' do
