@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
 
   validates :minimum,
             numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
-  validates :maximum, numericality: { less_than_or_equal_to: User.count }
+  validates :maximum, numericality: { greater_than: :minimum }
 
   scope :future, lambda { |limit = nil|
     where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
