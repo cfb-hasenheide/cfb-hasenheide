@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include ActionController::MimeResponds
+
   before_action :set_event, only: [:show,
                                    :edit,
                                    :update,
@@ -21,6 +23,16 @@ class EventsController < ApplicationController
   def show
     @reply = Reply.find_or_initialize_by(event_id: @event.id,
                                          user_id: current_user.id)
+
+    respond_to do |format|
+      format.html
+      format.ics do
+        calendar = Icalendar::Calendar.new
+        calendar.add_event(@event.to_ics)
+        calendar.publish
+        render text: calendar.to_ical
+      end
+    end
   end
 
   def new

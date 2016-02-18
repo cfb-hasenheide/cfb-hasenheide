@@ -132,6 +132,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
+    icalendar (2.3.0)
     ipaddress (0.8.2)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -291,6 +292,7 @@ DEPENDENCIES
   font-awesome-sass
   friendly_id
   haml-rails
+  icalendar
   jbuilder
   jquery-rails
   kaminari

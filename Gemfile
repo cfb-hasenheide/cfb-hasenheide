@@ -40,6 +40,9 @@ gem 'font-awesome-sass'
 # json
 gem 'jbuilder'
 
+# ical
+gem 'icalendar'
+
 group :development do
   gem 'spring'
   gem 'web-console'

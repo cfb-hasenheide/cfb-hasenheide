@@ -25,6 +25,12 @@
 
 %p.lead= @event.description
 
+%p
+  = link_to event_path(@event, format: :ics),
+    class: 'default-button' do
+    = download_icon
+    \.ics
+
 = render 'admin_bar', event: @event if admin?
 
 .halfs

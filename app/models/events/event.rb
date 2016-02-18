@@ -104,7 +104,7 @@ class Event < ActiveRecord::Base
     event.location = address
     event.created = created_at
     event.last_modified = updated_at
-    event.uid = slug
+    event.uid = friendly_id
     event
   end
 end

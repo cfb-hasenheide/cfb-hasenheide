@@ -108,4 +108,8 @@ module IconsHelper
   def logout_icon
     content_tag(:span, nil, class: 'fa fa-sign-out fa-fw')
   end
+
+  def download_icon
+    content_tag(:span, nil, class: 'fa fa-download fa-fw')
+  end
 end
