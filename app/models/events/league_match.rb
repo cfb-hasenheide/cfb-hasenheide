@@ -6,7 +6,9 @@ class LeagueMatch < Event
   validates :home, inclusion: { in: [true, false] }
   validates :home, exclusion: { in: [nil] }
 
-  before_save :generate_name
+  # Make sure to prepend it so that it runs before Friendly_id's own callback
+  # http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html
+  before_validation :generate_name, prepend: true
 
   def generate_name
     self.name = if home?
