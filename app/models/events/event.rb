@@ -97,6 +97,7 @@ class Event < ActiveRecord::Base
   end
 
   def to_ics
+    calendar = Icalendar::Calendar.new
     event = Icalendar::Event.new
     event.dtstart = datetime
     event.duration = 'PT2H0M0S'
@@ -106,6 +107,8 @@ class Event < ActiveRecord::Base
     event.created = created_at
     event.last_modified = updated_at
     event.uid = friendly_id
-    event
+    calendar.add_event(event)
+    calendar.publish
+    calendar.to_ical
   end
 end

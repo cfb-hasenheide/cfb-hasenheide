@@ -26,12 +26,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.ics do
-        calendar = Icalendar::Calendar.new
-        calendar.add_event(@event.to_ics)
-        calendar.publish
-        render text: calendar.to_ical
-      end
+      format.ics { render text: @event.to_ics }
     end
   end
 
