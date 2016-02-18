@@ -48,7 +48,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.save
 
-    respond_with(@event)
+    respond_with(@event, location: event_path(@event))
   end
 
   def update
