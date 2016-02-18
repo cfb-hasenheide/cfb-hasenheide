@@ -54,7 +54,7 @@ class EventsController < ApplicationController
   def update
     @event.update(event_params)
 
-    respond_with(@event)
+    respond_with(@event, location: event_path(@event))
   end
 
   def destroy
