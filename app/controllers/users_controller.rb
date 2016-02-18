@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.includes(:user_profile)
-      .order('admin DESC', 'player DESC', 'username')
-      .page(params[:page])
+                 .order('admin DESC', 'player DESC', 'username')
+                 .page(params[:page])
 
     respond_with(@users)
   end

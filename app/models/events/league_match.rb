@@ -10,9 +10,9 @@ class LeagueMatch < Event
 
   def generate_name
     self.name = if home?
-      club_team.name + ' : ' + rival_team.name
-    else
-      rival_team.name + ' : ' + club_team.name
-    end
+                  club_team.name + ' : ' + rival_team.name
+                else
+                  rival_team.name + ' : ' + club_team.name
+                end
   end
 end

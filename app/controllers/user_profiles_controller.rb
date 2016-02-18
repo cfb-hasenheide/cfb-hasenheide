@@ -21,13 +21,14 @@ class UserProfilesController < ApplicationController
   end
 
   private
-    def set_user_profile
-      @user_profile = UserProfile.find(params[:id])
-    end
 
-    def user_profile_params
-      params.require(:user_profile).permit(:user_id, :alias, :avatar,
-                                           :remote_avatar_url, :avatar_cache,
-                                           :remove_avatar)
-    end
+  def set_user_profile
+    @user_profile = UserProfile.find(params[:id])
+  end
+
+  def user_profile_params
+    params.require(:user_profile).permit(:user_id, :alias, :avatar,
+                                         :remote_avatar_url, :avatar_cache,
+                                         :remove_avatar)
+  end
 end

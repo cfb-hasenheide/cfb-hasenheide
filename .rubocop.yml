@@ -11,3 +11,7 @@ Rails:
 
 Documentation:
   Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - 'spec/spec_helper.rb'

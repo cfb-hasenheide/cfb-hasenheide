@@ -1,9 +1,8 @@
 module ReplyHelper
   def status_options
-    Reply.statuses.reduce({}) do |memo, (enum, _)|
+    Reply.statuses.each_with_object({}) do |(enum, _), options|
       translated_enum = I18n.t("reply_status.#{enum}")
-      memo[translated_enum] = enum
-      memo
+      options[translated_enum] = enum
     end
   end
 

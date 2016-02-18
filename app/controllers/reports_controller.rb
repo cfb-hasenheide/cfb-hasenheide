@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
   def show
     @report = Report.where(event_id: params[:event_id]).first
 
-    redirect_to action: :new and return unless @report.present?
+    redirect_to(action: :new) && return unless @report.present?
   end
 
   def new
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:event_id, :content, :club_final_score,
-                                  :rival_final_score, :club_half_time_score,
-                                  :rival_half_time_score)
+                                   :rival_final_score, :club_half_time_score,
+                                   :rival_half_time_score)
   end
 end

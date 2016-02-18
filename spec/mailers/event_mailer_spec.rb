@@ -12,7 +12,7 @@ describe EventMailer do
     subject { EventMailer.open_replies(event.id, to_user_ids: to_user_ids) }
 
     it 'is getting queued' do
-      expect{ subject.deliver_now }
+      expect { subject.deliver_now }
         .to change { ActionMailer::Base.deliveries.count }
         .from(0)
         .to(1)
@@ -23,7 +23,7 @@ describe EventMailer do
     subject { EventMailer.close_replies(event.id, to_user_ids: to_user_ids) }
 
     it 'is getting queued' do
-      expect{ subject.deliver_now }
+      expect { subject.deliver_now }
         .to change { ActionMailer::Base.deliveries.count }
         .from(0)
         .to(1)

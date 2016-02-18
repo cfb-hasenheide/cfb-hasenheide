@@ -1,4 +1,4 @@
-require "application_responder"
+require 'application_responder'
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     end
 
     devise_parameter_sanitizer.for(:accept_invitation)
-      .concat [:first_name, :last_name, :phone]
+                              .concat [:first_name, :last_name, :phone]
 
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
       u.permit(:first_name, :last_name, :phone, :password,
@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
   def authorize_admin!
     return true if current_user.admin?
     alert = 'Du hast keine Berechtigung für den Admin Bereich!'
-      redirect_to :root, alert: alert and return
+    redirect_to(:root, alert: alert) && return
   end
 end

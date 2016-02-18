@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
                           password_confirmation: password,
                           legacy_password:       false }
 
-      self.save!
+      save!
     end
 
     super password

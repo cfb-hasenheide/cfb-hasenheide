@@ -37,11 +37,12 @@ class ForumThreadsController < ApplicationController
   end
 
   private
-    def set_forum_thread
-      @forum_thread = ForumThread.find(params[:id])
-    end
 
-    def forum_thread_params
-      params.require(:forum_thread).permit(:topic, :comment, :user_id)
-    end
+  def set_forum_thread
+    @forum_thread = ForumThread.find(params[:id])
+  end
+
+  def forum_thread_params
+    params.require(:forum_thread).permit(:topic, :comment, :user_id)
+  end
 end

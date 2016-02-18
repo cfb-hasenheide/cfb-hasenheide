@@ -91,7 +91,8 @@ class EventsController < ApplicationController
                       from_user_id: current_user.id)
         .deliver_later
 
-      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet und Mail versendet.'
+      flash[:notice] =
+        'Meldeliste wurde erfolgreich geöffnet und Mail versendet.'
     else
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
@@ -123,7 +124,8 @@ class EventsController < ApplicationController
         .close_replies(@event.id, message: params[:message])
         .deliver_later
 
-      flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen und Final Call versendet.'
+      flash[:notice] =
+        'Meldeliste wurde erfolgreich geschlossen und Final Call versendet.'
     else
       flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
     end

@@ -81,14 +81,15 @@ class Event < ActiveRecord::Base
   end
 
   def attending_players
-    user_ids = Reply
-               .by_event(id)
-               .where(status: [1, 2])
-               .order(:status, :updated_at)
-               .limit(maximum)
-               .pluck(:user_id)
+    user_ids = Reply.by_event(id)
+                    .where(status: [1, 2])
+                    .order(:status, :updated_at)
+                    .limit(maximum)
+                    .pluck(:user_id)
 
-    User.where(id: user_ids).includes(:user_profile).order('user_profiles.alias')
+    User.where(id: user_ids)
+        .includes(:user_profile)
+        .order('user_profiles.alias')
   end
 
   def pending_players
