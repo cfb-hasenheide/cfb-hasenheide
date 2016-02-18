@@ -54,6 +54,7 @@ RSpec.describe NewsController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new news as @news" do
+      pending
       get :new, {}, valid_session
       expect(assigns(:news)).to be_a_new(News)
     end
