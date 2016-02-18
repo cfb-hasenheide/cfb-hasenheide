@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   include Replyable
+  include FriendlyIdAble
 
   paginates_per 12
 
@@ -7,7 +8,13 @@ class Event < ActiveRecord::Base
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
 
-  validates :type, :minimum, :maximum, :datetime, :address, presence: true
+  validates :address,
+            :datetime,
+            :maximum,
+            :minimum,
+            :name,
+            :type,
+            presence: true
 
   validates :minimum,
             numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
@@ -86,5 +93,18 @@ class Event < ActiveRecord::Base
 
   def pending_players
     possible_players.where.not(id: Reply.by_event(id).pluck(:user_id))
+  end
+
+  def to_ics
+    event = Icalendar::Event.new
+    event.dtstart = datetime
+    event.duration = 'PT2H0M0S'
+    event.summary = name
+    event.description = description
+    event.location = address
+    event.created = created_at
+    event.last_modified = updated_at
+    event.uid = slug
+    event
   end
 end

@@ -10,6 +10,9 @@ gem 'responders'
 # db
 gem 'pg'
 
+# slugs
+gem 'friendly_id'
+
 # pagination
 gem 'kaminari'
 

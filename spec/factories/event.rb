@@ -1,10 +1,12 @@
 FactoryGirl.define do
   factory :event do
-    type 'Other'
-    minimum 7
-    maximum 11
-    datetime Time.zone.now
     address 'Kreuzberg, Berlin'
+    datetime Time.zone.now
+    home true
+    maximum 11
+    minimum 7
+    name 'Event'
+    type 'Other'
 
     trait :other do
       type 'Other'
