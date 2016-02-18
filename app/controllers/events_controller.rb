@@ -69,12 +69,12 @@ class EventsController < ApplicationController
   end
 
   def open_replies_mail
-    @all_users = User.includes(:user_profile).order(:username)
+    @all_users = User.includes(:user_profile).order('user_profiles.alias')
 
-    @possible_user_ids = @event
-                         .possible_players
-                         .includes(:user_profile)
-                         .pluck(:id)
+    @possible_users = @event
+                      .possible_players
+                      .includes(:user_profile)
+                      .order('user_profiles.alias')
   end
 
   def open_with_mail

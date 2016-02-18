@@ -22,7 +22,7 @@
         .panel-heading
           %h2.panel-title
             Empfänger
-            %small= @possible_user_ids.count
+            %small= @possible_users.count
 
             .pull-right
               %small
@@ -30,12 +30,15 @@
                   '#editRecipients',
                   'data-toggle' => 'collapse'
 
-        .panel-body.collapse#editRecipients
+        .panel-body
+          = @possible_users.pluck(:alias).join(', ')
+
+        .panel-footer.collapse#editRecipients
           = f.collection_check_boxes 'user_ids[]',
             @all_users,
             :id,
             :email_with_name,
-            checked: @possible_user_ids,
+            checked: @possible_users.pluck(:id),
             hide_label: true
 
     .col-md-9
