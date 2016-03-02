@@ -38,8 +38,7 @@ class RepliesController < ApplicationController
       flash[:alert] = 'Deine Meldungen konnten nicht gespeichert werden!'
     end
 
-    event_id = Reply.find(replies_params.keys.first).event_id
-    respond_with event_id, location: event_replies_path(event_id)
+    redirect_to event_path(params[:event_id])
   end
 
   def update
