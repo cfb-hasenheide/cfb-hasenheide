@@ -4,7 +4,6 @@ ruby '2.2.2'
 
 # rails 4
 gem 'rails'
-gem 'turbolinks'
 gem 'responders'
 
 # db
