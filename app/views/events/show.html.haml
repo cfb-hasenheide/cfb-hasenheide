@@ -9,16 +9,18 @@
     = @event.name
     %small= @event.model_name.human
 
-.thirds
-  .third
-    %p.lead
-      = date_icon
-      = l(@event.datetime, format: :date_only)
-  .third
-    %p.lead
-      = time_icon
-      = l(@event.datetime, format: :time_only)
-  .third
+.halfs
+  .half
+    .halfs
+      .half
+        %p.lead
+          = date_icon
+          = l(@event.datetime, format: :date_only)
+      .half
+        %p.lead
+          = time_icon
+          = l(@event.datetime, format: :time_only)
+  .half
     %p.lead
       = address_icon
       = @event.address
