@@ -1,19 +1,34 @@
 .list-group
   - if events.present?
     - events.each do |event|
-      = link_to event_path(event), class: 'list-group-item' do
-        %h5.list-group-item-heading
-          = event.name
-          %small.pull-right= event.model_name.human
+      - if user_signed_in?
+        = link_to event_path(event), class: 'list-group-item' do
+          %h5.list-group-item-heading
+            = event.name
+            %small.pull-right= event.model_name.human
 
-        %p.list-group-item-text
-          = date_icon
-          = l(event.datetime, format: :date_only)
+          %p.list-group-item-text
+            = date_icon
+            = l(event.datetime, format: :date_only)
 
-          - if event.past? && event.report.present?
-            %span.pull-right.label{class: event_label_css_class(event)}
-              = event.report.final_score
+            - if event.past? && event.report.present?
+              %span.pull-right.label{class: event_label_css_class(event)}
+                = event.report.final_score
+
+      - else
+        .list-group-item
+          %h5.list-group-item-heading
+            = event.name
+            %small.pull-right= event.model_name.human
+
+          %p.list-group-item-text
+            = date_icon
+            = l(event.datetime, format: :date_only)
+
+            - if event.past? && event.report.present?
+              %span.pull-right.label{class: event_label_css_class(event)}
+                = event.report.final_score
 
   - else
     .list-group-item
-      .text-muted Keine
+      \-

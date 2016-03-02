@@ -16,8 +16,8 @@
       .panel-heading
         %h2.panel-title
           Neuigkeiten
-          %small
-            .pull-right
+          .pull-right
+            %small
               = link_to 'Alle anzeigen', news_index_path
 
     - @news.each do |news|
@@ -28,19 +28,26 @@
       .panel-heading
         %h2.panel-title
           Events
-          %small
+
+          - if user_signed_in?
             .pull-right
-              = link_to 'Alle anzeigen', news_index_path
+              %small
+                = link_to 'Alle anzeigen', events_path
+
       .panel-body
         .text-muted Kommende
+
       = render 'events/list_short', events: @future_events
+
       .panel-body
         .text-muted Vergangene
+
       = render 'events/list_short', events: @past_events
 
     .panel.panel-primary
       .panel-heading
         %h2.panel-title Tabelle - CFB I
+
       .panel-body
         .fussballDeWidget#fussballDeTableCFBI
           = spinner_icon
@@ -49,6 +56,7 @@
     .panel.panel-primary
       .panel-heading
         %h2.panel-title Tabelle - CFB II
+
       .panel-body
         .fussballDeWidget#fussballDeTableCFBII
           = spinner_icon
