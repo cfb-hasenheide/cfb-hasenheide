@@ -24,6 +24,8 @@ class EventsController < ApplicationController
     @reply = Reply.find_or_initialize_by(event_id: @event.id,
                                          user_id: current_user.id)
 
+    @previous_events = Event.previous(@event.id)
+
     respond_to do |format|
       format.html
       format.ics { render text: @event.to_ics }

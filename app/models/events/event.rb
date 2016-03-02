@@ -33,8 +33,14 @@ class Event < ActiveRecord::Base
   end
 
   def self.previous(event_id)
-    rival_team_id = find(event_id).rival_team_id
-    where(rival_team_id: rival_team_id).where.not(id: event_id)
+    event = find(event_id)
+    rival_team_id = event.rival_team_id
+    datetime = event.datetime
+
+    where(rival_team_id: rival_team_id)
+      .where.not(id: event_id)
+      .where('datetime < ?', datetime)
+      .order(datetime: :desc)
   end
 
   delegate :future?, :past?, to: :datetime

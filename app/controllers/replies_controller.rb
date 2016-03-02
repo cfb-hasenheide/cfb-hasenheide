@@ -5,8 +5,6 @@ class RepliesController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
 
-    @previous_events = Event.previous(params[:event_id])
-
     @replies = Reply.by_event(params[:event_id])
                     .includes(:user_profile)
                     .order('user_profiles.alias')
