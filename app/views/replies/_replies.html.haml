@@ -11,7 +11,7 @@
         'aria-controls' => status do
 
         %span.badge= status_replies.count
-        %h4.list-group-item-heading= I18n.t("reply_status.#{status}")
+        %h4.list-group-item-heading= t("reply_status.#{status}")
 
         .collapse.list-group-item-text{id: status, class: ('in' if status == :yes)}
           %ul.list-unstyled

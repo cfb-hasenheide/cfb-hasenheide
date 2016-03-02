@@ -23,7 +23,7 @@
         - if !event.past? && event.replyable?
           %span.label.label-primary
             - status = Reply.for_event_and_user(event, current_user).status
-            = I18n.t("reply_status.#{status}")
+            = t("reply_status.#{status}")
 
         - elsif event.past? && event.report.present?
           %span.label{class: event_label_css_class(event)}
