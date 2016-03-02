@@ -27,7 +27,7 @@ class RepliesController < ApplicationController
   end
 
   def edit_multiple
-    @event = Event.find(params[:event_id])
+    @event = Event.friendly.find(params[:event_id])
     @replies = @event.replies
   end
 
