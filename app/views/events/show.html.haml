@@ -39,9 +39,9 @@
       .panel-heading
         %h3.panel-title
           Meldeliste
-          %small.text-muted
+          %small
             - if @event.replyable?
-              offen
+              geöffnet
             - else
               geschlossen
 
