@@ -14,28 +14,51 @@
       = surround '(', ')' do
         = @event.model_name.human
 
-.row
-  .col-md-3
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Empfänger
-          %small= @user_aliases.count
+= bootstrap_form_tag url: close_with_mail_event_path(@event) do |f|
 
-      %ul.list-group
-        - @user_aliases.each do |user_alias|
-          %li.list-group-item= user_alias
+  .row
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %h2.panel-title
+            Empfänger
+            %small= @attending_players.count
 
-  .col-md-9
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Vorschau
+        .panel-body
+          %p
+            = @attending_players.pluck(:alias).join(', ')
 
-      .panel-body
-        = render 'event_mailer/close_replies', event: @event, message: nil
+          %p
+            = button_tag type: 'button',
+              'data-toggle' => 'collapse',
+              'data-target' => '#selectRecipients',
+              class: 'default-button' do
+              bearbeiten
 
-      .panel-footer
-        = bootstrap_form_tag url: close_with_mail_event_path(@event) do |f|
+        .panel-footer.collapse#selectRecipients
+          = f.collection_check_boxes 'user_ids[]',
+            @all_users,
+            :id,
+            :email_with_name,
+            checked: @attending_players.pluck(:id),
+            hide_label: true
+
+          %p
+            = button_tag type: 'button',
+              'data-toggle' => 'collapse',
+              'data-target' => '#selectRecipients',
+              class: 'default-button' do
+              Fertig
+
+    .col-md-8
+      .panel.panel-primary
+        .panel-heading
+          %h2.panel-title Vorschau
+
+        .panel-body
+          = render 'event_mailer/close_replies', event: @event, message: nil
+
+        .panel-footer
           = f.text_area :message, label: 'Nachricht hinzufügen?'
 
           = button_tag type: 'submit', class: 'primary-button' do

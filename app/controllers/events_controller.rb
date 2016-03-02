@@ -106,11 +106,9 @@ class EventsController < ApplicationController
   end
 
   def close_replies_mail
-    @user_aliases = @event
-                    .attending_players
-                    .includes(:user_profile)
-                    .pluck(:alias)
-                    .sort
+    @all_users = User.includes(:user_profile).order('user_profiles.alias')
+
+    @attending_players = @event.attending_players
   end
 
   def close_with_mail
