@@ -27,9 +27,9 @@ class Reply < ActiveRecord::Base
   def check_for_waiting
     return unless status_changed_from_yes && one_spot_left
 
-    if waiting = Reply.by_event(event_id).waiting.order(updated_at: :asc).first
-      waiting.update(status: :yes)
-    end
+    waiting = Reply.by_event(event_id).waiting.order(updated_at: :asc).first
+
+    waiting.update(status: :yes) if waiting.present?
   end
 
   def status_changed_from_yes
