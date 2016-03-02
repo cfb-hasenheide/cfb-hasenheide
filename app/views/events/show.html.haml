@@ -50,7 +50,7 @@
 
         = render 'progress_bar', event: @event
 
-      = render 'replies/replies', replies: @event.replies
+      = render 'replies/replies', replies: @event.replies.includes(:user_profile)
 
   .half
     .panel.panel-default
