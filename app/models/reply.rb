@@ -3,8 +3,8 @@ class Reply < ActiveRecord::Base
   belongs_to :event
   has_one :user_profile, through: :user
 
-  before_save :check_yes_maximum, if: :status_changed_to_yes
   after_save :check_for_waiting, if: :status_changed_from_yes
+  before_save :check_yes_maximum
 
   validates :user_id, :event_id, :status, presence: true
 
@@ -18,11 +18,9 @@ class Reply < ActiveRecord::Base
 
   private
 
-  def status_changed_to_yes
-    status_changed? && yes?
-  end
-
   def check_yes_maximum
+    return unless status_changed? && yes?
+
     self.status = 'waiting' if event.yes_count >= event.maximum
   end
 
