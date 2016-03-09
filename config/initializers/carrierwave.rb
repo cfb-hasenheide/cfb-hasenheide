@@ -5,7 +5,6 @@ CarrierWave.configure do |config|
     config.storage = :file
     config.enable_processing = false
   else
-    # config.storage = :fog
     config.fog_provider = 'fog/aws'
 
     config.fog_credentials = {
