@@ -9,6 +9,10 @@ class ReportsController < ApplicationController
                      .page(params[:page])
   end
 
+  def missing
+    @events_without_report = Event.without_report.page(params[:page])
+  end
+
   def show
     @report = Report.find(params[:id])
     @event = Event.find(@report.event_id)
