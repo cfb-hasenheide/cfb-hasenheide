@@ -1,8 +1,4 @@
 module IconsHelper
-  def report_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-list-alt')
-  end
-
   def edit_icon
     content_tag(:span, nil, class: 'glyphicon glyphicon-wrench')
   end
