@@ -36,12 +36,12 @@ class Report < ActiveRecord::Base
   def set_result
     self.result = nil && return unless final_score_present?
 
-    if club_final_score > rival_final_score
-      self.result = 'won'
-    elsif club_final_score < rival_final_score
-      self.result = 'lost'
-    else
-      self.result = 'drew'
-    end
+    self.result = if club_final_score > rival_final_score
+                    'won'
+                  elsif club_final_score < rival_final_score
+                    'lost'
+                  else
+                    'drew'
+                  end
   end
 end
