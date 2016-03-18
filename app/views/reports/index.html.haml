@@ -31,9 +31,13 @@
           %td.text-center.text-muted= report.half_time_score
           %td.text-center
             - if report.content.present?
-              %span.text-success= report_icon
+              %span.text-success
+                = report_icon
+                Ja
             - else
-              %span.text-danger= report_icon
+              %span.text-danger
+                = report_icon
+                Nein
 
 .text-center.text-muted
   = page_entries_info(@reports)
