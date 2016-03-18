@@ -20,7 +20,7 @@
 
     %tbody
       - for report in @reports
-        %tr
+        %tr.clickableTableRow{'data-url' => report_path(report)}
           %td= report.event.name
           %td.text-muted= l(report.event.datetime, format: :date_only)
           %td.text-center
