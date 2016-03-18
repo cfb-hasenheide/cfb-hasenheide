@@ -1,1 +1,8 @@
-= @report.final_score
+= content_for(:title, "Spielbericht #{@event.name}")
+
+.page-header
+  %h1
+    Spielbericht
+    %small= @event.name
+
+= render @report
