@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'pages#welcome'
+
   resources :user_profiles, only: [:index, :show, :edit, :update]
 
   resources :forum_threads
