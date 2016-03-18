@@ -15,6 +15,7 @@ config/initializers/secret_token.rb
 ## Environment normalisation:
 /.bundle
 /vendor/bundle
+/config/database.yml
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
@@ -23,5 +24,6 @@ config/initializers/secret_token.rb
 .rvmrc
 
 .DS_Store
+logfile
 
 .env
