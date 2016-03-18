@@ -7,9 +7,14 @@ class Report < ActiveRecord::Base
 
   before_save :set_result, if: :final_score_changed?
 
+  delegate :home?, to: :event
+
   def final_score
-    return "#{club_final_score} : #{rival_final_score}" if event.home?
-    "#{rival_final_score} : #{club_final_score}"
+    score(:final)
+  end
+
+  def half_time_score
+    score(:half_time)
   end
 
   def final_score_present?
@@ -17,6 +22,12 @@ class Report < ActiveRecord::Base
   end
 
   private
+
+  def score(type)
+    scores = [send("club_#{type}_score"), send("rival_#{type}_score")]
+    scores.reverse! unless home?
+    scores.join(' : ')
+  end
 
   def final_score_changed?
     club_final_score_changed? || rival_final_score_changed?

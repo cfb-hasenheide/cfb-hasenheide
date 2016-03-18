@@ -8,13 +8,32 @@
           = create_icon
           %span.hidden-xs Bericht erstellen
 
-%ul
-  - for report in @reports
-    %li
-      = link_to edit_report_path(report) do
-        = report.event.name
-        = surround '(', ')' do
-          = report.final_score
+.table-responsive
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Event
+        %th Datum
+        %th.text-center Endstand
+        %th.text-center Halbzeitstand
+        %th.text-center Bericht?
+        %th.text-right.text-muted Aktionen
+
+    %tbody
+      - for report in @reports
+        %tr
+          %td= report.event.name
+          %td.text-muted= l(report.event.datetime, format: :date_only)
+          %td.text-center
+            .label{class: "label-#{label_class_for_report(report)}"}
+              = report.final_score
+          %td.text-center.text-muted= report.half_time_score
+          %td.text-center
+            - if report.content.present?
+              %span.text-success= report_icon
+            - else
+              %span.text-danger= report_icon
+          %td.text-right= link_to 'bearbeiten', edit_report_path(report)
 
 .text-center.text-muted
   = page_entries_info(@reports)

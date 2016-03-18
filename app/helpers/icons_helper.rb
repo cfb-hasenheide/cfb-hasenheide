@@ -112,4 +112,8 @@ module IconsHelper
   def download_icon
     content_tag(:span, nil, class: 'fa fa-download fa-fw')
   end
+
+  def report_icon
+    content_tag(:span, nil, class: 'fa fa-file-text-o fa-fw')
+  end
 end

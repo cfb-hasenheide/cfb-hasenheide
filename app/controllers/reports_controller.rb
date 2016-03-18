@@ -4,7 +4,9 @@ class ReportsController < ApplicationController
   respond_to :html
 
   def index
-    @reports = Report.all.page(params[:page])
+    @reports = Report.includes(:event)
+                     .order('events.datetime DESC')
+                     .page(params[:page])
   end
 
   def show
