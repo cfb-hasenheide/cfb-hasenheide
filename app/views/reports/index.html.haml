@@ -24,7 +24,7 @@
           %td= report.event.name
           %td.text-muted= l(report.event.datetime, format: :date_only)
           %td.text-center
-            .label{class: "label-#{label_class_for_report(report)}"}
+            .label{class: "label-#{contextual_class_for_report(report)}"}
               = report.final_score
           %td.text-center.text-muted= report.half_time_score
           %td.text-center

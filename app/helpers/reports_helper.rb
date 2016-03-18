@@ -1,5 +1,5 @@
 module ReportsHelper
-  def label_class_for_report(report)
+  def contextual_class_for_report(report)
     case report.result
     when 'won' then 'success'
     when 'lost' then 'danger'
