@@ -27,7 +27,4 @@
     .col-xs-12.col-sm-6.col-md-4.col-lg-3
       = render 'event', event: events.fourth if events.fourth.present?
 
-.text-center.text-muted
-  = page_entries_info(@events)
-.text-center
-  = paginate @events
+= render 'layouts/pagination', entries: @events

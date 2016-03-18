@@ -11,7 +11,4 @@
 - for news in @news
   = render 'news', news: news
 
-.text-center.text-muted
-  = page_entries_info @news
-.text-center
-  = paginate(@news)
+= render 'layouts/pagination', entries: @news

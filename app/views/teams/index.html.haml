@@ -49,7 +49,4 @@
                 %span.text-danger
                   = delete_icon
 
-.text-center.text-muted
-  = page_entries_info(@teams)
-.text-center
-  = paginate @teams
+= render 'layouts/pagination', entries: @teams

@@ -39,7 +39,4 @@
                 = report_icon
                 Nein
 
-.text-center.text-muted
-  = page_entries_info(@reports)
-.text-center
-  = paginate @reports
+= render 'layouts/pagination', entries: @reports
