@@ -44,6 +44,8 @@ gem 'icalendar'
 
 group :development do
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec', require: false
   gem 'web-console'
   gem 'rubocop'
   gem 'rails_best_practices'
