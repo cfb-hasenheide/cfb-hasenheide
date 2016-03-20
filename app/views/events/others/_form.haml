@@ -1,7 +1,9 @@
 .halfs
   .half
-    = bootstrap_form_for event, layout: :horizontal,
+    = bootstrap_form_for Event.new, layout: :horizontal,
       label_col: "col-sm-4", control_col: "col-sm-8" do |f|
+      =f.hidden_field :type, value: event.type
+      =f.hidden_field :home, value: false
 
       = f.text_field :name
 
