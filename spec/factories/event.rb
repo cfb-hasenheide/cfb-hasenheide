@@ -5,7 +5,7 @@ FactoryGirl.define do
     home true
     maximum 11
     minimum 7
-    name 'Event'
+    name 'Eventname'
     type 'Other'
 
     trait :other do
