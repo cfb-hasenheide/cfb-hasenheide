@@ -3,4 +3,4 @@
     Event erstellen
     %small= @event.model_name.human
 
-= render "events/#{@event.class.to_s.underscore.pluralize}/form", event: @event
+= render "events/#{@event.model_name.plural}/form", event: @event

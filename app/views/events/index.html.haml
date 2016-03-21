@@ -12,9 +12,8 @@
             %span.caret
 
           %ul.dropdown-menu.pull-right
-            %li= link_to LeagueMatch.model_name.human, new_event_path(type: 'LeagueMatch')
-            %li= link_to CupMatch.model_name.human, new_event_path(type: 'CupMatch')
-            %li= link_to Other.model_name.human, new_event_path(type: 'Other')
+            - [LeagueMatch, CupMatch, Other].each do |event_class|
+              %li= link_to event_class.model_name.human, new_event_path(type: event_class.name)
 
 - @events.in_groups_of(4) do |events|
   .row

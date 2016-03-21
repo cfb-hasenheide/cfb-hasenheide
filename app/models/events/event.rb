@@ -27,6 +27,8 @@ class Event < ActiveRecord::Base
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
 
+  delegate :future?, :past?, to: :datetime
+
   def self.without_report
     ids = Report.all.pluck(:event_id)
     where.not(id: ids)
@@ -42,8 +44,6 @@ class Event < ActiveRecord::Base
       .where('datetime < ?', datetime)
       .order(datetime: :desc)
   end
-
-  delegate :future?, :past?, to: :datetime
 
   def google_maps_url
     "http://maps.google.com/?q=#{address}"
@@ -80,7 +80,6 @@ class Event < ActiveRecord::Base
 
   def possible_players
     player_pass_needed = Team.find(club_team_id).player_pass_needed?
-
     players = User.players
     players = players.with_player_pass if player_pass_needed
     players
