@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
                               .concat [:first_name, :last_name, :phone]
 
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:first_name, :last_name, :phone, :password,
+      u.permit(:username, :first_name, :last_name, :phone, :password,
                :password_confirmation, :invitation_token)
     end
   end

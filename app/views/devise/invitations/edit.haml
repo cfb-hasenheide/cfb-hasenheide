@@ -5,17 +5,26 @@
       .panel-heading
         %h3= t 'devise.invitations.edit.header'
 
-      = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :put} do |f|
+      = form_for resource, as: resource_name,
+        url: invitation_path(resource_name), html: { method: :put } do |f|
+
         .panel-body
           = devise_error_messages!
 
-          = hidden_field :invitation_token
+          = f.hidden_field :invitation_token
 
-          = f.label :password
-          = f.text_field :password
+          .form-group
+            = f.label :username
+            = f.text_field :username, class: 'form-control'
 
-          = f.label :password_confirmation
-          = f.text_field :password_confirmation
+          .form-group
+            = f.label :password
+            = f.text_field :password, class: 'form-control'
+
+          .form-group
+            = f.label :password_confirmation
+            = f.text_field :password_confirmation, class: 'form-control'
 
         .panel-footer
           = f.submit t("devise.invitations.edit.submit_button"),
+            class: 'btn btn-primary btn-block'
