@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   private
 
   def create_user_profile
-    user_alias = username.present? ? username.titleize : email.split('@').first
-    UserProfile.create(user: self, alias: user_alias)
+    user_alias = username || email.split('@').first
+    UserProfile.create(user: self, alias: user_alias.titleize)
   end
 end
