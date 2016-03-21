@@ -1,3 +1,8 @@
+- if user_signed_in?
+  %nav#chat.navmenu.navmenu-default.navmenu-fixed-right.offcanvas{role: "chat"}
+    %a.navmenu-brand{href: '#'} Chat
+    Chat
+
 %nav.navbar.navbar-fixed-top.navbar-default{role: 'navigation'}
   .container
     .navbar-header
@@ -12,6 +17,13 @@
           class: 'logoNavbar'
       %a.navbar-brand{href: root_path}
         CFB Hasenheide
+
+    - if user_signed_in?
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a{href: '#chat', 'data-toggle' => 'offcanvas'}
+            %span.fa.fa-wechat.fa-fw
+            Chat
 
     #navigation.collapse.navbar-collapse
       %ul.nav.navbar-nav
