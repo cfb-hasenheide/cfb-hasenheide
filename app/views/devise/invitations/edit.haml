@@ -19,11 +19,11 @@
 
           .form-group
             = f.label :password
-            = f.text_field :password, class: 'form-control'
+            = f.password_field :password, class: 'form-control'
 
           .form-group
             = f.label :password_confirmation
-            = f.text_field :password_confirmation, class: 'form-control'
+            = f.password_field :password_confirmation, class: 'form-control'
 
         .panel-footer
           = f.submit t("devise.invitations.edit.submit_button"),
