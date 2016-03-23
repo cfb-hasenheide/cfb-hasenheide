@@ -1,12 +1,11 @@
-- if user_signed_in?
-  %nav#chat.navmenu.navmenu-default.navmenu-fixed-right.offcanvas{role: "chat"}
-    %a.navmenu-brand{href: '#'} Chat
-    Chat
+= render 'layouts/chat'
 
 %nav.navbar.navbar-fixed-top.navbar-default{role: 'navigation'}
   .container
     .navbar-header
-      %button.navbar-toggle{'data-target' => '#navigation',
+      = render 'layouts/chat_toggle', navbar_toggle: true
+
+      %button.navbar-toggle.collapsed{'data-target' => '#navigation',
         'data-toggle' => 'collapse', type: 'button'}
         %span.sr-only Navigation aus-/einklappen
         %span.icon-bar
@@ -18,14 +17,9 @@
       %a.navbar-brand{href: root_path}
         CFB Hasenheide
 
-    - if user_signed_in?
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{href: '#chat', 'data-toggle' => 'offcanvas'}
-            %span.fa.fa-wechat.fa-fw
-            Chat
-
     #navigation.collapse.navbar-collapse
+      = render 'layouts/chat_toggle', navbar_toggle: false
+
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'news')}
           %a{href: news_index_path} News

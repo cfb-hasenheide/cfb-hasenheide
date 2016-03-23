@@ -1,0 +1,8 @@
+- if user_signed_in?
+  = button_tag type: 'button',
+    'data-target' => '#chat',
+    'data-toggle' => 'offcanvas',
+    class: "default-button navbar-btn navbar-right #{'navbar-toggle' if navbar_toggle}" do
+
+    %span.sr-only Chat aus-/einblenden
+    = chat_icon

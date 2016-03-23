@@ -1,0 +1,37 @@
+- if user_signed_in?
+  #chat.navmenu.navmenu-default.navmenu-fixed-right.offcanvas
+    .panel.panel-default
+      .panel-body
+        %h2.panel-title Chat
+
+      %ul.list-group
+        %li.list-group-item
+          %small.text-muted
+            %strong InternetHase
+            \-
+            = time_ago_in_words 2.minutes.ago
+          %br
+          Jaja der is schon in arbeit..
+        %li.list-group-item
+          %small.text-muted
+            %strong Hase 2
+            \-
+            = time_ago_in_words 5.minutes.ago
+          %br
+          ja genau, was gehtn da?
+        %li.list-group-item
+          %small.text-muted
+            %strong Hase 1
+            \-
+            = time_ago_in_words 25.minutes.ago
+          %br
+          Was issn jetz hier mit chat und so?
+
+      .panel-footer
+        = form_tag '#', method: :get do
+          .input-group
+            = text_field_tag :message, nil, class: 'form-control',
+              placeholder: 'Nachricht'
+            .input-group-btn
+              = button_tag type: 'submit', class: 'primary-button' do
+                = chat_message_icon

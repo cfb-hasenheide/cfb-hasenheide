@@ -112,4 +112,12 @@ module IconsHelper
   def report_icon
     content_tag(:span, nil, class: 'fa fa-file-text-o fa-fw')
   end
+
+  def chat_icon
+    content_tag(:span, nil, class: 'fa fa-comments-o fa-fw')
+  end
+
+  def chat_message_icon
+    content_tag(:span, nil, class: 'fa fa-commenting-o fa-fw')
+  end
 end
