@@ -14,8 +14,8 @@
   %table.table.table-hover
     %thead
       %tr
+        %th.text-right Datum
         %th Event
-        %th Datum
         %th.text-center Endstand
         %th.text-center Halbzeitstand
         %th.text-center Bericht?
@@ -23,12 +23,15 @@
     %tbody
       - for report in @reports
         %tr.clickableTableRow{'data-url' => report_path(report)}
-          %td= report.event.name
-          %td.text-muted= l(report.event.datetime, format: :date_only)
+          %td.text-right.text-muted
+            = l(report.event.datetime, format: :date_only)
+          %td
+            = report.event.name
           %td.text-center
             .label{class: "label-#{contextual_class_for_report(report)}"}
               = report.final_score
-          %td.text-center.text-muted= report.half_time_score
+          %td.text-center.text-muted
+            = report.half_time_score
           %td.text-center
             - if report.content.present?
               %span.text-success
