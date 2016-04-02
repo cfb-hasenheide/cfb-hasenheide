@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :update]
   resources :teams, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :reports, only: [:index, :show, :new, :create, :edit, :update] do
+    get :no_content, on: :collection
     get :missing, on: :collection
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -9,8 +9,15 @@ class ReportsController < ApplicationController
                      .page(params[:page])
   end
 
+  def no_content
+    @reports = Report.no_content
+                     .includes(:event)
+                     .order('events.datetime DESC')
+                     .page(params[:page])
+  end
+
   def missing
-    @events_without_report = Event.without_report.page(params[:page])
+    @events_without_report = Event.past.without_report.page(params[:page])
   end
 
   def show

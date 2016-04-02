@@ -7,6 +7,8 @@ class Report < ActiveRecord::Base
 
   before_save :set_result, if: :final_score_changed?
 
+  scope :no_content, -> { where(content: [nil, '']) }
+
   delegate :home?, to: :event
 
   def final_score

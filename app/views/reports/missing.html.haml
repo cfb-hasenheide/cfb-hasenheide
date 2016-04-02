@@ -1,5 +1,7 @@
 = content_for :title, 'Fehlende Spielberichte'
 
+= render 'subnavigation'
+
 .page-header
   %h1= content_for :title
 
@@ -7,15 +9,15 @@
   %table.table.table-hover
     %thead
       %tr
+        %th.text-right Datum
         %th Event
-        %th Datum
         %th.text-right.text-muted Aktionen
 
     %tbody
       - @events_without_report.each do |event|
         %tr
+          %td.text-right.text-muted= l(event.datetime, format: :date_only)
           %td= event.name
-          %td.text-muted= l(event.datetime, format: :date_only)
           %td.text-right
             = link_to new_report_path, class: 'btn btn-primary btn-xs' do
               = create_icon
