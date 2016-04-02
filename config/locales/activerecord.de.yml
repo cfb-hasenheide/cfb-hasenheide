@@ -5,6 +5,7 @@ de:
       cup_match: Pokalspiel
       other: Sonstiges
       team: Mannschaft
+      report: Spielbericht
     attributes:
       event:
         address: Adresse
@@ -25,7 +26,9 @@ de:
       reply:
         status: Bist du dabei?
       report:
+        club_final_score: Endstand CFB
         content: Bericht
+        rival_final_score: Endstand Gegner
       team:
         description: Beschreibung
         club: Vereinsmannschaft?

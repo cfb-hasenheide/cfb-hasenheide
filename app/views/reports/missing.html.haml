@@ -19,7 +19,8 @@
           %td.text-right.text-muted= l(event.datetime, format: :date_only)
           %td= event.name
           %td.text-right
-            = link_to new_report_path, class: 'btn btn-primary btn-xs' do
+            = link_to new_report_path(event_id: event.id),
+              class: 'btn btn-primary btn-xs' do
               = create_icon
               Erstellen
 

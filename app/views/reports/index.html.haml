@@ -3,13 +3,6 @@
 = render 'subnavigation'
 
 .page-header
-  %h1
-    = content_for :title
-
-    - if admin?
-      .pull-right
-        = link_to new_report_path, class: 'primary-button' do
-          = create_icon
-          %span.hidden-xs Bericht erstellen
+  %h1= content_for :title
 
 = render 'table', reports: @reports

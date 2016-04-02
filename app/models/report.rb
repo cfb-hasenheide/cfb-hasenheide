@@ -2,6 +2,12 @@ class Report < ActiveRecord::Base
   belongs_to :event
 
   validates :event_id, presence: true, uniqueness: true
+  validates :club_final_score,
+            numericality: { greater_than_or_equal_to: :club_half_time_score },
+            if: 'club_half_time_score.present?'
+  validates :rival_final_score,
+            numericality: { greater_than_or_equal_to: :rival_half_time_score },
+            if: 'rival_half_time_score.present?'
 
   enum result: { lost: 0, drew: 1, won: 3 }
 
