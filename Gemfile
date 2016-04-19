@@ -17,7 +17,11 @@ gem 'kaminari'
 
 # authorization
 gem 'devise'
-gem 'devise_invitable'
+gem 'devise_invitable', github: 'scambra/devise_invitable'
+# NOTE: using devise_invitable master, because of:
+# undefined method `attributes_for' for class `Devise::ParameterSanitizer' (NameError)
+# Did you mean?  attr_writer
+#   from /Users/elgrillo/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.6/lib/active_support/core_ext/module/aliasing.rb:32:in `alias_method_chain'
 
 # file uploading
 gem 'fog-aws'
