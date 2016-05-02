@@ -1,0 +1,26 @@
+.input-group
+  - if report.home?
+    %span.input-group-addon= report.event.club_team.name
+
+    = f.number_field_without_bootstrap :club_final_score, min: 0,
+      class: 'form-control'
+
+    %span.input-group-addon :
+
+    = f.number_field_without_bootstrap :rival_final_score, min: 0,
+      class: 'form-control'
+
+    %span.input-group-addon= report.event.rival_team.name
+
+  - else
+    %span.input-group-addon= report.event.rival_team.name
+
+    = f.number_field_without_bootstrap :rival_final_score, min: 0,
+      class: 'form-control'
+
+    %span.input-group-addon :
+
+    = f.number_field_without_bootstrap :club_final_score, min: 0,
+      class: 'form-control'
+
+    %span.input-group-addon= report.event.club_team.name
