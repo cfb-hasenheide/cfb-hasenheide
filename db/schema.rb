@@ -187,8 +187,8 @@ ActiveRecord::Schema.define(version: 20160503121251) do
     t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                              default: false, null: false
-    t.boolean  "player",                             default: false, null: false
     t.boolean  "player_pass",                        default: false, null: false
+    t.boolean  "player",                             default: false, null: false
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
@@ -196,7 +196,6 @@ ActiveRecord::Schema.define(version: 20160503121251) do
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["player", "player_pass"], name: "index_users_on_player_and_player_pass", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "users"
