@@ -23,7 +23,7 @@
 
 Gemeldet sind:
 %ul
-- event.attending_players.each do |user|
-  %li= user.user_profile.alias
+- event.attending_players.each do |player|
+  %li= player.nickname
 
 %p= message.presence

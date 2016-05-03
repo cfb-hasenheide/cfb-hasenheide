@@ -30,6 +30,7 @@ class Event < ActiveRecord::Base
   delegate :future?, :past?, to: :datetime
   delegate :name, to: :club_team, prefix: true
   delegate :name, to: :rival_team, prefix: true
+  delegate :player_pass_needed?, to: :club_team
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
@@ -82,9 +83,7 @@ class Event < ActiveRecord::Base
 
   def possible_players
     player_pass_needed = Team.find(club_team_id).player_pass_needed?
-    players = User.players
-    players = players.with_player_pass if player_pass_needed
-    players
+    Player.active.player_pass(player_pass_needed)
   end
 
   def attending_players
@@ -94,9 +93,7 @@ class Event < ActiveRecord::Base
                     .limit(maximum)
                     .pluck(:user_id)
 
-    User.where(id: user_ids)
-        .includes(:user_profile)
-        .order('user_profiles.alias')
+    Player.where(user_id: user_ids).order(:nickname)
   end
 
   def pending_players

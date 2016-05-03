@@ -64,11 +64,10 @@ class EventsController < ApplicationController
   end
 
   def open_replies_mail
-    @all_users = User.includes(:user_profile).order('user_profiles.alias')
-    @possible_users = @event
-                      .possible_players
-                      .includes(:user_profile)
-                      .order('user_profiles.alias')
+    @all_players = Player.includes(:user).order(:nickname)
+    @possible_users = Player.active
+                            .player_pass(@event.player_pass_needed?)
+                            .order(:nickname)
   end
 
   def open_with_mail
@@ -97,7 +96,7 @@ class EventsController < ApplicationController
   end
 
   def close_replies_mail
-    @all_users = User.includes(:user_profile).order('user_profiles.alias')
+    @all_players = Player.includes(:user).order(:nickname)
     @attending_players = @event.attending_players
   end
 

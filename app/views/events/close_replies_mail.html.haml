@@ -26,7 +26,7 @@
 
         .panel-body
           %p
-            = @attending_players.pluck(:alias).join(', ')
+            = @attending_players.pluck(:nickname).join(', ')
 
           %p
             = button_tag type: 'button',
@@ -37,9 +37,9 @@
 
         .panel-footer.collapse#selectRecipients
           = f.collection_check_boxes 'user_ids[]',
-            @all_users,
+            @all_players,
             :id,
-            :email_with_name,
+            :club_email_with_nickname,
             checked: @attending_players.pluck(:id),
             hide_label: true
 

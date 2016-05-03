@@ -37,7 +37,7 @@
 
         .panel-footer.collapse#selectRecipients
           = f.collection_check_boxes 'user_ids[]',
-            @all_users,
+            @all_players,
             :id,
             :email_with_name,
             checked: @possible_users.pluck(:id),

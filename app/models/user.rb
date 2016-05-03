@@ -9,14 +9,8 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
-  scope :players, -> { where(player: true) }
-
   def self.without_player
     User.where.not(id: Player.pluck(:user_id))
-  end
-
-  def self.with_player_pass
-    where(player_pass: true)
   end
 
   # NOTE: Workaround to migrate users from legacy app

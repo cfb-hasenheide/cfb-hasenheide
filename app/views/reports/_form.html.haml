@@ -62,11 +62,23 @@
 
   %hr
 
-  = f.collection_select :goalkeeper_id, User.all, :id, :username, prompt: true
+  = f.collection_select :goalkeeper_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
-  = f.collection_select :captain_id, User.all, :id, :username, prompt: true
+  = f.collection_select :captain_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
-  = f.collection_select :most_valuable_player_id, User.all, :id, :username, prompt: true
+  = f.collection_select :most_valuable_player_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
   = f.text_area :annotation
 
@@ -74,7 +86,11 @@
 
   = f.text_area :content, class: 'wysihtml5', control_col: 'col-md-10'
 
-  = f.collection_select :reporter_id, User.all, :id, :username, prompt: true
+  = f.collection_select :reporter_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
   %hr
 
