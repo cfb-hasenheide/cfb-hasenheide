@@ -1,18 +1,31 @@
 .halfs
   .half
-    = bootstrap_form_for Event.new, layout: :horizontal,
-      label_col: "col-sm-4", control_col: "col-sm-8" do |f|
-      = f.hidden_field :type, value: event.type
-      = f.hidden_field :home, value: false
+    = bootstrap_form_for event,
+      layout: :horizontal,
+      label_col: 'col-sm-4',
+      control_col: 'col-sm-8' do |f|
+
+      = f.hidden_field :type
+
+      = f.hidden_field :home
 
       = f.text_field :name
 
-      = f.collection_select :club_team_id, Team.club, :id, :name,
-        prompt: true, class: 'form-control'
+      = f.collection_select :club_team_id,
+        Team.club,
+        :id,
+        :name,
+        prompt: true
 
-      = f.number_field :minimum, icon: 'user', value: event.minimum || 7
+      = f.number_field :minimum,
+        icon: 'user',
+        min: 0,
+        value: event.minimum || 7
 
-      = f.number_field :maximum, icon: 'user', value: event.maximum || 11
+      = f.number_field :maximum,
+        icon: 'user',
+        min: 0,
+        value: event.maximum || 11
 
       = f.datetime_select :datetime
 
