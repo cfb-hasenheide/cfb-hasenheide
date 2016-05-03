@@ -11,10 +11,8 @@
     %thead
       %tr
         %th.col-md-2= User.human_attribute_name(:username)
-        %th.col-md-2= UserProfile.human_attribute_name(:alias)
+        %th.col-md-2= Player.human_attribute_name(:nickname)
         %th.col-md-2= User.human_attribute_name(:admin)
-        %th.col-md-2= User.human_attribute_name(:player)
-        %th.col-md-2= User.human_attribute_name(:player_pass)
         %th.col-md-2.text-right.text-muted Aktionen
 
     %tbody
@@ -22,25 +20,11 @@
         %tr
           %td.col-md-2= user.username
 
-          %td.col-md-2= user.user_profile.alias
+          %td.col-md-2= user.player.nickname
 
           %td.col-md-2
             - if user.admin?
               .label.label-success Ja
-
-          %td.col-md-2
-            = form_for user, remote: true do |f|
-              = f.check_box :player, class: 'bootstrap-switch',
-                'data-size' => 'mini', 'data-on-color' => 'success',
-                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
-                onchange: '$(this.form).submit();'
-
-          %td.col-md-2
-            = form_for user, remote: true do |f|
-              = f.check_box :player_pass, class: 'bootstrap-switch',
-                'data-size' => 'mini', 'data-on-color' => 'success',
-                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
-                onchange: '$(this.form).submit();'
 
           %td.col-md-2
             .btn-toolbar.pull-right
