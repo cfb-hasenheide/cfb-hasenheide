@@ -28,6 +28,8 @@ class Event < ActiveRecord::Base
   }
 
   delegate :future?, :past?, to: :datetime
+  delegate :name, to: :club_team, prefix: true
+  delegate :name, to: :rival_team, prefix: true
 
   def self.without_report
     ids = Report.all.pluck(:event_id)

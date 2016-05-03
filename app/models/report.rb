@@ -15,7 +15,7 @@ class Report < ActiveRecord::Base
 
   scope :no_content, -> { where(content: [nil, '']) }
 
-  delegate :home?, to: :event
+  delegate :club_team_name, :home?, :rival_team_name, to: :event
 
   def final_score
     score(:final)
