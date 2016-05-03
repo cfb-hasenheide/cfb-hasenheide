@@ -4,6 +4,7 @@ de:
       league_match: Ligaspiel
       cup_match: Pokalspiel
       other: Sonstiges
+      player: Spieler
       team: Mannschaft
       report: Spielbericht
     attributes:
@@ -23,6 +24,26 @@ de:
         title: Titel
         content: Inhalt
         internal: Intern
+      player:
+        city: Ort
+        club_email: CFB E-Mail
+        date_of_birth: Geburtstag
+        eligible_to_play_since: Spielberechtigt seit
+        first_name: Vorname
+        jersey_name: Trikotname
+        jersey_number: Trikotnummer
+        last_name: Nachname
+        member_since: Mitglied seit
+        member_until: Mitglied bis
+        membership_number: Mitgliedsnr.
+        nickname: Spitzname
+        phone1: Telefonnr.
+        phone2: Telefonnr. (alternativ)
+        place_of_birth: Geburtsort
+        player_pass: Spielerpass?
+        player_pass_number: Spielerpass-Nummmer
+        street: Strasse
+        zipcode: PLZ
       reply:
         status: Bist du dabei?
       report:

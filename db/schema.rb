@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502080445) do
+ActiveRecord::Schema.define(version: 20160503081307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,32 @@ ActiveRecord::Schema.define(version: 20160502080445) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id",                null: false
+    t.string  "nickname",               null: false
+    t.string  "first_name"
+    t.string  "last_name"
+    t.date    "date_of_birth"
+    t.string  "place_of_birth"
+    t.string  "street"
+    t.string  "zipcode"
+    t.string  "city"
+    t.string  "phone1"
+    t.string  "phone2"
+    t.string  "club_email"
+    t.string  "membership_number"
+    t.date    "member_since"
+    t.date    "member_until"
+    t.boolean "player_pass"
+    t.string  "player_pass_number"
+    t.date    "eligible_to_play_since"
+    t.integer "jersey_number"
+    t.string  "jersey_name"
+  end
+
+  add_index "players", ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+  add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
 
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"

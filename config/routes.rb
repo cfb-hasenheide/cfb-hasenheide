@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :replies, only: [:create, :update]
 
+  resources :players, except: :destroy
+
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :users, only: [:index, :update]
   resources :teams, only: [:index, :new, :create, :edit, :update, :destroy]

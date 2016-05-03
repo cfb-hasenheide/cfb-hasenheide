@@ -120,4 +120,8 @@ module IconsHelper
   def chat_message_icon
     content_tag(:span, nil, class: 'fa fa-commenting-o fa-fw')
   end
+
+  def list_icon
+    content_tag(:span, nil, class: 'fa fa-list fa-fw')
+  end
 end

@@ -1,0 +1,18 @@
+= content_for :title, @player.nickname
+
+.page-header
+  %h1
+    Spieler
+    %small= @player.nickname
+    .pull-right
+      = link_to players_path, class: 'default-button' do
+        = list_icon
+        %span.hidden-xs Alle Spieler
+
+- if admin? || current_user == @player.user
+  .well.well-sm
+    = link_to edit_player_path(@player), class: 'default-button' do
+      = edit_icon
+      Spieler bearbeiten
+
+= @player.nickname
