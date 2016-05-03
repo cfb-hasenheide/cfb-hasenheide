@@ -1,6 +1,8 @@
+= content_for :title, 'Events'
+
 .page-header
   %h1
-    Events
+    = content_for(:title)
     - if admin?
       .pull-right
         .btn-group
