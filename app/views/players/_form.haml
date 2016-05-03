@@ -53,7 +53,7 @@
       'data-toggle' => 'collapse',
       'data-target' => '#playerPassForm'
 
-  .collapse#playerPassForm
+  .collapse#playerPassForm{class: ('in' if player.player_pass?)}
     = f.text_field :player_pass_number
 
     = f.date_select :eligible_to_play_since,

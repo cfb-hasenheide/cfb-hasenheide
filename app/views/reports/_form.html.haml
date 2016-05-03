@@ -55,7 +55,7 @@
       'data-toggle' => 'collapse',
       'data-target' => '#refereeForm'
 
-  .collapse#refereeForm
+  .collapse#refereeForm{class: ('in' if report.referee?)}
     = f.text_field :referee_name
 
     = f.text_field :referee_description
