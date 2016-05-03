@@ -1,16 +1,16 @@
 class EventsController < ApplicationController
   include ActionController::MimeResponds
 
-  before_action :set_event, only: [:show,
-                                   :edit,
-                                   :update,
-                                   :destroy,
-                                   :open,
-                                   :close,
-                                   :open_with_mail,
-                                   :open_replies_mail,
-                                   :close_with_mail,
-                                   :close_replies_mail]
+  before_action :set_event, only: %i(show
+                                     edit
+                                     update
+                                     destroy
+                                     open
+                                     close
+                                     open_with_mail
+                                     open_replies_mail
+                                     close_with_mail
+                                     close_replies_mail)
 
   before_action :authorize_admin!, except: [:index, :show]
 
