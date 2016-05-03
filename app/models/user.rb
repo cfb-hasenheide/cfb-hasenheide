@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
-  after_create :create_user_profile
-
   scope :players, -> { where(player: true) }
 
   def self.without_player
@@ -47,12 +45,5 @@ class User < ActiveRecord::Base
 
   def email_with_name
     %("#{user_profile.alias}" <#{username}@cfb-hasenheide.de>)
-  end
-
-  private
-
-  def create_user_profile
-    user_alias = username || email.split('@').first
-    UserProfile.create(user: self, alias: user_alias.titleize)
   end
 end
