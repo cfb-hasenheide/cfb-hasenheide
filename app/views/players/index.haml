@@ -5,7 +5,7 @@
     = content_for :title
     - if admin?
       .pull-right
-        = link_to new_player_path, class: 'primary-button' do
+        = link_to for_user_new_player_path, class: 'primary-button' do
           = create_icon
           %span.hidden-xs Spieler erstellen
 

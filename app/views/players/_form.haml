@@ -3,8 +3,7 @@
   label_col: 'col-md-2',
   control_col: 'col-md-4' do |f|
 
-  - unless player.user_id?
-    = f.collection_select :user_id, User.all, :id, :username
+  = f.hidden_field :user_id
 
   = f.text_field :nickname
 

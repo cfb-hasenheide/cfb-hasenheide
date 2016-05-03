@@ -9,8 +9,11 @@ class PlayersController < ApplicationController
   def show
   end
 
+  def for_user
+  end
+
   def new
-    @player = Player.new
+    @player = Player.new(user_id: params[:user_id])
   end
 
   def edit

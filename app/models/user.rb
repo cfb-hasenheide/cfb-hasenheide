@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :user_profile, dependent: :destroy
+  has_one :player, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -11,6 +12,10 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
 
   scope :players, -> { where(player: true) }
+
+  def self.without_player
+    User.where.not(id: Player.pluck(:user_id))
+  end
 
   def self.with_player_pass
     where(player_pass: true)
