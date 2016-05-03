@@ -26,9 +26,21 @@ de:
       reply:
         status: Bist du dabei?
       report:
+        annotation: Anmerkungen
+        captain_id: Kapitän
         club_final_score: Endstand CFB
         content: Bericht
+        goalkeeper_id: Torwart
+        incident: Sonderereignis
+        most_valuable_player_id: Spieler des Tages
+        possession: Ballbesitz
+        referee: Schiedsrichter?
+        referee_name: Name
+        referee_description: Beschreibung
+        reporter_id: Berichtschreiber
         rival_final_score: Endstand Gegner
+        turf: Belag
+        weather: Wetter
       team:
         description: Beschreibung
         club: Vereinsmannschaft?
@@ -45,6 +57,26 @@ de:
         remember_me: Angemeldet bleiben
       user_profile:
         alias: Alias
+    enums:
+      report:
+        incident:
+          armchair_decision: Wertung am grünen Tisch
+          called_off_club: CFB ist nicht angetreten
+          called_off_rival: Gegner ist nicht angetreten
+          cancelled_due_weather: Wetterbedingt abgesagt
+        result:
+          lost: verloren
+          drew: unentschieden
+          won: gewonnen
+        turf:
+          artificial: Kunstrasen
+          natural: Rasen
+          gravel: Schotter
+        weather:
+          sunny: sonnig
+          cloudy: bewölkt
+          rainy: regnerisch
+          snowy: verschneit
 
   # enum translations
   reply_status:

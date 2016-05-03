@@ -1,15 +1,28 @@
 = bootstrap_form_for report, layout: :horizontal, label_col: 'col-md-2',
-  control_col: 'col-md-10' do |f|
+  control_col: 'col-md-4' do |f|
 
   = f.alert_message 'Folgende Fehler sind aufgetreten:'
 
-  .form-group
-    = label_tag 'Event', nil, class: 'col-md-2 control-label'
-    .col-md-4
-      %p.form-control-static
-        = report.event.name
-        = surround '(', ')' do
-          = l(report.event.datetime, format: :date_only)
+  = f.fields_for report.event do |e|
+    .form-group
+      = e.label report.event.model_name.human, nil, class: 'col-md-2 control-label'
+      .col-md-4
+        %p.form-control-static
+          = report.event_name
+
+    .form-group
+      = e.label :datetime, nil, class: 'col-md-2 control-label'
+      .col-md-4
+        %p.form-control-static
+          = l(report.event_datetime)
+
+    .form-group
+      = e.label :address, nil, class: 'col-md-2 control-label'
+      .col-md-4
+        %p.form-control-static
+          = report.event_address
+
+  %hr
 
   .form-group
     = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
@@ -21,8 +34,49 @@
     .col-md-4
       = render 'form_half_time_score', f: f, report: report
 
+  .form-group
+    = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
+    .col-md-4
+      = render 'form_corners', f: f, report: report
 
-  = f.text_area :content, class: 'wysihtml5'
+  = f.number_field :possession, min: 0, max: 100, append: '%'
+
+  = f.select :incident, options_for_select(incident_options),
+    include_blank: true
+
+  %hr
+
+  = f.select :turf, options_for_select(turf_options), prompt: true
+
+  = f.select :weather, options_for_select(weather_options), prompt: true
+
+  = f.form_group do
+    = f.check_box :referee,
+      'data-toggle' => 'collapse',
+      'data-target' => '#refereeForm'
+
+  .collapse#refereeForm
+    = f.text_field :referee_name
+
+    = f.text_field :referee_description
+
+  %hr
+
+  = f.collection_select :goalkeeper_id, User.all, :id, :username, prompt: true
+
+  = f.collection_select :captain_id, User.all, :id, :username, prompt: true
+
+  = f.collection_select :most_valuable_player_id, User.all, :id, :username, prompt: true
+
+  = f.text_area :annotation
+
+  %hr
+
+  = f.text_area :content, class: 'wysihtml5', control_col: 'col-md-10'
+
+  = f.collection_select :reporter_id, User.all, :id, :username, prompt: true
+
+  %hr
 
   = f.form_group do
     = f.submit class: 'btn btn-primary'

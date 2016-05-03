@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
       flash[:notice] = 'Bericht wurde erfolgreich aktualisiert.'
     end
 
-    respond_with @report, location: reports_path
+    respond_with @report
   end
 
   private
@@ -54,8 +54,24 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:event_id, :content, :club_final_score,
-                                   :rival_final_score, :club_half_time_score,
-                                   :rival_half_time_score)
+    params.require(:report).permit(:annotation,
+                                   :captain_id,
+                                   :club_final_score,
+                                   :club_half_time_score,
+                                   :content,
+                                   :corners_club,
+                                   :corners_rival,
+                                   :goalkeeper_id,
+                                   :incident,
+                                   :most_valuable_player_id,
+                                   :possession,
+                                   :referee,
+                                   :referee_description,
+                                   :referee_name,
+                                   :reporter_id,
+                                   :rival_final_score,
+                                   :rival_half_time_score,
+                                   :turf,
+                                   :weather)
   end
 end
