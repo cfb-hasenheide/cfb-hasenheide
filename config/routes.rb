@@ -7,22 +7,25 @@ Rails.application.routes.draw do
 
   root 'pages#welcome'
 
-  resources :events, concerns: :paginatable do
-    get :open_replies_mail, on: :member
-    get :close_replies_mail, on: :member
-    post :open, on: :member
-    post :open_with_mail, on: :member
+  resources :attendances, only: :update
+
+  resources :attendance_lists, concerns: :paginatable do
+    get :close_mail, on: :member
+    get :open_mail, on: :member
     post :close, on: :member
     post :close_with_mail, on: :member
+    post :open, on: :member
+    post :open_with_mail, on: :member
 
-    resource :attendance_list, only: :show
-
-    resource :report, only: :show
-
-    resources :replies, only: [:index] do
+    resources :attendances, only: [] do
       get :edit_multiple, on: :collection
       put :update_multiple, on: :collection
     end
+  end
+
+  resources :events, concerns: :paginatable do
+    resource :attendance_list, only: :show
+    resource :report, only: :show
   end
 
   resources :league_matches,
@@ -45,8 +48,6 @@ Rails.application.routes.draw do
   resources :players, concerns: :paginatable, except: :destroy do
     get :for_user, on: :new
   end
-
-  resources :replies, only: [:create, :update]
 
   resources :reports, concerns: :paginatable, except: :destroy do
     get :no_content, on: :collection

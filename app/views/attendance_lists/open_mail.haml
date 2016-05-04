@@ -1,12 +1,17 @@
+= content_for :title, 'Neuer Termin Mail'
+
 .page-header
   %h1
-    Neuer Termin Mail
-    %small
-      = @event.name
-      = surround '(', ')' do
-        = @event.model_name.human
+    = content_for :title
 
-= bootstrap_form_tag url: open_with_mail_event_path(@event) do |f|
+    %small
+      = @attendance_list.attendable.name
+      = surround '(', ')' do
+        = @attendance_list.attendable.model_name.human
+
+= bootstrap_form_tag url: open_attendance_list_path(@attendance_list) do |f|
+
+  = f.hidden_field :mail, value: true
 
   .row
     .col-md-4
@@ -14,11 +19,11 @@
         .panel-heading
           %h2.panel-title
             Empfänger
-            %small.recipientsCount= @possible_users.count
+            %small.recipientsCount= @eligible_players.count
 
         .panel-body
           %p
-            = @possible_users.pluck(:alias).join(', ')
+            = @eligible_players.pluck(:nickname).join(', ')
 
           %p
             = button_tag type: 'button',
@@ -28,11 +33,11 @@
               bearbeiten
 
         .panel-footer.collapse#selectRecipients
-          = f.collection_check_boxes 'user_ids[]',
+          = f.collection_check_boxes 'player_ids[]',
             @all_players,
             :id,
-            :email_with_name,
-            checked: @possible_users.pluck(:id),
+            :club_email_with_nickname,
+            checked: @eligible_players.pluck(:id),
             hide_label: true
 
           %p
@@ -48,7 +53,8 @@
           %h2.panel-title Vorschau
 
         .panel-body
-          = render 'event_mailer/open_replies', event: @event, message: nil
+          = render 'event_mailer/attendance_list_opened',
+            event: @attendance_list.attendable, message: nil
 
         .panel-footer
           = f.text_area :message, label: 'Nachricht hinzufügen?'
@@ -57,4 +63,4 @@
             = mail_icon
             Meldeliste öffnen und Mail versenden
 
-          = link_to 'Abbrechen', event_path(@event), class: 'default-button'
+          = link_to 'Abbrechen', :back, class: 'default-button'

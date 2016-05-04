@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   belongs_to :user
+  has_many :attendances, dependent: :destroy
 
   validates :nickname, :user_id, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true

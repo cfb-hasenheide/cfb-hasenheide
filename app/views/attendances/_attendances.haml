@@ -1,0 +1,19 @@
+%ul.list-group
+  - %i(yes waiting maybee no watch pending).each do |status|
+    - if status == :waiting
+      - status_attendances = attendances.send(status).order(:updated_at)
+    - else
+      - status_attendances = attendances.send(status).order('players.nickname')
+
+    - if status_attendances.present?
+      = link_to "##{status}", class: 'list-group-item', role: 'button',
+        'data-toggle' => 'collapse', 'aria-expanded' => 'false',
+        'aria-controls' => status do
+
+        %span.badge= status_attendances.count
+        %h4.list-group-item-heading
+          = t(status, scope: %w(activerecord enums attendance status))
+
+        .collapse.list-group-item-text{id: status, class: ('in' if status == :yes)}
+          %ul.list-unstyled
+            = render status_attendances || 'Keine Meldungen vorhanden'

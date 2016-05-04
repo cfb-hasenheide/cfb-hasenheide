@@ -1,0 +1,8 @@
+%li
+  - if attendance.waiting?
+    W#{attendance_counter + 1}
+
+  = attendance.player_nickname
+
+  - unless attendance.pending?
+    %small.text-muted.pull-right= l(attendance.updated_at, format: :short)

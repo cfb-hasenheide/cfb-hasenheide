@@ -11,6 +11,8 @@
 
 = render 'admin_bar', attendance_list: @attendance_list
 
+= render 'progress_bar', attendance_list: @attendance_list
+
 .halfs
   .half
     .panel.panel-default
@@ -18,14 +20,20 @@
         %h2.panel-title Meldung abgeben
 
       .panel-body
+        - if @attendance_list.open?
+          = bootstrap_form_for @current_user_attendance do |f|
+            = f.select :status,
+              status_options,
+              {},
+              { onchange: 'this.form.submit();' }
+
+        - else
+          %strong.text-muted Die Meldeliste ist geschlossen!
 
   .half
     .panel.panel-default
       .panel-heading
         %h2.panel-title Meldungen
 
-      .panel-body
-
-= @attendance_list.open?
-= @attendance_list.minimum
-= @attendance_list.maximum
+      = render 'attendances/attendances',
+        attendances: @attendance_list.attendances.includes(:player)

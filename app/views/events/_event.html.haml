@@ -20,10 +20,10 @@
       .label.label-default= event.model_name.human
 
       .pull-right
-        - if !event.past? && event.replyable?
+        - if !event.past? && event.attendance_list_open?
           %span.label.label-primary
-            - status = Reply.for_event_and_user(event, current_user).status
-            = t("reply_status.#{status}")
+            - status = event.attendances.find_by(player_id: current_user.player.id).status
+            = t(status, scope: %w(activerecord enums attendance status))
 
         - elsif event.past? && event.report.present?
           %span.label{class: event_label_css_class(event)}

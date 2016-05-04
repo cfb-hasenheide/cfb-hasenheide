@@ -1,0 +1,33 @@
+= content_for :title, 'Meldeliste bearbeiten'
+
+.page-header
+  %h1
+    = content_for :title
+
+    %small
+      = @attendance_list.attendable.name
+
+= bootstrap_form_tag url: update_multiple_attendance_list_attendances_path(@attendance_list),
+  method: :put,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-4' do |f|
+
+  - @attendances.each do |attendance|
+    = f.fields_for 'attendances[]',
+      attendance,
+      layout: :horizontal,
+      label_col: 'col-sm-2',
+      control_col: 'col-sm-4' do |r|
+
+      = r.collection_select :status,
+        status_options,
+        :last,
+        :first,
+        label: attendance.player_nickname
+
+  = f.form_group do
+    = f.submit 'Speichern', class: 'primary-button pull-left'
+    = link_to 'Abbrechen',
+      attendance_list_path(@attendance_list, event_id: @attendance_list.attendable_id),
+      class: 'default-button pull-right'

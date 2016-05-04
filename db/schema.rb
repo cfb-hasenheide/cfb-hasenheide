@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504114327) do
+ActiveRecord::Schema.define(version: 20160504161719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20160504114327) do
   end
 
   add_index "attendance_lists", ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
+
+  create_table "attendances", force: :cascade do |t|
+    t.integer  "attendance_list_id"
+    t.integer  "player_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendances", ["attendance_list_id", "player_id"], name: "index_attendances_on_attendance_list_id_and_player_id", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
@@ -106,18 +116,6 @@ ActiveRecord::Schema.define(version: 20160504114327) do
 
   add_index "players", ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
-
-  create_table "replies", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "status",     default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "replies", ["event_id", "user_id"], name: "index_replies_on_event_id_and_user_id", unique: true, using: :btree
-  add_index "replies", ["event_id"], name: "index_replies_on_event_id", using: :btree
-  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.integer  "event_id"

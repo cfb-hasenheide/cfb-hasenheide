@@ -1,12 +1,17 @@
+= content_for :title, 'Final Call Mail'
+
 .page-header
   %h1
-    Final Call Mail
-    %small
-      = @event.name
-      = surround '(', ')' do
-        = @event.model_name.human
+    = content_for :title
 
-= bootstrap_form_tag url: close_with_mail_event_path(@event) do |f|
+    %small
+      = @attendance_list.attendable.name
+      = surround '(', ')' do
+        = @attendance_list.attendable.model_name.human
+
+= bootstrap_form_tag url: close_attendance_list_path(@attendance_list) do |f|
+
+  = f.hidden_field :mail, value: true
 
   .row
     .col-md-4
@@ -28,7 +33,7 @@
               bearbeiten
 
         .panel-footer.collapse#selectRecipients
-          = f.collection_check_boxes 'user_ids[]',
+          = f.collection_check_boxes 'player_ids[]',
             @all_players,
             :id,
             :club_email_with_nickname,
@@ -48,7 +53,8 @@
           %h2.panel-title Vorschau
 
         .panel-body
-          = render 'event_mailer/close_replies', event: @event, message: nil
+          = render 'event_mailer/attendance_list_closed',
+            event: @attendance_list.attendable, message: nil
 
         .panel-footer
           = f.text_area :message, label: 'Nachricht hinzufügen?'
@@ -57,4 +63,4 @@
             = mail_icon
             Final Call Mail versenden
 
-          = link_to 'Abbrechen', event_path(@event), class: 'default-button'
+          = link_to 'Abbrechen', :back, class: 'default-button'

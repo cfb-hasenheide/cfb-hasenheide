@@ -3,8 +3,6 @@ FactoryGirl.define do
     address 'Kreuzberg, Berlin'
     datetime Time.zone.now
     home true
-    maximum 11
-    minimum 7
     name 'Eventname'
     type 'Other'
 
