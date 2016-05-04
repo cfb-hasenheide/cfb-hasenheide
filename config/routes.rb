@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     post :close, on: :member
     post :close_with_mail, on: :member
 
+    resource :attendees_list, only: :show
+
     resources :replies, only: [:index] do
       get :edit_multiple, on: :collection
       put :update_multiple, on: :collection
