@@ -124,4 +124,8 @@ module IconsHelper
   def list_icon
     content_tag(:span, nil, class: 'fa fa-list fa-fw')
   end
+
+  def comment_icon
+    content_tag(:span, nil, class: 'fa fa-comment fa-fw')
+  end
 end
