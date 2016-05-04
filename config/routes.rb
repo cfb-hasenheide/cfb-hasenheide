@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     resource :attendees_list, only: :show
 
+    resource :report, only: :show
+
     resources :replies, only: [:index] do
       get :edit_multiple, on: :collection
       put :update_multiple, on: :collection

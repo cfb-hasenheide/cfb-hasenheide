@@ -21,8 +21,12 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = Report.find(params[:id])
-    @event = Event.find(@report.event_id)
+    @event = Event.friendly.find(params[:event_id])
+    @report = @event.report
+
+    if @report.nil?
+      redirect_to :back, alert: 'Spielbericht nicht vorhanden!' and return
+    end
   end
 
   def new
