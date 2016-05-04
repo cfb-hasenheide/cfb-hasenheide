@@ -32,7 +32,8 @@ class EventsController < ApplicationController
 
   def new
     type = params[:type]
-    @event = Event.new type: type
+    @event = Event.new(type: type)
+    @event.build_attendees_list
   end
 
   def edit
@@ -40,8 +41,12 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.save
-    respond_with(@event, location: event_path(@event))
+
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render :new
+    end
   end
 
   def update
@@ -120,8 +125,16 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:address, :club_team_id, :rival_team_id,
-                                  :datetime, :description, :home, :maximum,
-                                  :minimum, :name, :type)
+    params.require(:event).permit(
+      :address,
+      :club_team_id,
+      :rival_team_id,
+      :datetime,
+      :description,
+      :home,
+      :name,
+      :type,
+      attendees_list_attributes: [:minimum, :maximum]
+    )
   end
 end

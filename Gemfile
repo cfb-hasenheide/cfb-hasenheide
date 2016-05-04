@@ -37,6 +37,8 @@ gem 'bootstrap-sass'
 gem 'bootstrap-wysihtml5-rails'
 gem 'simple_form'
 gem 'bootstrap_form'
+# NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
+gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
 

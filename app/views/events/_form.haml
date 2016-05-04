@@ -8,15 +8,19 @@
 
       = f.hidden_field :type
 
-      = f.hidden_field :home, value: true
-
-      = f.text_field :name
-
       = f.collection_select :club_team_id,
         Team.club,
         :id,
         :name,
         prompt: true
+
+      = f.select :rival_team_id,
+        grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
+        prompt: true
+
+      = f.form_group :home do
+        = f.radio_button :home, true, label: 'Heimspiel', inline: true
+        = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
 
       = f.fields_for :attendees_list
 
