@@ -1,0 +1,38 @@
+.well.well-sm
+  - if attendance_list.open?
+    .btn-group{role: 'group'}
+      %button.btn.btn-default.dropdown-toggle{type: 'button',
+        'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
+        'aria-expanded' => 'false'}
+        Meldeliste schließen
+        %span.caret
+
+      %ul.dropdown-menu
+        %li
+          = link_to close_attendance_list_path(attendance_list), method: :post do
+            ohne E-Mail
+        -# %li
+        -#   = link_to close_attendance_list_mail_event_path(event) do
+        -#     = mail_icon
+        -#     Final Call
+
+  - else
+    .btn-group{role: 'group'}
+      %button.btn.btn-default.dropdown-toggle{type: 'button',
+        'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
+        'aria-expanded' => 'false'}
+        Meldeliste öffnen
+        %span.caret
+
+      %ul.dropdown-menu
+        %li
+          = link_to open_attendance_list_path(attendance_list), method: :post do
+            ohne E-Mail
+        -# %li
+        -#   = link_to open_attendance_list_mail_event_path(event) do
+        -#     = mail_icon
+        -#     mit E-Mail
+
+  -# = link_to edit_multiple_attendance_path(event), class: 'default-button' do
+  -#   = edit_icon
+  -#   Meldeliste bearbeiten

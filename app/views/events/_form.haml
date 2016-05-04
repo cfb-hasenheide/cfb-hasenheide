@@ -22,7 +22,7 @@
         = f.radio_button :home, true, label: 'Heimspiel', inline: true
         = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
 
-      = f.fields_for :attendees_list
+      = f.fields_for :attendance_list
 
       = f.datetime_select :datetime
 

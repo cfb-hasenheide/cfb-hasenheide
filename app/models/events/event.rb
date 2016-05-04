@@ -4,12 +4,12 @@ class Event < ActiveRecord::Base
 
   paginates_per 12
 
-  has_one :attendees_list, as: :attendable, dependent: :destroy
+  has_one :attendance_list, as: :attendable, dependent: :destroy
   has_one :report, dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
 
-  accepts_nested_attributes_for :attendees_list
+  accepts_nested_attributes_for :attendance_list
 
   validates :address,
             :datetime,

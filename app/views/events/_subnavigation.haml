@@ -5,9 +5,9 @@
     = link_to @event.name, event_path(@event)
 
   %li{role: 'presentation',
-      class: ('active' if params[:controller] == 'attendees_lists')}
+      class: ('active' if params[:controller] == 'attendance_lists')}
 
-    = link_to 'Meldeliste', event_attendees_list_path(@event)
+    = link_to 'Meldeliste', event_attendance_list_path(@event)
 
   %li{role: 'presentation',
       class: ('active' if params[:controller] == 'reports')}

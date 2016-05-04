@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     post :close, on: :member
     post :close_with_mail, on: :member
 
-    resource :attendees_list, only: :show
+    resource :attendance_list, only: :show
 
     resource :report, only: :show
 

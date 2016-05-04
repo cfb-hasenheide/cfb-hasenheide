@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504093847) do
+ActiveRecord::Schema.define(version: 20160504114327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attendees_lists", force: :cascade do |t|
+  create_table "attendance_lists", force: :cascade do |t|
     t.integer "attendable_id"
     t.string  "attendable_type"
     t.boolean "open",            default: false, null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160504093847) do
     t.integer "maximum",         default: 11,    null: false
   end
 
-  add_index "attendees_lists", ["attendable_type", "attendable_id"], name: "index_attendees_lists_on_attendable_type_and_attendable_id", using: :btree
+  add_index "attendance_lists", ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
