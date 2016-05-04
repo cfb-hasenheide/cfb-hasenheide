@@ -36,8 +36,4 @@ class User < ActiveRecord::Base
 
     super password
   end
-
-  def email_with_name
-    %("#{user_profile.alias}" <#{username}@cfb-hasenheide.de>)
-  end
 end
