@@ -10,7 +10,6 @@ class Player < ActiveRecord::Base
 
   paginates_per 12
 
-  scope :active, -> { where(member_until: nil) }
   scope :player_pass, -> (needed) { where(player_pass: true) if needed }
 
   def club_email_with_nickname
