@@ -46,7 +46,7 @@
             %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
               role: 'button', 'aria-expanded' => 'false' }
               = current_user.admin? ? admin_icon : user_icon
-              #{current_user.user_profile.alias}
+              #{current_user.player.nickname}
               %span.caret
             %ul.dropdown-menu{role: 'menu'}
               - if current_user.admin?
@@ -58,7 +58,7 @@
                 %li.divider
               %li.dropdown-header User Einstellungen
               %li= link_to 'Account bearbeiten', edit_user_registration_path
-              %li= link_to 'Profil bearbeiten', edit_user_profile_path(current_user.user_profile)
+              %li= link_to 'Spieler bearbeiten', edit_player_path(current_user.player)
               %li.divider
               %li
                 = link_to destroy_user_session_path, method: :delete do
