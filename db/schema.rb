@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503121251) do
+ActiveRecord::Schema.define(version: 20160504093847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendees_lists", force: :cascade do |t|
+    t.integer "attendable_id"
+    t.string  "attendable_type"
+    t.boolean "open",            default: false, null: false
+    t.integer "minimum",         default: 7,     null: false
+    t.integer "maximum",         default: 11,    null: false
+  end
+
+  add_index "attendees_lists", ["attendable_type", "attendable_id"], name: "index_attendees_lists_on_attendable_type_and_attendable_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
@@ -29,17 +39,14 @@ ActiveRecord::Schema.define(version: 20160503121251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description",   limit: 255
-    t.string   "address",       limit: 255,                 null: false
-    t.integer  "minimum",                                   null: false
-    t.integer  "maximum",                                   null: false
-    t.string   "name",                                      null: false
+    t.string   "address",       limit: 255, null: false
+    t.string   "name",                      null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                                      null: false
-    t.datetime "datetime",                                  null: false
-    t.boolean  "replyable",                 default: false, null: false
-    t.string   "type",                                      null: false
-    t.string   "slug",                                      null: false
+    t.boolean  "home",                      null: false
+    t.datetime "datetime",                  null: false
+    t.string   "type",                      null: false
+    t.string   "slug",                      null: false
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -187,8 +194,8 @@ ActiveRecord::Schema.define(version: 20160503121251) do
     t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                              default: false, null: false
-    t.boolean  "player",                             default: false, null: false
     t.boolean  "player_pass",                        default: false, null: false
+    t.boolean  "player",                             default: false, null: false
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
@@ -196,7 +203,6 @@ ActiveRecord::Schema.define(version: 20160503121251) do
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["player", "player_pass"], name: "index_users_on_player_and_player_pass", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "users"
