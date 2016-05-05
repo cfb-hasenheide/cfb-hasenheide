@@ -29,6 +29,7 @@ class Event < ActiveRecord::Base
   delegate :name, to: :rival_team, prefix: true
   delegate :open?, to: :attendance_list, prefix: true, allow_nil: true
   delegate :player_pass_needed?, to: :club_team
+  delegate :final_score, :lost?, :won?, to: :report, allow_nil: true
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
@@ -58,21 +59,6 @@ class Event < ActiveRecord::Base
     '&size=400x400' \
     '&sensor=false' \
     '&scale=2'
-  end
-
-  def won?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score > report.rival_final_score
-  end
-
-  def lost?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score < report.rival_final_score
-  end
-
-  def drawed?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score == report.rival_final_score
   end
 
   def eligible_players
