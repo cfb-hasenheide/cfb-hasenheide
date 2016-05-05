@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
             presence: true
 
   scope :future, lambda { |limit = nil|
-    where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
+    where('datetime >= ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
