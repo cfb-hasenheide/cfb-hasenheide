@@ -15,4 +15,91 @@
       = edit_icon
       Spieler bearbeiten
 
-= @player.nickname
+.halfs
+  .half
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Person
+
+      .panel-body
+        %dl.dl-horizontal
+          %dt= Player.human_attribute_name(:nickname)
+          %dd= @player.nickname
+
+          %dt= Player.human_attribute_name(:first_name)
+          %dd= @player.first_name
+
+          %dt= Player.human_attribute_name(:last_name)
+          %dd= @player.last_name
+
+          %dt= Player.human_attribute_name(:date_of_birth)
+          %dd= l(@player.date_of_birth) if @player.date_of_birth?
+
+          %dt= Player.human_attribute_name(:place_of_birth)
+          %dd= @player.place_of_birth
+
+  .half
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Spieler
+
+      .panel-body
+        %dl.dl-horizontal
+          %dt= Player.human_attribute_name(:player_pass)
+          %dd= @player.player_pass? ? 'Ja' : 'Nein'
+
+          - if @player.player_pass?
+            %dt= Player.human_attribute_name(:player_pass_number)
+            %dd= @player.player_pass_number
+
+            %dt= Player.human_attribute_name(:eligible_to_play_since)
+            %dd
+              = l(@player.eligible_to_play_since) if @player.eligible_to_play_since?
+
+          %dt= Player.human_attribute_name(:jersey_name)
+          %dd= @player.jersey_name
+
+          %dt= Player.human_attribute_name(:jersey_number)
+          %dd= @player.jersey_number
+
+.halfs
+  .half
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Kontakt
+
+      .panel-body
+        %dl.dl-horizontal
+          %dt= Player.human_attribute_name(:street)
+          %dd= @player.street
+
+          %dt= Player.human_attribute_name(:zipcode)
+          %dd= @player.zipcode
+
+          %dt= Player.human_attribute_name(:city)
+          %dd= @player.city
+
+          %dt= Player.human_attribute_name(:phone1)
+          %dd= @player.phone1
+
+          %dt= Player.human_attribute_name(:phone2)
+          %dd= @player.phone2
+
+          %dt= Player.human_attribute_name(:club_email)
+          %dd= @player.club_email
+
+  .half
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Mitglied
+
+      .panel-body
+        %dl.dl-horizontal
+          %dt= Player.human_attribute_name(:membership_number)
+          %dd= @player.membership_number
+
+          %dt= Player.human_attribute_name(:member_since)
+          %dd= l(@player.member_since) if @player.member_since?
+
+          %dt= Player.human_attribute_name(:member_until)
+          %dd= l(@player.member_until) if @player.member_until?

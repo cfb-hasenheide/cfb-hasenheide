@@ -88,6 +88,11 @@ de:
           waiting: 'W - Warteliste'
           watch: 'Z - Zuschauer'
           'yes': 'M - Meldung'
+      player:
+        status:
+          active: aktiv
+          inactive: inaktiv
+          injured: verletzt
       report:
         incident:
           armchair_decision: Wertung am grünen Tisch

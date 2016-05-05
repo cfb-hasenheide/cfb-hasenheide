@@ -2,7 +2,8 @@ class PlayersController < ApplicationController
   before_action :set_player, only: %i(edit show update)
 
   def index
-    @players = Player.order(:status, :nickname).page(params[:page])
+    @players = Player.order(status: :asc, player_pass: :desc, nickname: :asc)
+                     .page(params[:page])
   end
 
   def show
