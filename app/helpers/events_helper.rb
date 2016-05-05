@@ -7,10 +7,4 @@ module EventsHelper
 
     'label-primary'
   end
-
-  def event_list_group_item_css_class(event)
-    return 'list-group-item disabled' if event.future? && !event.attendance_list_open?
-
-    'list-group-item'
-  end
 end
