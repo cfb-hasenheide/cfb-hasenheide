@@ -20,9 +20,10 @@
 
             %dt Endstand
             %dd
-              %strong= report.final_score
-              = surround '(', ')' do
-                = t(report.result, scope: %w(activerecord enums report result))
+              = report.final_score
+              - if report.result.present?
+                = surround '(', ')' do
+                  = t(report.result, scope: %w(activerecord enums report result))
 
             %dt Halbzeitstand
             %dd= report.half_time_score
