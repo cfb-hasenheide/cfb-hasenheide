@@ -2,7 +2,9 @@
   - if events.present?
     - events.each do |event|
       - if user_signed_in?
-        = link_to event_path(event), class: 'list-group-item' do
+        = link_to event_or_attendance_list_or_report_path(event),
+          class: 'list-group-item' do
+
           %h5.list-group-item-heading
             = event.name
             %small.pull-right= event.model_name.human

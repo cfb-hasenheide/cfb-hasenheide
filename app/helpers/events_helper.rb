@@ -7,4 +7,14 @@ module EventsHelper
 
     'label-primary'
   end
+
+  def event_or_attendance_list_or_report_path(event)
+    if event.future? && event.attendance_list_open?
+      event_attendance_list_path(event)
+    elsif event.past? && event.report.present?
+      event_report_path(event)
+    else
+      event_path(event)
+    end
+  end
 end
