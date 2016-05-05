@@ -23,6 +23,10 @@ class ReportsController < ApplicationController
   def show
     @event = Event.friendly.find(params[:event_id])
     @report = @event.report
+    @attending_players =
+      Player.where(id: @event.attendances.yes.pluck(:player_id)).order(:nickname)
+    @watching_players =
+      Player.where(id: @event.attendances.watch.pluck(:player_id)).order(:nickname)
 
     if @report.nil? && current_user.admin?
       redirect_to new_report_path(event_id: @event.id)

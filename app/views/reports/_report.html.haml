@@ -38,12 +38,12 @@
           %dl.dl-horizontal
             %dt= t(:turf, scope: %w(activerecord attributes report))
             %dd
-              - if report.turf?
+              - if report.turf.present?
                 = t(report.turf, scope: %w(activerecord enums report turf))
 
             %dt= t(:weather, scope: %w(activerecord attributes report))
             %dd
-              - if report.weather?
+              - if report.weather.present?
                 = t(report.weather, scope: %w(activerecord enums report weather))
 
             %dt= t(:referee, scope: %w(activerecord attributes report))
@@ -59,13 +59,13 @@
         %li.list-group-item
           %dl.dl-horizontal
             %dt= t(:goalkeeper_id, scope: %w(activerecord attributes report))
-            %dd= report.goalkeeper_id
+            %dd= Player.find(report.goalkeeper_id).nickname if report.goalkeeper_id?
 
             %dt= t(:captain_id, scope: %w(activerecord attributes report))
-            %dd= report.captain_id
+            %dd= Player.find(report.captain_id).nickname if report.captain_id?
 
             %dt= t(:most_valuable_player_id, scope: %w(activerecord attributes report))
-            %dd= report.most_valuable_player_id
+            %dd= Player.find(report.most_valuable_player_id).nickname if report.most_valuable_player_id?
 
             %dt= t(:annotation, scope: %w(activerecord attributes report))
             %dd= report.annotation
@@ -76,8 +76,18 @@
         %h2.panel-title Bericht
 
       .panel-body
-        %dl.dl-horizontal
-          %dt= t(:reporter_id, scope: %w(activerecord attributes report))
-          %dd= report.reporter_id.presence || 'Noch kein Bericht vorhanden'
+        = report.content.html_safe || 'Noch kein Bericht vorhanden'
 
-        = report.content
+        %hr
+
+        %dl.dl-horizontal
+          %dt Spieler
+          %dd= attending_players.pluck(:nickname).join(', ')
+
+          %dt Zuschauer
+          %dd= watching_players.pluck(:nickname).join(', ')
+
+          %br
+
+          %dt= t(:reporter_id, scope: %w(activerecord attributes report))
+          %dd= Player.find(report.reporter_id).nickname if report.reporter_id?
