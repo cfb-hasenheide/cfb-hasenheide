@@ -22,7 +22,11 @@ module EventsHelper
 
     css_class += ' pull-right' if pull_right
 
-    content_tag(:span, event.final_score, class: css_class)
+    content = ''
+    content += "#{report_icon} " if event.report.content?
+    content += event.final_score
+
+    content_tag(:span, content.html_safe, class: css_class)
   end
 
   def event_or_attendance_list_or_report_path(event)
