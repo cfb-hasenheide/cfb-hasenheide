@@ -1,26 +1,26 @@
 = bootstrap_form_for report,
   layout: :horizontal,
   label_col: 'col-md-2',
-  control_col: 'col-md-4' do |f|
+  control_col: 'col-md-5' do |f|
 
   = f.hidden_field :event_id
 
   = f.fields_for report.event do |e|
     .form-group
       = e.label report.event.model_name.human, nil, class: 'col-md-2 control-label'
-      .col-md-4
+      .col-md-5
         %p.form-control-static
           = report.event_name
 
     .form-group
       = e.label :datetime, nil, class: 'col-md-2 control-label'
-      .col-md-4
+      .col-md-5
         %p.form-control-static
           = l(report.event_datetime)
 
     .form-group
       = e.label :address, nil, class: 'col-md-2 control-label'
-      .col-md-4
+      .col-md-5
         %p.form-control-static
           = report.event_address
 
@@ -28,17 +28,17 @@
 
   .form-group
     = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
-    .col-md-4
+    .col-md-5
       = render 'form_final_score', f: f, report: report
 
   .form-group
     = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
-    .col-md-4
+    .col-md-5
       = render 'form_half_time_score', f: f, report: report
 
   .form-group
     = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
-    .col-md-4
+    .col-md-5
       = render 'form_corners', f: f, report: report
 
   = f.number_field :possession, min: 0, max: 100, append: '%'
