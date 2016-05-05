@@ -1,4 +1,6 @@
 class Player < ActiveRecord::Base
+  include FriendlyId
+
   belongs_to :user
   has_many :attendances, dependent: :destroy
 
@@ -7,6 +9,8 @@ class Player < ActiveRecord::Base
   validates :user_id, uniqueness: true
 
   enum status: { active: 0, injured: 1, inactive: 2 }
+
+  friendly_id :nickname, use: :slugged
 
   paginates_per 12
 
