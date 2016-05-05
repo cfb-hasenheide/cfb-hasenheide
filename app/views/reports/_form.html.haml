@@ -1,7 +1,9 @@
-= bootstrap_form_for report, layout: :horizontal, label_col: 'col-md-2',
+= bootstrap_form_for report,
+  layout: :horizontal,
+  label_col: 'col-md-2',
   control_col: 'col-md-4' do |f|
 
-  = f.alert_message 'Folgende Fehler sind aufgetreten:'
+  = f.hidden_field :event_id
 
   = f.fields_for report.event do |e|
     .form-group

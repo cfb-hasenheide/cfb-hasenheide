@@ -37,9 +37,13 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    flash[:notice] = 'Bericht wurde erfolgreich erstellt.' if @report.save
 
-    respond_with @report, location: reports_path
+    if @report.save
+      redirect_to event_report_path(@report.event_id),
+        notice: 'Bericht wurde erfolgreich erstellt.'
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -47,10 +51,11 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      flash[:notice] = 'Bericht wurde erfolgreich aktualisiert.'
+      redirect_to event_report_path(@report.event_id),
+        notice: 'Bericht wurde erfolgreich aktualisiert.'
+    else
+      render 'edit'
     end
-
-    respond_with @report
   end
 
   private
@@ -67,6 +72,7 @@ class ReportsController < ApplicationController
                                    :content,
                                    :corners_club,
                                    :corners_rival,
+                                   :event_id,
                                    :goalkeeper_id,
                                    :incident,
                                    :most_valuable_player_id,
