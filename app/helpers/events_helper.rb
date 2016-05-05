@@ -1,11 +1,28 @@
 module EventsHelper
-  def event_label_css_class(event)
-    return 'label-default' unless event.report.present? || event.attendance_list_open?
-    return 'label-success' if event.won?
-    return 'label-warning' if event.drawed?
-    return 'label-danger' if event.lost?
+  def event_attendance_label(event, pull_right: false)
+    return unless event.future? && event.attendance_list_open?
 
-    'label-primary'
+    attendance_status = event.attendances.find_by(player_id: current_user.player.id).status
+
+    content_tag(:span,
+                t(attendance_status, scope: %w(activerecord enums attendance status)),
+                class: "label label-primary #{('pull-right' if pull_right)}")
+  end
+
+  def event_final_score_label(event, pull_right: false)
+    return unless event.past? && event.report.present?
+
+    css_class = if event.won?
+                  'label label-success'
+                elsif event.lost?
+                  'label label-danger'
+                else # event.drew
+                  'label label-warning'
+                end
+
+    css_class += ' pull-right' if pull_right
+
+    content_tag(:span, event.final_score, class: css_class)
   end
 
   def event_or_attendance_list_or_report_path(event)
