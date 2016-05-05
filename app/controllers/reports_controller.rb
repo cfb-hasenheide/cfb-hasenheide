@@ -24,7 +24,9 @@ class ReportsController < ApplicationController
     @event = Event.friendly.find(params[:event_id])
     @report = @event.report
 
-    if @report.nil?
+    if @report.nil? && current_user.admin?
+      redirect_to new_report_path(event_id: @event.id)
+    elsif @report.nil?
       redirect_to :back, alert: 'Spielbericht nicht vorhanden!' and return
     end
   end
