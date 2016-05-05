@@ -43,6 +43,13 @@ module IconsHelper
     content_tag(:span, nil, class: 'fa fa-facebook fa-fw')
   end
 
+  def mail_to_link_icon
+    content_tag(:span, nil, class: 'fa-stack fa-lg') do
+      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
+        content_tag(:i, nil, class: 'fa fa-envelope fa-stack-1x fa-inverse')
+    end
+  end
+
   def facebook_link_icon
     content_tag(:span, nil, class: 'fa-stack fa-lg') do
       content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
