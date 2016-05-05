@@ -24,13 +24,6 @@ class Event < ActiveRecord::Base
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
 
-  delegate :future?, :past?, to: :datetime
-  delegate :name, to: :club_team, prefix: true
-  delegate :name, to: :rival_team, prefix: true
-  delegate :open?, to: :attendance_list, prefix: true, allow_nil: true
-  delegate :player_pass_needed?, to: :club_team
-  delegate :final_score, :lost?, :won?, to: :report, allow_nil: true
-
   def self.without_report
     ids = Report.all.pluck(:event_id)
     where.not(id: ids)
@@ -46,6 +39,13 @@ class Event < ActiveRecord::Base
       .where('datetime < ?', datetime)
       .order(datetime: :desc)
   end
+
+  delegate :future?, :past?, to: :datetime
+  delegate :name, to: :club_team, prefix: true
+  delegate :name, to: :rival_team, prefix: true
+  delegate :open?, to: :attendance_list, prefix: true, allow_nil: true
+  delegate :player_pass_needed?, to: :club_team
+  delegate :final_score, :lost?, :won?, to: :report, allow_nil: true
 
   def google_maps_url
     "http://maps.google.com/?q=#{address}"
