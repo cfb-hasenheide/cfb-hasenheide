@@ -48,6 +48,9 @@ gem 'jbuilder'
 # ical
 gem 'icalendar'
 
+# error tracking
+gem 'raygun4ruby'
+
 group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
