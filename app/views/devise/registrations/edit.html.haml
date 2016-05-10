@@ -5,43 +5,39 @@
       .panel-heading
         %h3.panel-title Account bearbeiten
 
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = bootstrap_form_for resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        method: :put do |f|
+
         .panel-body
-          = devise_error_messages!
+          = f.alert_message 'Es sind Fehler aufgetreten!', error_summary: false
 
-          .form-group
-            = f.label :username
-            = f.text_field :username, autofocus: true, class: 'form-control'
+          = f.text_field :username, autofocus: true, icon: :user
 
-          .form-group
-            = f.label :email
-            = f.email_field :email, class: 'form-control'
+          = f.email_field :email, icon: :envelope
 
           - if devise_mapping.confirmable? && resource.pending_reconfirmation?
             %div
               Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-          .form-group
-            = f.label :password
-            = f.password_field :password, autocomplete: 'off',
-              class: 'form-control', 'aria-describedby' => 'passwordHelp'
-            %span.help-block#passwordHelp
-              %i Leer lassen wenn es nicht geändert werden soll
+        .panel-body
+          = f.password_field :password,
+            icon: :sunglasses,
+            autocomplete: 'off',
+            help: 'Leer lassen wenn es nicht geändert werden soll'
 
-          .form-group
-            = f.label :password_confirmation
-            = f.password_field :password_confirmation, autocomplete: 'off',
-              class: 'form-control'
-
-          .form-group
-            = f.label :current_password
-            = f.password_field :current_password, autocomplete: 'off',
-              class: 'form-control', 'aria-describedby' => 'currentPasswordHelp'
-            %span.help-block#currentPasswordHelp
-              %i Zum Bestätigen der Änderungen
+          = f.password_field :password_confirmation,
+            icon: :sunglasses,
+            autocomplete: 'off'
 
         .panel-footer
-          = f.submit 'Speichern', class: 'btn btn-primary'
+          = f.password_field :current_password,
+            icon: :sunglasses,
+            autocomplete: 'off',
+            help: 'Zum Bestätigen der Änderungen'
+
+          = f.primary 'Speichern'
 
     .panel.panel-danger
       .panel-heading
