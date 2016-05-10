@@ -23,7 +23,7 @@
         - if @attendance_list.open?
           = bootstrap_form_for @current_user_attendance do |f|
             = f.select :status,
-              status_options,
+              attendance_status_options,
               {},
               { onchange: 'this.form.submit();' }
 
