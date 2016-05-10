@@ -48,6 +48,8 @@
 
   %hr
 
+  = f.select :status, player_status_options, prompt: true
+
   = f.form_group do
     = f.check_box :player_pass,
       'data-toggle' => 'collapse',

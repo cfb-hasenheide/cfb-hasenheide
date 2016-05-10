@@ -51,6 +51,7 @@ class PlayersController < ApplicationController
                                    :place_of_birth,
                                    :player_pass,
                                    :player_pass_number,
+                                   :status,
                                    :street,
                                    :user_id,
                                    :zipcode)

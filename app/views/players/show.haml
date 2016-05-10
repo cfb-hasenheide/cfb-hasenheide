@@ -45,6 +45,9 @@
 
       .panel-body
         %dl.dl-horizontal
+          %dt= Player.human_attribute_name(:status)
+          %dd= t(@player.status, scope: %w(activerecord enums player status))
+
           %dt= Player.human_attribute_name(:player_pass)
           %dd= @player.player_pass? ? 'Ja' : 'Nein'
 
