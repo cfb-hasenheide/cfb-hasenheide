@@ -1,12 +1,18 @@
 .panel.panel-primary
   .panel-body
     %h3
-      = news.title
       %small
         %strong.text-muted= 'Intern' if news.internal
         %span.pull-right= l(news.created_at, format: :date_only)
+      = news.title
 
-    = news.content.html_safe
+    = truncate(news.content,
+               length: 1_500,
+               separator: '<br><br>',
+               omission: "<br>",
+               escape: false) do
+
+      = link_to 'weiterlesen', news_path(news)
 
   - if admin?
     .panel-footer
