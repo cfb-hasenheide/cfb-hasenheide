@@ -2,7 +2,10 @@ module EventsHelper
   def event_attendance_label(event, pull_right: false)
     return unless event.future? && event.attendance_list_open?
 
-    attendance_status = event.attendances.find_by(player_id: current_user.player.id).status
+    attendance_status =
+      event.attendances.find_by(player_id: current_user.player.id).try(:status)
+
+    return unless attendance_status.present?
 
     content_tag(:span,
                 t(attendance_status, scope: %w(activerecord enums attendance status)),
