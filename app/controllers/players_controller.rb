@@ -2,7 +2,8 @@ class PlayersController < ApplicationController
   before_action :set_player, only: %i(edit show update)
 
   def index
-    @players = Player.order(:status, :nickname).page(params[:page])
+    @players = Player.order(status: :asc, player_pass: :desc, nickname: :asc)
+                     .page(params[:page])
   end
 
   def show
@@ -50,12 +51,13 @@ class PlayersController < ApplicationController
                                    :place_of_birth,
                                    :player_pass,
                                    :player_pass_number,
+                                   :status,
                                    :street,
                                    :user_id,
                                    :zipcode)
   end
 
   def set_player
-    @player = Player.find(params[:id])
+    @player = Player.friendly.find(params[:id])
   end
 end

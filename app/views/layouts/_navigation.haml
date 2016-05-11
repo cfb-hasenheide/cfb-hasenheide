@@ -11,34 +11,33 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.pull-left{href: root_path}
-        = image_tag 'logo_navbar.png', alt: 'CFB Hasenheide Logo',
+
+      = link_to root_path, class: 'pull-left' do
+        = image_tag 'logo_navbar.png',
+          alt: 'CFB Hasenheide Logo',
           class: 'logoNavbar'
-      %a.navbar-brand{href: root_path}
-        CFB Hasenheide
+
+      = link_to 'CFB Hasenheide', root_path, class: 'navbar-brand'
 
     #navigation.collapse.navbar-collapse
       = render 'layouts/chat_toggle', navbar_toggle: false
 
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'news')}
-          %a{href: news_index_path} News
+          = link_to 'News', news_index_path
 
         - if user_signed_in?
           %li{class: ('active' if params[:controller] == 'events')}
-            %a{href: events_path} Events
+            = link_to 'Events', events_path
 
           %li{class: ('active' if params[:controller] == 'reports')}
-            %a{href: reports_path} Spielberichte
+            = link_to 'Spielberichte', reports_path
 
           %li{class: ('active' if params[:controller] == 'players')}
-            %a{href: players_path} Spieler
-
-          %li{class: ('active' if params[:controller] == 'forum_threads')}
-            %a{href: forum_threads_path} Forum
+            = link_to 'Spieler', players_path
 
         %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
-          %a{href: '/contact'} Kontakt
+          = link_to 'Kontakt', '/contact'
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
@@ -46,19 +45,25 @@
             %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
               role: 'button', 'aria-expanded' => 'false' }
               = current_user.admin? ? admin_icon : user_icon
-              #{current_user.user_profile.alias}
+              = current_user.player.nickname
               %span.caret
             %ul.dropdown-menu{role: 'menu'}
               - if current_user.admin?
-                %li.dropdown-header Admin Einstellungen
+                %li.dropdown-header
+                  Admin Einstellungen
                 %li
-                  %a{href: users_path} User verwalten
+                  = link_to 'User verwalten', users_path
                 %li
-                  %a{href: teams_path} Teams verwalten
+                  = link_to 'Teams verwalten', teams_path
                 %li.divider
-              %li.dropdown-header User Einstellungen
-              %li= link_to 'Account bearbeiten', edit_user_registration_path
-              %li= link_to 'Profil bearbeiten', edit_user_profile_path(current_user.user_profile)
+
+              %li.dropdown-header
+                User Einstellungen
+              %li
+                = link_to 'Account bearbeiten', edit_user_registration_path
+              %li
+                = link_to 'Spieler bearbeiten',
+                  edit_player_path(current_user.player)
               %li.divider
               %li
                 = link_to destroy_user_session_path, method: :delete do

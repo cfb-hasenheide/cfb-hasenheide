@@ -1,0 +1,35 @@
+.halfs
+  .half
+    = bootstrap_nested_form_for event,
+      as: :event,
+      layout: :horizontal,
+      label_col: 'col-sm-4',
+      control_col: 'col-sm-8' do |f|
+
+      = f.hidden_field :type
+
+      = f.collection_select :club_team_id,
+        Team.club,
+        :id,
+        :name,
+        prompt: true
+
+      = f.select :rival_team_id,
+        grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
+        prompt: true
+
+      = f.form_group :home do
+        = f.radio_button :home, true, label: 'Heimspiel', inline: true
+        = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
+
+      = f.fields_for :attendance_list
+
+      = f.datetime_select :datetime
+
+      = f.text_field :address, icon: 'map-marker'
+
+      = f.text_area :description, icon: 'comment'
+
+      = f.form_group do
+        = f.submit class: 'primary-button'
+        = link_to 'Abbrechen', events_path, class: 'default-button'

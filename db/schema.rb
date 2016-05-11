@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503121251) do
+ActiveRecord::Schema.define(version: 20160505063717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendance_lists", force: :cascade do |t|
+    t.integer "attendable_id"
+    t.string  "attendable_type"
+    t.boolean "open",            default: false, null: false
+    t.integer "minimum",         default: 7,     null: false
+    t.integer "maximum",         default: 11,    null: false
+  end
+
+  add_index "attendance_lists", ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
+
+  create_table "attendances", force: :cascade do |t|
+    t.integer  "attendance_list_id"
+    t.integer  "player_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendances", ["attendance_list_id", "player_id"], name: "index_attendances_on_attendance_list_id_and_player_id", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
@@ -29,17 +49,14 @@ ActiveRecord::Schema.define(version: 20160503121251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description",   limit: 255
-    t.string   "address",       limit: 255,                 null: false
-    t.integer  "minimum",                                   null: false
-    t.integer  "maximum",                                   null: false
-    t.string   "name",                                      null: false
+    t.string   "address",       limit: 255, null: false
+    t.string   "name",                      null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                                      null: false
-    t.datetime "datetime",                                  null: false
-    t.boolean  "replyable",                 default: false, null: false
-    t.string   "type",                                      null: false
-    t.string   "slug",                                      null: false
+    t.boolean  "home",                      null: false
+    t.datetime "datetime",                  null: false
+    t.string   "type",                      null: false
+    t.string   "slug",                      null: false
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -95,22 +112,12 @@ ActiveRecord::Schema.define(version: 20160503121251) do
     t.integer "jersey_number"
     t.string  "jersey_name"
     t.integer "status",                 default: 0
+    t.string  "slug"
   end
 
   add_index "players", ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+  add_index "players", ["slug"], name: "index_players_on_slug", unique: true, using: :btree
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
-
-  create_table "replies", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "status",     default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "replies", ["event_id", "user_id"], name: "index_replies_on_event_id_and_user_id", unique: true, using: :btree
-  add_index "replies", ["event_id"], name: "index_replies_on_event_id", using: :btree
-  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.integer  "event_id"

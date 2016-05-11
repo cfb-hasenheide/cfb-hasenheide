@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
   end
 
   # NOTE: Workaround to migrate users from legacy app
-  # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
+  # https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def self.legacy_password(password)
     Digest::MD5.hexdigest(password)
   end
 
   # NOTE: Workaround to migrate users from legacy app
-  # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
+  # https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def valid_password?(password)
     if legacy_password?
       # Use Devise's secure_compare to avoid timing attacks
@@ -37,7 +37,10 @@ class User < ActiveRecord::Base
     super password
   end
 
-  def email_with_name
-    %("#{user_profile.alias}" <#{username}@cfb-hasenheide.de>)
+  # NOTE: Workaround to let users with legacy password reset their password
+  # https://github.com/plataformatec/devise/wiki/How-To:-Migration-legacy-database
+  def reset_password(*args)
+    self.legacy_password = false
+    super
   end
 end

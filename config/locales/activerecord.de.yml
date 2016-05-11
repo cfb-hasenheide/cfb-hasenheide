@@ -8,14 +8,17 @@ de:
       team: Mannschaft
       report: Spielbericht
     attributes:
+      attendance:
+        status: Bist du dabei?
+      attendance_list:
+        maximum: Max. Spieler
+        minimum: Min. Spieler
       event:
         address: Adresse
         club_team_id: Vereinsmannschaft
         datetime: Datum / Anstoß
         description: Beschreibung
         home: Heim / Auswärts?
-        minimum: Min. Spieler
-        maximum: Max. Spieler
         rival_team_id: Gegnermannschaft
       forum_thread:
         topic: Thema
@@ -44,8 +47,6 @@ de:
         player_pass_number: Spielerpass-Nummmer
         street: Strasse
         zipcode: PLZ
-      reply:
-        status: Bist du dabei?
       report:
         annotation: Anmerkungen
         captain_id: Kapitän
@@ -79,6 +80,19 @@ de:
       user_profile:
         alias: Alias
     enums:
+      attendance:
+        status:
+          maybee: '? - Unsicher'
+          'no': '0 - Absage'
+          pending: 'Ausstehend'
+          waiting: 'W - Warteliste'
+          watch: 'Z - Zuschauer'
+          'yes': 'M - Meldung'
+      player:
+        status:
+          active: aktiv
+          inactive: inaktiv
+          injured: verletzt
       report:
         incident:
           armchair_decision: Wertung am grünen Tisch
@@ -100,13 +114,6 @@ de:
           snowy: verschneit
 
   # enum translations
-  reply_status:
-    maybee: '? - Unsicher'
-    'no': '0 - Absage'
-    pending: 'Ausstehend'
-    waiting: 'W - Warteliste'
-    watch: 'Z - Zuschauer'
-    'yes': 'M - Meldung'
   team_kind:
     other: Andere
     club: Vereinsmannschaft

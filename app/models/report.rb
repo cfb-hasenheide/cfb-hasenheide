@@ -45,7 +45,7 @@ class Report < ActiveRecord::Base
   def score(type)
     scores = [send("club_#{type}_score"), send("rival_#{type}_score")]
     scores.reverse! unless home?
-    scores.join(' : ')
+    scores.compact.join(' : ')
   end
 
   def final_score_changed?

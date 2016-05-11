@@ -1,29 +1,41 @@
 module EventsHelper
-  def event_progress_bar_css_class(event)
-    if event.yes_and_waiting_count < event.minimum
-      'progress-bar-danger'
-    elsif event.yes_and_waiting_count >= event.minimum &&
-          event.yes_and_waiting_count < event.minimum + 3
-      'progress-bar-warning'
+  def event_attendance_label(event, pull_right: false)
+    return unless event.future? && event.attendance_list_open?
+
+    attendance_status = event.attendances.find_by(player_id: current_user.player.id).status
+
+    content_tag(:span,
+                t(attendance_status, scope: %w(activerecord enums attendance status)),
+                class: "label label-primary #{('pull-right' if pull_right)}")
+  end
+
+  def event_final_score_label(event, pull_right: false)
+    return unless event.past? && event.report.present?
+
+    css_class = if event.won?
+                  'label label-success'
+                elsif event.lost?
+                  'label label-danger'
+                else # event.drew
+                  'label label-warning'
+                end
+
+    css_class += ' pull-right' if pull_right
+
+    content = ''
+    content += "#{report_icon} " if event.report.content?
+    content += event.final_score
+
+    content_tag(:span, content.html_safe, class: css_class)
+  end
+
+  def event_or_attendance_list_or_report_path(event)
+    if event.future? && event.attendance_list_open?
+      event_attendance_list_path(event)
+    elsif event.past? && event.report.present?
+      event_report_path(event)
     else
-      'progress-bar-success'
+      event_path(event)
     end
-  end
-
-  ### events#index
-
-  def event_label_css_class(event)
-    return 'label-default' unless event.report.present? || event.replyable?
-    return 'label-success' if event.won?
-    return 'label-warning' if event.drawed?
-    return 'label-danger' if event.lost?
-
-    'label-primary'
-  end
-
-  def event_list_group_item_css_class(event)
-    return 'list-group-item disabled' if event.future? && !event.replyable?
-
-    'list-group-item'
   end
 end

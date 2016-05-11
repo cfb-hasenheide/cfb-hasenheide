@@ -1,36 +1,28 @@
 class Event < ActiveRecord::Base
-  include Replyable
   include FriendlyIdAble
 
   paginates_per 12
 
+  has_one :attendance_list, as: :attendable, dependent: :destroy
+  has_many :attendances, through: :attendance_list
   has_one :report, dependent: :destroy
   belongs_to :club_team,  class_name: 'Team'
   belongs_to :rival_team, class_name: 'Team'
 
+  accepts_nested_attributes_for :attendance_list
+
   validates :address,
             :datetime,
-            :maximum,
-            :minimum,
             :name,
             :type,
             presence: true
 
-  validates :minimum,
-            numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
-  validates :maximum, numericality: { greater_than: :minimum }
-
   scope :future, lambda { |limit = nil|
-    where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
+    where('datetime >= ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
-
-  delegate :future?, :past?, to: :datetime
-  delegate :name, to: :club_team, prefix: true
-  delegate :name, to: :rival_team, prefix: true
-  delegate :player_pass_needed?, to: :club_team
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
@@ -48,6 +40,13 @@ class Event < ActiveRecord::Base
       .order(datetime: :desc)
   end
 
+  delegate :future?, :past?, to: :datetime
+  delegate :name, to: :club_team, prefix: true
+  delegate :name, to: :rival_team, prefix: true
+  delegate :open?, to: :attendance_list, prefix: true, allow_nil: true
+  delegate :player_pass_needed?, to: :club_team
+  delegate :final_score, :lost?, :won?, to: :report, allow_nil: true
+
   def google_maps_url
     "http://maps.google.com/?q=#{address}"
   end
@@ -62,42 +61,17 @@ class Event < ActiveRecord::Base
     '&scale=2'
   end
 
-  def won?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score > report.rival_final_score
-  end
-
-  def lost?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score < report.rival_final_score
-  end
-
-  def drawed?
-    return false unless report.present? && report.final_score_present?
-    report.club_final_score == report.rival_final_score
-  end
-
-  def replies_quota
-    yes_and_waiting_count.to_f / maximum
-  end
-
-  def possible_players
-    player_pass_needed = Team.find(club_team_id).player_pass_needed?
-    Player.active.player_pass(player_pass_needed)
+  def eligible_players
+    Player.active.player_pass(player_pass_needed?)
   end
 
   def attending_players
-    user_ids = Reply.by_event(id)
-                    .where(status: [1, 2])
-                    .order(:status, :updated_at)
-                    .limit(maximum)
-                    .pluck(:user_id)
+    player_ids = attendances.where(status: [1, 2])
+                            .order(:status, :updated_at)
+                            .limit(attendance_list.maximum)
+                            .pluck(:player_id)
 
-    Player.where(user_id: user_ids).order(:nickname)
-  end
-
-  def pending_players
-    possible_players.where.not(id: Reply.by_event(id).pluck(:user_id))
+    Player.where(id: player_ids).order(:nickname)
   end
 
   def to_ics

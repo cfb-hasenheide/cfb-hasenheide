@@ -1,12 +1,10 @@
-%ol.breadcrumb
-  %li
-    = link_to 'Events', events_path
-  %li.active
-    = @event.name
+= content_for(:title, @event.name)
+
+= render 'subnavigation', event: @event
 
 .page-header
   %h1
-    = @event.name
+    = content_for(:title)
     %small
       = @event.model_name.human
       = link_to event_path(@event, format: :ics),
@@ -14,52 +12,17 @@
         = download_icon
         \.ics
 
-.halfs
-  .half
-    .halfs
-      .half
-        %p.lead
-          = date_icon
-          = l(@event.datetime, format: :date_only)
-      .half
-        %p.lead
-          = time_icon
-          = l(@event.datetime, format: :time_only)
-  .half
-    %p.lead
-      = address_icon
-      = @event.address
-
-%p.lead= @event.description
+= render 'basic_information', event: @event
 
 = render 'admin_bar', event: @event if admin?
 
+- if @event.description?
+  %p.lead
+    = comment_icon
+    = @event.description
+
 .halfs
   .half
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title
-          Meldeliste
-          %small
-            - if @event.replyable?
-              geöffnet
-            - else
-              geschlossen
-
-      .panel-body
-        = render 'replies/form', reply: @reply if @event.replyable?
-
-        = render 'progress_bar', event: @event
-
-      = render 'replies/replies', replies: @event.replies.includes(:user_profile)
-
-  .half
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title Letzte Begegnungen
-
-      = render 'events/list_short', events: @previous_events
-
     .panel.panel-default
       .panel-heading
         %h3.panel-title Adresse
@@ -76,3 +39,10 @@
         %p
           = image_tag @event.google_static_maps_url,
             class: 'img-responsive img-rounded'
+
+  .half
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Letzte Begegnungen
+
+      = render 'events/list_short', events: @previous_events

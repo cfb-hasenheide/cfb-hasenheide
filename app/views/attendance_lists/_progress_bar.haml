@@ -1,0 +1,14 @@
+.progress
+  .progress-bar{role: 'progress-bar',
+    class: attendance_list_progress_bar_css_class(attendance_list),
+    'aria-valuenow' => 1,
+    'aria-valuemin' => attendance_list.minimum,
+    'aria-valuemax' => attendance_list.maximum,
+    min_width: '20px',
+    style: "min-width: 2em; width: #{attendance_list.yes_and_waiting_quota * 100}%;"}
+
+    = attendance_list.yes_count.zero? ? '0' : "#{attendance_list.yes_count} M"
+    - unless attendance_list.waiting_count.zero?
+      \+
+      = attendance_list.waiting_count
+      W

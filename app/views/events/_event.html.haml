@@ -1,6 +1,6 @@
 .list-group
-  = link_to event_path(event),
-    class: event_list_group_item_css_class(event) do
+  = link_to event_or_attendance_list_or_report_path(event),
+    class: 'list-group-item' do
 
     %h4.list-group-item-heading
       = event.name
@@ -20,11 +20,5 @@
       .label.label-default= event.model_name.human
 
       .pull-right
-        - if !event.past? && event.replyable?
-          %span.label.label-primary
-            - status = Reply.for_event_and_user(event, current_user).status
-            = t("reply_status.#{status}")
-
-        - elsif event.past? && event.report.present?
-          %span.label{class: event_label_css_class(event)}
-            = event.report.final_score
+        = event_attendance_label(event)
+        = event_final_score_label(event)
