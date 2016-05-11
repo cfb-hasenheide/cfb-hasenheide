@@ -82,10 +82,10 @@
 
         %dl.dl-horizontal
           %dt Spieler
-          %dd= attending_players.pluck(:nickname).join(', ')
+          %dd= attending_players.pluck(:nickname).to_sentence
 
           %dt Zuschauer
-          %dd= watching_players.pluck(:nickname).join(', ')
+          %dd= watching_players.pluck(:nickname).to_sentence
 
           %br
 
