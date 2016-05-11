@@ -9,7 +9,8 @@ class AttendanceListsController < ApplicationController
       redirect_to :back, alert: 'Meldeliste nicht vorhanden!' and return
     end
 
-    @current_user_attendance = @attendance_list.attendances.find_by(player_id: current_user.player.id)
+    @current_user_attendance =
+      @attendance_list.attendances.find_by(player_id: current_user.player.id)
   end
 
   def close

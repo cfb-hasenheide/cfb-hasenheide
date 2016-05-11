@@ -20,7 +20,10 @@
         %h2.panel-title Meldung abgeben
 
       .panel-body
-        - if @attendance_list.open?
+        - if @attendance_list.open? && @current_user_attendance.blank?
+          %strong.text-muted Du kannst aktuell nicht melden!
+
+        - elsif @attendance_list.open?
           = bootstrap_form_for @current_user_attendance do |f|
             = f.select :status,
               attendance_status_options,
