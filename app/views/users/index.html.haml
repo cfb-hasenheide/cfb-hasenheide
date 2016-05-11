@@ -24,15 +24,19 @@
             = user.email
           %td
             = form_for user, remote: true do |f|
-              = f.check_box :admin, class: 'bootstrap-switch',
-                'data-size' => 'mini', 'data-on-color' => 'success',
-                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
+              = f.check_box :admin,
+                class: 'bootstrap-switch',
+                'data-size' => 'mini',
+                'data-on-color' => 'success',
+                'data-on-text' => 'Ja',
+                'data-off-text' => 'Nö',
+                'data-confirm' => 'Admin-Status wirklich ändern?',
                 onchange: '$(this.form).submit();'
           %td.text-right
             = link_to registration_path(user),
-              'data-confirm' => 'Wirklich unwiderruflich löschen?',
               method: :delete,
-              class: 'default-button-xs' do
+              class: 'default-button-xs',
+              'data-confirm' => 'Wirklich unwiderruflich löschen?' do
               %span.text-danger
                 = delete_icon
 
