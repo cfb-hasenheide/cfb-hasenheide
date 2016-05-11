@@ -194,8 +194,6 @@ ActiveRecord::Schema.define(version: 20160505063717) do
     t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                              default: false, null: false
-    t.boolean  "player_pass",                        default: false, null: false
-    t.boolean  "player",                             default: false, null: false
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
@@ -207,7 +205,11 @@ ActiveRecord::Schema.define(version: 20160505063717) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "forum_posts", "forum_threads"
+  add_foreign_key "forum_posts", "forum_threads"
+  add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
+  add_foreign_key "forum_threads", "users"
+  add_foreign_key "user_profiles", "users"
   add_foreign_key "user_profiles", "users"
 end
