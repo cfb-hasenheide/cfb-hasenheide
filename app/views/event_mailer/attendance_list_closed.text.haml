@@ -16,4 +16,4 @@ Halbe Stunde vorher treffen (#{l(@event.datetime - 30.minutes, format: :time_onl
   \
 Gemeldet sind:
 - @event.attending_players.each do |player|
-  \- #{player.nickname}
+  \- #{player.nickname} | #{player.jersey_number} | #{player.player_pass_number} | #{player.phone1} | #{player.phone2}

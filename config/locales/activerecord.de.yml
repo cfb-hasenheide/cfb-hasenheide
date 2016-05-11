@@ -39,9 +39,9 @@ de:
         member_since: Mitglied seit
         member_until: Mitglied bis
         membership_number: Mitgliedsnr.
-        nickname: Spitzname
-        phone1: Telefonnr.
-        phone2: Telefonnr. (alternativ)
+        nickname: Name
+        phone1: Telefon
+        phone2: Telefon (alternativ)
         place_of_birth: Geburtsort
         player_pass: Spielerpass?
         player_pass_number: Spielerpass-Nummmer
