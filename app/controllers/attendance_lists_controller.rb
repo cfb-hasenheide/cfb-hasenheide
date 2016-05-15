@@ -16,9 +16,8 @@ class AttendanceListsController < ApplicationController
 
   def close
     if @attendance_list.close!
-      flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'
-
       deliver_attendance_list_closed_mail if params[:mail]
+      flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'
     else
       flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
     end
@@ -38,8 +37,8 @@ class AttendanceListsController < ApplicationController
 
   def open
     if @attendance_list.open!
-      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
       deliver_attendance_list_opened_mail if params[:mail]
+      flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
     else
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
