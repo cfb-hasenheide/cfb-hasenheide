@@ -26,27 +26,28 @@
 
   %hr
 
-  .form-group
-    = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
-    .col-md-5
-      = render 'form_final_score', f: f, report: report
+  - unless report.event.type == 'Other'
+    .form-group
+      = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_final_score', f: f, report: report
 
-  .form-group
-    = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
-    .col-md-5
-      = render 'form_half_time_score', f: f, report: report
+    .form-group
+      = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_half_time_score', f: f, report: report
 
-  .form-group
-    = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
-    .col-md-5
-      = render 'form_corners', f: f, report: report
+    .form-group
+      = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_corners', f: f, report: report
 
-  = f.number_field :possession, min: 0, max: 100, append: '%'
+    = f.number_field :possession, min: 0, max: 100, append: '%'
 
-  = f.select :incident, options_for_select(incident_options),
-    include_blank: true
+    = f.select :incident, options_for_select(incident_options),
+      include_blank: true
 
-  %hr
+    %hr
 
   = f.select :turf, options_for_select(turf_options), prompt: true
 
