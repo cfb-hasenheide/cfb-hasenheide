@@ -6,7 +6,8 @@ class AttendanceListsController < ApplicationController
     @attendance_list = @event.attendance_list
 
     if @attendance_list.nil?
-      redirect_to :back, alert: 'Meldeliste nicht vorhanden!' and return
+      redirect_to event_path(@event), alert: 'Meldeliste nicht vorhanden!'
+      return
     end
 
     @current_user_attendance =
@@ -22,7 +23,7 @@ class AttendanceListsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
     end
 
-    redirect_to :back
+    redirect_to event_attendance_list_path(@attendance_list.attendance_id)
   end
 
   def close_mail
@@ -43,7 +44,7 @@ class AttendanceListsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
 
-    redirect_to :back
+    redirect_to event_attendance_list_path(@attendance_list.attendance_id)
   end
 
   private

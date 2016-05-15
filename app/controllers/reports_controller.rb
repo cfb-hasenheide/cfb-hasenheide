@@ -31,7 +31,8 @@ class ReportsController < ApplicationController
     if @report.nil? && current_user.admin?
       redirect_to new_report_path(event_id: @event.id)
     elsif @report.nil?
-      redirect_to :back, alert: 'Spielbericht nicht vorhanden!' and return
+      redirect_to event_path(@event), alert: 'Spielbericht nicht vorhanden!'
+      return
     end
   end
 
