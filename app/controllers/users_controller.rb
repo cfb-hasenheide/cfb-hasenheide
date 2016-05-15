@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.includes(:user_profile)
-                 .order('admin DESC', 'player DESC', 'username')
+                 .order('admin DESC', 'username')
                  .page(params[:page])
 
     respond_with(@users)
@@ -27,6 +27,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:admin, :player, :player_pass)
+    params.require(:user).permit(:admin)
   end
 end
