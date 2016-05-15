@@ -90,7 +90,7 @@
   = f.text_area :content, class: 'wysihtml5', control_col: 'col-md-10'
 
   = f.collection_select :reporter_id,
-    report.event.attending_players,
+    Player.all.order(:nickname),
     :id,
     :nickname,
     prompt: true
