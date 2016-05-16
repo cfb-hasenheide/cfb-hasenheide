@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505063717) do
+ActiveRecord::Schema.define(version: 20160516081646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,16 +160,6 @@ ActiveRecord::Schema.define(version: 20160505063717) do
 
   add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
 
-  create_table "user_profiles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "alias"
-    t.string   "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: ""
@@ -210,6 +200,4 @@ ActiveRecord::Schema.define(version: 20160505063717) do
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
   add_foreign_key "forum_threads", "users"
-  add_foreign_key "user_profiles", "users"
-  add_foreign_key "user_profiles", "users"
 end
