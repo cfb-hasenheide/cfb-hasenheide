@@ -1,6 +1,8 @@
 class Player < ActiveRecord::Base
   include FriendlyId
 
+  mount_uploader :avatar, AvatarUploader
+
   belongs_to :user
   has_many :attendances, dependent: :destroy
 

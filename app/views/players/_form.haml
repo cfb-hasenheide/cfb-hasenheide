@@ -3,6 +3,13 @@
   label_col: 'col-md-2',
   control_col: 'col-md-4' do |f|
 
+  = f.static_control :avatar do
+    = image_tag player.avatar_url, class: 'img-thumbnail'
+  = f.file_field :avatar, label: 'ändern'
+  = f.hidden_field :avatar_cache
+
+  %hr
+
   = f.hidden_field :user_id
 
   = f.text_field :nickname

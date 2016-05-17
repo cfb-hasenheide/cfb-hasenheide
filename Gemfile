@@ -26,6 +26,7 @@ gem 'devise_invitable', github: 'scambra/devise_invitable'
 # file uploading
 gem 'fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 
 # assets
 gem 'sass-rails'
@@ -61,8 +62,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'pry'
+  gem 'rspec-rails'
 end
 
 group :test do
