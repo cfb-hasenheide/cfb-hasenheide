@@ -3,6 +3,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
+  RESIZE_WIDTH = 140
+  RESIZE_HEIGHT = 140
+
   # Choose what kind of storage to use for this uploader:
   storage :fog
 
@@ -20,7 +23,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
-  process resize_to_limit: [200, 300]
+  process resize_to_fill: [RESIZE_WIDTH, RESIZE_HEIGHT]
 
   # def scale(width, height)
   #   # do something
