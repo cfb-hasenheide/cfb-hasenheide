@@ -4,7 +4,7 @@
   control_col: 'col-md-4' do |f|
 
   = f.static_control :avatar do
-    = image_tag player.avatar_url, class: 'img-thumbnail'
+    = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
     %small.help-block
       Dein Avatar ist dein internes User-Bild. Es wird automatisch auf
       #{AvatarUploader::RESIZE_WIDTH}x#{AvatarUploader::RESIZE_HEIGHT}
