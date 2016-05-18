@@ -77,8 +77,6 @@ de:
         player: Spieler?
         player_pass: Spielerpass?
         remember_me: Angemeldet bleiben
-      user_profile:
-        alias: Alias
     enums:
       attendance:
         status:

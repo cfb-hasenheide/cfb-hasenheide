@@ -34,7 +34,9 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:city,
+    params.require(:player).permit(:avatar,
+                                   :avatar_cache,
+                                   :city,
                                    :club_email,
                                    :date_of_birth,
                                    :eligible_to_play_since,
@@ -51,6 +53,7 @@ class PlayersController < ApplicationController
                                    :place_of_birth,
                                    :player_pass,
                                    :player_pass_number,
+                                   :remove_avatar,
                                    :status,
                                    :street,
                                    :user_id,

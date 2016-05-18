@@ -5,10 +5,7 @@ class UsersController < ApplicationController
   respond_to :html
 
   def index
-    @users = User.all.includes(:user_profile)
-                 .order('admin DESC', 'username')
-                 .page(params[:page])
-
+    @users = User.all.order('admin DESC', 'username').page(params[:page])
     respond_with(@users)
   end
 

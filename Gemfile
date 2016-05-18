@@ -26,6 +26,7 @@ gem 'devise_invitable', github: 'scambra/devise_invitable'
 # file uploading
 gem 'fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 
 # assets
 gem 'sass-rails'
@@ -60,16 +61,17 @@ group :development do
   gem 'rails_best_practices'
 end
 
-# specs
-gem 'rspec-rails', group: [:development, :test]
-
-# debugging
-gem 'pry', group: [:development, :test]
+group :development, :test do
+  gem 'pry'
+  gem 'rspec-rails'
+end
 
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
 end
 
-# heroku
-gem 'rails_12factor', group: :production
+group :production do
+  # heroku
+  gem 'rails_12factor'
+end

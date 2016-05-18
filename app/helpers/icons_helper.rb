@@ -96,10 +96,6 @@ module IconsHelper
     content_tag(:span, nil, class: 'fa fa-user fa-fw')
   end
 
-  def admin_icon
-    content_tag(:span, nil, class: 'fa fa-user-plus fa-fw')
-  end
-
   def spinner_icon
     content_tag(:span, nil, class: 'fa fa-spinner fa-pulse')
   end

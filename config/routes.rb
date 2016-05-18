@@ -56,8 +56,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :update]
 
-  resources :user_profiles, only: [:index, :show, :edit, :update]
-
   resources :teams, except: :show
 
   get '/fussball_de' => 'pages#fussball_de'

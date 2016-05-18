@@ -3,6 +3,20 @@
   label_col: 'col-md-2',
   control_col: 'col-md-4' do |f|
 
+  = f.static_control :avatar do
+    = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
+    %small.help-block
+      Dein Avatar ist dein internes User-Bild. Es wird automatisch auf
+      #{AvatarUploader::RESIZE_WIDTH}x#{AvatarUploader::RESIZE_HEIGHT}
+      Pixel zugeschnitten.
+  = f.file_field :avatar, label: 'ändern'
+  = f.hidden_field :avatar_cache
+
+  = f.form_group do
+    = f.check_box :remove_avatar, label: 'entfernen'
+
+  %hr
+
   = f.hidden_field :user_id
 
   = f.text_field :nickname

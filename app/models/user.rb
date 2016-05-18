@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_one :user_profile, dependent: :destroy
   has_one :player, dependent: :destroy
 
   # Include default devise modules. Others available are:
