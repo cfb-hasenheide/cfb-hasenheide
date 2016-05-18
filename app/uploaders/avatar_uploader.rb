@@ -45,7 +45,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def content_type_whitelist
-    %r(image/)
+    %r{image/}
   end
 
   # Override the filename of the uploaded files:
