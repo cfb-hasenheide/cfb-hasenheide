@@ -1,8 +1,8 @@
 de:
   errors:
     messages:
-        carrierwave_processing_error: "Bildgröße konnte nicht geändert werden."
-        carrierwave_integrity_error: "Ist kein Bild."
-        carrierwave_download_error: "Bild konnte nicht heruntergeladen werden."
-        extension_white_list_error: "%{extension} Dateien können nicht hochgeladen werden, erlaubt sind: %{allowed_types}"
-        extension_black_list_error: "%{extension} Dateien können nicht hochgeladen werden, nicht erlaubt sind: %{prohibited_types}"
+      carrierwave_processing_error: "Bildgröße konnte nicht geändert werden."
+      carrierwave_integrity_error: "Ist kein Bild."
+      carrierwave_download_error: "Bild konnte nicht heruntergeladen werden."
+      extension_white_list_error: "%{extension} Dateien können nicht hochgeladen werden, erlaubt sind: %{allowed_types}"
+      extension_black_list_error: "%{extension} Dateien können nicht hochgeladen werden, nicht erlaubt sind: %{prohibited_types}"
