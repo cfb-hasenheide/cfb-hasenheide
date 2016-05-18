@@ -53,6 +53,7 @@ class PlayersController < ApplicationController
                                    :place_of_birth,
                                    :player_pass,
                                    :player_pass_number,
+                                   :remove_avatar,
                                    :status,
                                    :street,
                                    :user_id,
