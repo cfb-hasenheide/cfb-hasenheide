@@ -42,6 +42,7 @@ gem 'bootstrap_form'
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
+gem "font-awesome-rails"
 
 # json
 gem 'jbuilder'
