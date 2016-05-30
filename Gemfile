@@ -35,7 +35,7 @@ gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-gem 'bootstrap-wysihtml5-rails'
+gem 'bootsy' # WYSIWYG editor
 gem 'simple_form'
 gem 'bootstrap_form'
 # NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms

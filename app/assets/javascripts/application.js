@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootsy
 //= require bootstrap
-//= require bootstrap-wysihtml5
-//= require bootstrap-wysihtml5/locales/de-DE
 //= require bootstrap-switch
 //= require_tree .

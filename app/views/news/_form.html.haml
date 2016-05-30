@@ -1,8 +1,25 @@
-= bootstrap_form_for(@news) do |f|
-  = f.text_field :title
-  = f.text_area :content, as: :text, class: 'wysihtml5'
-  = f.check_box :internal
+= form_for @news, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :internal, class: 'control-label col-md-2'
+    .col-md-4
+      = f.check_box :internal,
+        class: 'bootstrap-switch',
+        'data-on-color' => 'success',
+        'data-on-text' => 'Intern',
+        'data-off-color' => 'warning',
+        'data-off-text' => 'Öffentlich'
 
-  = f.form_group do
-    = f.submit class: 'primary-button'
-    = link_to 'Abbrechen', news_index_path, class: 'default-button'
+  .form-group
+    = f.label :title, class: 'control-label col-md-2'
+    .col-md-4
+      = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :content, class: 'control-label col-md-2'
+    .col-md-10
+      = f.bootsy_area :content, class: 'form-control', rows: 10
+
+  .form-group
+    .col-md-10.col-md-offset-2
+      = f.submit class: 'primary-button'
+      = link_to 'Abbrechen', news_index_path, class: 'default-button'
