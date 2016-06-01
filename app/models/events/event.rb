@@ -11,11 +11,7 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :attendance_list
 
-  validates :address,
-            :datetime,
-            :name,
-            :type,
-            presence: true
+  validates :address, :datetime, :name, :type, presence: true
 
   scope :future, lambda { |limit = nil|
     where('datetime >= ?', Time.zone.now).order('datetime DESC').limit(limit)
