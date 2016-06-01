@@ -22,7 +22,7 @@ class AttendanceListsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geschlossen werden.'
     end
 
-    redirect_to event_attendance_list_path(@attendance_list.attendance_id)
+    redirect_to event_attendance_list_path(@attendance_list.attendable_id)
   end
 
   def close_mail
@@ -43,7 +43,7 @@ class AttendanceListsController < ApplicationController
       flash[:alert] = 'Meldeliste konnte nicht geöffnet werden.'
     end
 
-    redirect_to event_attendance_list_path(@attendance_list.attendance_id)
+    redirect_to event_attendance_list_path(@attendance_list.attendable_id)
   end
 
   private
