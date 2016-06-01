@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
