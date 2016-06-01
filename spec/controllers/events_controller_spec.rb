@@ -69,7 +69,7 @@ RSpec.describe EventsController, type: :controller do
 
       it 'redirects to the created event' do
         post :create, event: valid_attributes
-        expect(response).to redirect_to(Event.last)
+        expect(response).to redirect_to(event_url(assigns(:event)))
       end
     end
 
@@ -88,16 +88,16 @@ RSpec.describe EventsController, type: :controller do
 
   describe 'PUT update' do
     context 'with valid params' do
-      let(:new_min) { 10 }
+      let(:new_home) { false }
       let(:new_attributes) do
-        valid_attributes[:minimum] = new_min
+        valid_attributes[:home] = new_home
         valid_attributes
       end
 
       it 'updates the requested event' do
         expect do
           put :update, id: event.id, event: new_attributes
-        end.to change { event.reload.minimum }.from(event.minimum).to(new_min)
+        end.to change { event.reload.home }.from(event.home).to(new_home)
       end
 
       it 'redirects to the event' do
