@@ -1,8 +1,9 @@
 .page-header
   %h1
     %small
-      %strong.text-muted= 'Intern' if @news.internal
       %span.pull-right= l(@news.created_at, format: :date_only)
     = @news.title
 
-= @news.content.html_safe
+.panel{class: (@news.internal? ? 'panel-default' : 'panel-primary')}
+  .panel-body
+    = @news.content.html_safe
