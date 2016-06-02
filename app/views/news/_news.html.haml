@@ -1,8 +1,7 @@
-.panel.panel-primary
+.panel{class: (news.internal? ? 'panel-default' : 'panel-primary')}
   .panel-body
     %h3
       %small
-        %strong.text-muted= 'Intern' if news.internal
         %span.pull-right= l(news.created_at, format: :date_only)
       = news.title
 
