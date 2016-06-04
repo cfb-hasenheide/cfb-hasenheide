@@ -1,8 +1,8 @@
 .panel{class: (news.internal? ? 'panel-default' : 'panel-primary')}
   .panel-body
     %h3
-      = news.title
       %small.pull-right= l(news.created_at, format: :date_only)
+      = news.title
 
     = truncate(news.content,
                length: 1_500,
