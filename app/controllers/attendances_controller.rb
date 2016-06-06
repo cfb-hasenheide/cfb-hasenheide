@@ -12,7 +12,7 @@ class AttendancesController < ApplicationController
       flash[:error] = 'Deine Meldung konnte nicht aktualisiert werden!'
     end
 
-    redirect_to event_attendance_list_path(@attendance_list.attendable_id)
+    redirect_to event_attendance_list_path(@attendance.attendance_list.attendable_id)
   end
 
   def edit_multiple
