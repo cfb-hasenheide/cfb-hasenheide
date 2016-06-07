@@ -3,15 +3,15 @@ Bootsy.setup do |config|
   # Default editor options
   #   You can also override them locally by passing an
   #   editor_options hash to bootsy_area
-  # config.editor_options = {
-  #   font_styles: true,
-  #   emphasis: true,
-  #   lists: true,
-  #   html: false,
-  #   link: true,
-  #   image: true,
-  #   color: true
-  # }
+  config.editor_options = {
+    font_styles: true,
+    emphasis: true,
+    lists: true,
+    html: true,
+    link: true,
+    image: true,
+    color: true
+  }
   #
   # Image versions available
   #  Possible values: :small, :medium, :large and/or :original
@@ -46,7 +46,7 @@ Bootsy.setup do |config|
   #
   #
   # Whether user can destroy uploaded files
-  # config.allow_destroy = true
+  config.allow_destroy = true
   #
   #
   # Storage mode
@@ -55,7 +55,7 @@ Bootsy.setup do |config|
   #   'fog' to your Gemfile and create and configure your credentials in an
   #   initializer file, as described in Carrierwave's docs:
   #   https://github.com/carrierwaveuploader/carrierwave#using-amazon-s3
-  # config.storage = :file
+  config.storage = :fog
   #
   #
   # Store directory (inside 'public') for storage = :file
@@ -65,5 +65,5 @@ Bootsy.setup do |config|
   #
   # Specify the controller to inherit from. Using ApplicationController
   # allows you to perform authentication from within your app.
-  # config.base_controller = ActionController::Base
+  config.base_controller = ActionController::Base
 end
