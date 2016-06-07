@@ -12,11 +12,13 @@
         Team.club,
         :id,
         :name,
-        prompt: true
+        { prompt: true },
+        { required: true }
 
       = f.select :rival_team_id,
         grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
-        prompt: true
+        { prompt: true },
+        { required: true }
 
       = f.form_group :home do
         = f.radio_button :home, true, label: 'Heimspiel', inline: true
