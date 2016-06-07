@@ -55,7 +55,7 @@ class AttendanceListsController < ApplicationController
                                        from_user_id: current_user.id)
                .deliver_later
 
-    flash[:notice] += ' Final Call wurde versendet.'
+    flash[:notice] = ' Final Call wurde versendet.'
   end
 
   def deliver_attendance_list_opened_mail
@@ -65,7 +65,6 @@ class AttendanceListsController < ApplicationController
                                        from_user_id: current_user.id)
                .deliver_later
 
-    flash[:notice] += ' Mail wurde versendet.'
   end
 
   def set_attendance_list
