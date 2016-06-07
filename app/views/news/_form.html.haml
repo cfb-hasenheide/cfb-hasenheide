@@ -20,6 +20,14 @@
       = f.bootsy_area :content, class: 'form-control', rows: 10
 
   .form-group
+    = f.label :content, class: 'control-label col-md-2'
+    .col-md-10
+      = f.cktext_area :content,
+        class: 'form-control',
+        rows: 10,
+        ckeditor: { language: :de }
+
+  .form-group
     .col-md-10.col-md-offset-2
       = f.submit class: 'primary-button'
       = link_to 'Abbrechen', news_index_path, class: 'default-button'
