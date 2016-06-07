@@ -14,10 +14,8 @@
   = link_to event.address, event.google_maps_url
 
 %p
-  Halbe Stunde vorher treffen
-  = succeed '!' do
-    = surround '(', ')' do
-      = l(event.datetime - 30.minutes, format: :time_only)
+  Treffpunkt:
+  = l(event.datetime - time_to_meet.minutes, format: :time_only)
 
 %p= event.description.presence
 

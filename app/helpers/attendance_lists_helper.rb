@@ -9,4 +9,12 @@ module AttendanceListsHelper
       'progress-bar-success'
     end
   end
+
+  def time_to_meet
+    [
+      ['30 min vorher', 30],
+      ['45 min vorher', 45],
+      ['60 min vorher', 60]
+    ]
+  end
 end
