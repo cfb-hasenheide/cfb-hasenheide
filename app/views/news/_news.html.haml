@@ -1,7 +1,9 @@
 .panel{class: (news.internal? ? 'panel-default' : 'panel-primary')}
   .panel-body
     %h3
-      %small.pull-right= l(news.created_at, format: :date_only)
+      %small.pull-right
+        = internal_icon if news.internal?
+        = l(news.created_at, format: :date_only)
       = news.title
 
     = truncate(news.content,

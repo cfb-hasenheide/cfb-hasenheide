@@ -1,13 +1,13 @@
 = form_for @news, html: { class: 'form-horizontal' } do |f|
   .form-group
     = f.label :internal, class: 'control-label col-md-2'
-    .col-md-4
+    .col-md-6
       = f.check_box :internal,
         class: 'bootstrap-switch',
         'data-on-color' => 'success',
-        'data-on-text' => 'Intern',
+        'data-on-text' => "#{internal_icon} Intern",
         'data-off-color' => 'warning',
-        'data-off-text' => 'Öffentlich'
+        'data-off-text' => "#{public_icon} Öffentlich"
 
   .form-group
     = f.label :title, class: 'control-label col-md-2'

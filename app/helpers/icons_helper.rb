@@ -131,4 +131,12 @@ module IconsHelper
   def comment_icon
     fa_icon(:comment)
   end
+
+  def internal_icon
+    fa_icon('eye-slash')
+  end
+
+  def public_icon
+    fa_icon('eye')
+  end
 end
