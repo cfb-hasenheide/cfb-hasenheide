@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
 
   concern :paginatable do
     get '(page/:page)', action: :index, on: :collection, as: ''

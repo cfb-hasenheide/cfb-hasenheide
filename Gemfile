@@ -35,7 +35,6 @@ gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-gem 'bootsy' # WYSIWYG editor
 gem 'ckeditor'
 gem 'simple_form'
 gem 'bootstrap_form'
