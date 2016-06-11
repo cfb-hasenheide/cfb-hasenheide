@@ -24,7 +24,7 @@ gem 'devise_invitable', github: 'scambra/devise_invitable'
 #   from /Users/elgrillo/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.6/lib/active_support/core_ext/module/aliasing.rb:32:in `alias_method_chain'
 
 # file uploading
-gem 'fog-aws'
+gem 'fog-aws', github: 'fog/fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 
