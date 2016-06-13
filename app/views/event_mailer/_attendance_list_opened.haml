@@ -13,10 +13,10 @@
 
 %p
   Wo:
-  = event.address
+  = link_to event.address, event.google_maps_url
 
 %p= event.description.presence
 
 %p= message.presence
 
-= link_to 'Melden!', event_attendance_list_url(event)
+= link_to 'Zur Meldeliste', event_attendance_list_url(event)

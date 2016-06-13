@@ -52,6 +52,7 @@ class AttendanceListsController < ApplicationController
     EventMailer.attendance_list_closed(@attendance_list.attendable_id,
                                        to_player_ids: params[:player_ids],
                                        message: params[:message],
+                                       time_to_meet: params[:time_to_meet].to_i,
                                        from_user_id: current_user.id)
                .deliver_later
 

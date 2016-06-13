@@ -4,7 +4,10 @@ class EventMailer < ApplicationMailer
   after_action :set_from, :set_to,
     only: %i(attendance_list_closed attendance_list_opened)
 
-  def attendance_list_opened(event_id, to_player_ids:, from_user_id: nil, message: nil)
+  def attendance_list_opened(event_id,
+                             to_player_ids:,
+                             from_user_id: nil,
+                             message: nil)
     @event = Event.find(event_id)
     @to_player_ids = to_player_ids
     @from_user_id = from_user_id
@@ -13,9 +16,14 @@ class EventMailer < ApplicationMailer
     mail(subject: 'Neuer Termin in der Meldeliste freigegeben')
   end
 
-  def attendance_list_closed(event_id, to_player_ids:, from_user_id: nil, message: nil)
+  def attendance_list_closed(event_id,
+                             time_to_meet: 30,
+                             to_player_ids:,
+                             from_user_id: nil,
+                             message: nil)
     @event = Event.find(event_id)
     @to_player_ids = to_player_ids
+    @time_to_meet = time_to_meet
     @from_user_id = from_user_id
     @message = message.presence
 
