@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   respond_to :html
 
@@ -13,6 +13,7 @@ class NewsController < ApplicationController
   end
 
   def show
+    authenticate_user! if @news.internal?
     respond_with(@news)
   end
 
