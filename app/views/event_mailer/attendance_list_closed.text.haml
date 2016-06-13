@@ -6,7 +6,7 @@ Wann: #{l(@event.datetime)}
 \
 Wo: #{@event.address}
 \
-Halbe Stunde vorher treffen (#{l(@event.datetime - 30.minutes, format: :time_only)})!
+Treffpunkt: (#{l(@event.datetime - @time_to_meet.minutes, format: :time_only)})!
 \
 - if @event.description.present?
   = @event.description

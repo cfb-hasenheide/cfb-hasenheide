@@ -54,13 +54,16 @@
 
         .panel-body
           = render 'event_mailer/attendance_list_closed',
-            event: @attendance_list.attendable, message: nil, time_to_meet: 30
+            event: @attendance_list.attendable,
+            message: nil,
+            time_to_meet: 30
+
+          = f.select 'time_to_meet', time_to_meet,
+            label: "Treffzeit"
 
         .panel-footer
           = f.text_area :message, label: 'Nachricht hinzufügen?'
 
-          = f.select 'time_to_meet', time_to_meet,
-            label: "Treffzeit"
 
           = button_tag type: 'submit', class: 'primary-button' do
             = mail_icon
