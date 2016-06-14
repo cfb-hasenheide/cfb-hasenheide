@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   resources :forum_threads
 
+  resources :messages, only: [:create, :index]
+
   resources :news, concerns: :paginatable
 
   resources :players, concerns: :paginatable, except: :destroy do
@@ -59,6 +61,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :update]
 
   resources :teams, except: :show
+
+  get '/chat' => 'messages#index', as: :chat
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'

@@ -129,4 +129,8 @@ module IconsHelper
   def public_icon
     fa_icon('eye')
   end
+
+  def refresh_icon
+    fa_icon('refresh')
+  end
 end

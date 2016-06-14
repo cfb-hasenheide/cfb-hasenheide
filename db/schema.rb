@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607214310) do
+ActiveRecord::Schema.define(version: 20160614184837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,15 @@ ActiveRecord::Schema.define(version: 20160607214310) do
   end
 
   add_index "forum_threads", ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "content",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title"
