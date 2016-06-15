@@ -5,6 +5,7 @@
     = content_for(:title)
     .pull-right
       = link_to chat_path,
+        remote: true,
         class: 'default-button',
         'data-disable-with' => "#{spinner_icon}" do
         = refresh_icon
@@ -13,22 +14,8 @@
   .panel-heading
     %h2.panel-title= page_entries_info(@messages)
 
-  %ul.list-group.fixed-panel
-    - @messages.each do |message|
-      %li.list-group-item
-        .media
-          .media-left
-            = image_tag message.user.player.avatar_url(:small_thumb),
-              width: '30',
-              height: '30',
-              alt: current_user.player.nickname,
-              class: 'img-circle'
-          .media-body
-            %strong.text-muted
-              = message.user.player.nickname
-            %small.text-muted= l(message.created_at, format: :short)
-            %br
-            = message.content
+  %ul.list-group.fixed-panel#messages
+    = render 'list', messages: @messages
 
   .panel-footer
     = form_for @message do |f|
