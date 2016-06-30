@@ -24,7 +24,8 @@
       .input-group
         = f.text_field :content,
           class: 'form-control',
-          placeholder: Message.human_attribute_name(:content)
+          placeholder: Message.human_attribute_name(:content),
+          autofocus: true
 
         %span.input-group-btn
           = button_tag type: 'submit',
