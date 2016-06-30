@@ -12,11 +12,10 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
 
-    if @message.save
-      redirect_to messages_path, notice: 'Nachricht erfolgreich gesendet.'
-    else
-      @messages = messages
-      render :index
+    @message.save
+
+    respond_to do |format|
+      format.js { render layout: false }
     end
   end
 

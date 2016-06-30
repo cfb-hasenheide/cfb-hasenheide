@@ -1,0 +1,13 @@
+<% if @message.errors.any? %>
+  // add error hint
+  $('#message_content').closest('.input-group').addClass('has-error')
+<% else %>
+  // remove any existing error hint
+  $('#message_content').closest('.input-group').removeClass('has-error')
+  // append created @message to #messages
+  $('#messages').append("<%= escape_javascript(render @message) %>");
+  // scroll down to latest message
+  $("#messages").scrollTop($('#messages')[0].scrollHeight);
+  // clear #message_content input field
+  $('#message_content').val('');
+<% end %>
