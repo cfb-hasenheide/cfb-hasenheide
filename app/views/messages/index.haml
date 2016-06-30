@@ -15,7 +15,7 @@
     %h2.panel-title= page_entries_info(@messages)
 
   %ul.list-group.fixed-panel#messages
-    = render 'list', messages: @messages
+    = render @messages
 
   .panel-footer
     = form_for @message do |f|
