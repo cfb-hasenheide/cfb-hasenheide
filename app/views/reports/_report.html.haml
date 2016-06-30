@@ -32,7 +32,7 @@
             %dd= corners(report)
 
             %dt= t(:possession, scope: %w(activerecord attributes report))
-            %dd= report.possession? ? report.possession + '%' : ''
+            %dd= report.possession? ? report.possession.to_s + ' %' : ''
 
         %li.list-group-item
           %dl.dl-horizontal
