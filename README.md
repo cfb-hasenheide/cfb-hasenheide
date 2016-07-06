@@ -6,7 +6,7 @@ cfb-hasenheide
 Specs
 -----
 * Ruby 2
-* Rails 4
+* Rails 5
 * Postgresql
 * Twitter Bootstrap 3
 
