@@ -1,0 +1,19 @@
+Final Call für das Event:
+\
+#{@event.name} (#{@event.model_name.human})
+\
+Wann: #{l(@event.datetime)}
+\
+Wo: #{@event.address}
+\
+Treffpunkt: (#{l(@event.datetime - @time_to_meet.minutes, format: :time_only)})!
+\
+- if @event.description.present?
+  = @event.description
+  \
+- if @message.present?
+  = @message
+  \
+Gemeldet sind:
+- @event.attending_players.each do |player|
+  \- #{player.nickname} | #{player.jersey_number} | #{player.player_pass_number} | #{player.phone1} | #{player.phone2}

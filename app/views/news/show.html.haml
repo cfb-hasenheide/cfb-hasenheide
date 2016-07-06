@@ -1,9 +1,10 @@
 .page-header
   %h1
     = @news.title
-    %small
-      = l(@news.created_at, format: :short)
-      .pull-right
-        = link_to 'Alle News', news_index_path
+    %small.pull-right
+      = internal_icon if @news.internal?
+      = l(@news.created_at, format: :date_only)
 
-= @news.content.html_safe
+.panel{class: (@news.internal? ? 'panel-default' : 'panel-primary')}
+  .panel-body
+    = @news.content.html_safe

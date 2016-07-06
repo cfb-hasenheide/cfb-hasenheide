@@ -1,0 +1,16 @@
+.list-group
+  = link_to player_path(player), class: 'list-group-item' do
+    %h4.list-group-item-heading
+      = player.nickname
+      .pull-right.text-muted
+        = player.jersey_name
+        = player.jersey_number
+
+    %br
+
+    %p.list-group-item-text.text-center
+      = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
+
+      %ul.list-unstyled.text-center
+        %li= t(player.status, scope: %w(activerecord enums player status))
+        %li= 'Spielerpass' if player.player_pass?

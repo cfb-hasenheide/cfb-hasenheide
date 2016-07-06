@@ -1,6 +1,8 @@
 cfb-hasenheide
 ==============
 
+[![Code Climate](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide/badges/gpa.svg)](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide) [![Issue Count](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide/badges/issue_count.svg)](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide) [![Test Coverage](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide/badges/coverage.svg)](https://codeclimate.com/github/cfb-hasenheide/cfb-hasenheide/coverage)
+
 Specs
 -----
 * Ruby 2

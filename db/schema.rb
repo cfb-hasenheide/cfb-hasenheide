@@ -11,28 +11,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318102615) do
+ActiveRecord::Schema.define(version: 20160607214310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
-    t.datetime "datetime",                      null: false
+  create_table "attendance_lists", force: :cascade do |t|
+    t.integer "attendable_id"
+    t.string  "attendable_type"
+    t.boolean "open",            default: false, null: false
+    t.integer "minimum",         default: 7,     null: false
+    t.integer "maximum",         default: 11,    null: false
+  end
+
+  add_index "attendance_lists", ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
+
+  create_table "attendances", force: :cascade do |t|
+    t.integer  "attendance_list_id"
+    t.integer  "player_id"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
-    t.string   "address",                       null: false
-    t.integer  "minimum",                       null: false
-    t.integer  "maximum",                       null: false
-    t.string   "home_team"
-    t.string   "away_team"
-    t.string   "name",                          null: false
+  end
+
+  add_index "attendances", ["attendance_list_id", "player_id"], name: "index_attendances_on_attendance_list_id_and_player_id", unique: true, using: :btree
+
+  create_table "bootsy_image_galleries", force: :cascade do |t|
+    t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bootsy_images", force: :cascade do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description",   limit: 255
+    t.string   "address",       limit: 255, null: false
+    t.string   "name",                      null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                          null: false
-    t.boolean  "replyable",     default: false, null: false
-    t.string   "type",                          null: false
-    t.string   "slug",                          null: false
+    t.boolean  "home",                      null: false
+    t.datetime "datetime",                  null: false
+    t.string   "type",                      null: false
+    t.string   "slug",                      null: false
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -66,28 +120,62 @@ ActiveRecord::Schema.define(version: 20160318102615) do
     t.datetime "updated_at",                null: false
   end
 
-  create_table "replies", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "status",     default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id",                            null: false
+    t.string  "nickname",                           null: false
+    t.string  "first_name"
+    t.string  "last_name"
+    t.date    "date_of_birth"
+    t.string  "place_of_birth"
+    t.string  "street"
+    t.string  "zipcode"
+    t.string  "city"
+    t.string  "phone1"
+    t.string  "phone2"
+    t.string  "club_email"
+    t.string  "membership_number"
+    t.date    "member_since"
+    t.date    "member_until"
+    t.boolean "player_pass"
+    t.string  "player_pass_number"
+    t.date    "eligible_to_play_since"
+    t.integer "jersey_number"
+    t.string  "jersey_name"
+    t.integer "status",                 default: 0
+    t.string  "slug"
+    t.string  "avatar"
+    t.string  "panini"
   end
 
-  add_index "replies", ["event_id", "user_id"], name: "index_replies_on_event_id_and_user_id", unique: true, using: :btree
-  add_index "replies", ["event_id"], name: "index_replies_on_event_id", using: :btree
-  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
+  add_index "players", ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+  add_index "players", ["slug"], name: "index_players_on_slug", unique: true, using: :btree
+  add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.integer  "event_id"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "club_final_score",      limit: 2
-    t.integer  "rival_final_score",     limit: 2
-    t.integer  "club_half_time_score",  limit: 2
-    t.integer  "rival_half_time_score", limit: 2
+    t.integer  "club_final_score",        limit: 2
+    t.integer  "rival_final_score",       limit: 2
+    t.integer  "club_half_time_score",    limit: 2
+    t.integer  "rival_half_time_score",   limit: 2
     t.integer  "result"
+    t.string   "annotation"
+    t.integer  "captain_id"
+    t.integer  "corners_club"
+    t.integer  "corners_rival"
+    t.integer  "goalkeeper_id"
+    t.integer  "incident"
+    t.integer  "most_valuable_player_id"
+    t.integer  "points"
+    t.integer  "possession"
+    t.boolean  "referee"
+    t.string   "referee_description"
+    t.string   "referee_name"
+    t.integer  "reporter_id"
+    t.integer  "turf"
+    t.integer  "weather"
   end
 
   add_index "reports", ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
@@ -104,42 +192,30 @@ ActiveRecord::Schema.define(version: 20160318102615) do
 
   add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
 
-  create_table "user_profiles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "alias"
-    t.string   "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", unique: true, using: :btree
-
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
-    t.string   "invitation_token"
+    t.string   "username",               limit: 255
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
-    t.boolean  "admin",                  default: false, null: false
-    t.boolean  "player",                 default: false, null: false
-    t.boolean  "player_pass",            default: false, null: false
+    t.boolean  "admin",                              default: false, null: false
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
@@ -147,11 +223,13 @@ ActiveRecord::Schema.define(version: 20160318102615) do
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["player", "player_pass"], name: "index_users_on_player_and_player_pass", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
-  add_foreign_key "user_profiles", "users"
+  add_foreign_key "forum_threads", "users"
 end

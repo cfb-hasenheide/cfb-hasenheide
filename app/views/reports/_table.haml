@@ -10,7 +10,7 @@
 
     %tbody
       - for report in reports
-        %tr.clickableTableRow{'data-url' => report_path(report)}
+        %tr.clickableTableRow{'data-url' => event_report_path(report.event_id)}
           %td.text-right.text-muted
             = l(report.event.datetime, format: :date_only)
           %td

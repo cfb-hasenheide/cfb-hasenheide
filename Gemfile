@@ -24,8 +24,9 @@ gem 'devise_invitable', github: 'scambra/devise_invitable'
 #   from /Users/elgrillo/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.6/lib/active_support/core_ext/module/aliasing.rb:32:in `alias_method_chain'
 
 # file uploading
-gem 'fog-aws'
+gem 'fog-aws', github: 'fog/fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 
 # assets
 gem 'sass-rails'
@@ -34,17 +35,23 @@ gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-gem 'bootstrap-wysihtml5-rails'
+gem 'ckeditor'
 gem 'simple_form'
 gem 'bootstrap_form'
+# NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
+gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
+gem "font-awesome-rails"
 
 # json
 gem 'jbuilder'
 
 # ical
 gem 'icalendar'
+
+# error tracking
+gem 'raygun4ruby'
 
 group :development do
   gem 'spring'
@@ -55,16 +62,17 @@ group :development do
   gem 'rails_best_practices'
 end
 
-# specs
-gem 'rspec-rails', group: [:development, :test]
-
-# debugging
-gem 'pry', group: [:development, :test]
+group :development, :test do
+  gem 'pry'
+  gem 'rspec-rails'
+end
 
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
 end
 
-# heroku
-gem 'rails_12factor', group: :production
+group :production do
+  # heroku
+  gem 'rails_12factor'
+end

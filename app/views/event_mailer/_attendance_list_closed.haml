@@ -1,0 +1,41 @@
+%p Final Call für das Event:
+
+%p
+  %strong= event.name
+  = surround '(', ')' do
+    = event.model_name.human
+
+%p
+  Wann:
+  = l(event.datetime)
+
+%p
+  Wo:
+  = link_to event.address, event.google_maps_url
+
+%p
+  Treffpunkt:
+  = l(event.datetime - time_to_meet.minutes, format: :time_only)
+
+%p= event.description.presence
+
+Gemeldet sind:
+%table{style: "border: 1px solid black; border-collapse: collapse;"}
+  %thead
+    %tr
+      %th= Player.human_attribute_name(:nickname)
+      %th= Player.human_attribute_name(:jersey_number)
+      %th= Player.human_attribute_name(:player_pass_number)
+      %th= Player.human_attribute_name(:phone1)
+      %th= Player.human_attribute_name(:phone2)
+
+  %tbody
+    - event.attending_players.each do |player|
+      %tr
+        %td= player.nickname
+        %td= player.jersey_number
+        %td= player.player_pass_number
+        %td= player.phone1
+        %td= player.phone2
+
+%p= message.presence

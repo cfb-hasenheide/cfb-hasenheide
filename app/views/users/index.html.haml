@@ -10,47 +10,34 @@
   %table
     %thead
       %tr
-        %th.col-md-2= User.human_attribute_name(:username)
-        %th.col-md-2= UserProfile.human_attribute_name(:alias)
-        %th.col-md-2= User.human_attribute_name(:admin)
-        %th.col-md-2= User.human_attribute_name(:player)
-        %th.col-md-2= User.human_attribute_name(:player_pass)
-        %th.col-md-2.text-right.text-muted Aktionen
+        %th= User.human_attribute_name(:username)
+        %th= User.human_attribute_name(:email)
+        %th= User.human_attribute_name(:admin)
+        %th.text-right.text-muted Aktionen
 
     %tbody
       - for user in @users
         %tr
-          %td.col-md-2= user.username
-
-          %td.col-md-2= user.user_profile.alias
-
-          %td.col-md-2
-            - if user.admin?
-              .label.label-success Ja
-
-          %td.col-md-2
+          %td
+            = user.username
+          %td
+            = user.email
+          %td
             = form_for user, remote: true do |f|
-              = f.check_box :player, class: 'bootstrap-switch',
-                'data-size' => 'mini', 'data-on-color' => 'success',
-                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
+              = f.check_box :admin,
+                class: 'bootstrap-switch',
+                'data-size' => 'mini',
+                'data-on-color' => 'success',
+                'data-on-text' => 'Ja',
+                'data-off-text' => 'Nö',
+                'data-confirm' => 'Admin-Status wirklich ändern?',
                 onchange: '$(this.form).submit();'
-
-          %td.col-md-2
-            = form_for user, remote: true do |f|
-              = f.check_box :player_pass, class: 'bootstrap-switch',
-                'data-size' => 'mini', 'data-on-color' => 'success',
-                'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
-                onchange: '$(this.form).submit();'
-
-          %td.col-md-2
-            .btn-toolbar.pull-right
-              = link_to root_path, class: 'default-button-xs' do
-                = edit_icon
-              = link_to registration_path(user),
-                'data-confirm' => 'Wirklich unwiderruflich löschen?',
-                method: :delete,
-                class: 'default-button-xs' do
-                %span.text-danger
-                  = delete_icon
+          %td.text-right
+            = link_to registration_path(user),
+              method: :delete,
+              class: 'default-button-xs',
+              'data-confirm' => 'Wirklich unwiderruflich löschen?' do
+              %span.text-danger
+                = delete_icon
 
 = render 'layouts/pagination', entries: @users

@@ -1,123 +1,132 @@
 module IconsHelper
   def edit_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-wrench')
+    fa_icon(:edit)
   end
 
   def delete_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-trash')
+    fa_icon(:trash)
   end
 
   def date_icon
-    content_tag(:span, nil, class: 'fa fa-calendar fa-fw')
+    fa_icon(:calendar)
   end
 
   def time_icon
-    content_tag(:span, nil, class: 'fa fa-clock-o fa-fw')
+    fa_icon('clock-o')
   end
 
   def address_icon
-    content_tag(:span, nil, class: 'fa fa-map-marker fa-fw')
+    fa_icon('map-marker')
   end
 
   def create_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-plus')
+    fa_icon(:plus)
   end
 
   def link_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-link')
+    fa_icon(:link)
   end
 
   def save_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-ok')
+    fa_icon(:check)
   end
 
   def mail_icon
-    content_tag(:span, nil, class: 'glyphicon glyphicon-envelope')
+    fa_icon(:envelope)
   end
 
   def minus_icon
-    content_tag(:span, nil, class: 'fa fa-minus fa-fw')
+    fa_icon(:minus)
   end
 
   def facebook_icon
-    content_tag(:span, nil, class: 'fa fa-facebook fa-fw')
+    fa_icon(:facebook)
+  end
+
+  def mail_to_link_icon
+    content_tag_container('fa fa-envelope fa-stack-1x fa-inverse')
   end
 
   def facebook_link_icon
-    content_tag(:span, nil, class: 'fa-stack fa-lg') do
-      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
-        content_tag(:i, nil, class: 'fa fa-facebook fa-stack-1x fa-inverse')
-    end
+    content_tag_container('fa fa-facebook fa-stack-1x fa-inverse')
   end
 
   def twitter_icon
-    content_tag(:span, nil, class: 'fa fa-twitter fa-fw')
+    fa_icon(:twitter)
   end
 
   def twitter_link_icon
-    content_tag(:span, nil, class: 'fa-stack fa-lg') do
-      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
-        content_tag(:i, nil, class: 'fa fa-twitter fa-stack-1x fa-inverse')
-    end
+    content_tag_container( 'fa fa-twitter fa-stack-1x fa-inverse')
   end
 
   def youtube_icon
-    content_tag(:span, nil, class: 'fa fa-youtube fa-fw')
+    fa_icon(:youtube)
   end
 
   def youtube_link_icon
-    content_tag(:span, nil, class: 'fa-stack fa-lg') do
-      content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
-        content_tag(:i, nil, class: 'fa fa-youtube fa-stack-1x fa-inverse')
-    end
+    content_tag_container('fa fa-youtube fa-stack-1x fa-inverse')
   end
 
   def fussball_de_icon
-    content_tag(:span, nil, class: 'fa fa-soccer-ball-o fa-fw')
+    fa_icon('soccer-ball-o')
   end
 
   def fussballde_link_icon
+    content_tag_container('fa fa-soccer-ball-o fa-stack-1x fa-inverse')
+  end
+
+  def content_tag_container(css_class)
     content_tag(:span, nil, class: 'fa-stack fa-lg') do
       content_tag(:i, nil, class: 'fa fa-circle fa-stack-2x') +
-        content_tag(:i,
-                    nil,
-                    class: 'fa fa-soccer-ball-o fa-stack-1x fa-inverse')
+        content_tag(:i, nil, class: css_class)
     end
   end
 
   def user_icon
-    content_tag(:span, nil, class: 'fa fa-user fa-fw')
-  end
-
-  def admin_icon
-    content_tag(:span, nil, class: 'fa fa-user-plus fa-fw')
+    fa_icon(:user)
   end
 
   def spinner_icon
-    content_tag(:span, nil, class: 'fa fa-spinner fa-pulse')
+    fa_icon('spinner pulse')
   end
 
   def login_icon
-    content_tag(:span, nil, class: 'fa fa-sign-in fa-fw')
+    fa_icon('sign-in')
   end
 
   def logout_icon
-    content_tag(:span, nil, class: 'fa fa-sign-out fa-fw')
+    fa_icon('sign-out')
   end
 
   def download_icon
-    content_tag(:span, nil, class: 'fa fa-download fa-fw')
+    fa_icon(:download)
   end
 
   def report_icon
-    content_tag(:span, nil, class: 'fa fa-file-text-o fa-fw')
+    fa_icon('file-text')
   end
 
   def chat_icon
-    content_tag(:span, nil, class: 'fa fa-comments-o fa-fw')
+    fa_icon('comments-o')
   end
 
   def chat_message_icon
-    content_tag(:span, nil, class: 'fa fa-commenting-o fa-fw')
+    fa_icon('commenting-o')
+  end
+
+  def list_icon
+    fa_icon(:list)
+  end
+
+  def comment_icon
+    fa_icon(:comment)
+  end
+
+  def internal_icon
+    fa_icon('eye-slash')
+  end
+
+  def public_icon
+    fa_icon('eye')
   end
 end

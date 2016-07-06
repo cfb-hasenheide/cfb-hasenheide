@@ -8,14 +8,25 @@ class Report < ActiveRecord::Base
   validates :rival_final_score,
             numericality: { greater_than_or_equal_to: :rival_half_time_score },
             if: 'rival_half_time_score.present?'
+  validates :possession,
+            numericality: { greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100 },
+            if: 'possession.present?'
 
+  enum incident: { armchair_decision: 0,
+                   called_off_club: 1,
+                   called_off_rival: 2,
+                   cancelled_due_weather: 3 }
   enum result: { lost: 0, drew: 1, won: 3 }
+  enum turf: { artificial: 0, natural: 1, gravel: 2 }
+  enum weather: { sunny: 0, cloudy: 1, rainy: 2, snowy: 3 }
 
-  before_save :set_result, if: :final_score_changed?
+  before_save :set_result_and_points, if: :final_score_changed?
 
   scope :no_content, -> { where(content: [nil, '']) }
 
-  delegate :home?, to: :event
+  delegate :club_team_name, :home?, :rival_team_name, to: :event
+  delegate :address, :datetime, :name, :type, to: :event, prefix: true
 
   def final_score
     score(:final)
@@ -34,14 +45,14 @@ class Report < ActiveRecord::Base
   def score(type)
     scores = [send("club_#{type}_score"), send("rival_#{type}_score")]
     scores.reverse! unless home?
-    scores.join(' : ')
+    scores.compact.join(' : ')
   end
 
   def final_score_changed?
     club_final_score_changed? || rival_final_score_changed?
   end
 
-  def set_result
+  def set_result_and_points
     self.result = nil && return unless final_score_present?
 
     self.result = if club_final_score > rival_final_score
@@ -51,5 +62,8 @@ class Report < ActiveRecord::Base
                   else
                     'drew'
                   end
+
+    # NOTE set the integer presentation of result enum as points
+    self.points = self[:result]
   end
 end

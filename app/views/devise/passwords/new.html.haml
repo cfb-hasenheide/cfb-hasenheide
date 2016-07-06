@@ -5,15 +5,17 @@
       .panel-heading
         %h3.panel-title Passwort vergessen?
 
-      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-        .panel-body
-          = devise_error_messages!
+      = bootstrap_form_for resource,
+        as: resource_name,
+        url: password_path(resource_name),
+        method: :post do |f|
 
-          .form-group
-            = f.label :email
-            = f.email_field :email, autofocus: true, class: 'form-control'
+        .panel-body
+          = f.alert_message 'Es sind Fehler aufgetreten!', error_summary: false
+
+          = f.email_field :email, autofocus: true, icon: :envelope
 
         .panel-footer
-          = f.submit 'Passwort zurücksetzen', class: 'btn btn-primary btn-block'
+          = f.primary 'Passwort zurücksetzen'
 
     = render 'devise/shared/links'

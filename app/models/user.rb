@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :user_profile, dependent: :destroy
+  has_one :player, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,22 +8,18 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
-  after_create :create_user_profile
-
-  scope :players, -> { where(player: true) }
-
-  def self.with_player_pass
-    where(player_pass: true)
+  def self.without_player
+    User.where.not(id: Player.pluck(:user_id))
   end
 
   # NOTE: Workaround to migrate users from legacy app
-  # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
+  # https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def self.legacy_password(password)
     Digest::MD5.hexdigest(password)
   end
 
   # NOTE: Workaround to migrate users from legacy app
-  # Following: https://vesselinv.com/rails-devise-user-migration-legacy-apps/
+  # https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def valid_password?(password)
     if legacy_password?
       # Use Devise's secure_compare to avoid timing attacks
@@ -40,14 +36,10 @@ class User < ActiveRecord::Base
     super password
   end
 
-  def email_with_name
-    %("#{user_profile.alias}" <#{username}@cfb-hasenheide.de>)
-  end
-
-  private
-
-  def create_user_profile
-    user_alias = username || email.split('@').first
-    UserProfile.create(user: self, alias: user_alias.titleize)
+  # NOTE: Workaround to let users with legacy password reset their password
+  # https://github.com/plataformatec/devise/wiki/How-To:-Migration-legacy-database
+  def reset_password(*args)
+    self.legacy_password = false
+    super
   end
 end

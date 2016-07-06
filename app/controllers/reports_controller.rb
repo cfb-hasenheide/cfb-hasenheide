@@ -21,8 +21,19 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = Report.find(params[:id])
-    @event = Event.find(@report.event_id)
+    @event = Event.friendly.find(params[:event_id])
+    @report = @event.report
+    @attending_players =
+      Player.where(id: @event.attendances.yes.pluck(:player_id)).order(:nickname)
+    @watching_players =
+      Player.where(id: @event.attendances.watch.pluck(:player_id)).order(:nickname)
+
+    if @report.nil? && current_user.admin?
+      redirect_to new_report_path(event_id: @event.id)
+    elsif @report.nil?
+      redirect_to event_path(@event), alert: 'Spielbericht nicht vorhanden!'
+      return
+    end
   end
 
   def new
@@ -31,9 +42,13 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    flash[:notice] = 'Bericht wurde erfolgreich erstellt.' if @report.save
 
-    respond_with @report, location: reports_path
+    if @report.save
+      redirect_to event_report_path(@report.event_id),
+        notice: 'Bericht wurde erfolgreich erstellt.'
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -41,10 +56,11 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      flash[:notice] = 'Bericht wurde erfolgreich aktualisiert.'
+      redirect_to event_report_path(@report.event_id),
+        notice: 'Bericht wurde erfolgreich aktualisiert.'
+    else
+      render 'edit'
     end
-
-    respond_with @report, location: reports_path
   end
 
   private
@@ -54,8 +70,25 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:event_id, :content, :club_final_score,
-                                   :rival_final_score, :club_half_time_score,
-                                   :rival_half_time_score)
+    params.require(:report).permit(:annotation,
+                                   :captain_id,
+                                   :club_final_score,
+                                   :club_half_time_score,
+                                   :content,
+                                   :corners_club,
+                                   :corners_rival,
+                                   :event_id,
+                                   :goalkeeper_id,
+                                   :incident,
+                                   :most_valuable_player_id,
+                                   :possession,
+                                   :referee,
+                                   :referee_description,
+                                   :referee_name,
+                                   :reporter_id,
+                                   :rival_final_score,
+                                   :rival_half_time_score,
+                                   :turf,
+                                   :weather)
   end
 end

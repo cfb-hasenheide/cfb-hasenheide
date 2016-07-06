@@ -1,0 +1,22 @@
+%p Hallo Hasen,
+
+%p auf der Page werden jetzt Meldungen für folgendes Event entgegen genommen:
+
+%p
+  %strong= event.name
+  = surround '(', ')' do
+    = event.model_name.human
+
+%p
+  Wann:
+  = l(event.datetime)
+
+%p
+  Wo:
+  = link_to event.address, event.google_maps_url
+
+%p= event.description.presence
+
+%p= message.presence
+
+= link_to 'Zur Meldeliste', event_attendance_list_url(event)

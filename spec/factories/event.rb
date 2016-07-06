@@ -3,8 +3,6 @@ FactoryGirl.define do
     address 'Kreuzberg, Berlin'
     datetime Time.zone.now
     home true
-    maximum 11
-    minimum 7
     name 'Eventname'
     type 'Other'
 
@@ -12,6 +10,14 @@ FactoryGirl.define do
       type 'Other'
       name 'Other Event'
       association :club_team, factory: [:team, :club]
+    end
+
+    trait :past do
+      sequence(:datetime) { |n| Time.zone.now - n.day }
+    end
+
+    trait :future do
+      sequence(:datetime) { |n| Time.zone.now + n.day }
     end
   end
 end

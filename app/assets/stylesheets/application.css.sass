@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require_tree .
- *= require bootstrap-wysihtml5
  *= require rails_bootstrap_forms
  *= require_self
  */
@@ -31,8 +30,8 @@ $link-hover-color: #D5A021
 $link-active-color: #D5A021
 
 body
-  padding-top: 60px
-  padding-bottom: 60px
+  padding-top: 70px
+  padding-bottom: 70px
 
 @import 'bootstrap-sprockets'
 @import 'bootstrap'
@@ -65,6 +64,8 @@ body
   @extend .row
   .third
     @extend .col-md-4
+  .two-thirds
+    @extend .col-md-8
 
 .primary-button
   @extend .btn
@@ -127,6 +128,9 @@ label.required:after
     color: $navbar-default-link-hover-color
   &:active
     color: $navbar-default-link-active-color
+  &.right
+    margin: 0
+    float: right
 
 blockquote
   font-size: 14px
@@ -150,6 +154,11 @@ img.logoNavbar
 tr.clickableTableRow
   cursor: pointer
 
+// navbar user avatar
+.navbar-nav > li > a.dropdown-toggle
+  padding-top: 10px
+  padding-bottom: 10px
+
 // offcanvas chat
 #chat
   padding-top: 60px
@@ -160,3 +169,6 @@ tr.clickableTableRow
 
 button.navbar-toggle
   height: 34px
+
+textarea
+  resize: vertical

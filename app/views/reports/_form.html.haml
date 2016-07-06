@@ -1,78 +1,102 @@
-= bootstrap_form_for report, layout: :horizontal, label_col: 'col-md-2',
-  control_col: 'col-md-10' do |f|
+= bootstrap_form_for report,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-5' do |f|
 
-  = f.alert_message 'Folgende Fehler sind aufgetreten:'
+  = f.hidden_field :event_id
 
-  .form-group
-    = label_tag 'Event', nil, class: 'col-md-2 control-label'
-    .col-md-4
-      %p.form-control-static
-        = report.event.name
-        = surround '(', ')' do
-          = l(report.event.datetime, format: :date_only)
+  = f.fields_for report.event do |e|
+    .form-group
+      = e.label report.event.model_name.human, nil, class: 'col-md-2 control-label'
+      .col-md-5
+        %p.form-control-static
+          = report.event_name
 
-  .form-group
-    = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
-    .col-md-4
-      .input-group
-        - if report.event.home?
-          %span.input-group-addon= report.event.club_team.name
+    .form-group
+      = e.label :datetime, nil, class: 'col-md-2 control-label'
+      .col-md-5
+        %p.form-control-static
+          = l(report.event_datetime)
 
-          = f.number_field_without_bootstrap :club_final_score, min: 0,
-            class: 'form-control'
+    .form-group
+      = e.label :address, nil, class: 'col-md-2 control-label'
+      .col-md-5
+        %p.form-control-static
+          = report.event_address
 
-          %span.input-group-addon :
+  %hr
 
-          = f.number_field_without_bootstrap :rival_final_score, min: 0,
-            class: 'form-control'
+  - unless report.event.type == 'Other'
+    .form-group
+      = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_final_score', f: f, report: report
 
-          %span.input-group-addon= report.event.rival_team.name
+    .form-group
+      = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_half_time_score', f: f, report: report
 
-        - else
-          %span.input-group-addon= report.event.rival_team.name
+    .form-group
+      = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
+      .col-md-5
+        = render 'form_corners', f: f, report: report
 
-          = f.number_field_without_bootstrap :rival_final_score, min: 0,
-            class: 'form-control'
+    = f.number_field :possession, min: 0, max: 100, append: '%'
 
-          %span.input-group-addon :
+    = f.select :incident, options_for_select(incident_options),
+      include_blank: true
 
-          = f.number_field_without_bootstrap :club_final_score, min: 0,
-            class: 'form-control'
+    %hr
 
-          %span.input-group-addon= report.event.club_team.name
+  = f.select :turf, options_for_select(turf_options), prompt: true
 
-  .form-group
-    = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
-    .col-md-4
-      .input-group
-        - if report.event.home?
-          %span.input-group-addon= report.event.club_team.name
+  = f.select :weather, options_for_select(weather_options), prompt: true
 
-          = f.number_field_without_bootstrap :club_half_time_score, min: 0,
-            class: 'form-control'
+  = f.form_group do
+    = f.check_box :referee,
+      'data-toggle' => 'collapse',
+      'data-target' => '#refereeForm'
 
-          %span.input-group-addon :
+  .collapse#refereeForm{class: ('in' if report.referee?)}
+    = f.text_field :referee_name
 
-          = f.number_field_without_bootstrap :rival_half_time_score, min: 0,
-            class: 'form-control'
+    = f.text_field :referee_description
 
-          %span.input-group-addon= report.event.rival_team.name
+  %hr
 
-        - else
-          %span.input-group-addon= report.event.rival_team.name
+  = f.collection_select :goalkeeper_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
-          = f.number_field_without_bootstrap :rival_half_time_score, min: 0,
-            class: 'form-control'
+  = f.collection_select :captain_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
-          %span.input-group-addon :
+  = f.collection_select :most_valuable_player_id,
+    report.event.attending_players,
+    :id,
+    :nickname,
+    prompt: true
 
-          = f.number_field_without_bootstrap :club_half_time_score, min: 0,
-            class: 'form-control'
+  = f.text_area :annotation
 
-          %span.input-group-addon= report.event.club_team.name
+  %hr
 
-  = f.text_area :content, class: 'wysihtml5'
+  = f.text_area :content, rows: 10, control_col: 'col-md-10'
+
+  = f.collection_select :reporter_id,
+    Player.all.order(:nickname),
+    :id,
+    :nickname,
+    prompt: true
+
+  %hr
 
   = f.form_group do
     = f.submit class: 'btn btn-primary'
-    = link_to 'Abbrechen', reports_path, class: 'btn btn-default'
+    = link_to 'Abbrechen', :back, class: 'btn btn-default'
