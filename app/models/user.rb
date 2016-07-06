@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_one :player, dependent: :destroy
 
   # Include default devise modules. Others available are:

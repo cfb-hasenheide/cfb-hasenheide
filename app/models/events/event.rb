@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include FriendlyIdAble
 
   paginates_per 12
