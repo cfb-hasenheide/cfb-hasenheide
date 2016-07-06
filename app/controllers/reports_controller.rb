@@ -45,7 +45,7 @@ class ReportsController < ApplicationController
 
     if @report.save
       redirect_to event_report_path(@report.event_id),
-        notice: 'Bericht wurde erfolgreich erstellt.'
+                  notice: 'Bericht wurde erfolgreich erstellt.'
     else
       render 'new'
     end
@@ -57,7 +57,7 @@ class ReportsController < ApplicationController
   def update
     if @report.update(report_params)
       redirect_to event_report_path(@report.event_id),
-        notice: 'Bericht wurde erfolgreich aktualisiert.'
+                  notice: 'Bericht wurde erfolgreich aktualisiert.'
     else
       render 'edit'
     end

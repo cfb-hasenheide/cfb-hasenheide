@@ -2,7 +2,7 @@ class EventMailer < ApplicationMailer
   default from: %("CFB" <cfb@cfb-hasenheide.de>)
 
   after_action :set_from, :set_to,
-    only: %i(attendance_list_closed attendance_list_opened)
+               only: %i(attendance_list_closed attendance_list_opened)
 
   def attendance_list_opened(event_id,
                              to_player_ids:,

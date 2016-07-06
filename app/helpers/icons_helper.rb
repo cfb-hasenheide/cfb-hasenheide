@@ -56,7 +56,7 @@ module IconsHelper
   end
 
   def twitter_link_icon
-    content_tag_container( 'fa fa-twitter fa-stack-1x fa-inverse')
+    content_tag_container('fa fa-twitter fa-stack-1x fa-inverse')
   end
 
   def youtube_icon
