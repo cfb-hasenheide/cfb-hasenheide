@@ -30,5 +30,7 @@ module CfbHasenheide
     # Do not suppress ActiveRecord errors raised within `after_rollback`/
     # `after_commit` callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end
