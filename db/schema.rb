@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607214310) do
+ActiveRecord::Schema.define(version: 20160614184837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +21,8 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.boolean "open",            default: false, null: false
     t.integer "minimum",         default: 7,     null: false
     t.integer "maximum",         default: 11,    null: false
+    t.index ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
   end
-
-  add_index "attendance_lists", ["attendable_type", "attendable_id"], name: "index_attendance_lists_on_attendable_type_and_attendable_id", using: :btree
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "attendance_list_id"
@@ -32,9 +30,8 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["attendance_list_id", "player_id"], name: "index_attendances_on_attendance_list_id_and_player_id", unique: true, using: :btree
   end
-
-  add_index "attendances", ["attendance_list_id", "player_id"], name: "index_attendances_on_attendance_list_id_and_player_id", unique: true, using: :btree
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
     t.integer  "bootsy_resource_id"
@@ -61,19 +58,17 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
-
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.datetime "created_at"
@@ -87,9 +82,8 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.datetime "datetime",                  null: false
     t.string   "type",                      null: false
     t.string   "slug",                      null: false
+    t.index ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   end
-
-  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
 
   create_table "forum_posts", force: :cascade do |t|
     t.integer  "user_id"
@@ -97,10 +91,9 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.text     "comment"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["forum_thread_id"], name: "index_forum_posts_on_forum_thread_id", using: :btree
+    t.index ["user_id"], name: "index_forum_posts_on_user_id", using: :btree
   end
-
-  add_index "forum_posts", ["forum_thread_id"], name: "index_forum_posts_on_forum_thread_id", using: :btree
-  add_index "forum_posts", ["user_id"], name: "index_forum_posts_on_user_id", using: :btree
 
   create_table "forum_threads", force: :cascade do |t|
     t.string   "topic"
@@ -108,9 +101,16 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
   end
 
-  add_index "forum_threads", ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "content",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
 
   create_table "news", force: :cascade do |t|
     t.string   "title"
@@ -145,11 +145,10 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.string  "slug"
     t.string  "avatar"
     t.string  "panini"
+    t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+    t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
+    t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
   end
-
-  add_index "players", ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
-  add_index "players", ["slug"], name: "index_players_on_slug", unique: true, using: :btree
-  add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
 
   create_table "reports", force: :cascade do |t|
     t.integer  "event_id"
@@ -176,9 +175,8 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.integer  "reporter_id"
     t.integer  "turf"
     t.integer  "weather"
+    t.index ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
   end
-
-  add_index "reports", ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                               null: false
@@ -188,9 +186,8 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.boolean  "club"
     t.boolean  "player_pass_needed", default: false, null: false
     t.boolean  "current_season",     default: false, null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true, using: :btree
   end
-
-  add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -216,14 +213,13 @@ ActiveRecord::Schema.define(version: 20160607214310) do
     t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                              default: false, null: false
+    t.index ["admin"], name: "index_users_on_admin", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+    t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
-  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "users"
   add_foreign_key "forum_posts", "forum_threads"
