@@ -58,8 +58,8 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'guard-rspec', require: false
   gem 'web-console'
-  gem 'rubocop'
-  gem 'rails_best_practices'
+  gem 'rubocop', require: false
+  gem 'rails_best_practices', require: false
 end
 
 group :development, :test do
