@@ -27,10 +27,6 @@ module CfbHasenheide
     # Load models in subfolders
     config.autoload_paths += %W(#{config.root}/app/models/events)
 
-    # Do not suppress ActiveRecord errors raised within `after_rollback`/
-    # `after_commit` callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     # Enable per-form CSRF tokens.
     config.action_controller.per_form_csrf_tokens = true
 
