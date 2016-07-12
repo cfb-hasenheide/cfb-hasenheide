@@ -6,6 +6,9 @@ ruby '2.3.1'
 gem 'rails', '~> 5.0'
 gem 'responders'
 
+# app server
+gem 'puma'
+
 # db
 gem 'pg'
 
@@ -54,16 +57,19 @@ gem 'icalendar'
 gem 'raygun4ruby'
 
 group :development do
+  gem 'guard-rspec', require: false
+  gem 'listen'
+  gem 'rails_best_practices', require: false
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'guard-rspec', require: false
+  gem 'spring-watcher-listen'
   gem 'web-console'
-  gem 'rubocop', require: false
-  gem 'rails_best_practices', require: false
 end
 
 group :development, :test do
-  gem 'pry'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
   gem 'rspec-rails'
 end
 
