@@ -1,0 +1,14 @@
+%li.list-group-item
+  .media
+    .media-left
+      = image_tag message.user.player.avatar_url(:small_thumb),
+        width: '30',
+        height: '30',
+        alt: current_user.player.nickname,
+        class: 'img-circle'
+    .media-body
+      %strong.text-muted
+        = message.user.player.nickname
+      %small.text-muted= l(message.created_at, format: :short)
+      %br
+      = message.content

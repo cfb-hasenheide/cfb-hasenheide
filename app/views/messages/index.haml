@@ -1,0 +1,35 @@
+= content_for(:title, 'Chat')
+
+.page-header
+  %h1
+    = content_for(:title)
+    .pull-right
+      = link_to chat_path,
+        remote: true,
+        class: 'default-button',
+        'data-disable-with' => "#{spinner_icon}" do
+        = refresh_icon
+
+.panel.panel-default
+  .panel-heading
+    %h2.panel-title= page_entries_info(@messages)
+
+  %ul.list-group.fixed-panel#messages
+    = render @messages
+
+  .panel-footer
+    = form_for @message, remote: true do |f|
+      = f.hidden_field :user_id, value: current_user.id
+
+      .input-group
+        = f.text_field :content,
+          class: 'form-control',
+          placeholder: Message.human_attribute_name(:content),
+          autofocus: true
+
+        %span.input-group-btn
+          = button_tag type: 'submit',
+            class: 'primary-button',
+            'data-disable-with' => "#{spinner_icon} Senden" do
+            = chat_message_icon
+            Senden

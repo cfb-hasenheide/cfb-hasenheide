@@ -112,6 +112,15 @@ ActiveRecord::Schema.define(version: 20160614184837) do
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "content",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
   create_table "news", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
