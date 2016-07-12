@@ -12,11 +12,16 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
 
-    @message.save
-
-    respond_to do |format|
-      format.js { render layout: false }
+    if @message.save
+      ActionCable.server.broadcast('messages',
+                                   message: @message.content,
+                                   user: @message.user_id)
+      head :ok
     end
+
+    # respond_to do |format|
+    #   format.js { render layout: false }
+    # end
   end
 
   private
