@@ -13,9 +13,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
-      ActionCable.server.broadcast('messages',
-                                   message: @message.content,
-                                   user: @message.user_id)
+      ActionCable.server.broadcast('messages', message: render(@message))
       head :ok
     end
 
