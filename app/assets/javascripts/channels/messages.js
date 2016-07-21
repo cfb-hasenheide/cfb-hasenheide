@@ -14,5 +14,7 @@ App.messages = App.cable.subscriptions.create('MessagesChannel', {
     $('#messages').append(data.message);
     // scroll down to latest message
     $("#messages").scrollTop($('#messages')[0].scrollHeight);
+    // clear #message_content input field
+    $('#message_content').val('');
   }
 });
