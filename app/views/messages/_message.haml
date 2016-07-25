@@ -9,6 +9,6 @@
     .media-body
       %strong.text-muted
         = message.user.player.nickname
-      %small.text-muted= l(message.created_at, format: :short)
+      %small.pull-right.text-muted= l(message.created_at, format: :short)
       %br
       = message.content

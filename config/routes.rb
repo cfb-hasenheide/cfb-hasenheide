@@ -62,8 +62,6 @@ Rails.application.routes.draw do
 
   resources :teams, except: :show
 
-  get '/chat' => 'messages#index', as: :chat
-
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
 end

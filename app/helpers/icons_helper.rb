@@ -133,4 +133,8 @@ module IconsHelper
   def refresh_icon
     fa_icon('refresh')
   end
+
+  def refreshing_icon
+    fa_icon('refresh spin')
+  end
 end
