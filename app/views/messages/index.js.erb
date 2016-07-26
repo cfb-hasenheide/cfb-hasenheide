@@ -1,2 +1,2 @@
 $('#messages').html("<%= escape_javascript(render @messages) %>");
-$('#messages').scrollTop($('#messages')[0].scrollHeight);
+$('#messages').closest('.modal-body').scrollTop($('#messages').closest('.modal-body')[0].scrollHeight);
