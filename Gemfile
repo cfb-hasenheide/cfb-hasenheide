@@ -11,6 +11,7 @@ gem 'puma'
 
 # db
 gem 'pg'
+gem 'redis'
 
 # slugs
 gem 'friendly_id'
