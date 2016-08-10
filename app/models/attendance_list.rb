@@ -1,4 +1,4 @@
-class AttendanceList < ActiveRecord::Base
+class AttendanceList < ApplicationRecord
   belongs_to :attendable, polymorphic: true
   has_many :attendances, dependent: :destroy
 

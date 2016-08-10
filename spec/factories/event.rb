@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :event do
+    association :club_team, factory: [:team, :club]
     address 'Kreuzberg, Berlin'
     datetime Time.zone.now
     home true
@@ -9,7 +10,6 @@ FactoryGirl.define do
     trait :other do
       type 'Other'
       name 'Other Event'
-      association :club_team, factory: [:team, :club]
     end
 
     trait :past do

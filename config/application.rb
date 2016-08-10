@@ -27,8 +27,19 @@ module CfbHasenheide
     # Load models in subfolders
     config.autoload_paths += %W(#{config.root}/app/models/events)
 
-    # Do not suppress ActiveRecord errors raised within `after_rollback`/
-    # `after_commit` callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    # Enable per-form CSRF tokens.
+    config.action_controller.per_form_csrf_tokens = true
+
+    # Enable origin-checking CSRF mitigation.
+    config.action_controller.forgery_protection_origin_check = true
+
+    # Make Ruby 2.4 preserve the timezone of the receiver when calling `to_time`.
+    ActiveSupport.to_time_preserves_timezone = true
+
+    # Require `belongs_to` associations by default.
+    Rails.application.config.active_record.belongs_to_required_by_default = true
+
+    # Do not halt callback chains when a callback returns false.
+    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end

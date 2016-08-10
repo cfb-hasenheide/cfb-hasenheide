@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
-# rails 4
-gem 'rails'
+# rails
+gem 'rails', '~> 5.0'
 gem 'responders'
+
+# app server
+gem 'puma'
 
 # db
 gem 'pg'
@@ -42,7 +45,7 @@ gem 'bootstrap_form'
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # json
 gem 'jbuilder'
@@ -54,22 +57,26 @@ gem 'icalendar'
 gem 'raygun4ruby'
 
 group :development do
+  gem 'guard-rspec', require: false
+  gem 'listen'
+  gem 'rails_best_practices', require: false
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'guard-rspec', require: false
+  gem 'spring-watcher-listen'
   gem 'web-console'
-  gem 'rubocop'
-  gem 'rails_best_practices'
 end
 
 group :development, :test do
-  gem 'pry'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
   gem 'rspec-rails'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
 end
 
 group :production do

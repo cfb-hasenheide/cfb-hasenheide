@@ -1,4 +1,4 @@
-class Team < ActiveRecord::Base
+class Team < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   scope :club, -> { where(club: true).order('name') }

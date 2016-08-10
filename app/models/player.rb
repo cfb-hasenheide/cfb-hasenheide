@@ -1,4 +1,4 @@
-class Player < ActiveRecord::Base
+class Player < ApplicationRecord
   include FriendlyId
 
   mount_uploader :avatar, AvatarUploader

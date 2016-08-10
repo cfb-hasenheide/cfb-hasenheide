@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include FriendlyIdAble
 
   paginates_per 12
@@ -6,8 +6,7 @@ class Event < ActiveRecord::Base
   has_one :attendance_list, as: :attendable, dependent: :destroy
   has_many :attendances, through: :attendance_list
   has_one :report, dependent: :destroy
-  belongs_to :club_team,  class_name: 'Team'
-  belongs_to :rival_team, class_name: 'Team'
+  belongs_to :club_team, class_name: 'Team'
 
   accepts_nested_attributes_for :attendance_list
 

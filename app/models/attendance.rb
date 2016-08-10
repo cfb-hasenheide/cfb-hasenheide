@@ -1,4 +1,4 @@
-class Attendance < ActiveRecord::Base
+class Attendance < ApplicationRecord
   belongs_to :attendance_list
   belongs_to :player
 

@@ -17,22 +17,30 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit :username, :email, :password, :password_confirmation
-    end
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: [:username, :email, :password, :password_confirmation]
+    )
 
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:username, :email, :password, :password_confirmation,
-               :current_password)
-    end
+    devise_parameter_sanitizer.permit(
+      :account_update,
+      keys: [
+        :username, :email, :password, :password_confirmation, :current_password
+      ]
+    )
 
-    devise_parameter_sanitizer.for(:accept_invitation)
-                              .concat [:first_name, :last_name, :phone]
-
-    devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:username, :first_name, :last_name, :phone, :password,
-               :password_confirmation, :invitation_token)
-    end
+    devise_parameter_sanitizer.permit(
+      :accept_invitation,
+      keys: [
+        :first_name,
+        :invitation_token,
+        :last_name,
+        :password,
+        :password_confirmation,
+        :phone,
+        :username
+      ]
+    )
   end
 
   def authorize_admin!

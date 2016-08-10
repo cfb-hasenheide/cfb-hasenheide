@@ -27,3 +27,5 @@ config/initializers/secret_token.rb
 logfile
 
 .env
+
+.byebug_history

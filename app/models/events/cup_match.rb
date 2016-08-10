@@ -1,6 +1,8 @@
 class CupMatch < Event
   include FriendlyIdAble
 
+  belongs_to :rival_team, class_name: 'Team'
+
   validates :club_team_id, :rival_team_id, presence: true
 
   validates :home, inclusion: { in: [true, false] }
