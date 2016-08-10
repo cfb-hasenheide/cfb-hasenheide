@@ -23,6 +23,8 @@ de:
       forum_thread:
         topic: Thema
         comment: Kommentar
+      message:
+        content: Nachricht
       news:
         title: Titel
         content: Inhalt

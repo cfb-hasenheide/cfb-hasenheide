@@ -1,10 +1,6 @@
-= render 'layouts/chat'
-
 %nav.navbar.navbar-fixed-top.navbar-default{role: 'navigation'}
   .container
     .navbar-header
-      = render 'layouts/chat_toggle', navbar_toggle: true
-
       %button.navbar-toggle.collapsed{'data-target' => '#navigation',
         'data-toggle' => 'collapse', type: 'button'}
         %span.sr-only Navigation aus-/einklappen
@@ -20,8 +16,6 @@
       = link_to 'CFB Hasenheide', root_path, class: 'navbar-brand'
 
     #navigation.collapse.navbar-collapse
-      = render 'layouts/chat_toggle', navbar_toggle: false
-
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'news')}
           = link_to 'News', news_index_path
@@ -41,6 +35,12 @@
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
+          %li
+            = link_to '#chatModal',
+              'data-toggle' => 'modal' do
+              = chat_icon
+              Chat
+
           %li.dropdown
             %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
               role: 'button', 'aria-expanded' => 'false' }
@@ -79,3 +79,5 @@
             = link_to new_user_session_path do
               = login_icon
               Login
+
+= render 'layouts/chat' if user_signed_in?

@@ -1,37 +1,38 @@
-- if user_signed_in?
-  #chat.navmenu.navmenu-default.navmenu-fixed-right.offcanvas
-    .panel.panel-default
-      .panel-body
-        %h2.panel-title Chat
+.modal.fade#chatModal{tabindex: '-1',
+  role: 'dialog',
+  'aria-labelledby' => 'chatLabel'}
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-header
+        = button_tag class: 'close',
+          'data-dismiss' => 'modal',
+          'aria-label' => 'Close' do
+          %span{'aria-hidden' => 'true'} &times;
 
-      %ul.list-group
-        %li.list-group-item
-          %small.text-muted
-            %strong Hase 1
-            \-
-            = time_ago_in_words 25.minutes.ago
-          %br
-          Was issn jetz hier mit chat und so?
-        %li.list-group-item
-          %small.text-muted
-            %strong Hase 2
-            \-
-            = time_ago_in_words 5.minutes.ago
-          %br
-          ja genau, was gehtn da?
-        %li.list-group-item
-          %small.text-muted
-            %strong InternetHase
-            \-
-            = time_ago_in_words 2.minutes.ago
-          %br
-          Jaja der is schon in arbeit..
+        %h4.modal-title#chatLabel
+          Chat
+          %small
+            = link_to messages_path,
+              remote: true,
+              'data-disable-with' => "#{refreshing_icon}" do
+              = refresh_icon
 
-      .panel-footer
-        = form_tag '#', method: :get do
+      .modal-body
+        %ul.list-group#messages
+
+      .modal-footer
+        = form_for Message.new, remote: true do |f|
+          = f.hidden_field :user_id, value: current_user.id
+
           .input-group
-            = text_field_tag :message, nil, class: 'form-control',
-              placeholder: 'Nachricht'
-            .input-group-btn
-              = button_tag type: 'submit', class: 'primary-button' do
+            = f.text_field :content,
+              class: 'form-control',
+              placeholder: Message.human_attribute_name(:content)
+
+            %span.input-group-btn
+              = button_tag type: 'submit',
+                class: 'primary-button',
+                'data-disable-with' => "#{spinner_icon} Senden" do
                 = chat_message_icon
+                Senden
+

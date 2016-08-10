@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   resources :forum_threads
 
+  resources :messages, only: [:create, :index]
+
   resources :news, concerns: :paginatable
 
   resources :players, concerns: :paginatable, except: :destroy do
