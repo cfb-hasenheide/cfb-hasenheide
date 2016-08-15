@@ -28,4 +28,22 @@ RSpec.describe Function, type: :model do
       end.to change { user.functions.count }.from(0).to(1)
     end
   end
+
+  context 'delegating methods to relations functions' do
+    before do
+      user.assign_role role
+    end
+
+    describe '#name' do
+      it 'returns the name of the role' do
+        expect(user.functions.first.name).to eq(role.name)
+      end
+    end
+
+    describe '#username' do
+      it 'returns the name of the user' do
+        expect(user.functions.first.username).to eq(user.username)
+      end
+    end
+  end
 end

@@ -10,6 +10,8 @@ class Player < ApplicationRecord
   validates :jersey_number, uniqueness: true, allow_nil: true
   validates :user_id, uniqueness: true
 
+  delegate :current_functions, to: :user
+
   enum status: { active: 0, injured: 1, inactive: 2 }
 
   friendly_id :nickname, use: :slugged
