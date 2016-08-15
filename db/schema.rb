@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614184837) do
+ActiveRecord::Schema.define(version: 20160815160730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attendance_lists", force: :cascade do |t|
-    t.integer "attendable_id"
     t.string  "attendable_type"
+    t.integer "attendable_id"
     t.boolean "open",            default: false, null: false
     t.integer "minimum",         default: 7,     null: false
     t.integer "maximum",         default: 11,    null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160614184837) do
   end
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
-    t.integer  "bootsy_resource_id"
     t.string   "bootsy_resource_type"
+    t.integer  "bootsy_resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 20160614184837) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
+  end
+
+  create_table "functions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.date     "assumed_at"
+    t.date     "vacated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_functions_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -171,6 +182,12 @@ ActiveRecord::Schema.define(version: 20160614184837) do
     t.index ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string   "name",                               null: false
     t.datetime "created_at"
@@ -201,8 +218,8 @@ ActiveRecord::Schema.define(version: 20160614184837) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                  default: false, null: false
@@ -217,4 +234,6 @@ ActiveRecord::Schema.define(version: 20160614184837) do
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
+  add_foreign_key "functions", "roles"
+  add_foreign_key "functions", "users"
 end
