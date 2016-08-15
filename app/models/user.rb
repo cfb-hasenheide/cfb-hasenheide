@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  has_many :functions
+  has_many :roles, through: :functions
+
   def self.without_player
     User.where.not(id: Player.pluck(:user_id))
   end
@@ -36,10 +39,21 @@ class User < ApplicationRecord
     super password
   end
 
+  def assign_role(role, start = nil, ending = nil)
+    functions << Function.create(role_id: role.id,
+                                 assumed_at: start,
+                                 vacated_at: ending)
+    save
+  end
+
   # NOTE: Workaround to let users with legacy password reset their password
   # https://github.com/plataformatec/devise/wiki/How-To:-Migration-legacy-database
   def reset_password(*args)
     self.legacy_password = false
     super
+  end
+
+  def current_functions
+    functions.where('vacated_at = ?', DateTime.now)
   end
 end
