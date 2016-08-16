@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 20160815160730) do
   create_table "functions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
-    t.date     "assumed_at"
-    t.date     "vacated_at"
+    t.datetime "assumed_at"
+    t.datetime "vacated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_functions_on_role_id", using: :btree

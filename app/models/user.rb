@@ -54,6 +54,6 @@ class User < ApplicationRecord
   end
 
   def current_functions
-    functions.where('vacated_at = ?', DateTime.now)
+    functions.where('vacated_at >= ?', DateTime.now)
   end
 end
