@@ -6,11 +6,9 @@ class Player < ApplicationRecord
   belongs_to :user
   has_many :attendances, dependent: :destroy
 
-  validates :nickname, :user_id, presence: true
+  validates :nickname, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true
-  validates :user_id, uniqueness: true
-
-  delegate :current_functions, to: :user
+  validates :user_id, uniqueness: true, presence: true
 
   enum status: { active: 0, injured: 1, inactive: 2 }
 
