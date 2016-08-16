@@ -1,8 +1,11 @@
-= simple_form_for(@role) do |f|
-  = f.error_notification
+= bootstrap_form_for @role,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-4' do |f|
 
   .form-inputs
     = f.text_field :name
 
-  .form-actions
-    = f.button :submit
+  = f.form_group do
+    = f.submit class: 'primary-button'
+    = link_to 'Abbrechen', roles_path, class: 'default-button'
