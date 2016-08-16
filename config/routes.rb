@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   mount Ckeditor::Engine => '/ckeditor'
 
   concern :paginatable do
@@ -63,6 +64,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :update]
 
   resources :teams, except: :show
+
+  resources :administrations, only: :index
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
