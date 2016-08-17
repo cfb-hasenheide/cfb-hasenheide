@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.integer  "addressable_id"
     t.float    "longitude"
     t.float    "latitude"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
   end
 
@@ -141,13 +141,6 @@ ActiveRecord::Schema.define(version: 20160816211924) do
   create_table "players", force: :cascade do |t|
     t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
-    t.string  "first_name"
-    t.string  "last_name"
-    t.date    "date_of_birth"
-    t.string  "place_of_birth"
-    t.string  "phone1"
-    t.string  "phone2"
-    t.string  "club_email"
     t.string  "membership_number"
     t.date    "member_since"
     t.date    "member_until"
@@ -159,6 +152,13 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.integer "status",                 default: 0
     t.string  "slug"
     t.string  "avatar"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.date    "date_of_birth"
+    t.string  "place_of_birth"
+    t.string  "phone1"
+    t.string  "phone2"
+    t.string  "club_email"
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
     t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
