@@ -1,0 +1,7 @@
+FactoryGirl.define do
+  factory :address do
+    sequence(:street) { |n| "Awesome_street #{n}" }
+    sequence(:zipcode) { |n| n + 10_000 }
+    association :addressable, factory: :user
+  end
+end

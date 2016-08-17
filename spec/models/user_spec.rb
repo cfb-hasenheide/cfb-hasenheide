@@ -9,7 +9,7 @@ describe User do
       it 'assigns the role to the user' do
         expect do
           user.assign_role(role)
-        end.to change{ user.roles.count }.by(1)
+        end.to change { user.roles.count }.by(1)
       end
     end
 
@@ -56,6 +56,19 @@ describe User do
       it 'returns nil' do
         expect(user.current_functions).to eq([])
       end
+    end
+  end
+
+  describe '#address' do
+    it 'user references to address' do
+      expect(user.address)
+    end
+
+    it 'user address can be assigned' do
+      address = create :address
+      user.address = address
+      expect(user.save).to be_truthy
+      expect(user.reload.address).to eq(address)
     end
   end
 end
