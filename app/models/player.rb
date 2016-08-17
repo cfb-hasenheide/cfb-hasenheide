@@ -3,7 +3,9 @@ class Player < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader unless Rails.env.test?
 
-  delegate :street, :zipcode, :city, to: :user
+  delegate :street, :zipcode, :city, to: :address
+  delegate :address, to: :user
+  delegate :contact, to: :user
 
   belongs_to :user
   has_many :attendances, dependent: :destroy

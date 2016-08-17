@@ -85,4 +85,10 @@ describe User do
       expect(user.reload.player?).to be_falsy
     end
   end
+
+  describe '#contact' do
+    it 'has contact' do
+      expect(user.contact)
+    end
+  end
 end
