@@ -57,4 +57,9 @@ class User < ApplicationRecord
   def current_functions
     functions.where('vacated_at >= ?', DateTime.now)
   end
+
+  def player?
+    return true if player
+    false
+  end
 end
