@@ -114,6 +114,10 @@ module IconsHelper
     fa_icon('commenting-o')
   end
 
+  def comment_icon
+    fa_icon('comment')
+  end
+
   def list_icon
     fa_icon(:list)
   end

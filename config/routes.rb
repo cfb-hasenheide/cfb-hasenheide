@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments, only: :create
+
   resources :events, concerns: :paginatable do
     resource :attendance_list, only: :show
     resource :report, only: :show

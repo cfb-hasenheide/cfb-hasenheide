@@ -1,5 +1,6 @@
 class Report < ApplicationRecord
   belongs_to :event
+  has_many :comments, as: :commentable
 
   validates :event_id, presence: true, uniqueness: true
   validates :club_final_score,

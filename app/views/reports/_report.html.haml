@@ -91,3 +91,15 @@
 
           %dt= t(:reporter_id, scope: %w(activerecord attributes report))
           %dd= Player.find(report.reporter_id).nickname if report.reporter_id?
+
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title
+          Stimmen zum Spiel
+          %small= report.comments.count
+
+      %ul.list-group
+        = render(report.comments) || 'Keine vorhanden'
+
+      .panel-footer
+        = render 'comments/form', comment: report.comments.new
