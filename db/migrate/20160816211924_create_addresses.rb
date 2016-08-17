@@ -8,7 +8,8 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.float :longitude
       t.float :latitude
 
-      t.timestamps
+      t.datetime :created_at, null: true
+      t.datetime :updated_at, null: true
     end
 
     execute <<-SQL
