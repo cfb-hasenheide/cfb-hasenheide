@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 20160816211924) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street",           null: false
-    t.integer  "zipcode",          null: false
+    t.string   "zipcode",          null: false
+    t.string   "city",             null: false
     t.string   "addressable_type"
     t.integer  "addressable_id"
     t.float    "longitude"
@@ -144,9 +145,6 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.string  "last_name"
     t.date    "date_of_birth"
     t.string  "place_of_birth"
-    t.string  "street"
-    t.string  "zipcode"
-    t.string  "city"
     t.string  "phone1"
     t.string  "phone2"
     t.string  "club_email"
