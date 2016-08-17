@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  delegate :street, :zipcode, :city, to: :address
+
   has_many :functions
   has_many :roles, through: :functions
 
