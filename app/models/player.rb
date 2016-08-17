@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
   include FriendlyId
 
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader unless Rails.env.test?
 
   belongs_to :user
   has_many :attendances, dependent: :destroy
