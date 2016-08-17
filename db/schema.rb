@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816211924) do
+ActiveRecord::Schema.define(version: 20160817181339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.datetime "updated_at"
     t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.date     "date_of_birth"
+    t.string   "place_of_birth"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "club_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -152,13 +166,6 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.integer "status",                 default: 0
     t.string  "slug"
     t.string  "avatar"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.date    "date_of_birth"
-    t.string  "place_of_birth"
-    t.string  "phone1"
-    t.string  "phone2"
-    t.string  "club_email"
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
     t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
@@ -241,6 +248,7 @@ ActiveRecord::Schema.define(version: 20160816211924) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "contacts", "users"
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
