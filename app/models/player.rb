@@ -5,6 +5,7 @@ class Player < ApplicationRecord
 
   delegate :address, to: :user
   delegate :contact, to: :user
+  delegate :member, to: :user
 
   belongs_to :user
   has_many :attendances, dependent: :destroy
