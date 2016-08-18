@@ -1,0 +1,21 @@
+%ul.list-group
+  - if comments.empty?
+    %li.list-group-item.text-muted
+      Keine vorhanden
+
+  - else
+    - comments.each do |comment|
+      %li.list-group-item
+        .media
+          .media-left
+            = image_tag comment.user.player.avatar_url(:small_thumb),
+              width: '30',
+              height: '30',
+              alt: comment.user.player.nickname,
+              class: 'img-circle'
+          .media-body
+            %strong.text-muted
+              = comment.user.player.nickname
+            %small.pull-right.text-muted= l(comment.created_at, format: :short)
+            %br
+            = comment.content

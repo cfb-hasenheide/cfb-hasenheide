@@ -98,8 +98,7 @@
           Stimmen zum Spiel
           %small= report.comments.count
 
-      %ul.list-group
-        = render(report.comments) || 'Keine vorhanden'
+      = render 'comments/comments', comments: report.comments
 
       .panel-footer
         = render 'comments/form', comment: report.comments.new

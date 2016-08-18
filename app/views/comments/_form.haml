@@ -3,14 +3,13 @@
   = f.hidden_field :commentable_type, value: f.object.commentable_type
   = f.hidden_field :user_id, value: current_user.id
 
-  .input-group
-    = f.text_field :content,
+  .form-group
+    = f.text_area :content,
       class: 'form-control',
       placeholder: Comment.human_attribute_name(:content)
 
-    %span.input-group-btn
-      = button_tag type: 'submit',
-        class: 'primary-button',
-        'data-disable-with' => "#{spinner_icon} Abgeben" do
-        = comment_icon
-        Abgeben
+  = button_tag type: 'submit',
+    class: 'primary-button',
+    'data-disable-with' => "#{spinner_icon} Abgeben" do
+    = comment_icon
+    Abgeben
