@@ -27,16 +27,16 @@
           %dd= @player.nickname
 
           %dt= Player.human_attribute_name(:first_name)
-          %dd= @player.contact.firstname
+          %dd= @player.contact.firstname if @player.contact
 
           %dt= Player.human_attribute_name(:last_name)
-          %dd= @player.contact.lastname
+          %dd= @player.contact.lastname if @player.contact
 
           %dt= Player.human_attribute_name(:date_of_birth)
-          %dd= l(@player.contact.date_of_birth) if @player.contact.date_of_birth?
+          %dd= l(@player.contact.date_of_birth) if @player.contact && @player.contact.date_of_birth?
 
           %dt= Player.human_attribute_name(:place_of_birth)
-          %dd= @player.contact.place_of_birth
+          %dd= @player.contact.place_of_birth if @player.contact
 
   .half
     .panel.panel-default
@@ -83,13 +83,13 @@
           %dd= @player.address.city
 
           %dt= Player.human_attribute_name(:phone1)
-          %dd= @player.contact.phone1
+          %dd= @player.contact.phone1 if @player.contact
 
           %dt= Player.human_attribute_name(:phone2)
-          %dd= @player.contact.phone2
+          %dd= @player.contact.phone2 if @player.contact
 
           %dt= Player.human_attribute_name(:club_email)
-          %dd= @player.contact.club_email
+          %dd= @player.contact.club_email if @player.contact
 
   .half
     .panel.panel-default
@@ -99,10 +99,10 @@
       .panel-body
         %dl.dl-horizontal
           %dt= Player.human_attribute_name(:membership_number)
-          %dd= @player.membership_number
+          %dd= @player.member.identifier if @player.member
 
           %dt= Player.human_attribute_name(:member_since)
-          %dd= l(@player.member_since) if @player.member_since?
+          %dd= l(@player.member.member_since) if @player.member && @player.member.member_since?
 
           %dt= Player.human_attribute_name(:member_until)
-          %dd= l(@player.member_until) if @player.member_until?
+          %dd= l(@player.member.member_until) if @player.member && @player.member.member_until?

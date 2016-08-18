@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :player, dependent: :destroy
+  has_one :member
   has_one :address, as: :addressable
   has_one :contact, dependent: :destroy
 
