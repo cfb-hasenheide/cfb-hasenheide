@@ -17,7 +17,12 @@ if Rails.env.development?
 
     Player.create(
       nickname: "Nicki #{role}",
-      user: user
+      user: user,
+    )
+
+    Member.create(
+      user: user,
+      identifier: "{role}1232434353"
     )
   end
 end

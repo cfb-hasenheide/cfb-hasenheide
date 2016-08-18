@@ -87,7 +87,13 @@ describe User do
   end
 
   describe '#contact' do
-    it 'has contact' do
+    it 'has a contact' do
+      expect(user.contact)
+    end
+  end
+
+  describe '#member' do
+    it 'has a member' do
       expect(user.contact)
     end
   end

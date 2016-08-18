@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817181339) do
+ActiveRecord::Schema.define(version: 20160818170321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,16 @@ ActiveRecord::Schema.define(version: 20160817181339) do
     t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
   end
 
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "identifier"
+    t.date     "member_since"
+    t.date     "member_until"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_members_on_user_id", using: :btree
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "content",    null: false
@@ -155,9 +165,6 @@ ActiveRecord::Schema.define(version: 20160817181339) do
   create_table "players", force: :cascade do |t|
     t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
-    t.string  "membership_number"
-    t.date    "member_since"
-    t.date    "member_until"
     t.boolean "player_pass"
     t.string  "player_pass_number"
     t.date    "eligible_to_play_since"
