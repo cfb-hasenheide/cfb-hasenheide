@@ -8,19 +8,21 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.float :longitude
       t.float :latitude
 
-      t.datetime :created_at, null: true
-      t.datetime :updated_at, null: true
+      t.timestamps
     end
 
-    execute <<-SQL
-      INSERT INTO addresses(addressable_id, street, zipcode, city)
-      SELECT players.user_id, players.street, players.zipcode, players.city
-      FROM players
-    SQL
+    say 'Import data Addresses'
 
-    execute <<-SQL
-      UPDATE addresses SET addressable_type='User'
-    SQL
+    Player.all.each do |p|
+      if (p.city && p.street && p.zipcode)
+        Address.create(
+          city: p.city,
+          street: p.street,
+          addressable: p.user,
+          zipcode: p.zipcode
+        )
+      end
+    end
 
     remove_column :players, :street
     remove_column :players, :zipcode
@@ -33,14 +35,16 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
     add_column :players, :zipcode, :string
     add_column :players, :city, :string
 
-    execute <<-SQL
-      UPDATE players
-      SET street=addresses.street,
-          city=addresses.city,
-          zipcode=addresses.zipcode
-      FROM addresses
-      WHERE players.user_id = addresses.addressable_id
-    SQL
+    say 'Move data back to player class'
+
+    Address.all.each do |a|
+      p = Player.find_by(user_id: a.addressable_id)
+      p.update(
+        city: a.city,
+        street: a.street,
+        zipcode: a.zipcode
+      )
+    end
 
     drop_table :addresses
   end

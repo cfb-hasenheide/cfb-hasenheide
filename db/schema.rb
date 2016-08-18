@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160817181339) do
     t.integer  "addressable_id"
     t.float    "longitude"
     t.float    "latitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
   end
 
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20160817181339) do
     t.string   "phone1"
     t.string   "phone2"
     t.string   "club_email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
   end
 

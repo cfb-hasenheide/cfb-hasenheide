@@ -10,21 +10,21 @@ class CreateContacts < ActiveRecord::Migration[5.0]
       t.string :phone2
       t.string :club_email
 
-      t.datetime :created_at, null: true
-      t.datetime :updated_at, null: true
+      t.timestamps
     end
 
-    execute <<-SQL
-      INSERT INTO contacts(user_id, firstname,
-                  lastname, date_of_birth,
-                  place_of_birth, phone1, phone2, club_email)
-      SELECT players.user_id, players.first_name,
-             players.last_name, players.date_of_birth,
-             players.place_of_birth,
-             players.phone1, players.phone2,
-             players.club_email
-      FROM players
-    SQL
+    Player.all.each do |p|
+      Contact.create(
+        club_email: p.club_email,
+        date_of_birth: p.date_of_birth,
+        firstname: p.first_name,
+        lastname: p.last_name,
+        phone1: p.phone1,
+        phone2: p.phone2,
+        place_of_birth: p.place_of_birth,
+        user: p.user
+      )
+    end
 
     remove_column :players, :first_name
     remove_column :players, :last_name
@@ -44,18 +44,19 @@ class CreateContacts < ActiveRecord::Migration[5.0]
     add_column :players, :phone2, :string
     add_column :players, :club_email, :string
 
-    execute <<-SQL
-      UPDATE players
-      SET first_name=contacts.firstname,
-          last_name=contacts.lastname,
-          date_of_birth=contacts.date_of_birth,
-          place_of_birth=contacts.place_of_birth,
-          phone1=contacts.phone1,
-          phone2=contacts.phone2,
-          club_email=contacts.club_email
-      FROM contacts
-      WHERE players.user_id = contacts.user_id
-    SQL
+    Contact.all.each do |c|
+      p = Player.find_by(user_id: c.user_id)
+      p.update(
+        club_email: c.club_email,
+        date_of_birth: c.date_of_birth,
+        firs_tname: c.firstname,
+        last_name: c.lastname,
+        phone1: c.phone1,
+        phone2: c.phone2,
+        place_of_birth: c.place_of_birth,
+        user: c.user
+      )
+    end
 
     drop_table :contacts
   end
