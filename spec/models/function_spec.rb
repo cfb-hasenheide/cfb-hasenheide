@@ -46,4 +46,36 @@ RSpec.describe Function, type: :model do
       end
     end
   end
+
+  describe '.current' do
+    let(:current_functions_count) { 5 }
+    let(:not_vacated_functions_count) { 8 }
+
+    let!(:not_vacated_functions)  { create_list :function, 8 }
+    let!(:past_functions) do
+      create_list :function, not_vacated_functions_count, :in_past
+    end
+    let!(:current_functions)  do
+      create_list :function, current_functions_count, :current_function
+    end
+
+    let!(:future_function) { create :function, assumed_at: DateTime.now + 9 }
+
+    it 'returns all function where vacated_at is nil or not reached' do
+      expected = current_functions_count + not_vacated_functions_count
+      expect(Function.current.count).to eq(expected)
+    end
+
+    it 'returns only functions with vacated nil or vacated_at after today' do
+      Function.current.each do |function|
+        expect(function.vacated_at).to be > Date.today if function.vacated_at
+      end
+    end
+
+    it 'returns only functions started in the past' do
+      Function.current.each do |function|
+        expect(function.assumed_at).to be < Date.today + 1
+      end
+    end
+  end
 end
