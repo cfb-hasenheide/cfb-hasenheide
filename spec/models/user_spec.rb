@@ -4,6 +4,15 @@ describe User do
   let(:user) { create :user }
   let(:role) { create :role }
 
+  context 'roles assignable to users' do
+    it 'assigns the role to the user' do
+      expect do
+        user.roles << role
+        user.save
+      end.to change { user.functions.count }.from(0).to(1)
+    end
+  end
+
   describe '#assign_role' do
     context 'no dates given' do
       it 'assigns the role to the user' do
@@ -12,6 +21,7 @@ describe User do
         end.to change { user.roles.count }.by(1)
       end
     end
+
 
     context 'start and end date given' do
       let(:start_date) { DateTime.new }
