@@ -89,13 +89,15 @@ RSpec.describe Function, type: :model do
   describe '#update' do
     let(:updating_function) do
       create :function, role: function.role, user: function.user,
-        assumed_at: function.vacated_at + 10, vacated_at: function.vacated_at + 20
+        assumed_at: function.vacated_at + 10,
+        vacated_at: function.vacated_at + 20
     end
 
-    subject { updating_function.update(vacated_at: time_for_update) }
 
     context 'no times overlapping with existing function' do
       let(:time_for_update) { updating_function.vacated_at + 2 }
+
+      subject { updating_function.update(vacated_at: time_for_update) }
 
       it 'updates the function' do
         expect(subject).to be_truthy
@@ -104,6 +106,8 @@ RSpec.describe Function, type: :model do
 
     context 'times will be overlapping with existing existing function' do
       let(:time_for_update) { function.vacated_at - 2 }
+
+      subject { updating_function.update(assumed_at: time_for_update) }
 
       it 'cannot update the function' do
         expect(subject).to be_falsy
