@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   resources :administrations, only: :index
   resources :roles
 
+  resources :functions, only: [:create, :destroy, :index]
+
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
 end
