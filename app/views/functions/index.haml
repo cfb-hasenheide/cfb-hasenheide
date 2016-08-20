@@ -1,0 +1,36 @@
+= form_for Function.new, url: functions_path do |f|
+  = f.select :user_id,
+    options_from_collection_for_select(User.all, :id, :username),
+    prompt: "Person"
+  = f.select :role_id,
+    options_from_collection_for_select(Role.all, :id, :name),
+    prompt: "Aufgabe"
+
+  = f.date_field :assumed_at, value: Date.today
+  = f.date_field :vacated_at
+
+  = f.submit class: 'btn btn-primary'
+
+%h1 Aktuelle Funktionen im Verein
+- @current_functions.each do |function|
+  %dl
+    %dt Rolle
+    %dd= function.role.name
+    %dt Beauftragter
+    %dd= function.user.username
+    %dt Von:
+    %dd= function.assumed_at
+    %dt Bis:
+    %dd= function.vacated_at
+
+%h1 Funktionen im Verein
+- @functions.each do |function|
+  %dl
+    %dt Rolle
+    %dd= function.role.name
+    %dt Beauftragter
+    %dd= function.user.username
+    %dt Von:
+    %dd= function.assumed_at
+    %dt Bis:
+    %dd= function.vacated_at
