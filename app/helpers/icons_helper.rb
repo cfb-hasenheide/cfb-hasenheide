@@ -1,6 +1,6 @@
 module IconsHelper
   def edit_icon
-    fa_icon(:edit)
+    fa_icon(:pencil)
   end
 
   def delete_icon
@@ -112,10 +112,6 @@ module IconsHelper
 
   def chat_message_icon
     fa_icon('commenting-o')
-  end
-
-  def comment_icon
-    fa_icon('comment')
   end
 
   def list_icon
