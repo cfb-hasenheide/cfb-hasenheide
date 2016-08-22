@@ -13,6 +13,7 @@
               height: '30',
               alt: comment.user.player.nickname,
               class: 'img-circle'
+
           .media-body
             %strong.text-muted
               = comment.user.player.nickname
@@ -22,6 +23,11 @@
                   %span.text-warning
                     = edit_icon
                     %span.hidden-xs bearbeiten
-            %small.pull-right.text-muted= l(comment.created_at, format: :short)
+
+            %small.pull-right.text-muted
+              = 'bearbeitet |' if comment.edited?
+              = l(comment.updated_at, format: :short)
+
             %br
+
             = comment.content
