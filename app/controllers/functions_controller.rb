@@ -1,4 +1,6 @@
 class FunctionsController < ApplicationController
+  before_action :set_function, only: %i(destroy update end_up)
+
   def index
     @functions = Function.all
     @current_functions = Function.current
@@ -11,24 +13,23 @@ class FunctionsController < ApplicationController
   end
 
   def destroy
-    id = params.require(:id)
-    function = Function.find(id)
-    function.delete
+    @function.delete
   end
 
   def update
-    id = params.require(:id)
-    function = Function.find(id)
-    function.update(required_params)
+    @function.update(required_params)
   end
 
   def end_up
-    id = params.require(:id)
-    function = Function.find(id)
-    function.update(vacated_at: DateTime.now)
+    @function.update(vacated_at: Date.today)
   end
 
   private
+
+  def set_function
+    id = params.require(:id)
+    @function = Function.find(id)
+  end
 
   def required_params
     params.require(:function).permit(:user_id,

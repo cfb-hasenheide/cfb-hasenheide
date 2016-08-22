@@ -2,14 +2,20 @@ FactoryGirl.define do
   factory :function do
     association :user, factory: :user
     association :role, factory: :role
-    assumed_at DateTime.now - 10.day
+    assumed_at Date.today + 10
 
-    trait :in_past do
-      vacated_at DateTime.now - 6.day
+    trait :past do
+      assumed_at Date.today - 10.day
+      vacated_at Date.today - 6.day
     end
 
-    trait :current_function do
-      vacated_at DateTime.now + 6.day
+    trait :current do
+      assumed_at Date.today
+      vacated_at Date.today + 15
+    end
+
+    trait :future do
+      assumed_at Date.today + 10
     end
   end
 end
