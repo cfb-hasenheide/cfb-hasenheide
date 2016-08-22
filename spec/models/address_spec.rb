@@ -18,13 +18,15 @@ RSpec.describe Address, type: :model do
 
     it 'returns the user' do
       user = create :user
-      user.address = address and user.save
+      user.address = address
+      user.save
       expect(address.addressable).to eq(user)
     end
 
     it 'returns the team' do
       team = create :team
-      team.addresses << address and team.save
+      team.addresses << address
+      team.save
       expect(address.addressable).to eq(team)
     end
   end
