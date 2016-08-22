@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      flash[:notice] = 'Kommentar wurde erstellt'
+      flash.notice = 'Kommentar wurde erstellt'
     else
-      flash[:alert] = @comment.errors.full_messages.to_sentence
+      flash.alert = @comment.errors.full_messages.to_sentence
     end
 
     redirect_to :back
@@ -18,8 +18,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.commentable,
-                  notice: 'Kommentar wurde aktualisiert'
+      redirect_to @comment.commentable, notice: 'Kommentar aktualisiert'
     else
       render :edit
     end
