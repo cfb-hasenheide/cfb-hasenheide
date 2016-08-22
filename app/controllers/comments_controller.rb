@@ -25,6 +25,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    redirect_to @comment.commentable, notice: 'Kommentar gelöscht'
+  end
+
   private
 
   def comment_params
