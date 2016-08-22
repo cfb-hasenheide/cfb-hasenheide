@@ -10,7 +10,7 @@ class Function < ApplicationRecord
 
   def self.current
     where('vacated_at > ? OR vacated_at is NULL AND assumed_at <= ?',
-          Time.zoneTime.now, Time.zoneTime.now)
+          Time.zone.today, Time.zone.today)
   end
 
   private
@@ -22,9 +22,9 @@ class Function < ApplicationRecord
 
   def check_overlapping_time
     same_functions = Function.where(role: role.id, user: user)
-      .where('vacated_at > ?', assumed_at)
-      .where('assumed_at < ?', vacated_at)
-      .where.not(id: id)
+                             .where('vacated_at > ?', assumed_at)
+                             .where('assumed_at < ?', vacated_at)
+                             .where.not(id: id)
     throw(:abort) if same_functions.any?
   end
 end
