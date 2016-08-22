@@ -7,7 +7,7 @@ class FunctionsController < ApplicationController
   end
 
   def create
-    @function= Function.create required_params
+    @function = Function.create required_params
     @functions = Function.all
     respond_with(@function, location: functions_url)
   end
@@ -21,7 +21,7 @@ class FunctionsController < ApplicationController
   end
 
   def end_up
-    @function.update(vacated_at: Date.today)
+    @function.update(vacated_at: Time.zone.today)
   end
 
   private
