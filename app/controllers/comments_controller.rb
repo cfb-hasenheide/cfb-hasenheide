@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
 
   def create
+    authorize! :create, Comment
+
     @comment = Comment.new(comment_params)
 
     if @comment.save
@@ -17,6 +19,8 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize! :update, Comment
+
     if @comment.update(comment_params)
       redirect_to @comment.commentable, notice: 'Kommentar aktualisiert'
     else
@@ -25,6 +29,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Comment
+
     @comment.destroy
     redirect_to @comment.commentable, notice: 'Kommentar gelöscht'
   end

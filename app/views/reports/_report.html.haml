@@ -100,5 +100,6 @@
 
       = render 'comments/comments', comments: report.comments
 
-      .panel-footer
-        = render 'comments/form', comment: report.comments.new
+      - if can?(:create, Comment)
+        .panel-footer
+          = render 'comments/form', comment: report.comments.new
