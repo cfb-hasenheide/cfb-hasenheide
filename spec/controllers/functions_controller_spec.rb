@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe FunctionsController, type: :controller do
-  let(:function) { build :function }
+  let(:function) { create :function }
   let(:role) { function.role }
   let(:user) { function.user }
   before { sign_in }
 
   describe "POST #create" do
+    let(:function) { build :function }
     let(:create_params) { { function: function.attributes } }
 
     it "returns http success" do
@@ -28,25 +29,38 @@ RSpec.describe FunctionsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:persited_funciton) { create :function }
-
     subject do
-      delete :destroy, params: { id: persited_funciton.id }
+      delete :destroy, params: { id: function.id }
     end
 
+    before { function }
+
     it "returns http success" do
-      delete :destroy, params: { id: persited_funciton.id }
       expect(response).to have_http_status(:success)
     end
 
-    it "does not delete the entry from the database" do
-      expect { subject }.to_not change{ Function.count }
+    it 'it deletes the function from the datebase' do
+      expect { subject }.to change{ Function.count }.by(-1)
     end
+  end
 
-    it 'represents a deleted function by setting the vacated_at date' do
+  describe 'PUT/PATCH #update' do
+    let(:new_vacated_at) { DateTime.now + 700 }
+
+    it 'updates vacated_at' do
       expect do
-        subject
-      end.to change{ persited_funciton.reload.vacated_at }
+        put :update, params: { id: function.id,
+                               function: { vacated_at: new_vacated_at } }
+      end.to change{ function.reload.vacated_at }
+    end
+  end
+
+
+  describe 'POST #end_up' do
+    it 'sets the vacated_at date to now' do
+      expect do
+        post :end_up, params: { id: function.id }
+      end.to change { function.reload.vacated_at }
     end
   end
 end
