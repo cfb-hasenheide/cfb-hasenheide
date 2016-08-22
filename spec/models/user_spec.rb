@@ -22,10 +22,9 @@ describe User do
       end
     end
 
-
     context 'start and end date given' do
-      let(:start_date) { DateTime.new }
-      let(:end_date) { DateTime.new + 2.days }
+      let(:start_date) { Time.zone.today }
+      let(:end_date) { Time.zone.today + 2.days }
 
       before do
         user.assign_role(role, start_date, end_date)
@@ -51,8 +50,8 @@ describe User do
     end
 
     context 'user has a current function' do
-      let(:start_date) { DateTime.now - 10.days }
-      let(:end_date) { DateTime.now + 2.days }
+      let(:start_date) { Time.zone.today - 10.days }
+      let(:end_date) { Time.zone.today + 2.days }
 
       it 'returns the current function' do
         expect(user.current_functions.first.name).to eq(role.name)
@@ -60,8 +59,8 @@ describe User do
     end
 
     context 'user was in function' do
-      let(:start_date) { DateTime.now - 10.days }
-      let(:end_date) { DateTime.now - 2.days }
+      let(:start_date) { Time.zone.today - 10.days }
+      let(:end_date) { Time.zone.today - 2.days }
 
       it 'returns nil' do
         expect(user.current_functions).to eq([])

@@ -66,8 +66,8 @@ RSpec.describe Function, type: :model do
   describe '#update' do
     let(:new_function) do
       create :function, role: role, user: user,
-        assumed_at: function.vacated_at + 10,
-        vacated_at: function.vacated_at + 20
+                        assumed_at: function.vacated_at + 10,
+                        vacated_at: function.vacated_at + 20
     end
 
     it 'updates the function' do

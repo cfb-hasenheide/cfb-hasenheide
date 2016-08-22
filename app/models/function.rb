@@ -10,7 +10,7 @@ class Function < ApplicationRecord
 
   def self.current
     where('vacated_at > ? OR vacated_at is NULL AND assumed_at <= ?',
-          DateTime.now, DateTime.now)
+          Time.zoneTime.now, Time.zoneTime.now)
   end
 
   private
