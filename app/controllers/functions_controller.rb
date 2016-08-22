@@ -11,8 +11,18 @@ class FunctionsController < ApplicationController
   end
 
   def destroy
-    # TODO need a assignment controller to split
-    # destroying function and vacated it out
+    id = params.require(:id)
+    function = Function.find(id)
+    function.delete
+  end
+
+  def update
+    id = params.require(:id)
+    function = Function.find(id)
+    function.update(required_params)
+  end
+
+  def end_up
     id = params.require(:id)
     function = Function.find(id)
     function.update(vacated_at: DateTime.now)
