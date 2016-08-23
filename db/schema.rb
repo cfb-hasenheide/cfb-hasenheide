@@ -226,9 +226,6 @@ ActiveRecord::Schema.define(version: 20160817195301) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "forum_posts", "forum_threads"
-  add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
-  add_foreign_key "forum_posts", "users"
-  add_foreign_key "forum_threads", "users"
   add_foreign_key "forum_threads", "users"
 end
