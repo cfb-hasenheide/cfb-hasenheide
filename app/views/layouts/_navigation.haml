@@ -31,7 +31,7 @@
             = link_to 'Spieler', players_path
         - if admin?
           %li{class: ('active' if params[:controller] == 'administrations')}
-            = link_to 'Administration', administrations_path
+            = link_to 'Administration', administration_path
 
 
         %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
