@@ -9,21 +9,21 @@ class Function < ApplicationRecord
   delegate :name, to: :role
 
   def self.current
-    where('vacated_at > ? OR vacated_at is NULL AND assumed_at <= ?',
+    where('vacated_on > ? OR vacated_on is NULL AND assumed_on <= ?',
           Time.zone.today, Time.zone.today)
   end
 
   private
 
   def correct_time_order?
-    return true unless vacated_at
-    throw(:abort) if vacated_at < assumed_at
+    return true unless vacated_on
+    throw(:abort) if vacated_on < assumed_on
   end
 
   def check_overlapping_time
     same_functions = Function.where(role: role.id, user: user)
-                             .where('vacated_at > ?', assumed_at)
-                             .where('assumed_at < ?', vacated_at)
+                             .where('vacated_on > ?', assumed_on)
+                             .where('assumed_on < ?', vacated_on)
                              .where.not(id: id)
     throw(:abort) if same_functions.any?
   end

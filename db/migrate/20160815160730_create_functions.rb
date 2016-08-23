@@ -3,8 +3,8 @@ class CreateFunctions < ActiveRecord::Migration[5.0]
     create_table :functions do |t|
       t.belongs_to :user, foreign_key: true
       t.belongs_to :role, foreign_key: true
-      t.date :assumed_at
-      t.date :vacated_at
+      t.date :assumed_on
+      t.date :vacated_on
 
       t.timestamps
     end

@@ -21,7 +21,7 @@ class FunctionsController < ApplicationController
   end
 
   def end_up
-    @function.update(vacated_at: Time.zone.today)
+    @function.update(vacated_on: Time.zone.today)
   end
 
   private
@@ -34,7 +34,7 @@ class FunctionsController < ApplicationController
   def required_params
     params.require(:function).permit(:user_id,
                                      :role_id,
-                                     :assumed_at,
-                                     :vacated_at)
+                                     :assumed_on,
+                                     :vacated_on)
   end
 end

@@ -37,12 +37,12 @@ RSpec.describe FunctionsController, type: :controller do
     it_behaves_like 'create function'
 
     context 'create in for same/overlapping time' do
-      let(:vacated_at) { function.vacated_at }
-      let(:assumed_at) { function.assumed_at }
+      let(:vacated_on) { function.vacated_on }
+      let(:assumed_on) { function.assumed_on }
       let(:to_create_function) do
         build(:function,
               user: user, role: role,
-              vacated_at: vacated_at, assumed_at: assumed_at).attributes
+              vacated_on: vacated_on, assumed_on: assumed_on).attributes
       end
 
       subject do
@@ -55,25 +55,25 @@ RSpec.describe FunctionsController, type: :controller do
         it_behaves_like 'cannot create'
       end
 
-      context 'overlapping time by assumed_at' do
-        let(:assumed_at) { function.assumed_at + 1 }
+      context 'overlapping time by assumed_on' do
+        let(:assumed_on) { function.assumed_on + 1 }
         it_behaves_like 'cannot create'
       end
 
-      context 'overlapping time by vacated_at' do
-        let(:vacated_at) { function.vacated_at + 2 }
+      context 'overlapping time by vacated_on' do
+        let(:vacated_on) { function.vacated_on + 2 }
         it_behaves_like 'cannot create'
       end
 
       context 'time in the middle of existing' do
-        let(:assumed_at) { function.assumed_at + 1 }
-        let(:vacated_at) { function.vacated_at - 1 }
+        let(:assumed_on) { function.assumed_on + 1 }
+        let(:vacated_on) { function.vacated_on - 1 }
         it_behaves_like 'cannot create'
       end
 
       context 'different and independent time' do
-        let(:assumed_at) { Time.zone.today + 1000 }
-        let(:vacated_at) { Time.zone.today + 1003 }
+        let(:assumed_on) { Time.zone.today + 1000 }
+        let(:vacated_on) { Time.zone.today + 1003 }
         it_behaves_like 'create function'
       end
     end
@@ -96,21 +96,21 @@ RSpec.describe FunctionsController, type: :controller do
   end
 
   describe 'PUT/PATCH #update' do
-    let(:new_vacated_at) { Time.zone.now + 700 }
+    let(:new_vacated_on) { Time.zone.now + 700 }
 
-    it 'updates vacated_at' do
+    it 'updates vacated_on' do
       expect do
         put :update, params: { id: function.id,
-                               function: { vacated_at: new_vacated_at } }
-      end.to change { function.reload.vacated_at }
+                               function: { vacated_on: new_vacated_on } }
+      end.to change { function.reload.vacated_on }
     end
   end
 
   describe 'POST #end_up' do
-    it 'sets the vacated_at date to todays date' do
+    it 'sets the vacated_on date to todays date' do
       expect do
         post :end_up, params: { id: function.id }
-      end.to change { function.reload.vacated_at }
+      end.to change { function.reload.vacated_on }
     end
   end
 end
