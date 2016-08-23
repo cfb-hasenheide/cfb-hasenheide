@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :attendances, only: :update
 
-  resources :attendance_lists, concerns: :paginatable do
+  resources :attendance_lists, concerns: :paginatable, only: :show do
     get :close_mail, on: :member
     get :open_mail, on: :member
     post :close, on: :member

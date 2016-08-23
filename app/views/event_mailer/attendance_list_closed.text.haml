@@ -8,7 +8,7 @@ Wo: #{@event.address}
 \
 Treffpunkt: (#{l(@event.datetime - @time_to_meet.minutes, format: :time_only)})!
 \
-- if @event.description.present?
+- if @event.description?
   = @event.description
   \
 - if @message.present?

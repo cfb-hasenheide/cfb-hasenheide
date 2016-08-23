@@ -27,20 +27,8 @@ module IconsHelper
     fa_icon(:link)
   end
 
-  def save_icon
-    fa_icon(:check)
-  end
-
   def mail_icon
     fa_icon(:envelope)
-  end
-
-  def minus_icon
-    fa_icon(:minus)
-  end
-
-  def facebook_icon
-    fa_icon(:facebook)
   end
 
   def mail_to_link_icon
@@ -51,16 +39,8 @@ module IconsHelper
     content_tag_container('fa fa-facebook fa-stack-1x fa-inverse')
   end
 
-  def twitter_icon
-    fa_icon(:twitter)
-  end
-
   def twitter_link_icon
     content_tag_container('fa fa-twitter fa-stack-1x fa-inverse')
-  end
-
-  def youtube_icon
-    fa_icon(:youtube)
   end
 
   def youtube_link_icon

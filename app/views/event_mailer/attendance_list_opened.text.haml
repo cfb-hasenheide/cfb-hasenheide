@@ -8,7 +8,7 @@ Wann: #{l(@event.datetime)}
 \
 Wo: #{@event.address}
 \
-- if @event.description.present?
+- if @event.description?
   = @event.description
   \
 - if @message.present?
