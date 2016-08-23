@@ -62,7 +62,7 @@ Rails.application.routes.draw do
 
   resources :teams, except: :show
 
-  resources :administrations, only: :index
+  resource :administration, only: :show
   resources :roles
 
   resources :functions, only: %i(create destroy index update) do
