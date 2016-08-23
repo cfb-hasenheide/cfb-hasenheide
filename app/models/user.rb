@@ -46,8 +46,8 @@ class User < ApplicationRecord
 
   def assign_role(role, start = nil, ending = nil)
     functions << Function.create(role_id: role.id,
-                                 assumed_at: start,
-                                 vacated_at: ending)
+                                 assumed_on: start,
+                                 vacated_on: ending)
     save
   end
 
@@ -59,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def current_functions
-    functions.where('vacated_at >= ?', Time.zone.today)
+    functions.where('vacated_on >= ?', Time.zone.today)
   end
 
   def player?

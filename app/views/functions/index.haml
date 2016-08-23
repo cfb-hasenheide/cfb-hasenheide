@@ -7,8 +7,8 @@
       options_from_collection_for_select(User.all, :id, :username),
       prompt: "Person"
 
-    = f.date_field :assumed_at, value: Date.today
-    = f.date_field :vacated_at
+    = f.date_field :assumed_on, value: Date.today
+    = f.date_field :vacated_on
 
     = f.primary
 
