@@ -5,6 +5,7 @@ class RolesController < ApplicationController
 
   def index
     @roles = Role.all
+    @role = Role.new
     respond_with(@roles)
   end
 
@@ -12,12 +13,9 @@ class RolesController < ApplicationController
     respond_with(@role)
   end
 
-  def new
-    @role = Role.new
-    respond_with(@role)
-  end
-
   def edit
+    @roles = Role.all
+    render 'index'
   end
 
   def create
