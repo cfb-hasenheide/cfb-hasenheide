@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AccessPolicy do
-  let(:admin) { double(:user, admin: true) }
-  let(:member) { double(:user) }
+  let(:admin) { double(:user, admin?: true) }
+  let(:member) { double(:user, admin?: false) }
 
   context 'admin' do
     subject { described_class.new(admin) }
@@ -27,28 +27,27 @@ RSpec.describe AccessPolicy do
   context 'member' do
     subject { described_class.new(member) }
 
+    let(:own_comment) { double(:comment, class: Comment, user: member) }
+    let(:other_comment) { double(:comment, class: Comment, user: nil) }
+
     it 'can :create Comments' do
       expect(subject.can?(:create, Comment)).to be true
     end
 
     it 'can :update own comment' do
-      comment = double(:comment, user: member)
-      expect(subject.can?(:update, comment)).to be true
+      expect(subject.can?(:update, own_comment)).to be true
     end
 
     it 'cannot :update other comments' do
-      comment = double(:comment, user: nil)
-      expect(subject.can?(:update, comment)).to be false
+      expect(subject.can?(:update, other_comment)).to be false
     end
 
     it 'can :destroy own comment' do
-      comment = double(:comment, user: member)
-      expect(subject.can?(:destroy, comment)).to be true
+      expect(subject.can?(:destroy, own_comment)).to be true
     end
 
     it 'cannot :destroy other comments' do
-      comment = double(:comment, user: nil)
-      expect(subject.can?(:destroy, comment)).to be false
+      expect(subject.can?(:destroy, other_comment)).to be false
     end
   end
 end
