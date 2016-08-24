@@ -1,21 +1,9 @@
-= bootstrap_form_for Function.new, url: functions_path do |f|
-  .form-inline
-    = f.select :role_id,
-      options_from_collection_for_select(Role.all, :id, :name),
-      prompt: "Aufgabe"
-    = f.select :user_id,
-      options_from_collection_for_select(User.all, :id, :username),
-      prompt: "Person"
+= render 'form'
 
-    = f.date_field :assumed_on, value: Date.today
-    = f.date_field :vacated_on
-
-    = f.primary
-
-= render 'functions/functions',
+= render 'functions',
   functions: @current_functions,
   headline: 'Aktuelle Functionen im Verein'
 
-= render 'functions/functions',
+= render 'functions',
   functions: @functions,
   headline: 'Alle Funktionen im Verein'

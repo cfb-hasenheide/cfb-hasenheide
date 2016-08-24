@@ -1,0 +1,13 @@
+= bootstrap_form_for @function, url: functions_path do |f|
+  .form-inline
+    = f.select :role_id,
+      options_from_collection_for_select(Role.all, :id, :name),
+        { include_blank: true }, required: true
+    = f.select :user_id,
+      options_from_collection_for_select(User.all, :id, :username),
+        { include_blank: true } , required: true
+
+    = f.date_field :assumed_on, value: Date.today, required: true
+    = f.date_field :vacated_on
+
+    = f.primary
