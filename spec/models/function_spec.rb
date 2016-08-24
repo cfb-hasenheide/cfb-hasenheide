@@ -128,4 +128,31 @@ RSpec.describe Function, type: :model do
       end
     end
   end
+
+  describe '#save' do
+    let(:assumed_on) { Date.today }
+    let(:vacated_on) { nil }
+    let(:function) do
+      Function.new(user: user, role: role,
+                   assumed_on: assumed_on, vacated_on: vacated_on)
+    end
+
+    context 'first save' do
+      it 'save the first function' do
+        expect(function.save).to be_truthy
+      end
+    end
+
+    context 'saving same criteria' do
+      let(:same_function) do
+        Function.new(user: user, role: role,
+                     assumed_on: assumed_on, vacated_on: vacated_on)
+      end
+
+      it 'cannot save the same function twice' do
+        expect(function.save).to be_truthy
+        expect(same_function.save).to be_falsy
+      end
+    end
+  end
 end
