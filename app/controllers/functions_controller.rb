@@ -3,6 +3,7 @@ class FunctionsController < ApplicationController
 
   def index
     @functions = Function.all
+    @function = Function.new
     @current_functions = Function.current
   end
 
@@ -10,6 +11,11 @@ class FunctionsController < ApplicationController
     @function = Function.create required_params
     @functions = Function.all
     respond_with(@function, location: functions_url)
+  end
+
+  def new
+    @function = Function.new
+    respond_with(@function)
   end
 
   def destroy
