@@ -1,6 +1,6 @@
 module IconsHelper
   def edit_icon
-    fa_icon(:edit)
+    fa_icon(:pencil)
   end
 
   def delete_icon

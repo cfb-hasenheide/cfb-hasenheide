@@ -19,13 +19,16 @@ gem 'friendly_id'
 # pagination
 gem 'kaminari'
 
-# authorization
+# authentication
 gem 'devise'
-gem 'devise_invitable', github: 'scambra/devise_invitable'
 # NOTE: using devise_invitable master, because of:
 # undefined method `attributes_for' for class `Devise::ParameterSanitizer' (NameError)
 # Did you mean?  attr_writer
 #   from /Users/elgrillo/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.6/lib/active_support/core_ext/module/aliasing.rb:32:in `alias_method_chain'
+gem 'devise_invitable', github: 'scambra/devise_invitable'
+
+# authorization
+gem 'access-granted'
 
 # file uploading
 gem 'fog-aws', github: 'fog/fog-aws'

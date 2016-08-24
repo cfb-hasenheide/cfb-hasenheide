@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:edit, :update]
+  before_action :set_report, only: [:show, :edit, :update]
 
   respond_to :html
 
@@ -21,8 +21,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @event = Event.friendly.find(params[:event_id])
-    @report = @event.report
+    @event = @report.event
     @attending_players =
       Player.where(id: @event.attendances.yes.pluck(:player_id)).order(:nickname)
     @watching_players =
@@ -66,7 +65,14 @@ class ReportsController < ApplicationController
   private
 
   def set_report
-    @report = Report.find(params[:id])
+    if params[:id].present?
+      @report = Report.find(params[:id])
+    elsif params[:event_id].present?
+      @report = Event.friendly.find(params[:event_id]).report
+    else
+      raise StandardError,
+        'Neither :id nor :event_id param given to find report!'
+    end
   end
 
   def report_params

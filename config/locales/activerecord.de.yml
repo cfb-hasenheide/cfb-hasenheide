@@ -1,18 +1,21 @@
 de:
   activerecord:
     models:
-      league_match: Ligaspiel
+      comment: Kommentar
       cup_match: Pokalspiel
+      league_match: Ligaspiel
       other: Sonstiges
       player: Spieler
-      team: Mannschaft
       report: Spielbericht
+      team: Mannschaft
     attributes:
       attendance:
         status: Bist du dabei?
       attendance_list:
         maximum: Max. Spieler
         minimum: Min. Spieler
+      comment:
+        content: Kommentar
       event:
         address: Adresse
         club_team_id: Vereinsmannschaft

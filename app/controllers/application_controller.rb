@@ -10,7 +10,17 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
+  rescue_from 'AccessGranted::AccessDenied' do
+    redirect_back_or_to(path: root_path, alert: 'Aktion nicht erlaubt!')
+  end
+
   protected
+
+  def authorize_admin!
+    return true if current_user.admin?
+    alert = 'Du hast keine Berechtigung für den Admin Bereich!'
+    redirect_to(:root, alert: alert) && return
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
@@ -39,9 +49,14 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  def authorize_admin!
-    return true if current_user.admin?
-    alert = 'Du hast keine Berechtigung für den Admin Bereich!'
-    redirect_to(:root, alert: alert) && return
+  def redirect_back_or_to(path:, notice: nil, alert: nil)
+    flash.notice = notice
+    flash.alert = alert
+
+    if request.referer.present?
+      redirect_to request.referer
+    else
+      redirect_to path
+    end
   end
 end
