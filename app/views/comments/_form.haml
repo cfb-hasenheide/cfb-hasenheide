@@ -1,0 +1,16 @@
+= bootstrap_form_for comment do |f|
+  = f.hidden_field :commentable_id, value: f.object.commentable_id
+  = f.hidden_field :commentable_type, value: f.object.commentable_type
+  = f.hidden_field :user_id, value: current_user.id
+
+  .form-group
+    = f.text_area :content,
+      hide_label: true,
+      placeholder: Comment.human_attribute_name(:content),
+      icon: 'comment'
+
+  = button_tag type: 'submit',
+    class: 'primary-button',
+    'data-disable-with' => "#{spinner_icon} Abgeben" do
+    = save_icon
+    Speichern

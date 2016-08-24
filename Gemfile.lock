@@ -28,6 +28,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    access-granted (1.1.0)
     actioncable (5.0.0)
       actionpack (= 5.0.0)
       nio4r (~> 1.2)
@@ -350,6 +351,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  access-granted
   bootstrap-sass
   bootstrap-switch-rails
   bootstrap_form
