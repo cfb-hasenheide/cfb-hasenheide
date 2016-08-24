@@ -49,7 +49,7 @@ class CreateContacts < ActiveRecord::Migration[5.0]
       p.update(
         club_email: c.club_email,
         date_of_birth: c.date_of_birth,
-        firs_tname: c.firstname,
+        first_name: c.firstname,
         last_name: c.lastname,
         phone1: c.phone1,
         phone2: c.phone2,
