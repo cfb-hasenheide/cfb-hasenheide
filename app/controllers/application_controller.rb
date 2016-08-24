@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
     redirect_back_or_to(path: root_path, alert: 'Aktion nicht erlaubt!')
   end
 
-  def not_found
-    raise ActionController::RoutingError, 'Not Found'
-  end
-
   protected
 
   def authorize_admin!

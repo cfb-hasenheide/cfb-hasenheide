@@ -19,7 +19,7 @@
             Letzter Eintrag von
             = User.find(forum_thread.user_id).username
             vor
-            = time_ago_in_words(forum_thread.created_at)
+            = l(forum_thread.created_at)
 
     = link_to forum_thread_path(forum_thread) do
       .panel-body

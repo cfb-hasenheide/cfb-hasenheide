@@ -2,14 +2,14 @@
   %li{role: 'presentation',
       class: ('active' if params[:controller] == 'events')}
 
-    = link_to @event.name, event_path(@event)
+    = link_to event.name, event_path(event)
 
   %li{role: 'presentation',
       class: ('active' if params[:controller] == 'attendance_lists')}
 
-    = link_to 'Meldeliste', event_attendance_list_path(@event)
+    = link_to 'Meldeliste', event_attendance_list_path(event)
 
   %li{role: 'presentation',
       class: ('active' if params[:controller] == 'reports')}
 
-    = link_to 'Spielbericht', event_report_path(@event)
+    = link_to 'Spielbericht', event_report_path(event)

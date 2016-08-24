@@ -17,7 +17,7 @@
             = User.find(@forum_thread.user_id).username
             = time_icon
             vor
-            = time_ago_in_words(@forum_thread.created_at)
+            = l(@forum_thread.created_at)
 
     .two-ten
       .two
