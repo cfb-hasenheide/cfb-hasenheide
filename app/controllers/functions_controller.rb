@@ -1,5 +1,5 @@
 class FunctionsController < ApplicationController
-  before_action :set_function, only: %i(destroy update end_up)
+  before_action :set_function, only: %i(destroy update)
 
   def index
     @functions = Function.all
@@ -24,10 +24,6 @@ class FunctionsController < ApplicationController
 
   def update
     @function.update(required_params)
-  end
-
-  def end_up
-    @function.update(vacated_on: Time.zone.today)
   end
 
   private
