@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817195301) do
+ActiveRecord::Schema.define(version: 20160824203837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,14 +77,15 @@ ActiveRecord::Schema.define(version: 20160817195301) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description",   limit: 255
-    t.string   "address",       limit: 255, null: false
-    t.string   "name",                      null: false
+    t.string   "address",       limit: 255,                 null: false
+    t.string   "name",                                      null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                      null: false
-    t.datetime "datetime",                  null: false
-    t.string   "type",                      null: false
-    t.string   "slug",                      null: false
+    t.boolean  "home",                                      null: false
+    t.datetime "datetime",                                  null: false
+    t.string   "type",                                      null: false
+    t.string   "slug",                                      null: false
+    t.boolean  "public",                    default: false, null: false
     t.index ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   end
 
