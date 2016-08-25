@@ -14,7 +14,6 @@ class User < ApplicationRecord
   delegate :street, :zipcode, :city, to: :address
 
   has_many :functions
-  has_many :roles, through: :functions
 
   def self.without_player
     User.where.not(id: Player.pluck(:user_id))

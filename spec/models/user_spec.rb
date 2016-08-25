@@ -4,23 +4,11 @@ describe User do
   let(:user) { create :user }
   let(:role) { create :role }
 
-  context 'roles assignable to users' do
-    it 'assigns the role to the user' do
-      expect do
-        user.roles << role
-        user.save
-      end.to change { user.functions.count }.from(0).to(1)
-    end
-  end
-
   describe '#current_function' do
-    before do
-      user.assign_role role, start_date, end_date
-    end
-
     context 'user has a current function' do
-      let(:start_date) { Time.zone.today - 10.days }
-      let(:end_date) { Time.zone.today + 2.days }
+      let(:user) do
+        create(:function, :current, role: role).user
+      end
 
       it 'returns the current function' do
         expect(user.current_functions.first.name).to eq(role.name)
@@ -28,8 +16,9 @@ describe User do
     end
 
     context 'user was in function' do
-      let(:start_date) { Time.zone.today - 10.days }
-      let(:end_date) { Time.zone.today - 2.days }
+      let(:user) do
+        create(:function, :past, role: role).user
+      end
 
       it 'returns nil' do
         expect(user.current_functions).to eq([])
