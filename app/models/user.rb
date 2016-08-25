@@ -44,13 +44,6 @@ class User < ApplicationRecord
     super password
   end
 
-  def assign_role(role, start = nil, ending = nil)
-    functions << Function.create(role_id: role.id,
-                                 assumed_on: start,
-                                 vacated_on: ending)
-    save
-  end
-
   # NOTE: Workaround to let users with legacy password reset their password
   # https://github.com/plataformatec/devise/wiki/How-To:-Migration-legacy-database
   def reset_password(*args)
