@@ -1,0 +1,17 @@
+.table-responsive
+  %table.table.table-condensed.table-striped
+    %caption
+      %h3
+        = headline
+    %thead
+      %th Aufgabe
+      %th Beauftragter
+      %th Von
+      %th Bis
+    %tbody
+      - functions.each do |function|
+        %tr
+          %td= function.role.name
+          %td= function.user.username
+          %td= function.assumed_on
+          %td= function.vacated_on

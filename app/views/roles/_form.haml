@@ -1,0 +1,9 @@
+= bootstrap_form_for @role,
+  control_col: 'col-md-4',
+  label_col: 'col-md-2' do |f|
+  .form-inline
+    = f.text_field :name
+    = f.primary
+    - if cancel || @role.id
+      = link_to 'Abbrechen', roles_path, class: 'btn default-button'
+

@@ -64,6 +64,11 @@ Rails.application.routes.draw do
 
   resources :teams, except: :show
 
+  resource :administration, only: :show
+  resources :roles
+
+  resources :functions, only: %i(create destroy index update)
+
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
 end

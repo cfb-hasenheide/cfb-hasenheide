@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_one :player, dependent: :destroy
+  has_one :member
+  has_one :address, as: :addressable
+  has_one :contact, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -7,6 +10,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, presence: true, uniqueness: true
+
+  delegate :street, :zipcode, :city, to: :address
+
+  has_many :functions
 
   def self.without_player
     User.where.not(id: Player.pluck(:user_id))
@@ -41,5 +48,14 @@ class User < ApplicationRecord
   def reset_password(*args)
     self.legacy_password = false
     super
+  end
+
+  def current_functions
+    functions.where('vacated_on >= ?', Time.zone.today)
+  end
+
+  def player?
+    return true if player
+    false
   end
 end

@@ -1,0 +1,19 @@
+=render 'form', cancel: false
+
+%table.table
+  %caption
+    %h2 Rollen des Vereines
+  %thead
+    %tr
+      %th Bezeichnung
+      %th
+
+  %tbody
+    - @roles.each do |role|
+      %tr
+        %td
+          = link_to role.name, role_path(role)
+        %td
+          = link_to 'Edit', edit_role_path(role)
+          = link_to 'Destroy', role,
+            method: :delete, :data => { :confirm => 'Are you sure?' }
