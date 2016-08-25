@@ -96,20 +96,12 @@ RSpec.describe FunctionsController, type: :controller do
   end
 
   describe 'PUT/PATCH #update' do
-    let(:new_vacated_on) { Time.zone.now + 700 }
+    let(:new_vacated_on) { function.vacated_on + 700 }
 
     it 'updates vacated_on' do
       expect do
         put :update, params: { id: function.id,
                                function: { vacated_on: new_vacated_on } }
-      end.to change { function.reload.vacated_on }
-    end
-  end
-
-  describe 'POST #end_up' do
-    it 'sets the vacated_on date to todays date' do
-      expect do
-        post :end_up, params: { id: function.id }
       end.to change { function.reload.vacated_on }
     end
   end
