@@ -15,6 +15,19 @@ ActiveRecord::Schema.define(version: 20160824203837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street",           null: false
+    t.string   "zipcode",          null: false
+    t.string   "city",             null: false
+    t.string   "addressable_type"
+    t.integer  "addressable_id"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+  end
+
   create_table "attendance_lists", force: :cascade do |t|
     t.integer "attendable_id"
     t.string  "attendable_type"
@@ -73,6 +86,20 @@ ActiveRecord::Schema.define(version: 20160824203837) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.date     "date_of_birth"
+    t.string   "place_of_birth"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "club_email"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
+  end
+
   create_table "events", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -108,6 +135,27 @@ ActiveRecord::Schema.define(version: 20160824203837) do
     t.index ["user_id"], name: "index_forum_threads_on_user_id", using: :btree
   end
 
+  create_table "functions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.date     "assumed_on"
+    t.date     "vacated_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_functions_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "identifier"
+    t.date     "member_since"
+    t.date     "member_until"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_members_on_user_id", using: :btree
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "content",    null: false
@@ -127,19 +175,6 @@ ActiveRecord::Schema.define(version: 20160824203837) do
   create_table "players", force: :cascade do |t|
     t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
-    t.string  "first_name"
-    t.string  "last_name"
-    t.date    "date_of_birth"
-    t.string  "place_of_birth"
-    t.string  "street"
-    t.string  "zipcode"
-    t.string  "city"
-    t.string  "phone1"
-    t.string  "phone2"
-    t.string  "club_email"
-    t.string  "membership_number"
-    t.date    "member_since"
-    t.date    "member_until"
     t.boolean "player_pass"
     t.string  "player_pass_number"
     t.date    "eligible_to_play_since"
@@ -180,6 +215,12 @@ ActiveRecord::Schema.define(version: 20160824203837) do
     t.integer  "turf"
     t.integer  "weather"
     t.index ["event_id"], name: "index_reports_on_event_id", unique: true, using: :btree
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
@@ -226,7 +267,13 @@ ActiveRecord::Schema.define(version: 20160824203837) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "contacts", "users"
+  add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
+  add_foreign_key "forum_threads", "users"
+  add_foreign_key "functions", "roles"
+  add_foreign_key "functions", "users"
 end
