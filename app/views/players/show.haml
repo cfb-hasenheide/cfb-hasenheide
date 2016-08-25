@@ -11,7 +11,7 @@
 
 - if admin? || current_user == @player.user
   .well.well-sm
-    = link_to edit_player_path(@player), class: 'default-button' do
+    = link_to edit_player_path(@player), class: 'disabled default-button' do
       = edit_icon
       Spieler bearbeiten
 
