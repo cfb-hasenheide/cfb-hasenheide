@@ -1,0 +1,18 @@
+= bootstrap_form_for @member do |f|
+  = f.hidden_field :user_id
+  = f.text_field :identifier
+
+  = f.date_select :member_since,
+    start_year: Date.today.year - 100,
+    end_year: Date.today.year,
+    prompt: true
+
+  = f.date_select :member_until,
+    start_year: Date.today.year - 100,
+    end_year: Date.today.year,
+    prompt: true
+
+  = f.primary
+
+  = link_to 'Cancel', player_path(@member.player), class: 'default-button'
+
