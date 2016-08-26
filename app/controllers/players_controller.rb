@@ -21,13 +21,11 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.create(player_params)
-
     respond_with @player
   end
 
   def update
     @player.update(player_params)
-
     respond_with @player
   end
 
@@ -45,26 +43,6 @@ class PlayersController < ApplicationController
                                    :remove_avatar,
                                    :status,
                                    :user_id)
-  end
-
-  def address_params
-    params.require(:player).require(:address).permit(:street, :zipcode, :city)
-  end
-
-  def contact_params
-    params.require(:player).require(:contact).permit(:lastname,
-                                                     :firstname,
-                                                     :phone1,
-                                                     :phone2,
-                                                     :date_of_birth,
-                                                     :club_email,
-                                                     :place_of_birth)
-  end
-
-  def member_params
-    params.require(:player).require(:member).permit(:member_since,
-                                                    :member_until,
-                                                    :membership_number)
   end
 
   def set_player

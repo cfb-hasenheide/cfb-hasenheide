@@ -38,45 +38,7 @@
 
   %hr
 
-  = f.fields_for :contact do |inner_form|
-    = inner_form.hidden_field :user_id
-    = inner_form.text_field :firstname
-    = inner_form.text_field :lastname
-    = inner_form.date_select :date_of_birth,
-      start_year: Date.today.year - 100,
-      end_year: Date.today.year,
-      prompt: true
-    = inner_form.text_field :place_of_birth
-
-  %hr
-
-  = f.fields_for :address do |inner_form|
-    = inner_form.hidden_field :user_id
-    = inner_form.text_field :street
-    = inner_form.text_field :zipcode
-    = inner_form.text_field :city
-
-  = f.fields_for :contact do |inner_form|
-    = inner_form.text_field :phone1
-    = inner_form.text_field :phone2
-    = inner_form.text_field :club_email
-
-  %hr
-
-  = f.fields_for :member do |inner_form|
-    = inner_form.hidden_field :user_id
-    = inner_form.text_field :membership_number
-    = inner_form.date_select :member_since,
-      start_year: Date.today.year - 100,
-      end_year: Date.today.year,
-      prompt: true
-
-    = inner_form.date_select :member_until,
-      start_year: Date.today.year - 100,
-      end_year: Date.today.year,
-      prompt: true
-
-  %hr
+    %hr
 
   = f.form_group do
     = f.submit class: 'primary-button'
