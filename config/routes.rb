@@ -69,6 +69,7 @@ Rails.application.routes.draw do
 
   resources :functions, only: %i(create destroy index update)
   resources :members
+  resources :addresses
   resources :contacts
 
   get '/fussball_de' => 'pages#fussball_de'

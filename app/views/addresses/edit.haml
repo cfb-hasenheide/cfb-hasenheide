@@ -1,0 +1,9 @@
+= bootstrap_form_for @address do |f|
+  = f.hidden_field :addressable_id
+  = f.text_field :street
+  = f.text_field :zipcode
+  = f.text_field :city
+
+  = f.primary
+  = link_to 'Cancel', player_path(@address.addressable), class: 'default-button'
+
