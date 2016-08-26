@@ -36,28 +36,35 @@ class PlayersController < ApplicationController
   def player_params
     params.require(:player).permit(:avatar,
                                    :avatar_cache,
-                                   :city,
-                                   :club_email,
-                                   :date_of_birth,
                                    :eligible_to_play_since,
-                                   :first_name,
                                    :jersey_name,
                                    :jersey_number,
-                                   :last_name,
-                                   :member_since,
-                                   :member_until,
-                                   :membership_number,
                                    :nickname,
-                                   :phone1,
-                                   :phone2,
-                                   :place_of_birth,
                                    :player_pass,
                                    :player_pass_number,
                                    :remove_avatar,
                                    :status,
-                                   :street,
-                                   :user_id,
-                                   :zipcode)
+                                   :user_id)
+  end
+
+  def address_params
+    params.require(:player).require(:address).permit(:street, :zipcode, :city)
+  end
+
+  def contact_params
+    params.require(:player).require(:contact).permit(:lastname,
+                                                     :firstname,
+                                                     :phone1,
+                                                     :phone2,
+                                                     :date_of_birth,
+                                                     :club_email,
+                                                     :place_of_birth)
+  end
+
+  def member_params
+    params.require(:player).require(:member).permit(:member_since,
+                                                    :member_until,
+                                                    :membership_number)
   end
 
   def set_player

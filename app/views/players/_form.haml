@@ -17,52 +17,11 @@
 
   %hr
 
-  = f.hidden_field :user_id
-
-  = f.text_field :nickname
-
-  = f.text_field :first_name
-
-  = f.text_field :last_name
-
-  = f.date_select :date_of_birth,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  = f.text_field :place_of_birth
-
-  %hr
-
-  = f.text_field :street
-
-  = f.text_field :zipcode
-
-  = f.text_field :city
-
-  = f.text_field :phone1
-
-  = f.text_field :phone2
-
-  = f.text_field :club_email
-
-  %hr
-
-  = f.text_field :membership_number
-
-  = f.date_select :member_since,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  = f.date_select :member_until,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  %hr
-
   = f.select :status, player_status_options, prompt: true
+  = f.number_field :jersey_number, min: 0, max: 99
+  = f.text_field :jersey_name
+  = f.hidden_field :user_id
+  = f.text_field :nickname
 
   = f.form_group do
     = f.check_box :player_pass,
@@ -79,9 +38,43 @@
 
   %hr
 
-  = f.number_field :jersey_number, min: 0, max: 99
+  = f.fields_for :contact do |inner_form|
+    = inner_form.hidden_field :user_id
+    = inner_form.text_field :firstname
+    = inner_form.text_field :lastname
+    = inner_form.date_select :date_of_birth,
+      start_year: Date.today.year - 100,
+      end_year: Date.today.year,
+      prompt: true
+    = inner_form.text_field :place_of_birth
 
-  = f.text_field :jersey_name
+  %hr
+
+  = f.fields_for :address do |inner_form|
+    = inner_form.hidden_field :user_id
+    = inner_form.text_field :street
+    = inner_form.text_field :zipcode
+    = inner_form.text_field :city
+
+  = f.fields_for :contact do |inner_form|
+    = inner_form.text_field :phone1
+    = inner_form.text_field :phone2
+    = inner_form.text_field :club_email
+
+  %hr
+
+  = f.fields_for :member do |inner_form|
+    = inner_form.hidden_field :user_id
+    = inner_form.text_field :membership_number
+    = inner_form.date_select :member_since,
+      start_year: Date.today.year - 100,
+      end_year: Date.today.year,
+      prompt: true
+
+    = inner_form.date_select :member_until,
+      start_year: Date.today.year - 100,
+      end_year: Date.today.year,
+      prompt: true
 
   %hr
 
