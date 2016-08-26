@@ -8,6 +8,10 @@ if Rails.env.development?
       admin: admin
     )
 
+    Contact.create(
+      user: user
+    )
+
     Address.create(
       street: 'Hasenheide',
       zipcode: '13346',
