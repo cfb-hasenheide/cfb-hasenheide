@@ -28,29 +28,37 @@
   .half
     .panel.panel-default
       .panel-heading
-        %h2.panel-title Person
+        %h2.panel-title
+          = Contact.model_name.human
 
       .panel-body
         %dl.dl-horizontal
-          %dt= Player.human_attribute_name(:nickname)
-          %dd= @player.nickname
-
-          %dt= Player.human_attribute_name(:first_name)
+          %dt= Contact.human_attribute_name(:firstname)
           %dd= @player.contact.firstname if @player.contact
 
-          %dt= Player.human_attribute_name(:last_name)
+          %dt= Contact.human_attribute_name(:lastname)
           %dd= @player.contact.lastname if @player.contact
 
-          %dt= Player.human_attribute_name(:date_of_birth)
+          %dt= Contact.human_attribute_name(:phone1)
+          %dd= @player.contact.phone1 if @player.contact
+
+          %dt= Contact.human_attribute_name(:phone2)
+          %dd= @player.contact.phone2 if @player.contact
+
+          %dt= Contact.human_attribute_name(:club_email)
+          %dd= @player.contact.club_email if @player.contact
+
+          %dt= Contact.human_attribute_name(:date_of_birth)
           %dd= l(@player.contact.date_of_birth) if @player.contact && @player.contact.date_of_birth?
 
-          %dt= Player.human_attribute_name(:place_of_birth)
+          %dt= Contact.human_attribute_name(:place_of_birth)
           %dd= @player.contact.place_of_birth if @player.contact
 
   .half
     .panel.panel-default
       .panel-heading
-        %h2.panel-title Spieler
+        %h2.panel-title
+          = Player.model_name.human
 
       .panel-body
         %dl.dl-horizontal
@@ -78,40 +86,34 @@
   .half
     .panel.panel-default
       .panel-heading
-        %h2.panel-title Kontakt
+        %h2.panel-title
+          = Address.model_name.human
 
       .panel-body
         %dl.dl-horizontal
-          %dt= Player.human_attribute_name(:street)
+          %dt= Address.human_attribute_name(:street)
           %dd= @player.address.street
 
-          %dt= Player.human_attribute_name(:zipcode)
+          %dt= Address.human_attribute_name(:zipcode)
           %dd= @player.address.zipcode
 
-          %dt= Player.human_attribute_name(:city)
+          %dt= Address.human_attribute_name(:city)
           %dd= @player.address.city
 
-          %dt= Player.human_attribute_name(:phone1)
-          %dd= @player.contact.phone1 if @player.contact
-
-          %dt= Player.human_attribute_name(:phone2)
-          %dd= @player.contact.phone2 if @player.contact
-
-          %dt= Player.human_attribute_name(:club_email)
-          %dd= @player.contact.club_email if @player.contact
 
   .half
     .panel.panel-default
       .panel-heading
-        %h2.panel-title Mitglied
+        %h2.panel-title
+          = Member.model_name.human
 
       .panel-body
         %dl.dl-horizontal
-          %dt= Player.human_attribute_name(:membership_number)
+          %dt= Member.human_attribute_name(:identifier)
           %dd= @player.member.identifier if @player.member
 
-          %dt= Player.human_attribute_name(:member_since)
+          %dt= Member.human_attribute_name(:member_since)
           %dd= l(@player.member.member_since) if @player.member && @player.member.member_since?
 
-          %dt= Player.human_attribute_name(:member_until)
+          %dt= Member.human_attribute_name(:member_until)
           %dd= l(@player.member.member_until) if @player.member && @player.member.member_until?

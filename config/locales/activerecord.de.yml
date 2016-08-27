@@ -1,14 +1,21 @@
 de:
   activerecord:
     models:
+      address: Adresse
       comment: Kommentar
+      contact: Kontakt
       cup_match: Pokalspiel
       league_match: Ligaspiel
+      member: Mitglied
       other: Sonstiges
       player: Spieler
       report: Spielbericht
       team: Mannschaft
     attributes:
+      address:
+        city: Ort
+        street: Strasse
+        zipcode: PLZ
       attendance:
         status: Bist du dabei?
       attendance_list:
@@ -16,6 +23,14 @@ de:
         minimum: Min. Spieler
       comment:
         content: Kommentar
+      contact:
+        club_email: CFB E-Mail
+        date_of_birth: Geboren am
+        firstname: Vorname
+        lastname: Nachname
+        phone1: Telefonnummer
+        phone2: Telefonnummer (alternativ)
+        place_of_birth: Geboren in
       event:
         address: Adresse
         club_team_id: Vereinsmannschaft
@@ -28,30 +43,22 @@ de:
         comment: Kommentar
       message:
         content: Nachricht
+      member:
+        member_since: Mitglied seit
+        member_until: Mitglied bis
+        identifier: Mitgliedsnr.
       news:
         title: Titel
         content: Inhalt
         internal: Intern
       player:
-        city: Ort
-        club_email: CFB E-Mail
-        date_of_birth: Geburtstag
         eligible_to_play_since: Spielberechtigt seit
-        first_name: Vorname
         jersey_name: Trikotname
         jersey_number: Trikotnummer
         last_name: Nachname
-        member_since: Mitglied seit
-        member_until: Mitglied bis
-        membership_number: Mitgliedsnr.
-        nickname: Name
-        phone1: Telefon
-        phone2: Telefon (alternativ)
-        place_of_birth: Geburtsort
-        player_pass: Spielerpass?
+        nickname: Spitzname
+        player_pass: Spielerpass
         player_pass_number: Spielerpass-Nummmer
-        street: Strasse
-        zipcode: PLZ
       report:
         annotation: Anmerkungen
         captain_id: Kapitän
