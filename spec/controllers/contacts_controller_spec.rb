@@ -24,7 +24,7 @@ describe ContactsController do
       end.to change { contact.reload.firstname }.to firstname
     end
 
-    it "redirects to player/:id" do
+    it 'redirects to player/:id' do
       expect(subject).to redirect_to(player_path(contact.player))
     end
   end

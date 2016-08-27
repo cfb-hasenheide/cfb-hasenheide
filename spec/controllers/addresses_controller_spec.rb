@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe AddressesController do
-
   let(:address) { create :address }
 
   before { sign_in }
@@ -12,7 +11,7 @@ describe AddressesController do
   end
 
   describe '#update' do
-    let(:street) { 'Test street 19'}
+    let(:street) { 'Test street 19' }
 
     subject do
       put :update, params: { id: address.id, address: { street: street } }
@@ -21,10 +20,10 @@ describe AddressesController do
     it 'updates the address' do
       expect do
         subject
-      end.to change{ address.reload.street }.to(street)
+      end.to change { address.reload.street }.to(street)
     end
 
-    it "redirects to player/:id" do
+    it 'redirects to player/:id' do
       expect(subject).to redirect_to(player_path(address.addressable))
     end
   end

@@ -23,7 +23,7 @@ describe MembersController do
       end.to change { member.reload.identifier }.to(identifier)
     end
 
-    it "redirects to player/:id" do
+    it 'redirects to player/:id' do
       expect(subject).to redirect_to(player_path(member.player))
     end
   end
