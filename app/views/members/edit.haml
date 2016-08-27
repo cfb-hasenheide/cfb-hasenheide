@@ -1,4 +1,12 @@
-= bootstrap_form_for @member do |f|
+= content_for :title, 'Mitgliedsdaten bearbeiten'
+
+.page-header
+  %h1= content_for :title
+
+= bootstrap_form_for @member,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-4' do |f|
   = f.hidden_field :user_id
   = f.text_field :identifier
 
@@ -12,7 +20,8 @@
     end_year: Date.today.year,
     prompt: true
 
-  = f.primary
-
-  = link_to 'Cancel', player_path(@member.player), class: 'default-button'
+  = f.form_group do
+    = f.primary
+    = link_to t('links.cancel'),
+      player_path(@member.player), class: 'default-button'
 
