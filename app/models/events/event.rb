@@ -10,6 +10,8 @@ class Event < ApplicationRecord
 
   accepts_nested_attributes_for :attendance_list
 
+  after_initialize :set_public, unless: :persisted?
+
   validates :address, :datetime, :name, :type, presence: true
 
   scope :future, lambda { |limit = nil|
@@ -83,5 +85,11 @@ class Event < ApplicationRecord
     calendar.add_event(event)
     calendar.publish
     calendar.to_ical
+  end
+
+  private
+
+  def set_public
+    self.public = true if %w(CupMatch LeagueMatch).include?(type)
   end
 end

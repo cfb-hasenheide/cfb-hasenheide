@@ -33,5 +33,13 @@
       = f.text_area :description, icon: 'comment'
 
       = f.form_group do
+        = f.check_box_without_bootstrap :public,
+          class: 'bootstrap-switch',
+          'data-on-color' => 'warning',
+          'data-on-text' => "#{public_icon} Öffentlich",
+          'data-off-color' => 'success',
+          'data-off-text' => "#{internal_icon} Intern"
+
+      = f.form_group do
         = f.submit class: 'primary-button'
         = link_to 'Abbrechen', events_path, class: 'default-button'
