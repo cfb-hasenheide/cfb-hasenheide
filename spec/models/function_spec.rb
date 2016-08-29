@@ -130,7 +130,7 @@ RSpec.describe Function, type: :model do
   end
 
   describe '#save' do
-    let(:assumed_on) { Date.today }
+    let(:assumed_on) { Time.zone.today }
     let(:vacated_on) { nil }
     let(:function) do
       Function.new(user: user, role: role,
