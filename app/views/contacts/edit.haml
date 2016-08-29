@@ -1,0 +1,26 @@
+= content_for :title, 'Kontaktdaten bearbeiten'
+
+.page-header
+  %h1= content_for :title
+
+= bootstrap_form_for @contact,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-4' do |f|
+  = f.hidden_field :user_id
+  = f.text_field :firstname
+  = f.text_field :lastname
+  = f.date_select :date_of_birth,
+    start_year: Date.today.year - 100,
+    end_year: Date.today.year,
+    prompt: true
+  = f.text_field :place_of_birth
+  = f.text_field :phone1
+  = f.text_field :phone2
+  = f.text_field :club_email
+
+  = f.form_group do
+    = f.primary
+    = link_to t('links.cancel'),
+      player_path(@contact.player), class: 'default-button'
+
