@@ -3,66 +3,11 @@
   label_col: 'col-md-2',
   control_col: 'col-md-4' do |f|
 
-  = f.static_control :avatar do
-    = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
-    %small.help-block
-      Dein Avatar ist dein internes User-Bild. Es wird automatisch auf
-      #{AvatarUploader::RESIZE_WIDTH}x#{AvatarUploader::RESIZE_HEIGHT}
-      Pixel zugeschnitten.
-  = f.file_field :avatar, label: 'ändern'
-  = f.hidden_field :avatar_cache
-
-  = f.form_group do
-    = f.check_box :remove_avatar, label: 'entfernen'
-
-  %hr
-
-  = f.hidden_field :user_id
-
-  = f.text_field :nickname
-
-  = f.text_field :first_name
-
-  = f.text_field :last_name
-
-  = f.date_select :date_of_birth,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  = f.text_field :place_of_birth
-
-  %hr
-
-  = f.text_field :street
-
-  = f.text_field :zipcode
-
-  = f.text_field :city
-
-  = f.text_field :phone1
-
-  = f.text_field :phone2
-
-  = f.text_field :club_email
-
-  %hr
-
-  = f.text_field :membership_number
-
-  = f.date_select :member_since,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  = f.date_select :member_until,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
-    prompt: true
-
-  %hr
-
   = f.select :status, player_status_options, prompt: true
+  = f.number_field :jersey_number, min: 0, max: 99
+  = f.text_field :jersey_name
+  = f.hidden_field :user_id
+  = f.text_field :nickname
 
   = f.form_group do
     = f.check_box :player_pass,
@@ -79,12 +24,18 @@
 
   %hr
 
-  = f.number_field :jersey_number, min: 0, max: 99
-
-  = f.text_field :jersey_name
-
-  %hr
+  = f.static_control :avatar do
+    = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
+    %small.help-block
+      Dein Avatar ist dein internes User-Bild. Es wird automatisch auf
+      #{AvatarUploader::RESIZE_WIDTH}x#{AvatarUploader::RESIZE_HEIGHT}
+      Pixel zugeschnitten.
+  = f.file_field :avatar, label: 'ändern'
+  = f.hidden_field :avatar_cache
 
   = f.form_group do
-    = f.submit class: 'primary-button'
-    = link_to 'Abbrechen', players_path, class: 'default-button'
+    = f.check_box :remove_avatar, label: 'entfernen'
+
+  = f.form_group do
+    = f.primary
+    = link_to t('links.cancel'), player_path(player), class: 'default-button'

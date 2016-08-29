@@ -1,0 +1,20 @@
+= content_for :title, 'Adresse bearbeiten'
+
+.page-header
+  %h1= content_for :title
+
+= bootstrap_form_for @address,
+  layout: :horizontal,
+  label_col: 'col-md-2',
+  control_col: 'col-md-4' do |f|
+  = f.hidden_field :addressable_id
+  = f.hidden_field :addressable_type
+  = f.text_field :street
+  = f.text_field :zipcode
+  = f.text_field :city
+
+  = f.form_group do
+    = f.primary
+    = link_to t('links.cancel'), player_path(@address.addressable),
+      class: 'default-button'
+

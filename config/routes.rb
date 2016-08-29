@@ -68,6 +68,9 @@ Rails.application.routes.draw do
   resources :roles
 
   resources :functions, only: %i(create destroy index update)
+  resources :members, only: %i(edit update)
+  resources :addresses, only: %i(edit update)
+  resources :contacts, only: %i(edit update)
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
