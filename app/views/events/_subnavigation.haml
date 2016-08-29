@@ -4,10 +4,19 @@
 
     = link_to event.name, event_path(event)
 
-  %li{role: 'presentation',
-      class: ('active' if params[:controller] == 'attendance_lists')}
+  - if event.attendance_list.present?
+    %li{role: 'presentation',
+        class: ('active' if params[:controller] == 'attendance_lists')}
 
-    = link_to 'Meldeliste', event_attendance_list_path(event)
+      = link_to 'Meldeliste', event_attendance_list_path(event)
+
+  - elsif can?(:create, AttendanceList)
+    %li{role: 'presentation',
+        class: ('active' if params[:controller] == 'attendance_lists')}
+
+      = link_to 'Meldeliste erstellen',
+                event_attendance_list_path(event),
+                method: :post
 
   %li{role: 'presentation',
       class: ('active' if params[:controller] == 'reports')}

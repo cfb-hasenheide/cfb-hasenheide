@@ -14,6 +14,13 @@ class AttendanceListsController < ApplicationController
       @attendance_list.attendances.find_by(player_id: current_user.player.id)
   end
 
+  def create
+    event = Event.friendly.find(params[:event_id])
+    event.create_attendance_list
+    redirect_to event_attendance_list_path(event),
+                notice: 'Meldeliste erfolgreich erstellt.'
+  end
+
   def close
     if @attendance_list.close!
       flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'

@@ -11,6 +11,9 @@
 
 = render 'admin_bar', attendance_list: @attendance_list
 
+- if can?(:update, AttendanceList)
+  = render 'form', attendance_list: @attendance_list
+
 = render 'progress_bar', attendance_list: @attendance_list
 
 .halfs
