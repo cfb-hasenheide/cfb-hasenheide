@@ -7,7 +7,7 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.update(address_params)
       flash[:notice] = 'Erfogreich geupdated'
-      redirect_to player_path @address.addressable
+      redirect_to player_path @address.addressable.player
     else
       render 'edit'
     end
