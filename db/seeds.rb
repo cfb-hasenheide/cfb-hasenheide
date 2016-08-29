@@ -9,7 +9,7 @@ if Rails.env.development?
     )
 
     Contact.create(
-      user: user
+      user: user,
     )
 
     Address.create(
@@ -26,7 +26,9 @@ if Rails.env.development?
 
     Member.create(
       user: user,
-      identifier: "{role}1232434353"
+      identifier: "{role}1232434353",
+      firstname: "First#{role}",
+      lastname: "Last#{role}"
     )
   end
 end
