@@ -18,7 +18,6 @@ class Event < ApplicationRecord
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
-  scope :public, -> { where(public: true) }
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
