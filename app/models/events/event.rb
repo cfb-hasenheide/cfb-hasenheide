@@ -8,8 +8,6 @@ class Event < ApplicationRecord
   has_one :report, dependent: :destroy
   belongs_to :club_team, class_name: 'Team'
 
-  accepts_nested_attributes_for :attendance_list
-
   after_initialize :set_public, unless: :persisted?
 
   validates :address, :datetime, :name, :type, presence: true
@@ -20,6 +18,7 @@ class Event < ApplicationRecord
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
   }
+  scope :public, -> { where(public: true) }
 
   def self.without_report
     ids = Report.all.pluck(:event_id)
