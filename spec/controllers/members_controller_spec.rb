@@ -18,8 +18,7 @@ describe MembersController do
     let(:member_param) do
       { identifier: identifier, firstname: firstname,
         lastname: firstname, member_since: new_date,
-        date_of_birth: new_date
-      }
+        date_of_birth: new_date }
     end
 
     subject do
