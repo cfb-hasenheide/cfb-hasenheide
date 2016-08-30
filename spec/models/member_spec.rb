@@ -9,4 +9,16 @@ RSpec.describe Member, type: :model do
       expect(member.user).to eq(user)
     end
   end
+
+  describe '#contact' do
+    it 'has a contact relation' do
+      expect(member.contact)
+    end
+  end
+
+  describe '#address' do
+    it 'has a address relation' do
+      expect(member.address)
+    end
+  end
 end

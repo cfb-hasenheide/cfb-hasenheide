@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe MembersController do
-  let(:member) { create(:member) }
+  let(:member) { create(:player).member }
   before { sign_in }
 
   describe '#edit' do
@@ -13,14 +13,33 @@ describe MembersController do
 
   describe '#update' do
     let(:identifier) { '123456789' }
+    let(:firstname) { 'Hase' }
+    let(:new_date) { Time.zone.today }
+    let(:member_param) do
+      { identifier: identifier, firstname: firstname,
+        lastname: firstname, member_since: new_date }
+    end
+
     subject do
-      put :update, params: { id: member.id, member: { identifier: identifier } }
+      put :update, params: { id: member.id, member: member_param }
     end
 
     it 'updates the identifier' do
       expect do
         subject
       end.to change { member.reload.identifier }.to(identifier)
+    end
+
+    it 'updates the firstname' do
+      expect { subject }.to change { member.reload.firstname }.to firstname
+    end
+
+    it 'updates the lastname' do
+      expect { subject }.to change { member.reload.lastname }.to firstname
+    end
+
+    it 'updates the lastname' do
+      expect { subject }.to change { member.reload.member_since }.to new_date
     end
 
     it 'redirects to player/:id' do

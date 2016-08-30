@@ -16,9 +16,11 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:user_id,
+    params.require(:member).permit(:firstname,
+                                   :identifier,
+                                   :lastname,
                                    :member_since,
                                    :member_until,
-                                   :identifier)
+                                   :user_id)
   end
 end
