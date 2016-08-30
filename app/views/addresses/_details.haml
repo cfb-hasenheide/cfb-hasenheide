@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    %h2.panel-title
+      = Address.model_name.human
+
+  .panel-body
+    %dl.dl-horizontal
+      %dt= Address.human_attribute_name(:street)
+      %dd= address.street
+
+      %dt= Address.human_attribute_name(:zipcode)
+      %dd= address.zipcode
+
+      %dt= Address.human_attribute_name(:city)
+      %dd= address.city

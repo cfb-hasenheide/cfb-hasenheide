@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    %h2.panel-title
+      = Contact.model_name.human
+
+  .panel-body
+    %dl.dl-horizontal
+      %dt= Contact.human_attribute_name(:phone1)
+      %dd= contact.phone1
+
+      %dt= Contact.human_attribute_name(:phone2)
+      %dd= contact.phone2
+
+      %dt= Contact.human_attribute_name(:club_email)
+      %dd= contact.club_email

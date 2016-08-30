@@ -9,7 +9,7 @@
         = list_icon
         %span.hidden-xs Alle Spieler
 
-- if admin? || current_user == @player.user
+- if admin? || current_user == @player.member.user
   .well.well-sm
     = link_to edit_contact_path(@player.contact), class: 'default-button' do
       = edit_icon
@@ -26,93 +26,12 @@
 
 .halfs
   .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title
-          = Contact.model_name.human
-
-      .panel-body
-        %dl.dl-horizontal
-          %dt= Contact.human_attribute_name(:firstname)
-          %dd= @player.contact.firstname if @player.contact
-
-          %dt= Contact.human_attribute_name(:lastname)
-          %dd= @player.contact.lastname if @player.contact
-
-          %dt= Contact.human_attribute_name(:phone1)
-          %dd= @player.contact.phone1 if @player.contact
-
-          %dt= Contact.human_attribute_name(:phone2)
-          %dd= @player.contact.phone2 if @player.contact
-
-          %dt= Contact.human_attribute_name(:club_email)
-          %dd= @player.contact.club_email if @player.contact
-
-          %dt= Contact.human_attribute_name(:date_of_birth)
-          %dd= l(@player.contact.date_of_birth) if @player.contact && @player.contact.date_of_birth?
-
-          %dt= Contact.human_attribute_name(:place_of_birth)
-          %dd= @player.contact.place_of_birth if @player.contact
-
+    = render 'members/details', member: @player.member
   .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title
-          = Player.model_name.human
-
-      .panel-body
-        %dl.dl-horizontal
-          %dt= Player.human_attribute_name(:status)
-          %dd= t(@player.status, scope: %w(activerecord enums player status))
-
-          %dt= Player.human_attribute_name(:player_pass)
-          %dd= @player.player_pass? ? 'Ja' : 'Nein'
-
-          - if @player.player_pass?
-            %dt= Player.human_attribute_name(:player_pass_number)
-            %dd= @player.player_pass_number
-
-            %dt= Player.human_attribute_name(:eligible_to_play_since)
-            %dd
-              = l(@player.eligible_to_play_since) if @player.eligible_to_play_since?
-
-          %dt= Player.human_attribute_name(:jersey_name)
-          %dd= @player.jersey_name
-
-          %dt= Player.human_attribute_name(:jersey_number)
-          %dd= @player.jersey_number
+    = render 'players/details', player: @player
 
 .halfs
   .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title
-          = Address.model_name.human
-
-      .panel-body
-        %dl.dl-horizontal
-          %dt= Address.human_attribute_name(:street)
-          %dd= @player.address.street
-
-          %dt= Address.human_attribute_name(:zipcode)
-          %dd= @player.address.zipcode
-
-          %dt= Address.human_attribute_name(:city)
-          %dd= @player.address.city
-
+    = render 'addresses/details', address: @player.address
   .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title
-          = Member.model_name.human
-
-      .panel-body
-        %dl.dl-horizontal
-          %dt= Member.human_attribute_name(:identifier)
-          %dd= @player.member.identifier if @player.member
-
-          %dt= Member.human_attribute_name(:member_since)
-          %dd= l(@player.member.member_since) if @player.member && @player.member.member_since?
-
-          %dt= Member.human_attribute_name(:member_until)
-          %dd= l(@player.member.member_until) if @player.member && @player.member.member_until?
+    = render 'contacts/details', contact: @player.contact
