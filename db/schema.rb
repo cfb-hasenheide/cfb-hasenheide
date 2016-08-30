@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829173123) do
+ActiveRecord::Schema.define(version: 20160830160941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 20160829173123) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
     t.boolean "player_pass"
     t.string  "player_pass_number"
@@ -185,9 +184,10 @@ ActiveRecord::Schema.define(version: 20160829173123) do
     t.integer "status",                 default: 0
     t.string  "slug"
     t.string  "avatar"
+    t.integer "member_id"
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+    t.index ["member_id"], name: "index_players_on_member_id", using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
-    t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
   end
 
   create_table "reports", force: :cascade do |t|
@@ -274,4 +274,5 @@ ActiveRecord::Schema.define(version: 20160829173123) do
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
+  add_foreign_key "players", "members"
 end

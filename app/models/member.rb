@@ -1,4 +1,4 @@
 class Member < ApplicationRecord
   belongs_to :user
-  delegate :player, to: :user
+  has_one :player, dependent: :destroy
 end

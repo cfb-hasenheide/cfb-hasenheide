@@ -5,14 +5,12 @@ class Player < ApplicationRecord
 
   delegate :address, to: :user
   delegate :contact, to: :user
-  delegate :member, to: :user
+  belongs_to :member
 
-  belongs_to :user
   has_many :attendances, dependent: :destroy
 
   validates :nickname, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true
-  validates :user_id, uniqueness: true, presence: true
 
   enum status: { active: 0, injured: 1, inactive: 2 }
 
