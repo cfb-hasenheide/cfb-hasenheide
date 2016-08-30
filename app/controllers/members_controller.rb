@@ -19,6 +19,8 @@ class MembersController < ApplicationController
     params.require(:member).permit(:firstname,
                                    :identifier,
                                    :lastname,
+                                   :date_of_birth,
+                                   :place_of_birth,
                                    :member_since,
                                    :member_until,
                                    :user_id)

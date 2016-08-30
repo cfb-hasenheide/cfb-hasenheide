@@ -17,7 +17,9 @@ describe MembersController do
     let(:new_date) { Time.zone.today }
     let(:member_param) do
       { identifier: identifier, firstname: firstname,
-        lastname: firstname, member_since: new_date }
+        lastname: firstname, member_since: new_date,
+        date_of_birth: new_date
+      }
     end
 
     subject do
@@ -38,8 +40,12 @@ describe MembersController do
       expect { subject }.to change { member.reload.lastname }.to firstname
     end
 
-    it 'updates the lastname' do
+    it 'updates the member date' do
       expect { subject }.to change { member.reload.member_since }.to new_date
+    end
+
+    it 'updates the date of birth' do
+      expect { subject }.to change { member.reload.date_of_birth }.to new_date
     end
 
     it 'redirects to player/:id' do

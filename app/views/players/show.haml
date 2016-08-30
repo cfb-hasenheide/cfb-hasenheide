@@ -11,18 +11,18 @@
 
 - if admin? || current_user == @player.member.user
   .well.well-sm
-    = link_to edit_contact_path(@player.contact), class: 'default-button' do
-      = edit_icon
-      Profil und Telefonnummer bearbeiten
-    = link_to edit_player_path(@player), class: 'default-button' do
-      = edit_icon
-      Spielerdaten anpassen
     = link_to edit_member_path(@player.member), class: 'default-button' do
       = edit_icon
-      Mitgliedschaft anpassen
+      Person bearbeiten
+    = link_to edit_player_path(@player), class: 'default-button' do
+      = edit_icon
+      Spielerdaten bearbeiten
     = link_to edit_address_path(@player.address), class: 'default-button' do
       = edit_icon
       Addresse ändern
+    = link_to edit_contact_path(@player.contact), class: 'default-button' do
+      = edit_icon
+      Kontaktdaten bearbeiten
 
 .halfs
   .half
