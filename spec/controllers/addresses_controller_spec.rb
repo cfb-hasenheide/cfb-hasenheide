@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe AddressesController do
-  let(:address) { create :address }
+  let(:address) { create(:member, :with_player, :with_address).address }
 
   before { sign_in }
 
@@ -46,7 +46,7 @@ describe AddressesController do
     end
 
     it 'redirects to player/:id' do
-      expect(subject).to redirect_to(player_path(address.addressable))
+      expect(subject).to redirect_to(player_path(address.addressable.player))
     end
   end
 end
