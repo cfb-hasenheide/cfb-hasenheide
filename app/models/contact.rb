@@ -1,4 +1,3 @@
 class Contact < ApplicationRecord
-  belongs_to :user
-  delegate :player, to: :user
+  belongs_to :member
 end

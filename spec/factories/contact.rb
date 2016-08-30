@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :contact do
-    association :user, :as_player
+    association :member
   end
 end

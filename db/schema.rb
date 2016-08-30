@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830160941) do
+ActiveRecord::Schema.define(version: 20160830182712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20160830160941) do
   end
 
   create_table "attendance_lists", force: :cascade do |t|
-    t.string  "attendable_type"
     t.integer "attendable_id"
+    t.string  "attendable_type"
     t.boolean "open",            default: false, null: false
     t.integer "minimum",         default: 7,     null: false
     t.integer "maximum",         default: 11,    null: false
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160830160941) do
   end
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
-    t.string   "bootsy_resource_type"
     t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,13 +87,13 @@ ActiveRecord::Schema.define(version: 20160830160941) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "phone1"
     t.string   "phone2"
     t.string   "club_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
+    t.integer  "member_id"
+    t.index ["member_id"], name: "index_contacts_on_member_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -268,9 +268,10 @@ ActiveRecord::Schema.define(version: 20160830160941) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "contacts", "users"
+  add_foreign_key "contacts", "members"
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_threads", "users"
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
