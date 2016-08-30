@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  delegate :street, :zipcode, :city, to: :address
+  delegate :player, to: :member
 
   has_many :functions
 
