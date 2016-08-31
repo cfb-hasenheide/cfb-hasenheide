@@ -39,23 +39,9 @@ describe User do
     end
   end
 
-  describe '#player?' do
-    let(:player_profile) { build :player }
-
-    it 'returns true if user has a player relation' do
-      user.player = player_profile
-      user.save
-      expect(user.reload.player?).to be_truthy
-    end
-
-    it 'returns false if user has no player assigned' do
-      expect(user.reload.player?).to be_falsy
-    end
-  end
-
   describe '#member' do
     it 'has a member' do
-      expect(user.contact)
+      expect(user.member)
     end
   end
 end
