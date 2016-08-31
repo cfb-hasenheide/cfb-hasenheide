@@ -71,7 +71,7 @@ class ReportsController < ApplicationController
       @report = Event.friendly.find(params[:event_id]).report
     else
       raise StandardError,
-        'Neither :id nor :event_id param given to find report!'
+            'Neither :id nor :event_id param given to find report!'
     end
   end
 

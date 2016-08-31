@@ -41,8 +41,7 @@ class PlayersController < ApplicationController
                                    :player_pass,
                                    :player_pass_number,
                                    :remove_avatar,
-                                   :status,
-                                   :user_id)
+                                   :status)
   end
 
   def set_player

@@ -1,0 +1,27 @@
+.panel.panel-default
+  .panel-heading
+    %h2.panel-title
+      = Player.model_name.human
+
+  .panel-body
+    %dl.dl-horizontal
+      %dt= Player.human_attribute_name(:status)
+      %dd= t(player.status, scope: %w(activerecord enums player status))
+
+      %dt= Player.human_attribute_name(:player_pass)
+      %dd= player.player_pass? ? 'Ja' : 'Nein'
+
+      - if player.player_pass?
+        %dt= Player.human_attribute_name(:player_pass_number)
+        %dd= player.player_pass_number
+
+        %dt= Player.human_attribute_name(:eligible_to_play_since)
+        %dd
+          = l(player.eligible_to_play_since) if player.eligible_to_play_since?
+
+      %dt= Player.human_attribute_name(:jersey_name)
+      %dd= player.jersey_name
+
+      %dt= Player.human_attribute_name(:jersey_number)
+      %dd= player.jersey_number
+

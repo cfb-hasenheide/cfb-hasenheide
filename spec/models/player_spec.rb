@@ -1,18 +1,13 @@
 require 'rails_helper'
 
 describe Player do
-  let(:user) { create :user, :as_player }
-  let(:player) { user.player }
+  let(:player) { create :player }
 
-  describe '#address' do
-    it 'has an address' do
-      expect(user.address)
-    end
+  it 'belongs_to a member' do
+    expect(player.member)
   end
 
-  describe '#contact' do
-    it 'has contact' do
-      expect(player.contact)
-    end
+  it 'has member_id' do
+    expect(player.member_id)
   end
 end

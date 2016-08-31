@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     if @contact.update(contact_params)
       flash[:notice] = 'Erfogreich geupdated'
-      redirect_to player_path @contact.player
+      redirect_to player_path @contact.member.player
     else
       render 'edit'
     end
@@ -16,12 +16,8 @@ class ContactsController < ApplicationController
   private
 
   def contact_params
-    params.require(:contact).permit(:lastname,
-                                    :firstname,
-                                    :phone1,
+    params.require(:contact).permit(:phone1,
                                     :phone2,
-                                    :date_of_birth,
-                                    :club_email,
-                                    :place_of_birth)
+                                    :club_email)
   end
 end
