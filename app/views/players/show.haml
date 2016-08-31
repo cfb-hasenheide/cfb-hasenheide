@@ -20,9 +20,9 @@
     = link_to edit_address_path(@player.address), class: 'default-button' do
       = edit_icon
       Addresse ändern
-    = link_to edit_contact_path(@player.contact), class: 'default-button' do
-      = edit_icon
-      Kontaktdaten bearbeiten
+    -# = link_to edit_contact_path(@player.contact), class: 'default-button' do
+    -#   = edit_icon
+    -#   Kontaktdaten bearbeiten
 
 .halfs
   .half
@@ -33,5 +33,5 @@
 .halfs
   .half
     = render 'addresses/details', address: @player.address
-  .half
-    = render 'contacts/details', contact: @player.contact
+  -# .half
+  -#   = render 'contacts/details', contact: @player.contact
