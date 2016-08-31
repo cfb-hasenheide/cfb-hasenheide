@@ -20,6 +20,6 @@ class AddressesController < ApplicationController
   end
 
   def redirect_path_model
-    @address.addressable.player if @address.addressable
+    @address.try(:addressable).try(:player)
   end
 end
