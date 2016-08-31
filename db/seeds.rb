@@ -8,27 +8,27 @@ if Rails.env.development?
       admin: admin
     )
 
-    Contact.create(
+    member = Member.create(
       user: user,
+      identifier: "{role}1232434353",
+      firstname: "First#{role}",
+      lastname: "Last#{role}"
+    )
+
+    Contact.create(
+      member: member,
     )
 
     Address.create(
       street: 'Hasenheide',
       zipcode: '13346',
       city: 'Hasentown',
-      addressable: user
+      addressable: member
     )
 
     Player.create(
       nickname: "Nicki #{role}",
-      user: user,
-    )
-
-    Member.create(
-      user: user,
-      identifier: "{role}1232434353",
-      firstname: "First#{role}",
-      lastname: "Last#{role}"
+      member: member,
     )
   end
 end
