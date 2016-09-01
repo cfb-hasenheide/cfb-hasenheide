@@ -1,0 +1,14 @@
+= bootstrap_form_for(training) do |f|
+  .row
+    .col-md-3
+      = f.date_field :date, icon: :calendar
+    .col-md-2
+      = f.number_field :additional_count, min: 0, icon: :plus
+    .col-md-7
+      = f.text_field :additional_info, icon: :comment
+
+  = f.collection_check_boxes :player_ids, @players, :id, :nickname
+
+  = f.submit class: 'primary-button'
+
+  = link_to 'Abbrechen', trainings_path, class: 'default-button'

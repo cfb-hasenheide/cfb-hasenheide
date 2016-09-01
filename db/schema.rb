@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912161354) do
+ActiveRecord::Schema.define(version: 20160901204134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,30 +87,32 @@ ActiveRecord::Schema.define(version: 20160912161354) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.date     "date_of_birth"
+    t.string   "place_of_birth"
     t.string   "phone1"
     t.string   "phone2"
     t.string   "club_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "member_id"
-    t.index ["member_id"], name: "index_contacts_on_member_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "datetime",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
-    t.string   "address",                       null: false
-    t.string   "home_team"
-    t.string   "away_team"
-    t.string   "name",                          null: false
+    t.string   "description",   limit: 255
+    t.string   "address",       limit: 255,                 null: false
+    t.string   "name",                                      null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                          null: false
-    t.string   "type",                          null: false
-    t.string   "slug",                          null: false
-    t.boolean  "public",        default: false, null: false
+    t.boolean  "home",                                      null: false
+    t.datetime "datetime",                                  null: false
+    t.string   "type",                                      null: false
+    t.string   "slug",                                      null: false
+    t.boolean  "public",                    default: false, null: false
     t.index ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   end
 
@@ -149,14 +151,8 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.string   "identifier"
     t.date     "member_since"
     t.date     "member_until"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "firstname"
-    t.string   "lastname"
-    t.date     "date_of_birth"
-    t.string   "place_of_birth"
-    t.string   "player_ideal"
-    t.string   "personal_moment"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
@@ -177,6 +173,7 @@ ActiveRecord::Schema.define(version: 20160912161354) do
   end
 
   create_table "players", force: :cascade do |t|
+    t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
     t.boolean "player_pass"
     t.string  "player_pass_number"
@@ -186,17 +183,17 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.integer "status",                 default: 0
     t.string  "slug"
     t.string  "avatar"
-    t.integer "member_id"
+    t.string  "panini"
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
-    t.index ["member_id"], name: "index_players_on_member_id", using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
+    t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
   end
 
-  create_table "players_teams", id: false, force: :cascade do |t|
-    t.integer "player_id", null: false
-    t.integer "team_id",   null: false
-    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id", unique: true, using: :btree
-    t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true, using: :btree
+  create_table "players_trainings", id: false, force: :cascade do |t|
+    t.integer "training_id", null: false
+    t.integer "player_id",   null: false
+    t.index ["player_id", "training_id"], name: "index_players_trainings_on_player_id_and_training_id", using: :btree
+    t.index ["training_id", "player_id"], name: "index_players_trainings_on_training_id_and_player_id", using: :btree
   end
 
   create_table "reports", force: :cascade do |t|
@@ -244,30 +241,37 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.index ["name"], name: "index_teams_on_name", unique: true, using: :btree
   end
 
+  create_table "trainings", force: :cascade do |t|
+    t.date    "date",                         null: false
+    t.integer "additional_count", default: 0, null: false
+    t.string  "additional_info"
+    t.index ["date"], name: "index_trainings_on_date", unique: true, using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
-    t.string   "invitation_token"
+    t.string   "username",               limit: 255
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
-    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "admin",                              default: false, null: false
     t.index ["admin"], name: "index_users_on_admin", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
@@ -277,11 +281,13 @@ ActiveRecord::Schema.define(version: 20160912161354) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "contacts", "members"
+  add_foreign_key "contacts", "users"
+  add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "forum_threads"
   add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_threads", "users"
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
-  add_foreign_key "players", "members"
 end

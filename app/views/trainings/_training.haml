@@ -1,0 +1,19 @@
+%li.list-group-item{href: '#'}
+  %span.badge= training.players_count
+
+  %h4.list-group-item-heading
+    = l(training.date)
+
+    - if can?(:update, Training)
+      %small= link_to 'bearbeiten', edit_training_path(training)
+
+
+  %p.list-group-item-text
+    = training.players.pluck(:nickname).sort.to_sentence
+
+    - unless training.additional_count.zero?
+      (+ #{training.additional_count})
+
+    %br
+
+    %span.text-muted= training.additional_info

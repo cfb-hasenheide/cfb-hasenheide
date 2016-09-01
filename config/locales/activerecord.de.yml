@@ -85,6 +85,11 @@ de:
         club: Vereinsmannschaft?
         player_pass_needed: Spielerpass benötigt?
         current_season: Aktuelle Saison?
+      training:
+        additional_count: Zusätzliche Anzahl
+        additional_info: Zusatzinfos
+        date: Datum
+        player_ids: Spieler
       user:
         admin: Admin?
         current_password: Aktuelles Passwort
