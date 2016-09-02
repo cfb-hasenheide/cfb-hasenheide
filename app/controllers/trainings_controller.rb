@@ -7,11 +7,15 @@ class TrainingsController < ApplicationController
   end
 
   def new
+    authorize! :create, Training
+
     current_weeks_monday = Time.zone.today.beginning_of_week
     @training = Training.new(date: current_weeks_monday)
   end
 
   def create
+    authorize! :create, Training
+
     @training = Training.new(training_params)
 
     if @training.save
@@ -23,9 +27,12 @@ class TrainingsController < ApplicationController
   end
 
   def edit
+    authorize! :update, Training
   end
 
   def update
+    authorize! :update, Training
+
     if @training.update(training_params)
       redirect_to trainings_path, notice: 'Training aktualisiert.'
     else
@@ -35,6 +42,8 @@ class TrainingsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, Training
+
     @training.destroy
     redirect_to trainings_path, notice: 'Training gelöscht.'
   end
