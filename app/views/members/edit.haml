@@ -13,21 +13,21 @@
   = f.text_field :lastname
 
   = f.date_select :date_of_birth,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
+    start_year: Date.today.year - 65,
+    end_year: Date.today.year - 18,
     prompt: true
   = f.text_field :place_of_birth
 
   = f.text_field :identifier
 
   = f.date_select :member_since,
-    start_year: Date.today.year - 100,
+    start_year: Date.today.year - 10,
     end_year: Date.today.year,
     prompt: true
 
   = f.date_select :member_until,
-    start_year: Date.today.year - 100,
-    end_year: Date.today.year,
+    start_year: Date.today.year - 3,
+    end_year: Date.today.year + 10,
     prompt: true
 
   = f.form_group do
