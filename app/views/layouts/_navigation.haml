@@ -29,10 +29,9 @@
 
           %li{class: ('active' if params[:controller] == 'players')}
             = link_to 'Spieler', players_path
-        - if admin?
-          %li{class: ('active' if params[:controller] == 'administrations')}
-            = link_to 'Administration', administration_path
 
+          %li{class: ('active' if params[:controller] == 'trainings')}
+            = link_to 'Training', trainings_path
 
         %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
           = link_to 'Kontakt', '/contact'
@@ -60,9 +59,11 @@
                 %li.dropdown-header
                   Admin Einstellungen
                 %li
-                  = link_to 'User verwalten', users_path
+                  = link_to 'Admin Dashboard', administration_path
                 %li
                   = link_to 'Teams verwalten', teams_path
+                %li
+                  = link_to 'User verwalten', users_path
                 %li.divider
 
               %li.dropdown-header
