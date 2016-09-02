@@ -3,7 +3,7 @@ class TrainingsController < ApplicationController
   before_action :set_training, only: %i(edit update)
 
   def index
-    @trainings = Training.order(date: :desc)
+    @trainings = Training.order(date: :desc).page(params[:page])
   end
 
   def new
