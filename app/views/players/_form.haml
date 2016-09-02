@@ -17,8 +17,8 @@
     = f.text_field :player_pass_number
 
     = f.date_select :eligible_to_play_since,
-      start_year: Date.today.year - 100,
-      end_year: Date.today.year,
+      start_year: Date.today.year,
+      end_year: Date.today.year - 10,
       prompt: true
 
   %hr
