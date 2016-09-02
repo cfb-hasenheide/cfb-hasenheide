@@ -1,6 +1,6 @@
 class TrainingsController < ApplicationController
   before_action :set_players, only: %i(new edit)
-  before_action :set_training, only: %i(edit update)
+  before_action :set_training, only: %i(edit update destroy)
 
   def index
     @trainings = Training.order(date: :desc).page(params[:page])
@@ -32,6 +32,11 @@ class TrainingsController < ApplicationController
       set_players
       render :edit, alert: 'Training nicht aktualisiert!'
     end
+  end
+
+  def destroy
+    @training.destroy
+    redirect_to trainings_path, notice: 'Training gelöscht.'
   end
 
   private

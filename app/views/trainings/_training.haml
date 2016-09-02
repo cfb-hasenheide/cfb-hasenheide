@@ -7,6 +7,12 @@
     - if can?(:update, Training)
       %small= link_to 'bearbeiten', edit_training_path(training)
 
+    - if can?(:destroy, Training)
+      %small
+        = link_to 'löschen',
+          training_path(training),
+          method: :delete,
+          'data-confirm' => 'Wirklich löschen?'
 
   %p.list-group-item-text
     = training.players.pluck(:nickname).sort.to_sentence
