@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20160901010201) do
   end
 
   create_table "attendance_lists", force: :cascade do |t|
-    t.string  "attendable_type"
     t.integer "attendable_id"
+    t.string  "attendable_type"
     t.boolean "open",            default: false, null: false
     t.integer "minimum",         default: 7,     null: false
     t.integer "maximum",         default: 11,    null: false
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160901010201) do
   end
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
-    t.string   "bootsy_resource_type"
     t.integer  "bootsy_resource_id"
+    t.string   "bootsy_resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -254,8 +254,8 @@ ActiveRecord::Schema.define(version: 20160901010201) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
-    t.string   "invited_by_type"
     t.integer  "invited_by_id"
+    t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
     t.boolean  "legacy_password"
     t.boolean  "admin",                  default: false, null: false
