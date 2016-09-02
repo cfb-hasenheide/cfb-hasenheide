@@ -7,7 +7,8 @@ class TrainingsController < ApplicationController
   end
 
   def new
-    @training = Training.new(date: Time.zone.today)
+    current_weeks_monday = Time.zone.today.beginning_of_week
+    @training = Training.new(date: current_weeks_monday)
   end
 
   def create
