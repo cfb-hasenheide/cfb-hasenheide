@@ -287,7 +287,6 @@ ActiveRecord::Schema.define(version: 20160901204134) do
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
-  add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
 end
