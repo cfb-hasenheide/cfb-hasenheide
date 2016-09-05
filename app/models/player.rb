@@ -3,8 +3,8 @@ class Player < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader unless Rails.env.test?
 
-  delegate :address, to: :member
-  delegate :contact, to: :member
+  has_one :address, through: :member
+  has_one :contact, through: :member
   belongs_to :member
 
   has_many :attendances, dependent: :destroy
@@ -19,6 +19,8 @@ class Player < ApplicationRecord
   paginates_per 12
 
   scope :player_pass, -> (needed) { where(player_pass: true) if needed }
+
+  delegate :club_email, to: :contact
 
   def club_email_with_nickname
     %("#{nickname}" <#{club_email}>)
