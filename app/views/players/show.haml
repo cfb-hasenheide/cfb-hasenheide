@@ -14,15 +14,24 @@
     = link_to edit_member_path(@player.member), class: 'default-button' do
       = edit_icon
       Person bearbeiten
+
     = link_to edit_player_path(@player), class: 'default-button' do
       = edit_icon
       Spielerdaten bearbeiten
-    = link_to edit_address_path(@player.address), class: 'default-button' do
-      = edit_icon
-      Addresse ändern
+
+    - if @player.address
+      = link_to edit_address_path(@player.address), class: 'default-button' do
+        = edit_icon
+        Addresse ändern
+
     = link_to edit_contact_path(@player.contact), class: 'default-button' do
       = edit_icon
       Kontaktdaten bearbeiten
+
+    - unless @player.address
+      = link_to new_member_address_path(@player.member), class: 'pull-right primary-button' do
+        = create_icon
+        Addresse hinzufügen
 
 .halfs
   .half
@@ -31,7 +40,8 @@
     = render 'details', player: @player
 
 .halfs
-  .half
-    = render 'addresses/details', address: @player.address
+  - if @player.address && (current_user == @player.member.user || admin?)
+    .half
+      = render 'addresses/details', address: @player.address
   .half
     = render 'contacts/details', contact: @player.contact
