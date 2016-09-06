@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin!, only: :index
-  before_action :set_user, only: :update
+  before_action :set_user, only: [:update, :destroy]
 
   respond_to :html
 
@@ -15,6 +15,13 @@ class UsersController < ApplicationController
     end
 
     respond_with(@user, location: users_url)
+  end
+
+  def destroy
+    if @user.delete
+      flash[:notice] = 'User wurde erfolgreich gelöscht.'
+    end
+    redirect_to users_path
   end
 
   private

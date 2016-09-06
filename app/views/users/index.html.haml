@@ -33,7 +33,7 @@
                 'data-confirm' => 'Admin-Status wirklich ändern?',
                 onchange: '$(this.form).submit();'
           %td.text-right
-            = link_to registration_path(user),
+            = link_to user_path(user),
               method: :delete,
               class: 'default-button-xs',
               'data-confirm' => 'Wirklich unwiderruflich löschen?' do

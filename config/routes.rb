@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get :missing, on: :collection
   end
 
-  resources :users, only: [:index, :update]
+  resources :users, only: [:index, :update, :destroy]
 
   resources :teams, except: :show
 
