@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_one :member
   has_one :address, as: :addressable, dependent: :destroy
-  has_one :contact, dependent: :destroy
+  has_many :functions
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -10,9 +10,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  delegate :player, to: :member
+  before_save :set_username
 
-  has_many :functions
+  after_create :create_member
+
+  delegate :player, to: :member
 
   def self.without_player
     User.where.not(id: Player.pluck(:user_id))
@@ -56,5 +58,12 @@ class User < ApplicationRecord
   def player?
     return true if player
     false
+  end
+
+  private
+
+  def set_username
+    return if username
+    self.username = email.split('@').first
   end
 end

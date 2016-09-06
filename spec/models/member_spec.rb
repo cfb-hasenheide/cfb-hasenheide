@@ -21,4 +21,14 @@ RSpec.describe Member, type: :model do
       expect(member.address)
     end
   end
+
+  describe '.create' do
+    subject do
+      Member.create!(user_id: user.id)
+    end
+
+    it 'has a auto generated contact model' do
+      expect(subject.contact.persisted?).to be_truthy
+    end
+  end
 end
