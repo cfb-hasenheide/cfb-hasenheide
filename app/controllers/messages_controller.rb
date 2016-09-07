@@ -28,6 +28,6 @@ class MessagesController < ApplicationController
   end
 
   def messages
-    Message.order(:created_at).page(params[:page])
+    Message.order(created_at: :desc).limit(100).reverse
   end
 end
