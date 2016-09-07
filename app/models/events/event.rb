@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   validates :address, :datetime, :name, :type, presence: true
 
   scope :future, lambda { |limit = nil|
-    where('datetime >= ?', Time.zone.now).order('datetime DESC').limit(limit)
+    where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
   }
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
