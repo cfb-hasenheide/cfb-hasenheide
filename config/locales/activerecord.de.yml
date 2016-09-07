@@ -44,6 +44,8 @@ de:
         lastname: Nachname
         date_of_birth: Geboren am
         place_of_birth: Geboren in
+        player_ideal: Fußballerisches Vorbild
+        personal_moment: Mein persönlicher CFB-Moment
         member_since: Mitglied seit
         member_until: Mitglied bis
         identifier: Mitgliedsnr.
