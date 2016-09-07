@@ -11,6 +11,8 @@ class Player < ApplicationRecord
 
   validates :nickname, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true
+  delegate :club_email, to: :contact
+  delegate :phone1, :phone2, to: :contact
 
   enum status: { active: 0, injured: 1, inactive: 2 }
 
