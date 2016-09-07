@@ -35,6 +35,9 @@ gem 'fog-aws', github: 'fog/fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 
+# cms
+gem 'redcarpet'
+
 # assets
 gem 'sass-rails'
 gem 'uglifier'
