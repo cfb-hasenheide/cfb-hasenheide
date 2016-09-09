@@ -28,4 +28,10 @@ class Player < ApplicationRecord
   def club_email_with_nickname
     %("#{nickname}" <#{club_email}>)
   end
+
+  def name_and_status
+    return nickname if active?
+    state = I18n.t(status, scope: %w(activerecord enums player status))
+    "#{nickname} (#{state})"
+  end
 end

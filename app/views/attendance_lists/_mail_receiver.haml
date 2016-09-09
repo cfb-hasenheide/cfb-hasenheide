@@ -7,7 +7,7 @@
 
   .panel-body
     = f.collection_check_boxes 'player_ids[]',
-      @club_team.players, :id, :club_email_with_nickname,
+      @club_team.players, :id, :name_and_status,
       checked: @eligible_players.pluck(:id), hide_label: true
 
     = button_tag type: 'button', 'data-toggle' => 'collapse',
@@ -18,5 +18,5 @@
 
   .panel-footer.collapse#selectRecipients
     = f.collection_check_boxes 'player_ids[]', @other_players, :id,
-      :club_email_with_nickname, hide_label: true
+      :name_and_status, hide_label: true
 
