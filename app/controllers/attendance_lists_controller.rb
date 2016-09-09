@@ -50,7 +50,8 @@ class AttendanceListsController < ApplicationController
 
   def open_mail
     @eligible_players = @attendance_list.attendable.eligible_players
-    @all_players = Player.order(:nickname)
+    @club_team = @attendance_list.club_team
+    @other_players = Player.order(:nickname) - @club_team.players
   end
 
   def open

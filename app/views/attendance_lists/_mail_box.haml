@@ -1,0 +1,16 @@
+.panel.panel-primary
+  .panel-heading
+    %h2.panel-title Vorschau
+
+  .panel-body
+    = render 'event_mailer/attendance_list_opened',
+      event: @attendance_list.attendable, message: nil
+
+  .panel-footer
+    = f.text_area :message, label: 'Nachricht hinzufügen?'
+
+    = button_tag type: 'submit', class: 'primary-button' do
+      = mail_icon
+      Meldeliste öffnen und Mail versenden
+
+    = link_to 'Abbrechen', :back, class: 'default-button'
