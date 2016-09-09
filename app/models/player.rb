@@ -8,6 +8,7 @@ class Player < ApplicationRecord
   belongs_to :member
 
   has_many :attendances, dependent: :destroy
+  has_and_belongs_to_many :teams
 
   validates :nickname, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true
