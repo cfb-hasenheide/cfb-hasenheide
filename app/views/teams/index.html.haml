@@ -1,10 +1,11 @@
 .page-header
   %h1
-    Mannschaften
+    = Team.model_name.human(count: 2)
     .pull-right
       = link_to new_team_path, class: 'primary-button' do
         = create_icon
-        %span.hidden-xs Mannschaft erstellen
+        %span.hidden-xs
+          = t('helpers.submit.create', model: Team.model_name.human)
 
 .table-responsive
   %table
@@ -22,15 +23,15 @@
         %tr
           %td.col-md-3= team.name
 
-          %td.col-md-5= team.description
+          %td.col-md-4= team.description
 
           %td.col-md-1
             - if team.club?
-              .label.label-success Ja
+              .label.label-success= t('simple_form.yes')
 
           %td.col-md-1
             - if team.club? && team.player_pass_needed?
-              .label.label-success Ja
+              .label.label-success= t('simple_form.yes')
 
           %td.col-md-1
             = form_for team, remote: true do |f|

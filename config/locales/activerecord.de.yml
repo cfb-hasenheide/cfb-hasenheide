@@ -11,7 +11,9 @@ de:
       other: Sonstiges
       player: Spieler
       report: Spielbericht
-      team: Mannschaft
+      team:
+        one: Mannschaft
+        other: Mannschaften
     attributes:
       address:
         city: Ort
