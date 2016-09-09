@@ -11,7 +11,7 @@
     %thead
       %tr
         %th.col-md-3= Team.human_attribute_name(:name)
-        %th.col-md-5= Team.human_attribute_name(:description)
+        %th.col-md-4= Team.human_attribute_name(:description)
         %th.col-md-1= Team.human_attribute_name(:club)
         %th.col-md-1= Team.human_attribute_name(:player_pass_needed)
         %th.col-md-1= Team.human_attribute_name(:current_season)
@@ -39,8 +39,12 @@
                 'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
                 onchange: '$(this.form).submit();'
 
-          %td.col-md-1
+          %td.col-md-2
             .btn-toolbar.pull-right
+              - if team.club?
+                = link_to team_players_path(team), class: 'default-button-xs' do
+                  = create_icon
+                  = user_icon
               = link_to edit_team_path(team), class: 'default-button-xs' do
                 = edit_icon
               = link_to team_path(team), method: :delete,
