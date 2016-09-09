@@ -8,7 +8,7 @@ class TeamPlayersController < ApplicationController
   def update
     @team = Team.find(params[:team_id])
     @team.update(player_ids: player_ids)
-    redirect_to team_players_path(@team)
+    respond_with @team, location: team_players_path(@team)
   end
 
   private
