@@ -30,6 +30,9 @@
     end_year: Date.today.year + 10,
     prompt: true
 
+  = f.text_field :player_ideal
+  = f.text_field :personal_moment
+
   = f.form_group do
     = f.primary
     = link_to t('links.cancel'),

@@ -21,6 +21,8 @@ class MembersController < ApplicationController
                                    :lastname,
                                    :date_of_birth,
                                    :place_of_birth,
+                                   :personal_moment,
+                                   :player_ideal,
                                    :member_since,
                                    :member_until,
                                    :user_id)
