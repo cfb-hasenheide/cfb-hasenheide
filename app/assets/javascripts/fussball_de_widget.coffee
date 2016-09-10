@@ -16,6 +16,8 @@ fussballDeWidget =
       .showWidget('fussballDeMatchScheduleCFBII', '01R2OPR4PK000000VS541L4GVTUQ91SG')
 
 $ ->
+  return unless fussballdeWidgetAPI?
+
   if $('#fussballDeTableCFBI').length > 0
     fussballDeWidget.tableCFBI()
 
