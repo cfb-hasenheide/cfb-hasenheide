@@ -1,37 +1,25 @@
-.modal.fade#chatModal{tabindex: '-1',
-  role: 'dialog',
-  'aria-labelledby' => 'chatLabel'}
-  .modal-dialog{role: 'document'}
-    .modal-content
-      .modal-header
-        = button_tag class: 'close',
-          'data-dismiss' => 'modal',
-          'aria-label' => 'Close' do
-          %span{'aria-hidden' => 'true'} &times;
+%ul.list-group
+  %li.list-group-item
+    %strong Chat
+    %small
+      = link_to messages_path,
+        remote: true,
+        'data-disable-with' => "#{refreshing_icon}" do
+        = refresh_icon
 
-        %h4.modal-title#chatLabel
-          Chat
-          %small
-            = link_to messages_path,
-              remote: true,
-              'data-disable-with' => "#{refreshing_icon}" do
-              = refresh_icon
+  #messages
 
-      .modal-body
-        %ul.list-group#messages
+  %li.list-group-item
+    = form_for Message.new, remote: true do |f|
+      = f.hidden_field :user_id, value: current_user.id
 
-      .modal-footer
-        = form_for Message.new, remote: true do |f|
-          = f.hidden_field :user_id, value: current_user.id
+      .input-group
+        = f.text_field :content,
+          class: 'form-control',
+          placeholder: Message.human_attribute_name(:content)
 
-          .input-group
-            = f.text_field :content,
-              class: 'form-control',
-              placeholder: Message.human_attribute_name(:content)
-
-            %span.input-group-btn
-              = button_tag type: 'submit',
-                class: 'primary-button',
-                'data-disable-with' => "#{spinner_icon} Senden" do
-                = chat_message_icon
-                Senden
+        %span.input-group-btn
+          = button_tag type: 'submit',
+            class: 'primary-button',
+            'data-disable-with' => "#{spinner_icon} Senden" do
+            = chat_message_icon

@@ -17,9 +17,15 @@
 
   %body
     = render 'layouts/navigation'
+
     .container
-      = render 'layouts/flash_messages'
-      = yield
+      .row.row-offcanvas.row-offcanvas-right
+        .col-xs-12.col-md-12
+          = render 'layouts/flash_messages'
+          = yield
+
+        .col-xs-6.col-md-3.sidebar-offcanvas#sidebar
+          = render 'layouts/chat' if user_signed_in?
 
     = render 'layouts/footer'
 

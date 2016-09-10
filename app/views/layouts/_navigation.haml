@@ -41,7 +41,7 @@
         - if user_signed_in?
           %li
             = link_to '#chatModal',
-              'data-toggle' => 'modal' do
+              'data-toggle' => 'offcanvas' do
               = chat_icon
               Chat
 
@@ -83,5 +83,3 @@
             = link_to new_user_session_path do
               = login_icon
               Login
-
-= render 'layouts/chat' if user_signed_in?
