@@ -117,4 +117,8 @@ module IconsHelper
   def refreshing_icon
     fa_icon('refresh spin')
   end
+
+  def show_icon
+    fa_icon('search')
+  end
 end

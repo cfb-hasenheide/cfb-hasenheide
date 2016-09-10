@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   resources :news, concerns: :paginatable
 
+  resources :pages
+
   resources :players, concerns: :paginatable, except: :destroy do
     get :for_user, on: :new
   end
