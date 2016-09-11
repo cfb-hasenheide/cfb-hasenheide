@@ -64,7 +64,7 @@ class User < ApplicationRecord
   private
 
   def set_username
-    return if username
+    return if username?
     self.username = email.split('@').first
   end
 end
