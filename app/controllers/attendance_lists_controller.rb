@@ -1,8 +1,8 @@
 class AttendanceListsController < ApplicationController
+  before_action :set_event, only: %i(new show)
   before_action :set_attendance_list, only: %i(close close_mail open open_mail)
 
   def show
-    @event = Event.friendly.find(params[:event_id])
     @attendance_list = @event.attendance_list
 
     if @attendance_list.nil?
@@ -14,11 +14,22 @@ class AttendanceListsController < ApplicationController
       @attendance_list.attendances.find_by(player_id: current_user.player.id)
   end
 
+  def new
+    @attendance_list = @event.build_attendance_list
+  end
+
   def create
-    event = Event.friendly.find(params[:event_id])
-    event.create_attendance_list
-    redirect_to event_attendance_list_path(event),
-                notice: 'Meldeliste erfolgreich erstellt.'
+    authorize!(:create, AttendanceList)
+
+    @event = Event.friendly.find(attendance_list_params[:attendable_id])
+    @attendance_list = AttendanceList.new(attendance_list_params)
+
+    if @attendance_list.save
+      redirect_to event_attendance_list_path(@event),
+                  notice: 'Meldeliste erfolgreich erstellt.'
+    else
+      render :new, alert: 'Meldeliste nicht erstellt!'
+    end
   end
 
   def close
@@ -55,6 +66,11 @@ class AttendanceListsController < ApplicationController
 
   private
 
+  def attendance_list_params
+    params.require(:attendance_list)
+          .permit(:maximum, :minimum, :attendable_id, :attendable_type)
+  end
+
   def deliver_attendance_list_closed_mail
     EventMailer.attendance_list_closed(@attendance_list.attendable_id,
                                        to_player_ids: params[:player_ids],
@@ -78,5 +94,9 @@ class AttendanceListsController < ApplicationController
 
   def set_attendance_list
     @attendance_list = AttendanceList.find(params[:id])
+  end
+
+  def set_event
+    @event = Event.friendly.find(params[:event_id])
   end
 end

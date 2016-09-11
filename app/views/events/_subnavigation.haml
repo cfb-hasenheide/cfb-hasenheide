@@ -15,8 +15,7 @@
         class: ('active' if params[:controller] == 'attendance_lists')}
 
       = link_to 'Meldeliste erstellen',
-                event_attendance_list_path(event),
-                method: :post
+                new_event_attendance_list_path(event)
 
   - if event.report.present?
     %li{role: 'presentation',
