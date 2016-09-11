@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   after_create :create_member
 
+  delegate :avatar_url, :nickname, to: :player
   delegate :player, to: :member
 
   def self.without_player

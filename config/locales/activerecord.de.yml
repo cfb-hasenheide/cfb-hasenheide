@@ -6,6 +6,10 @@ de:
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
+      forum_post:
+        one: Beitrag
+        other: Beiträge
+      forum_thread: Thema
       league_match: Ligaspiel
       member: Mitglied
       other: Sonstiges
@@ -36,8 +40,8 @@ de:
         home: Heim / Auswärts?
         rival_team_id: Gegnermannschaft
       forum_thread:
-        topic: Thema
         comment: Kommentar
+        topic: Thema
       message:
         content: Nachricht
       member:

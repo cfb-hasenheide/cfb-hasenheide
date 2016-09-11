@@ -4,7 +4,11 @@ class ForumThreadsController < ApplicationController
   respond_to :html
 
   def index
-    @forum_threads = ForumThread.order('created_at DESC')
+    @forum_threads =
+      ForumThread.includes(:forum_posts)
+                 .order('forum_posts.created_at DESC, forum_threads.created_at DESC')
+                 .page(params[:page])
+
     respond_with(@forum_threads)
   end
 

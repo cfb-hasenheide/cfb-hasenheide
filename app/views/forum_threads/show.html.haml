@@ -1,71 +1,56 @@
-.panel.panel-primary
-  .panel-heading
-    %h3.panel-title
-      Thema:
+= content_for :title, "Forum | #{@forum_thread.topic}"
+
+.page-header
+  %h1
+    = ForumThread.model_name.human
+
+    %small
       = @forum_thread.topic
 
-  .panel-footer
-    .two-ten
-      .two
-        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
-      .ten
-        %blockquote.blockquote
-          = @forum_thread.comment
-          %footer
-            Erstellt von
-            = user_icon
-            = User.find(@forum_thread.user_id).username
-            = time_icon
-            vor
-            = l(@forum_thread.created_at)
+    .pull-right
+      = link_to forum_threads_path, class: 'default-button' do
+        = list_icon
+        %span.hidden-xs Alle anzeigen
 
-    .two-ten
-      .two
-        = link_to 'Antworten', '#answerForm', class: 'primary-button',
-          'data-toggle' => 'collapse', 'aria-expanded' => 'false',
-          'aria-controls' => 'answerForm'
-      .ten
-        .collapse#answerForm
-          %blockquote
-            = simple_form_for @forum_thread do |f|
-              = f.input :comment
-              = f.submit 'Abschicken', class: 'primary-button-sm'
-              = link_to 'Abbrechen', '#answerForm', class: 'default-button-sm',
-                'data-toggle' => 'collapse', 'aria-expanded' => 'false',
-                'aria-controls' => 'answerForm'
-
+.panel.panel-default
   .panel-body
-    .two-ten
-      .two
-        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
-      .ten
-        %blockquote
-          Mauris varius dignissim gravida. Curabitur scelerisque eleifend dui, ut vestibulum dui ornare vel. Nunc hendrerit neque at fringilla elementum. Phasellus gravida pharetra tincidunt. Duis nec ex velit. Vestibulum in neque faucibus, condimentum lectus non, dictum felis. Praesent in massa et ante pharetra pellentesque ut interdum nunc.
-          %footer
-            = user_icon
-            Hase 4
-            = time_icon
-            3 Minuten her
+    .media
+      .media-body
+        .text-muted
+          Erstellt von
+          %strong= @forum_thread.user_nickname
+          am
+          = l(@forum_thread.created_at, format: :short)
 
-    .two-ten
-      .two
-        = image_tag('hase.png', class: 'img-thumbnail', size: '50x50')
-      .ten
-        %blockquote
-          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-          %footer
-            = user_icon
-            Hase 4
-            = time_icon
-            3 Minuten her
+        = @forum_thread.comment
 
-  - if @forum_thread.user_id == current_user.id or admin?
-    .panel-footer
-      = link_to edit_forum_thread_path(@forum_thread), class: 'default-button-xs' do
-        = edit_icon
-        Editieren
-      = link_to @forum_thread, method: :delete, class: 'default-button-xs',
-        data: { confirm: 'Das Thema wirklich löschen?' } do
-        %span.text-danger
-          = delete_icon
-          Löschen
+      .media-right
+        = image_tag @forum_thread.user_avatar_url(:small_thumb),
+          width: '30',
+          height: '30',
+          alt: current_user.nickname,
+          class: 'img-circle'
+
+%p.text-center.text-muted
+  = @forum_thread.forum_posts_count
+  = ForumPost.model_name.human(count: @forum_thread.forum_posts_count)
+
+.panel.panel-default
+  %ul.list-group
+    = render @forum_thread.forum_posts
+
+  .panel-footer
+    = render 'forum_posts/form', forum_post: @forum_thread.build_forum_post
+
+.well.well-sm
+  - if can? :update, @forum_thread
+    = link_to edit_forum_thread_path(@forum_thread), class: 'default-button-xs' do
+      = edit_icon
+      Editieren
+
+  - if can? :destroy, @forum_thread
+    = link_to @forum_thread, method: :delete, class: 'default-button-xs',
+      data: { confirm: 'Das Thema wirklich löschen?' } do
+      %span.text-danger
+        = delete_icon
+        Löschen

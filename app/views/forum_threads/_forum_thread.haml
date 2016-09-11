@@ -1,0 +1,27 @@
+= link_to forum_thread_path(forum_thread), class: 'list-group-item' do
+  %span.badge= forum_thread.forum_posts_count
+
+  %h4.list-group-item-heading
+    = forum_thread.topic
+
+  %p.list-group-item-text
+    .media
+      .media-body
+        %strong.text-muted
+          = forum_thread.user_nickname
+
+        %small.text-muted= l(forum_thread.created_at, format: :short)
+
+        %br
+
+        = forum_thread.comment
+
+      .media-right
+        = image_tag forum_thread.user_avatar_url(:small_thumb),
+          width: '30',
+          height: '30',
+          alt: current_user.nickname,
+          class: 'img-circle'
+
+  %p.list-group-item-text
+    = render forum_thread.newest_post if forum_thread.newest_post.present?
