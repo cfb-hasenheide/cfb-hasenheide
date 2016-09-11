@@ -78,4 +78,6 @@ Rails.application.routes.draw do
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
+  get '/:id', to: 'pages#show', constraints: lambda { |request|
+    Page.published.pluck(:slug).include?(request.params[:id]) }
 end
