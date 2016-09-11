@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  before_action :set_event, only: [:new, :edit]
   before_action :set_report, only: [:show, :edit, :update]
 
   respond_to :html
@@ -36,7 +37,7 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = Report.new(event_id: params[:event_id])
+    @report = @event.build_report
   end
 
   def create
@@ -63,6 +64,10 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def set_event
+    @event = Event.friendly.find(params[:event_id])
+  end
 
   def set_report
     if params[:id].present?

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :events, concerns: :paginatable do
     resource :attendance_list, only: [:show, :create]
-    resource :report, only: :show
+    resource :report, only: [:show, :new]
   end
 
   resources :league_matches,
