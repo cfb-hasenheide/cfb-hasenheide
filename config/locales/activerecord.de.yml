@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       address: Adresse
+      attendance_list: Meldeliste
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
