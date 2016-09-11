@@ -2,13 +2,12 @@ class AttendanceList < ApplicationRecord
   belongs_to :attendable, polymorphic: true
   has_many :attendances, dependent: :destroy
 
+  validates :minimum, :maximum, presence: true
   validates :minimum,
-            presence: true,
-            numericality: { greater_than: 0, less_than_or_equal_to: :maximum }
-
-  validates :maximum,
-            presence: true,
-            numericality: { greater_than: :minimum }
+            numericality: { greater_than: 0, less_than_or_equal_to: :maximum },
+            if: :maximum?
+  validates :maximum, numericality: { greater_than: :minimum },
+            if: :minimum?
 
   delegate :eligible_players, to: :attendable
 
