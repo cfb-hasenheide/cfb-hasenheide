@@ -68,7 +68,8 @@ class PagesController < PublicController
   private
 
   def page_params
-    params.require(:page).permit(:slug, :header, :subheader, :content, :public)
+    params.require(:page)
+          .permit(:slug, :header, :subheader, :content, :public, :published)
   end
 
   def set_events
