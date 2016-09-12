@@ -2,13 +2,13 @@
   .panel-heading
     %h2.panel-title
       Empfänger
-      %small.recipientsCount
-        = @club_team.name
+      %small
+        = title
 
   .panel-body
     = f.collection_check_boxes 'player_ids[]',
-      @club_team.players, :id, :name_and_status,
-      checked: @eligible_players.pluck(:id), hide_label: true
+      first_choice, :id, :name_and_status,
+      checked: receiver_ids, hide_label: true
 
     = button_tag type: 'button', 'data-toggle' => 'collapse',
       'data-target' => '#selectRecipients', class: 'btn-sm primary-button' do
@@ -17,6 +17,6 @@
       = fa_icon('arrow-up')
 
   .panel-footer.collapse#selectRecipients
-    = f.collection_check_boxes 'player_ids[]', @other_players, :id,
-      :name_and_status, hide_label: true
-
+    = f.collection_check_boxes 'player_ids[]',
+      Player.order(:nickname) - first_choice, :id, :name_and_status,
+      hide_label: true

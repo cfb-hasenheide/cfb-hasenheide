@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    = title
+    %small
+      = attendable.name
+      = surround '(', ')' do
+        = attendable.model_name.human
+

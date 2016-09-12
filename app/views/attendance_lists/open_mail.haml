@@ -1,17 +1,11 @@
-= content_for :title, 'Neuer Termin Mail'
-
-.page-header
-  %h1
-    = content_for :title
-    %small
-      = @attendance_list.attendable.name
-      = surround '(', ')' do
-        = @attendance_list.attendable.model_name.human
+= render 'page_header', attendable: @attendance_list.attendable,
+  title: 'Neuer Termin Mail'
 
 = bootstrap_form_tag url: open_attendance_list_path(@attendance_list) do |f|
   = f.hidden_field :mail, value: true
   .row
     .col-md-4
-      = render 'mail_receiver', f: f
+      = render 'mail_receiver', f: f, title: @attendance_list.club_team.name,
+        first_choice: @first_choice, receiver_ids: @receiver_ids
     .col-md-8
       = render 'mail_box', f: f

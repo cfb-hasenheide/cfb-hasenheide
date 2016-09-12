@@ -44,14 +44,13 @@ class AttendanceListsController < ApplicationController
   end
 
   def close_mail
-    @attending_players = @attendance_list.attendable.attending_players
-    @all_players = Player.order(:nickname)
+    @first_choice = @attendance_list.attendable.attending_players
+    @receiver_ids = @first_choice.pluck(:id)
   end
 
   def open_mail
-    @eligible_players = @attendance_list.attendable.eligible_players
-    @club_team = @attendance_list.club_team
-    @other_players = Player.order(:nickname) - @club_team.players
+    @first_choice = @attendance_list.club_team.players
+    @receiver_ids = @attendance_list.attendable.eligible_players.pluck(:id)
   end
 
   def open

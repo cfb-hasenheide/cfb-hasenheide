@@ -1,70 +1,12 @@
-= content_for :title, 'Final Call Mail'
-
-.page-header
-  %h1
-    = content_for :title
-
-    %small
-      = @attendance_list.attendable.name
-      = surround '(', ')' do
-        = @attendance_list.attendable.model_name.human
+= render 'page_header', attendable: @attendance_list.attendable,
+  title: 'Final Call Mail'
 
 = bootstrap_form_tag url: close_attendance_list_path(@attendance_list) do |f|
   = f.hidden_field :mail, value: true
   .row
     .col-md-4
-      .panel.panel-primary
-        .panel-heading
-          %h2.panel-title
-            Empfänger
-            %small= @attending_players.count
-
-        .panel-body
-          %p
-            = @attending_players.pluck(:nickname).join(', ')
-
-          %p
-            = button_tag type: 'button',
-              'data-toggle' => 'collapse',
-              'data-target' => '#selectRecipients',
-              class: 'default-button' do
-              bearbeiten
-
-        .panel-footer.collapse#selectRecipients
-          = f.collection_check_boxes 'player_ids[]',
-            @all_players,
-            :id,
-            :club_email_with_nickname,
-            checked: @attending_players.pluck(:id),
-            hide_label: true
-
-          %p
-            = button_tag type: 'button',
-              'data-toggle' => 'collapse',
-              'data-target' => '#selectRecipients',
-              class: 'default-button' do
-              Fertig
+      = render 'mail_receiver', f: f, title: 'Gemeldete Spieler',
+        first_choice: @first_choice, receiver_ids: @receiver_ids
 
     .col-md-8
-      .panel.panel-primary
-        .panel-heading
-          %h2.panel-title Vorschau
-
-        .panel-body
-          = render 'event_mailer/attendance_list_closed',
-            event: @attendance_list.attendable,
-            message: nil,
-            time_to_meet: 30
-
-          = f.select 'time_to_meet', time_to_meet,
-            label: "Treffzeit"
-
-        .panel-footer
-          = f.text_area :message, label: 'Nachricht hinzufügen?'
-
-
-          = button_tag type: 'submit', class: 'primary-button' do
-            = mail_icon
-            Final Call Mail versenden
-
-          = link_to 'Abbrechen', :back, class: 'default-button'
+      = render 'mail_box', f: f
