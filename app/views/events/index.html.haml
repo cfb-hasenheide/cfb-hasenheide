@@ -15,17 +15,14 @@
 
           %ul.dropdown-menu.pull-right
             - [LeagueMatch, CupMatch, Other].each do |event_class|
-              %li= link_to event_class.model_name.human, new_event_path(type: event_class.name)
+              %li
+                = link_to event_class.model_name.human,
+                  new_event_path(type: event_class.name)
 
 - @events.in_groups_of(4) do |events|
   .row
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'event', event: events.first
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'event', event: events.second if events.second.present?
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'event', event: events.third if events.third.present?
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'event', event: events.fourth if events.fourth.present?
+    - events.compact.each do |event|
+      .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        = render 'event', event: event
 
 = render 'layouts/pagination', entries: @events

@@ -10,9 +10,7 @@
         = @attendance_list.attendable.model_name.human
 
 = bootstrap_form_tag url: close_attendance_list_path(@attendance_list) do |f|
-
   = f.hidden_field :mail, value: true
-
   .row
     .col-md-4
       .panel.panel-primary
