@@ -25,3 +25,10 @@
 
       %dt= Member.human_attribute_name(:member_until)
       %dd= l(member.member_until) if member && member.member_until?
+
+      %dt= Member.human_attribute_name(:player_ideal)
+      %dd= member.player_ideal
+
+      %dt= Member.human_attribute_name(:personal_moment)
+      %dd= member.personal_moment
+

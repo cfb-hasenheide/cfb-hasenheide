@@ -10,6 +10,7 @@ class AttendanceList < ApplicationRecord
             if: :minimum?
 
   delegate :eligible_players, to: :attendable
+  delegate :club_team, to: :attendable
 
   def yes_and_waiting_quota
     yes_and_waiting_count.to_f / maximum

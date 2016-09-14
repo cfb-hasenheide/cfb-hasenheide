@@ -1,0 +1,17 @@
+= link_to 'Zurück', teams_path
+.halfs
+  .half
+    %h1
+      = @team.name
+      %small Spieler
+    %ul
+      - @team.players.each do |player|
+        %li= player.nickname
+
+  .half
+    %h1 Alle Spieler
+    = bootstrap_form_for @team, url: team_players_path(@team),
+      method: :put do |f|
+      %ul
+        = render 'checkbox', team: @team
+      = f.primary

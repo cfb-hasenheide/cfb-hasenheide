@@ -8,6 +8,7 @@ class Player < ApplicationRecord
   belongs_to :member
 
   has_many :attendances, dependent: :destroy
+  has_and_belongs_to_many :teams
 
   validates :nickname, presence: true
   validates :jersey_number, uniqueness: true, allow_nil: true
@@ -26,5 +27,11 @@ class Player < ApplicationRecord
 
   def club_email_with_nickname
     %("#{nickname}" <#{club_email}>)
+  end
+
+  def name_and_status
+    return nickname if active?
+    state = I18n.t(status, scope: %w(activerecord enums player status))
+    "#{nickname} (#{state})"
   end
 end

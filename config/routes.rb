@@ -62,7 +62,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :update, :destroy]
 
-  resources :teams, except: :show
+  resources :teams, except: :show do
+    resource :players, only: %i(show update), controller: :team_players
+  end
 
   resource :administration, only: :show
   resources :roles

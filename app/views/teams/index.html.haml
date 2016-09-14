@@ -1,36 +1,37 @@
 .page-header
   %h1
-    Mannschaften
+    = Team.model_name.human(count: 2)
     .pull-right
       = link_to new_team_path, class: 'primary-button' do
         = create_icon
-        %span.hidden-xs Mannschaft erstellen
+        %span.hidden-xs
+          = t('helpers.submit.create', model: Team.model_name.human)
 
 .table-responsive
   %table
     %thead
       %tr
         %th.col-md-3= Team.human_attribute_name(:name)
-        %th.col-md-5= Team.human_attribute_name(:description)
+        %th.col-md-4= Team.human_attribute_name(:description)
         %th.col-md-1= Team.human_attribute_name(:club)
         %th.col-md-1= Team.human_attribute_name(:player_pass_needed)
         %th.col-md-1= Team.human_attribute_name(:current_season)
         %th.col-md-1.text-right.text-muted Aktionen
 
     %tbody
-      - for team in @teams
+      - @teams.each do |team|
         %tr
           %td.col-md-3= team.name
 
-          %td.col-md-5= team.description
+          %td.col-md-4= team.description
 
           %td.col-md-1
             - if team.club?
-              .label.label-success Ja
+              .label.label-success= t('simple_form.yes')
 
           %td.col-md-1
             - if team.club? && team.player_pass_needed?
-              .label.label-success Ja
+              .label.label-success= t('simple_form.yes')
 
           %td.col-md-1
             = form_for team, remote: true do |f|
@@ -39,8 +40,12 @@
                 'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
                 onchange: '$(this.form).submit();'
 
-          %td.col-md-1
+          %td.col-md-2
             .btn-toolbar.pull-right
+              - if team.club?
+                = link_to team_players_path(team), class: 'default-button-xs' do
+                  = create_icon
+                  = user_icon
               = link_to edit_team_path(team), class: 'default-button-xs' do
                 = edit_icon
               = link_to team_path(team), method: :delete,
