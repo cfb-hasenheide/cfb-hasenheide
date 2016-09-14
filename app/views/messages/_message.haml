@@ -7,8 +7,9 @@
         alt: current_user.player.nickname,
         class: 'img-circle'
     .media-body
-      %strong.text-muted
-        = message.user.player.nickname
+      = link_to player_path(message.user.player) do
+        %strong.text-muted
+          = message.user.player.nickname
       %small.pull-right.text-muted= l(message.created_at, format: :short)
       %br
       = message.content
