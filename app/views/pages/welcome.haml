@@ -17,6 +17,8 @@
     - @news.each do |news|
       = render 'news/news', news: news
 
+    = link_to 'Alle Nachrichten anzeigen', news_index_path
+
   .col-md-4
     .panel.panel-primary
       .panel-heading
