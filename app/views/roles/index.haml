@@ -1,4 +1,5 @@
-=render 'form', cancel: false
+- if can? :manage, Role
+  = render 'form', cancel: false
 
 %table.table
   %caption

@@ -8,21 +8,25 @@ class FunctionsController < ApplicationController
   end
 
   def create
+    authorize(:create, Function)
     @function = Function.create required_params
     @functions = Function.all
     respond_with(@function, location: functions_url)
   end
 
   def new
+    authorize!(:create, Function)
     @function = Function.new
     respond_with(@function)
   end
 
   def destroy
+    authorize!(:destroy, @function)
     @function.delete
   end
 
   def update
+    authorize!(:update, @function)
     @function.update(required_params)
   end
 

@@ -1,4 +1,7 @@
 class AdministrationsController < ApplicationController
-  def index
+  def show
+    authorize!(:create, Function) &&
+      authorize!(:update, Team) &&
+      authorize!(:update, User)
   end
 end

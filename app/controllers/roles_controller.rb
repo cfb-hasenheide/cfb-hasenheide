@@ -14,22 +14,26 @@ class RolesController < ApplicationController
   end
 
   def edit
+    authorize!(:update, @role)
     @roles = Role.all
     render 'index'
   end
 
   def create
     @role = Role.new(role_params)
+    authorize!(:create, @role)
     @role.save
     respond_with(@role)
   end
 
   def update
+    authorize!(:update, @role)
     @role.update(role_params)
     respond_with(@role)
   end
 
   def destroy
+    authorize!(:destoy, @role)
     @role.destroy
     respond_with(@role)
   end
