@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    authorize! :update, Comment
+    authorize! :update, @comment
 
     if @comment.update(comment_params)
       redirect_to @comment.commentable, notice: 'Kommentar aktualisiert'
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, Comment
+    authorize! :destroy, @comment
 
     @comment.destroy
     redirect_to @comment.commentable, notice: 'Kommentar gelöscht'
