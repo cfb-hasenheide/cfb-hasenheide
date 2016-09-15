@@ -15,6 +15,7 @@ class AttendanceListsController < ApplicationController
   end
 
   def new
+    authorize!(:create, AttendanceList)
     @attendance_list = @event.build_attendance_list
   end
 
@@ -33,6 +34,7 @@ class AttendanceListsController < ApplicationController
   end
 
   def close
+    authorize! :close, @attendance_list
     if @attendance_list.close!
       flash[:notice] = 'Meldeliste wurde erfolgreich geschlossen.'
       deliver_attendance_list_closed_mail if params[:mail]
@@ -44,16 +46,19 @@ class AttendanceListsController < ApplicationController
   end
 
   def close_mail
+    authorize! :close, @attendance_list
     @first_choice = @attendance_list.attendable.attending_players
     @receiver_ids = @first_choice.pluck(:id)
   end
 
   def open_mail
+    authorize! :open, @attendance_list
     @first_choice = @attendance_list.club_team.players
     @receiver_ids = @attendance_list.attendable.eligible_players.pluck(:id)
   end
 
   def open
+    authorize! :open, @attendance_list
     if @attendance_list.open!
       flash[:notice] = 'Meldeliste wurde erfolgreich geöffnet.'
       deliver_attendance_list_opened_mail if params[:mail]

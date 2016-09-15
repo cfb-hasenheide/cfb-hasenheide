@@ -4,6 +4,8 @@ class AccessPolicy
   def configure
     role :admin, proc { |user| user.admin? } do
       can :manage, Object
+      can :open, AttendanceList
+      can :close, AttendanceList
     end
 
     role :member, proc { |user| user.present? } do
