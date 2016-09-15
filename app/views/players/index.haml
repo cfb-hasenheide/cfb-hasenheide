@@ -3,7 +3,7 @@
 .page-header
   %h1
     = content_for :title
-    - if admin?
+    - if can? :create, Player
       .pull-right
         = link_to for_user_new_player_path, class: 'primary-button' do
           = create_icon

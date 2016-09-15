@@ -11,6 +11,22 @@ class AccessPolicy
       can [:update, :destroy], Comment do |comment, user|
         comment.user == user
       end
+
+      can :update, Player do |player, user|
+        player.member.id == user.member.id
+      end
+
+      can :update, Address do |address, user|
+        address.member.id == user.member.id
+      end
+
+      can :update, Member do |member, user|
+        member.id == user.member.id
+      end
+
+      can :update, Contact do |contact, user|
+        contact.member.id == user.member.id
+      end
     end
   end
 end

@@ -17,14 +17,17 @@ class PlayersController < ApplicationController
   end
 
   def edit
+    authorize!(:update, @player)
   end
 
   def create
+    authorize!(:create, Player)
     @player = Player.create(player_params)
     respond_with @player
   end
 
   def update
+    authorize!(:update, @player)
     @player.update(player_params)
     respond_with @player
   end

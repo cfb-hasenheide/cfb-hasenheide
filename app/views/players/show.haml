@@ -9,7 +9,7 @@
         = list_icon
         %span.hidden-xs Alle Spieler
 
-- if admin? || current_user == @player.member.user
+- if can? :update, @player
   .well.well-sm
     = link_to edit_member_path(@player.member), class: 'default-button' do
       = edit_icon
