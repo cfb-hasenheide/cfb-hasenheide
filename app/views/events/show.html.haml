@@ -14,7 +14,8 @@
 
 = render 'basic_information', event: @event
 
-= render 'admin_bar', event: @event if admin?
+- if can? :update, @event
+  = render 'admin_bar', event: @event
 
 - if @event.description?
   %p.lead

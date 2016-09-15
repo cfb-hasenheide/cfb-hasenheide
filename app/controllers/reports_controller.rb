@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
     @watching_players =
       Player.where(id: @event.attendances.watch.pluck(:player_id)).order(:nickname)
 
-    if @report.nil? && current_user.admin?
+    if @report.nil? && can(:create, Report)
       redirect_to new_report_path(event_id: @event.id)
     elsif @report.nil?
       redirect_to event_path(@event), alert: 'Spielbericht nicht vorhanden!'

@@ -3,7 +3,7 @@
 .page-header
   %h1
     = content_for(:title)
-    - if admin?
+    - if can? :create, Event
       .pull-right
         .btn-group
           %button.primary-button.dropdown-toggle{type: 'button',

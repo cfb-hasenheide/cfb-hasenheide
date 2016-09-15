@@ -1,10 +1,10 @@
 .panel{class: (news.internal? ? 'panel-default' : 'panel-primary')}
   .panel-body
     %h3
+      = news.title
       %small.pull-right
         = internal_icon if news.internal?
         = l(news.created_at, format: :date_only)
-      = news.title
 
     = truncate(news.content,
                length: 1_500,
@@ -14,7 +14,7 @@
 
       = link_to 'weiterlesen', news_path(news)
 
-  - if admin?
+  - if can?(:destroy, news) && can?(:update, news)
     .panel-footer
       = link_to edit_news_path(news), class: 'default-button-xs' do
         = edit_icon
