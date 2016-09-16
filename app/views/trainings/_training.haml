@@ -5,7 +5,10 @@
     = l(training.date)
 
     - if can?(:update, Training)
-      %small= link_to 'bearbeiten', edit_training_path(training)
+      = link_to edit_training_path(training), class: 'btn btn-default btn-xs' do
+        %span.text-warning
+          = edit_icon
+          %span.hidden-xs Bearbeiten
 
   %p.list-group-item-text
     = training.players.pluck(:nickname).sort.to_sentence
