@@ -28,7 +28,7 @@
         = image_tag @forum_thread.user_avatar_url(:small_thumb),
           width: '30',
           height: '30',
-          alt: current_user.nickname,
+          alt: @forum_thread.user_nickname,
           class: 'img-circle'
 
 %p.text-center.text-muted
@@ -40,7 +40,9 @@
     = render @forum_thread.forum_posts
 
   .panel-footer
-    = render 'forum_posts/form', forum_post: @forum_thread.build_forum_post
+    = render 'forum_posts/form',
+      forum_post: @forum_thread.forum_posts.build,
+      forum_thread: @forum_thread
 
 .well.well-sm
   - if can? :update, @forum_thread
@@ -49,8 +51,10 @@
       Editieren
 
   - if can? :destroy, @forum_thread
-    = link_to @forum_thread, method: :delete, class: 'default-button-xs',
-      data: { confirm: 'Das Thema wirklich löschen?' } do
+    = link_to @forum_thread,
+      method: :delete,
+      'data-confirm' => 'Das Thema wirklich löschen?',
+      class: 'default-button-xs' do
       %span.text-danger
         = delete_icon
         Löschen

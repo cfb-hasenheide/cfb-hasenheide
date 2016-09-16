@@ -45,7 +45,9 @@ Rails.application.routes.draw do
     type: 'Other',
     only: [:create, :edit, :update]
 
-  resources :forum_threads, concerns: :paginatable
+  resources :forum_threads, concerns: :paginatable do
+    resources :forum_posts, concerns: :paginatable, only: :create
+  end
 
   resources :messages, only: [:create, :index]
 

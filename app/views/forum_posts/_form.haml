@@ -1,3 +1,5 @@
-= bootstrap_form_for forum_post do |f|
-  = f.text_area :content
+= bootstrap_form_for [forum_thread, forum_post] do |f|
+  = f.hidden_field :user_id, value: current_user.id
+
+  = f.text_area :comment
   = f.submit class: 'default-button'
