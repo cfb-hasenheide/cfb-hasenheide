@@ -1,7 +1,7 @@
 = bootstrap_form_for(training) do |f|
   .row
     .col-md-3
-      = f.date_field :date, icon: :calendar
+      = f.date_field :date, icon: :calendar, autofocus: true
     .col-md-2
       = f.number_field :additional_count, min: 0, icon: :plus
     .col-md-7
