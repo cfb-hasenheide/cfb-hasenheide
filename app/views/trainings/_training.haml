@@ -14,7 +14,7 @@
     = training.players.pluck(:nickname).sort.to_sentence
 
     - unless training.additional_count.zero?
-      (+ #{training.additional_count})
+      (+#{training.additional_count})
 
     %br
 
