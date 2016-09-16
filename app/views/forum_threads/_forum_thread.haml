@@ -20,7 +20,7 @@
         = image_tag forum_thread.user_avatar_url(:small_thumb),
           width: '30',
           height: '30',
-          alt: current_user.nickname,
+          alt: forum_thread.user_nickname,
           class: 'img-circle'
 
   %p.list-group-item-text

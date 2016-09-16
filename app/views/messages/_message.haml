@@ -4,7 +4,7 @@
       = image_tag message.user.player.avatar_url(:small_thumb),
         width: '30',
         height: '30',
-        alt: current_user.player.nickname,
+        alt: message.user.player.nickname,
         class: 'img-circle'
     .media-body
       %strong.text-muted
