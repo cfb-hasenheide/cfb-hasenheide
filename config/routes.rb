@@ -45,7 +45,9 @@ Rails.application.routes.draw do
     type: 'Other',
     only: [:create, :edit, :update]
 
-  resources :forum_threads
+  resources :forum_threads, concerns: :paginatable do
+    resources :forum_posts, concerns: :paginatable, only: :create
+  end
 
   resources :messages, only: [:create, :index]
 
@@ -78,4 +80,5 @@ Rails.application.routes.draw do
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
+  get 'forum', to: 'forum_threads#index'
 end

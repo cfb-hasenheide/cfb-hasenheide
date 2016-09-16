@@ -1,11 +1,7 @@
-= simple_form_for(forum_thread) do |f|
-  = f.error_notification
+= bootstrap_form_for(forum_thread) do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  = f.text_field :topic
+  = f.text_area :comment
 
-  .form-inputs
-    = f.input :topic
-    = f.input :comment
-    = f.association :user, as: :hidden, input_html: { value: current_user.id }
-
-  .form-actions
-    = f.button :submit, 'Speichern', class: 'primary-button'
-    = link_to 'Abbrechen', forum_threads_path, class: 'default-button'
+  = f.submit class: 'primary-button'
+  = link_to 'Abbrechen', forum_threads_path, class: 'default-button'

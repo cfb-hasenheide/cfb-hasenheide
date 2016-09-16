@@ -1,43 +1,19 @@
+= content_for :title, 'Forum'
+
 .page-header
   %h1
-    Forum
+    = content_for :title
+
     .pull-right
       = link_to new_forum_thread_path, class: 'primary-button' do
         = create_icon
-        Thema erstellen
+        %span.hidden-xs Thema erstellen
 
-- for forum_thread in @forum_threads
-  .panel.panel-primary
-    .panel-heading
-      %h3.panel-title
-        = link_to forum_thread_path(forum_thread) do
-          Thema:
-          = forum_thread.topic
+%p.text-center.text-muted
+  = page_entries_info @forum_threads
 
-        %small
-          .pull-right
-            Letzter Eintrag von
-            = User.find(forum_thread.user_id).username
-            vor
-            = l(forum_thread.created_at)
+.list-group
+  = render @forum_threads
 
-    = link_to forum_thread_path(forum_thread) do
-      .panel-body
-        .two-ten
-          .two
-            %p.text-muted
-              Hase 2
-          .ten
-            %blockquote
-              %p Das kann ja wohl nicht sein, dass ihr hier alle einfach so rum oxidiert!
-
-    - if forum_thread.user_id == current_user.id || admin?
-      .panel-footer
-        = link_to edit_forum_thread_path(forum_thread), class: 'default-button-xs' do
-          = edit_icon
-          Editieren
-        = link_to forum_thread, method: :delete, class: 'default-button-xs',
-          data: { confirm: 'Das Thema wirklich löschen?' } do
-          %span.text-danger
-            = delete_icon
-            Löschen
+.text-center
+  = paginate @forum_threads

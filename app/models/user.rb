@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   after_create :create_member
 
+  delegate :avatar_url, :nickname, to: :player
   delegate :player, to: :member
 
   def self.without_player
@@ -63,7 +64,7 @@ class User < ApplicationRecord
   private
 
   def set_username
-    return if username
+    return if username?
     self.username = email.split('@').first
   end
 end
