@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901204134) do
+ActiveRecord::Schema.define(version: 20160912161354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,32 +87,30 @@ ActiveRecord::Schema.define(version: 20160901204134) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "firstname"
-    t.string   "lastname"
-    t.date     "date_of_birth"
-    t.string   "place_of_birth"
     t.string   "phone1"
     t.string   "phone2"
     t.string   "club_email"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "member_id"
+    t.index ["member_id"], name: "index_contacts_on_member_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
+    t.datetime "datetime",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description",   limit: 255
-    t.string   "address",       limit: 255,                 null: false
-    t.string   "name",                                      null: false
+    t.string   "description"
+    t.string   "address",                       null: false
+    t.string   "home_team"
+    t.string   "away_team"
+    t.string   "name",                          null: false
     t.integer  "club_team_id"
     t.integer  "rival_team_id"
-    t.boolean  "home",                                      null: false
-    t.datetime "datetime",                                  null: false
-    t.string   "type",                                      null: false
-    t.string   "slug",                                      null: false
-    t.boolean  "public",                    default: false, null: false
+    t.boolean  "home",                          null: false
+    t.string   "type",                          null: false
+    t.string   "slug",                          null: false
+    t.boolean  "public",        default: false, null: false
     t.index ["slug"], name: "index_events_on_slug", unique: true, using: :btree
   end
 
@@ -151,8 +149,14 @@ ActiveRecord::Schema.define(version: 20160901204134) do
     t.string   "identifier"
     t.date     "member_since"
     t.date     "member_until"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "firstname"
+    t.string   "lastname"
+    t.date     "date_of_birth"
+    t.string   "place_of_birth"
+    t.string   "player_ideal"
+    t.string   "personal_moment"
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
@@ -172,8 +176,19 @@ ActiveRecord::Schema.define(version: 20160901204134) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string   "slug",                       null: false
+    t.string   "header",                     null: false
+    t.string   "subheader"
+    t.text     "content",                    null: false
+    t.boolean  "public",     default: false, null: false
+    t.boolean  "published",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+  end
+
   create_table "players", force: :cascade do |t|
-    t.integer "user_id",                            null: false
     t.string  "nickname",                           null: false
     t.boolean "player_pass"
     t.string  "player_pass_number"
@@ -183,10 +198,17 @@ ActiveRecord::Schema.define(version: 20160901204134) do
     t.integer "status",                 default: 0
     t.string  "slug"
     t.string  "avatar"
-    t.string  "panini"
+    t.integer "member_id"
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
+    t.index ["member_id"], name: "index_players_on_member_id", using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
-    t.index ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
+  end
+
+  create_table "players_teams", id: false, force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "team_id",   null: false
+    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id", unique: true, using: :btree
+    t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true, using: :btree
   end
 
   create_table "players_trainings", id: false, force: :cascade do |t|
@@ -281,12 +303,11 @@ ActiveRecord::Schema.define(version: 20160901204134) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "contacts", "users"
+  add_foreign_key "contacts", "members"
   add_foreign_key "forum_posts", "forum_threads"
-  add_foreign_key "forum_posts", "forum_threads"
-  add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_posts", "users"
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
+  add_foreign_key "players", "members"
 end
