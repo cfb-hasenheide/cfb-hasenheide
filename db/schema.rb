@@ -176,6 +176,18 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string   "slug",                       null: false
+    t.string   "header",                     null: false
+    t.string   "subheader"
+    t.text     "content",                    null: false
+    t.boolean  "public",     default: false, null: false
+    t.boolean  "published",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+  end
+
   create_table "players", force: :cascade do |t|
     t.string  "nickname",                           null: false
     t.boolean "player_pass"
@@ -197,6 +209,13 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.integer "team_id",   null: false
     t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id", unique: true, using: :btree
     t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true, using: :btree
+  end
+
+  create_table "players_trainings", id: false, force: :cascade do |t|
+    t.integer "training_id", null: false
+    t.integer "player_id",   null: false
+    t.index ["player_id", "training_id"], name: "index_players_trainings_on_player_id_and_training_id", using: :btree
+    t.index ["training_id", "player_id"], name: "index_players_trainings_on_training_id_and_player_id", using: :btree
   end
 
   create_table "reports", force: :cascade do |t|
@@ -244,30 +263,37 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.index ["name"], name: "index_teams_on_name", unique: true, using: :btree
   end
 
+  create_table "trainings", force: :cascade do |t|
+    t.date    "date",                         null: false
+    t.integer "additional_count", default: 0, null: false
+    t.string  "additional_info"
+    t.index ["date"], name: "index_trainings_on_date", unique: true, using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
-    t.string   "invitation_token"
+    t.string   "username",               limit: 255
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",                  default: 0
     t.boolean  "legacy_password"
-    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "admin",                              default: false, null: false
     t.index ["admin"], name: "index_users_on_admin", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree

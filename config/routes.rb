@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     resource :players, only: %i(show update), controller: :team_players
   end
 
+  resources :trainings, concerns: :paginatable
+
   resource :administration, only: :show
   resources :roles
 
