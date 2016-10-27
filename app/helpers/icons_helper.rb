@@ -1,4 +1,8 @@
 module IconsHelper
+  def chart_icon
+    fa_icon('bar-chart')
+  end
+
   def edit_icon
     fa_icon(:pencil)
   end

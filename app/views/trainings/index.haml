@@ -10,11 +10,37 @@
           = create_icon
           %span.hidden-xs Training erstellen
 
-.text-center
-  %small.text-muted= page_entries_info @trainings
+%ul.nav.nav-pills.nav-justified{role: 'tablist'}
+  %li.active{role: 'presentation'}
+    = link_to '#list', 'data-toggle' => 'tab' do
+      = list_icon
+      Liste
 
-%ul.list-group
-  = render @trainings
+  %li{role: 'presentation'}
+    = link_to '#player_counts_by_training', 'data-toggle' => 'tab' do
+      = chart_icon
+      Teilnehmer
 
-.text-center
-  = paginate @trainings
+  %li{role: 'presentation'}
+    = link_to '#training_counts_by_player', 'data-toggle' => 'tab' do
+      = chart_icon
+      Teilnahmen
+
+%br
+
+.tab-content
+  .tab-pane.fade.in.active#list
+    .text-center
+      %small.text-muted= page_entries_info @trainings
+
+    %ul.list-group
+      = render @trainings
+
+    .text-center
+      = paginate @trainings
+
+  .tab-pane.fade#player_counts_by_training
+    = player_counts_by_training_chart
+
+  .tab-pane.fade#training_counts_by_player
+    = training_counts_by_player_chart

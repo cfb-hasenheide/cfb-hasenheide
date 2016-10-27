@@ -25,6 +25,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :chart, only: [] do
+    get :player_counts_by_training, on: :collection
+    get :training_counts_by_player, on: :collection
+  end
+
   resources :comments, only: [:create, :edit, :update, :destroy]
 
   resources :events, concerns: :paginatable do

@@ -50,6 +50,7 @@ gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
+gem 'chartkick'
 
 # json
 gem 'jbuilder'
