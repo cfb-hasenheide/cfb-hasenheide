@@ -9,7 +9,7 @@
 
 = render 'events/basic_information', event: @event
 
-= render 'admin_bar', attendance_list: @attendance_list
+= render 'admin_bar', attendance_list: @attendance_list if admin?
 
 = render 'progress_bar', attendance_list: @attendance_list
 
