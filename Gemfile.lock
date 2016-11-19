@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/carrierwaveuploader/carrierwave.git
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
   revision: 237328dbcbd5a18f5c737fb1c7e9197e8c118c31
   specs:
     carrierwave (1.0.0.rc)
@@ -8,7 +8,7 @@ GIT
       mime-types (>= 1.16)
 
 GIT
-  remote: https://github.com/fog/fog-aws.git
+  remote: git://github.com/fog/fog-aws.git
   revision: 67e0e28ab4cb95436cc2aab6fa1af9d9199acc3f
   specs:
     fog-aws (0.12.0)
@@ -18,7 +18,7 @@ GIT
       ipaddress (~> 0.8)
 
 GIT
-  remote: https://github.com/scambra/devise_invitable.git
+  remote: git://github.com/scambra/devise_invitable.git
   revision: ac06ccb6e181fcbdb2cb6fdf0bf8779ab1b471bd
   specs:
     devise_invitable (1.7.0)
@@ -395,9 +395,6 @@ DEPENDENCIES
   spring-watcher-listen
   uglifier
   web-console
-
-RUBY VERSION
-   ruby 2.3.1p112
 
 BUNDLED WITH
    1.13.6
