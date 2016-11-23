@@ -2,6 +2,7 @@ class PagesController < PublicController
   before_action :set_events, :set_news, only: :welcome
 
   def welcome
+    @homepage_header = HomepageHeader.active
   end
 
   def fussball_de
