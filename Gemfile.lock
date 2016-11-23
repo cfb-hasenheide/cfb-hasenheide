@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/fog/fog-aws.git
-  revision: 67e0e28ab4cb95436cc2aab6fa1af9d9199acc3f
+  revision: c4b619d0f4ccb622921aa53579f95c29b7a73851
   specs:
     fog-aws (0.12.0)
       fog-core (~> 1.38)
@@ -205,7 +205,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    parser (2.3.1.4)
+    parser (2.3.2.0)
       ast (~> 2.2)
     pg (0.19.0)
     powerpack (0.1.1)
@@ -213,7 +213,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (3.6.0)
+    puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
