@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912161354) do
+ActiveRecord::Schema.define(version: 20161123200121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,15 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
   end
 
+  create_table "homepage_headers", force: :cascade do |t|
+    t.boolean  "active",           default: false, null: false
+    t.string   "background_image"
+    t.string   "heading",                          null: false
+    t.string   "text"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "identifier"
@@ -174,18 +183,6 @@ ActiveRecord::Schema.define(version: 20160912161354) do
     t.boolean  "internal",   default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-  end
-
-  create_table "pages", force: :cascade do |t|
-    t.string   "slug",                       null: false
-    t.string   "header",                     null: false
-    t.string   "subheader"
-    t.text     "content",                    null: false
-    t.boolean  "public",     default: false, null: false
-    t.boolean  "published",  default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 
   create_table "players", force: :cascade do |t|
@@ -271,29 +268,29 @@ ActiveRecord::Schema.define(version: 20160912161354) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: ""
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: ""
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username",               limit: 255
-    t.string   "invitation_token",       limit: 255
+    t.string   "username"
+    t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type",        limit: 255
-    t.integer  "invitations_count",                  default: 0
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
     t.boolean  "legacy_password"
-    t.boolean  "admin",                              default: false, null: false
+    t.boolean  "admin",                  default: false, null: false
     t.index ["admin"], name: "index_users_on_admin", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree

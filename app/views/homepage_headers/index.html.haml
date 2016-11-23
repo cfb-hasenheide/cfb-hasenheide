@@ -1,0 +1,37 @@
+= content_for(:title, HomepageHeader.model_name.human(count: 2))
+
+.page-header
+  %h1
+    = content_for(:title)
+    %small
+      = @homepage_headers.count
+
+    .pull-right
+      = link_to new_homepage_header_path, class: 'primary-button' do
+        = create_icon
+        %span.hidden-xs
+          = HomepageHeader.model_name.human
+          erstellen
+
+- @homepage_headers.each do |homepage_header|
+  %p.text-center
+    = HomepageHeader.human_attribute_name(:created_at)
+    = l(homepage_header.created_at, format: :short)
+
+    = HomepageHeader.human_attribute_name(:updated_at)
+    = l(homepage_header.updated_at, format: :short)
+
+  = button_to activate_homepage_header_path(homepage_header),
+    class: 'primary-button pull-left', disabled: homepage_header.active? do
+    = check_icon
+    = homepage_header.active? ? 'Aktiv' : 'Aktivieren'
+
+  = link_to edit_homepage_header_path(homepage_header),
+    class: 'default-button pull-right' do
+    %span.text-warning
+      = edit_icon
+      Bearbeiten
+
+  = render homepage_header
+
+  %hr

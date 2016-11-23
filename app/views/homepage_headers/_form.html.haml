@@ -1,0 +1,26 @@
+= bootstrap_form_for(homepage_header) do |f|
+  = f.static_control :background_image do
+    - if homepage_header.background_image_url.present?
+      = image_tag homepage_header.background_image_url, class: 'img-rounded'
+
+  = f.file_field :background_image
+  = f.hidden_field :background_image_cache
+
+  = f.form_group do
+    = f.check_box :remove_background_image, label: 'entfernen'
+
+  = f.text_field :heading
+
+  = f.text_field :text
+
+  = f.primary
+
+  - if homepage_header.persisted?
+    = link_to homepage_header_path(homepage_header),
+      method: :delete,
+      class: 'default-button pull-right',
+      'data-confirm' => 'Wirklich löschen?',
+      'data-disable-with' => "#{spinner_icon} Löschen" do
+      %span.text-danger
+        = delete_icon
+        %span.hidden-xs Löschen

@@ -52,6 +52,10 @@ Rails.application.routes.draw do
 
   resources :forum_threads
 
+  resources :homepage_headers, except: :show do
+    post :activate, on: :member
+  end
+
   resources :messages, only: [:create, :index]
 
   resources :news, concerns: :paginatable
