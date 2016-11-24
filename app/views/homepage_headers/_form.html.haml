@@ -11,6 +11,8 @@
 
   = f.text_field :text
 
+  = f.number_field :background_position_y, min: 0, max: 100, step: 1, append: '%'
+
   = f.primary
 
   - if homepage_header.persisted?

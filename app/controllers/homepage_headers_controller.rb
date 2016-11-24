@@ -61,6 +61,7 @@ class HomepageHeadersController < ApplicationController
   def homepage_header_params
     params.require(:homepage_header).permit(:background_image,
                                             :background_image_cache,
+                                            :background_position_y,
                                             :heading,
                                             :remove_background_image,
                                             :text)

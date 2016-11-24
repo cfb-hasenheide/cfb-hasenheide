@@ -46,6 +46,7 @@ de:
       homepage_header:
         active: Aktiv
         background_image: Hintergrundbild
+        background_position_y: Hintergrundvertikalverschiebung
         created_at: Erstellt
         heading: Überschrift
         text: Text

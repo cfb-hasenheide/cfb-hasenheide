@@ -14,4 +14,9 @@ class HomepageHeader < ApplicationRecord
     currently_active.update(active: false) if currently_active.present?
     update(active: true)
   end
+
+  def style
+    "background-image: url(#{background_image_url}); " \
+      "background-position: 0% #{background_position_y}%;"
+  end
 end
