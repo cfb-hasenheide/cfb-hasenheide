@@ -6,6 +6,9 @@ de:
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
+      homepage_header:
+        one: Homepage Header
+        other: Homepage Headers
       league_match: Ligaspiel
       member: Mitglied
       other: Sonstiges
@@ -40,6 +43,15 @@ de:
       forum_thread:
         topic: Thema
         comment: Kommentar
+      homepage_header:
+        active: Aktiv
+        background_image: Hintergrundbild
+        background_position_y: Hintergrundvertikalverschiebung
+        color: Farbe
+        created_at: Erstellt
+        heading: Überschrift
+        text: Text
+        updated_at: Aktualisiert
       message:
         content: Nachricht
       member:
