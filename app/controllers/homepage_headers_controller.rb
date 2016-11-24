@@ -58,15 +58,15 @@ class HomepageHeadersController < ApplicationController
 
   private
 
-  def set_homepage_header
-    @homepage_header = HomepageHeader.find(params[:id])
-  end
-
   def homepage_header_params
     params.require(:homepage_header).permit(:background_image,
                                             :background_image_cache,
                                             :heading,
                                             :remove_background_image,
                                             :text)
+  end
+
+  def set_homepage_header
+    @homepage_header = HomepageHeader.find(params[:id])
   end
 end
