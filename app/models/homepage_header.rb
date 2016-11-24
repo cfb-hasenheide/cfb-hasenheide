@@ -17,6 +17,7 @@ class HomepageHeader < ApplicationRecord
 
   def style
     "background-image: url(#{background_image_url}); " \
-      "background-position: 0% #{background_position_y}%;"
+      "background-position: 0% #{background_position_y}%; " \
+      "color: #{color}"
   end
 end

@@ -47,6 +47,7 @@ de:
         active: Aktiv
         background_image: Hintergrundbild
         background_position_y: Hintergrundvertikalverschiebung
+        color: Farbe
         created_at: Erstellt
         heading: Überschrift
         text: Text
