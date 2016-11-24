@@ -6,7 +6,7 @@ class HomepageHeader < ApplicationRecord
   mount_uploader :background_image, BackgroundImageUploader
 
   def self.active
-    where(active: true).first
+    find_by(active: true)
   end
 
   def activate
