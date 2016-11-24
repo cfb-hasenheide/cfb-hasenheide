@@ -14,13 +14,6 @@
           erstellen
 
 - @homepage_headers.each do |homepage_header|
-  %p.text-center
-    = HomepageHeader.human_attribute_name(:created_at)
-    = l(homepage_header.created_at, format: :short)
-
-    = HomepageHeader.human_attribute_name(:updated_at)
-    = l(homepage_header.updated_at, format: :short)
-
   = button_to activate_homepage_header_path(homepage_header),
     class: 'primary-button pull-left', disabled: homepage_header.active? do
     = check_icon
