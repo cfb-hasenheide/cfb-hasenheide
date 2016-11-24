@@ -2,17 +2,21 @@ class HomepageHeadersController < ApplicationController
   before_action :set_homepage_header, only: %i(edit update destroy activate)
 
   def index
+    authorize!(:read, HomepageHeader)
     @homepage_headers = HomepageHeader.all
   end
 
   def new
+    authorize!(:create, HomepageHeader)
     @homepage_header = HomepageHeader.new
   end
 
   def edit
+    authorize!(:update, HomepageHeader)
   end
 
   def create
+    authorize!(:create, HomepageHeader)
     @homepage_header = HomepageHeader.new(homepage_header_params)
 
     if @homepage_header.save
@@ -24,6 +28,7 @@ class HomepageHeadersController < ApplicationController
   end
 
   def update
+    authorize!(:update, HomepageHeader)
     if @homepage_header.update(homepage_header_params)
       redirect_to homepage_headers_url,
                   notice: 'Homepage Header wurde aktualisiert.'
@@ -33,12 +38,14 @@ class HomepageHeadersController < ApplicationController
   end
 
   def destroy
+    authorize!(:destroy, HomepageHeader)
     @homepage_header.destroy
 
     redirect_to homepage_headers_url, notice: 'Homepage Header wurde gelöscht.'
   end
 
   def activate
+    authorize!(:update, HomepageHeader)
     if @homepage_header.activate
       flash.notice = 'Homepage Header wurde aktiviert.'
     else
