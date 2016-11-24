@@ -1,7 +1,7 @@
 class BackgroundImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  RESIZE_WIDTH = 940
+  RESIZE_WIDTH = 1140
 
   storage :fog
 
