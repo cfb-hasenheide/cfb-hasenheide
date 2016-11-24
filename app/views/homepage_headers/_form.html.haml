@@ -1,7 +1,5 @@
 = bootstrap_form_for(homepage_header) do |f|
-  = f.static_control :background_image do
-    - if homepage_header.background_image_url.present?
-      = image_tag homepage_header.background_image_url, class: 'img-rounded'
+  = render homepage_header
 
   = f.file_field :background_image
   = f.hidden_field :background_image_cache
