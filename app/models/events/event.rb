@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   validates :address, :datetime, :name, :type, presence: true
 
   scope :future, lambda { |limit = nil|
-    where('datetime >= ?', Time.zone.now).order('datetime DESC').limit(limit)
+    where('datetime >= ?', Time.zone.now).order('datetime ASC').limit(limit)
   }
   scope :past, lambda { |limit = nil|
     where('datetime < ?', Time.zone.now).order('datetime DESC').limit(limit)
@@ -61,6 +61,8 @@ class Event < ApplicationRecord
   end
 
   def attending_players
+    return Player.none if attendance_list.nil?
+
     player_ids = attendances.where(status: [1, 2])
                             .order(:status, :updated_at)
                             .limit(attendance_list.maximum)

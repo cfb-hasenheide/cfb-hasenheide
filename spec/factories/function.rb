@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :function do
-    association :user, factory: :user
-    association :role, factory: :role
+    user
+    role
     assumed_on Time.zone.today + 10
 
     trait :past do

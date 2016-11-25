@@ -1,8 +1,4 @@
-.jumbotron
-  %h1 Willkommen beim CFB Hasenheide
-  %p
-    Cola, Fanta, Bier - die Hasenheide ist hier! Wir spielen auch das nächste
-    Turnier - und dann, dann gewinnen wir!
+= render @homepage_header if @homepage_header
 
 .row
   .col-md-8
@@ -40,18 +36,18 @@
 
     .panel.panel-primary
       .panel-heading
-        %h2.panel-title Tabelle - CFB I
+        %h2.panel-title Tabelle
 
       .panel-body
-        .fussballDeWidget#fussballDeTableCFBI
+        .fussballDeWidget#tableCFB
           = spinner_icon
           Lade Tabelle
 
     .panel.panel-primary
       .panel-heading
-        %h2.panel-title Tabelle - CFB II
+        %h2.panel-title Spielplan
 
       .panel-body
-        .fussballDeWidget#fussballDeTableCFBII
+        .fussballDeWidget#scheduleCFB
           = spinner_icon
-          Lade Tabelle
+          Lade Spielplan

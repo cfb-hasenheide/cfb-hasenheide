@@ -1,4 +1,14 @@
 = bootstrap_form_for attendance_list do |f|
-  = f.number_field :minimum, icon: 'user', min: 0
 
-  = f.number_field :maximum, icon: 'user', min: 0
+  = f.hidden_field :attendable_id
+  = f.hidden_field :attendable_type
+
+  .row
+    .col-md-4
+      = f.number_field :minimum, icon: 'user', min: 0
+
+    .col-md-4
+      = f.number_field :maximum, icon: 'user', min: 0
+
+    .col-md-4
+      = f.submit class: 'primary-button btn-block'

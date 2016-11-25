@@ -1,0 +1,6 @@
+- Player.all.each do |player|
+  %li
+    %label
+      = check_box_tag 'player_ids[]', player.id,
+        team.player_ids.include?(player.id)
+      = player.nickname

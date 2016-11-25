@@ -2,9 +2,13 @@ de:
   activerecord:
     models:
       address: Adresse
+      attendance_list: Meldeliste
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
+      homepage_header:
+        one: Homepage Header
+        other: Homepage Headers
       league_match: Ligaspiel
       member: Mitglied
       other: Sonstiges
@@ -13,7 +17,9 @@ de:
         other: Seiten
       player: Spieler
       report: Spielbericht
-      team: Mannschaft
+      team:
+        one: Mannschaft
+        other: Mannschaften
     attributes:
       address:
         city: Ort
@@ -40,6 +46,15 @@ de:
       forum_thread:
         topic: Thema
         comment: Kommentar
+      homepage_header:
+        active: Aktiv
+        background_image: Hintergrundbild
+        background_position_y: Hintergrundvertikalverschiebung
+        color: Farbe
+        created_at: Erstellt
+        heading: Überschrift
+        text: Text
+        updated_at: Aktualisiert
       message:
         content: Nachricht
       member:
@@ -47,6 +62,8 @@ de:
         lastname: Nachname
         date_of_birth: Geboren am
         place_of_birth: Geboren in
+        player_ideal: Fußballerisches Vorbild
+        personal_moment: Mein persönlicher CFB-Moment
         member_since: Mitglied seit
         member_until: Mitglied bis
         identifier: Mitgliedsnr.
@@ -90,6 +107,11 @@ de:
         club: Vereinsmannschaft?
         player_pass_needed: Spielerpass benötigt?
         current_season: Aktuelle Saison?
+      training:
+        additional_count: Zusätzliche Anzahl
+        additional_info: Zusatzinfos
+        date: Datum
+        player_ids: Spieler
       user:
         admin: Admin?
         current_password: Aktuelles Passwort

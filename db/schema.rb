@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910101248) do
+ActiveRecord::Schema.define(version: 20161124212036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,17 +144,30 @@ ActiveRecord::Schema.define(version: 20160910101248) do
     t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
   end
 
+  create_table "homepage_headers", force: :cascade do |t|
+    t.boolean  "active",                default: false,     null: false
+    t.string   "background_image"
+    t.string   "heading",                                   null: false
+    t.string   "text"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "background_position_y", default: 0,         null: false
+    t.string   "color",                 default: "#ffffff", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "identifier"
     t.date     "member_since"
     t.date     "member_until"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "firstname"
     t.string   "lastname"
     t.date     "date_of_birth"
     t.string   "place_of_birth"
+    t.string   "player_ideal"
+    t.string   "personal_moment"
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
@@ -200,6 +213,13 @@ ActiveRecord::Schema.define(version: 20160910101248) do
     t.index ["jersey_number"], name: "index_players_on_jersey_number", unique: true, using: :btree
     t.index ["member_id"], name: "index_players_on_member_id", using: :btree
     t.index ["slug"], name: "index_players_on_slug", unique: true, using: :btree
+  end
+
+  create_table "players_teams", id: false, force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "team_id",   null: false
+    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id", unique: true, using: :btree
+    t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true, using: :btree
   end
 
   create_table "players_trainings", id: false, force: :cascade do |t|

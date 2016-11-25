@@ -11,13 +11,8 @@
 
 - @players.in_groups_of(4) do |players|
   .row
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'player', player: players.first
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'player', player: players.second if players.second.present?
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'player', player: players.third if players.third.present?
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
-      = render 'player', player: players.fourth if players.fourth.present?
+    - players.compact.each do |player|
+      .col-xs-12.col-sm-6.col-md-4.col-lg-3
+        = render player
 
 = render 'layouts/pagination', entries: @players

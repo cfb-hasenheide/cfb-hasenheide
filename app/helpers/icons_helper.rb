@@ -1,4 +1,16 @@
 module IconsHelper
+  def cancel_icon
+    fa_icon('ban')
+  end
+
+  def chart_icon
+    fa_icon('bar-chart')
+  end
+
+  def check_icon
+    fa_icon('check')
+  end
+
   def edit_icon
     fa_icon(:pencil)
   end

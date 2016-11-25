@@ -34,15 +34,12 @@ class EventMailer < ApplicationMailer
 
   def set_from
     return unless @from_user_id.present?
-
-    player = Player.find_by(user_id: @from_user_id)
-
+    player = Member.find_by(user_id: @from_user_id).player
     mail.from = player.club_email_with_nickname
   end
 
   def set_to
     players = Player.find(@to_player_ids)
-
     mail.to = players.map(&:club_email_with_nickname).sort
   end
 end

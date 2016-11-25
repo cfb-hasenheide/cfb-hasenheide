@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :attendances, only: :update
 
-  resources :attendance_lists, concerns: :paginatable, only: :show do
+  resources :attendance_lists, concerns: :paginatable, only: [:show, :create] do
     get :close_mail, on: :member
     get :open_mail, on: :member
     post :close, on: :member
@@ -25,11 +25,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :chart, only: [] do
+    get :player_counts_by_training, on: :collection
+    get :training_counts_by_player, on: :collection
+  end
+
   resources :comments, only: [:create, :edit, :update, :destroy]
 
   resources :events, concerns: :paginatable do
-    resource :attendance_list, only: [:show, :create]
-    resource :report, only: :show
+    resource :attendance_list, only: [:show, :new]
+    resource :report, only: [:show, :new, :edit]
   end
 
   resources :league_matches,
@@ -46,6 +51,10 @@ Rails.application.routes.draw do
     only: [:create, :edit, :update]
 
   resources :forum_threads
+
+  resources :homepage_headers, except: :show do
+    post :activate, on: :member
+  end
 
   resources :messages, only: [:create, :index]
 
@@ -64,7 +73,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :update, :destroy]
 
-  resources :teams, except: :show
+  resources :teams, except: :show do
+    resource :players, only: %i(show update), controller: :team_players
+  end
+
+  resources :trainings, concerns: :paginatable
 
   resource :administration, only: :show
   resources :roles

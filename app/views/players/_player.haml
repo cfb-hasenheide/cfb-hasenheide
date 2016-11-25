@@ -1,16 +1,16 @@
-.list-group
-  = link_to player_path(player), class: 'list-group-item' do
-    %h4.list-group-item-heading
+.thumbnail
+  = image_tag player.avatar_url(:thumb)
+  .caption
+    %h3
       = player.nickname
       .pull-right.text-muted
-        = player.jersey_name
+        = player.jersey_name unless player.jersey_name == player.nickname
         = player.jersey_number
 
-    %br
+    %p.text-center
+      = t(player.status, scope: %w(activerecord enums player status))
+      = '| Spielerpass' if player.player_pass?
 
-    %p.list-group-item-text.text-center
-      = image_tag player.avatar_url(:thumb), class: 'img-thumbnail'
-
-      %ul.list-unstyled.text-center
-        %li= t(player.status, scope: %w(activerecord enums player status))
-        %li= 'Spielerpass' if player.player_pass?
+    %p.text-center
+      = link_to player_path(player), class: 'default-button' do
+        Profil

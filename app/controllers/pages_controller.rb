@@ -57,6 +57,7 @@ class PagesController < PublicController
   end
 
   def welcome
+    @homepage_header = HomepageHeader.active
   end
 
   def fussball_de
