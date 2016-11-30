@@ -20,11 +20,9 @@
           = Page.human_attribute_name(:header)
         %th
           = Page.human_attribute_name(:subheader)
-        %th
-          = Page.human_attribute_name(:content)
-        %th
+        %th.text-center
           = Page.human_attribute_name(:public)
-        %th
+        %th.text-center
           = Page.human_attribute_name(:published)
         %th.text-right.text-muted
           Aktionen
@@ -38,12 +36,16 @@
             = page.header
           %td
             = page.subheader
-          %td
-            = page.content
-          %td
-            = page.public?
-          %td
-            = page.published?
+          %td.text-center
+            - if page.public?
+              = public_icon
+            - else
+              = internal_icon
+          %td.text-center
+            - if page.published?
+              %span.text-success= check_icon
+            - else
+              %span.text-danger= uncheck_icon
           %td.text-right
             = link_to page_path(page.slug),
               class: 'default-button-xs' do
