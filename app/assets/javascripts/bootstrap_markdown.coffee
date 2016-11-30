@@ -6,6 +6,7 @@ class BootstrapMarkdown
       footer: 'Testfooter'
       iconlibrary: 'fa' # FontAwesome
       language: 'de'
+      hiddenButtons: ['cmdCode']
     )
 
 $ ->
