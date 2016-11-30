@@ -15,6 +15,8 @@
 //= require ckeditor/init
 //= require bootstrap
 //= require bootstrap-switch
+//= require bootstrap-markdown
+//= require bootstrap-markdown.de
 //= require Chart.bundle
 //= require chartkick
 //= require_tree .
