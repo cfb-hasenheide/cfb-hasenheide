@@ -4,7 +4,7 @@ class BootstrapMarkdown
 
     @textArea.markdown(
       footer: 'Testfooter'
-      iconLibray: 'fa' # FontAwesome
+      iconlibrary: 'fa' # FontAwesome
       language: 'de'
     )
 
