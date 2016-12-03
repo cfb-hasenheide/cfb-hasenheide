@@ -1,0 +1,39 @@
+%small= render 'layouts/pagination', entries: reports
+
+%ul.list-group
+  - reports.each do |report|
+    = link_to report_path(report), class: 'list-group-item' do
+      - unless report.comments.count.zero?
+        %span.badge{'data-toggle' => 'tooltip', title: 'Stimmen zum Spiel'}
+          = report.comments.count
+          = comment_icon
+
+      %h4.list-group-item-heading
+        = report.event.name
+
+        %small
+          = report.event.model_name.human
+
+      %p.list-group-item-text
+        %ul.list-inline
+          %li
+            .label{class: "label-#{contextual_class_for_report(report)}"}
+              = report.final_score
+
+          %li
+            = l(report.event.datetime, format: :date_only)
+
+          %li
+            - if report.content?
+              Bericht von
+
+              %strong
+                - if report.reporter_id?
+                  = Player.find(report.reporter_id).nickname
+
+                - else
+                  ?
+
+            - else
+              %span.text-muted
+                Kein Bericht
