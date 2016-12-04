@@ -3,6 +3,7 @@
 = render 'subnavigation'
 
 .page-header
-  %h1= content_for :title
+  %h1
+    = content_for :title
 
 = render 'list', reports: @reports

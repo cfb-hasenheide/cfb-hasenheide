@@ -1,4 +1,6 @@
-%small= render 'layouts/pagination', entries: reports
+.text-center
+  %small.text-muted
+    = page_entries_info reports
 
 %ul.list-group
   - reports.each do |report|
@@ -37,3 +39,6 @@
             - else
               %span.text-muted
                 Kein Bericht
+
+.text-center
+  = paginate reports
