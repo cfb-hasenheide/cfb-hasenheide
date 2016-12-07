@@ -1,10 +1,11 @@
 class MessagesController < ApplicationController
   def index
-    @message = Message.new
-    @messages = messages
-
     respond_to do |format|
-      format.js { render layout: false }
+      format.html
+      format.js do
+        @messages = messages
+        render layout: false
+      end
     end
   end
 
@@ -15,10 +16,6 @@ class MessagesController < ApplicationController
       ActionCable.server.broadcast('chat', message: render(@message))
       head :ok
     end
-
-    # respond_to do |format|
-    #   format.js { render layout: false }
-    # end
   end
 
   private

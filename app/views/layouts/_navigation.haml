@@ -39,8 +39,7 @@
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li
-            = link_to '#chatModal',
-              'data-toggle' => 'modal' do
+            = link_to '#chatModal', 'data-toggle' => 'modal' do
               = chat_icon
               Chat
 

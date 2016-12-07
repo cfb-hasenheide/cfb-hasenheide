@@ -4,21 +4,30 @@
   .modal-dialog{role: 'document'}
     .modal-content
       .modal-header
-        = button_tag class: 'close',
-          'data-dismiss' => 'modal',
-          'aria-label' => 'Close' do
-          %span{'aria-hidden' => 'true'} &times;
-
         %h4.modal-title#chatLabel
           Chat
+
           %small
             = link_to messages_path,
               remote: true,
+              class: 'chatRefresh',
               'data-disable-with' => "#{refreshing_icon}" do
               = refresh_icon
 
-      .modal-body
-        %ul.list-group#messages
+          .btn-group.pull-right
+            = link_to chat_path, class: 'default-button-xs' do
+              %span.text-info
+                = full_screen_icon
+                Vollbild
+
+            = button_tag class: 'default-button-xs',
+              'data-dismiss' => 'modal',
+              'aria-label' => 'Close' do
+              = close_icon
+              %span.hidden-xs Schließen
+
+      .modal-body.chatMessagesContainer
+        %ul.list-group.chatMessages
 
       .modal-footer
         = form_for Message.new, remote: true do |f|

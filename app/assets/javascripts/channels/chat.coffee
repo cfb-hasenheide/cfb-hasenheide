@@ -7,10 +7,10 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
 
   received: (data) ->
     # append message
-    $('#messages').append(data.message);
+    $('.chatMessages').append(data.message);
     # scroll down to latest message
-    $('#messages').closest('.modal-body')
-                  .scrollTop($('#messages')
+    $('.chatMessages').closest('.modal-body')
+                  .scrollTop($('.chatMessages')
                   .closest('.modal-body')[0]
                   .scrollHeight);
     # clear #message_content input field

@@ -1,0 +1,14 @@
+= form_for Message.new, remote: true do |f|
+  = f.hidden_field :user_id, value: current_user.id
+
+  .input-group
+    = f.text_field :content,
+      class: 'form-control',
+      placeholder: Message.human_attribute_name(:content)
+
+    %span.input-group-btn
+      = button_tag type: 'submit',
+        class: 'primary-button',
+        'data-disable-with' => "#{spinner_icon} Senden" do
+        = chat_message_icon
+        Senden

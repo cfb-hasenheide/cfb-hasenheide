@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   resources :addresses, only: %i(edit update create)
   resources :contacts, only: %i(edit update)
 
-  get '/fussball_de' => 'pages#fussball_de'
+  get '/chat' => 'messages#index'
   get '/contact' => 'pages#contact'
+  get '/fussball_de' => 'pages#fussball_de'
 end

@@ -129,4 +129,12 @@ module IconsHelper
   def refreshing_icon
     fa_icon('refresh spin')
   end
+
+  def full_screen_icon
+    fa_icon('window-maximize')
+  end
+
+  def close_icon
+    fa_icon('close')
+  end
 end
