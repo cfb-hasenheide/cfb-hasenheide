@@ -1,0 +1,60 @@
+= content_for :title, Page.model_name.human(count: 2)
+
+.page-header
+  %h1
+    = content_for :title
+
+    - if can?(:create, Page)
+      .pull-right
+        = link_to new_page_path, class: 'primary-button' do
+          = create_icon
+          %span.hidden-xs Seite erstellen
+
+.table-responsive
+  %table.table
+    %thead
+      %tr
+        %th
+          = Page.human_attribute_name(:slug)
+        %th
+          = Page.human_attribute_name(:header)
+        %th
+          = Page.human_attribute_name(:subheader)
+        %th.text-center
+          = Page.human_attribute_name(:public)
+        %th.text-center
+          = Page.human_attribute_name(:published)
+        %th.text-right.text-muted
+          Aktionen
+
+    %tbody
+      - @pages.each do |page|
+        %tr
+          %td
+            = page.slug
+          %td
+            = page.header
+          %td
+            = page.subheader
+          %td.text-center
+            - if page.public?
+              = public_icon
+            - else
+              = internal_icon
+          %td.text-center
+            - if page.published?
+              %span.text-success= check_icon
+            - else
+              %span.text-danger= uncheck_icon
+          %td.text-right
+            = link_to page_path(page.slug),
+              class: 'default-button-xs' do
+              = show_icon
+            = link_to edit_page_path(page.slug),
+              class: 'default-button-xs' do
+              = edit_icon
+            = link_to page_path(page.slug),
+              method: :delete,
+              class: 'default-button-xs',
+              'data-confirm' => "Seite #{page.slug} wirklich löschen?" do
+              = delete_icon

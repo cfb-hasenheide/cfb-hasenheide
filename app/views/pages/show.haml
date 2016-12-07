@@ -1,0 +1,16 @@
+= content_for :title, @page.header
+
+.page-header
+  %h1
+    = content_for :title
+    %small
+      = @page.subheader.presence
+
+    - if can?(:update, Page)
+      .pull-right
+        = link_to edit_page_path(@page), class: 'default-button pull-right' do
+          = edit_icon
+          %span.hidden-xs Bearbeiten
+
+= @markdown.render(@page.content).html_safe
+

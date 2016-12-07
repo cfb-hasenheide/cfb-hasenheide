@@ -187,6 +187,18 @@ ActiveRecord::Schema.define(version: 20161206210537) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.string   "slug",                       null: false
+    t.string   "header",                     null: false
+    t.string   "subheader"
+    t.text     "content",                    null: false
+    t.boolean  "public",     default: false, null: false
+    t.boolean  "published",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
+  end
+
   create_table "players", force: :cascade do |t|
     t.string  "nickname",                           null: false
     t.boolean "player_pass"

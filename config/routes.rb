@@ -60,6 +60,8 @@ Rails.application.routes.draw do
 
   resources :news, concerns: :paginatable
 
+  resources :pages
+
   resources :players, concerns: :paginatable, except: :destroy do
     get :for_user, on: :new
   end
@@ -89,4 +91,6 @@ Rails.application.routes.draw do
 
   get '/fussball_de' => 'pages#fussball_de'
   get '/contact' => 'pages#contact'
+  get '/:id', to: 'pages#show', constraints: lambda { |request|
+    Page.published.pluck(:slug).include?(request.params[:id]) }
 end
