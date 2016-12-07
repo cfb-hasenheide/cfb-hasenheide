@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
-      ActionCable.server.broadcast('messages', message: render(@message))
+      ActionCable.server.broadcast('chat', message: render(@message))
       head :ok
     end
 
