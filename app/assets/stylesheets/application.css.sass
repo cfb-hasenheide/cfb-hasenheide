@@ -10,9 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require rails_bootstrap_forms
- *= require_self
+ * require_tree .
+ * require_self
  */
 
 $brand-primary: #335032
@@ -34,6 +33,7 @@ body
   padding-bottom: 70px
 
 @import 'bootstrap'
+@import 'rails_bootstrap_forms'
 @import 'bootstrap3-switch'
 @import 'font-awesome-sprockets'
 @import 'font-awesome'
