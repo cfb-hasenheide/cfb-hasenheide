@@ -2,35 +2,35 @@
 
 .row
   .col-md-8
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Neuigkeiten
-          .pull-right
-            %small
-              = link_to 'Alle anzeigen', news_index_path
+    .card.card-primary.card-inverse
+      %h2.card-header
+        Neuigkeiten
+        .pull-right
+          = link_to 'Alle anzeigen', news_index_path
 
-    - @news.each do |news|
-      = render 'news/news', news: news
+    .card-columns
+      - @news.each do |news|
+        = render news
 
   .col-md-4
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Events
+    .card
+      %h2.card-header
+        Events
 
-          - if user_signed_in?
-            .pull-right
-              %small
-                = link_to 'Alle anzeigen', events_path
+        - if user_signed_in?
+          .pull-right
+            %small
+              = link_to 'Alle anzeigen', events_path
 
-      .panel-body
-        .text-muted Kommende
+      .card-block
+        %p.card-text
+          %small.text-muted Kommende
 
       = render 'events/list_short', events: @future_events
 
-      .panel-body
-        .text-muted Vergangene
+      .card-block
+        %p.card-text
+          %small.text-muted Vergangene
 
       = render 'events/list_short', events: @past_events
 
