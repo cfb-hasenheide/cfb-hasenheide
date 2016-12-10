@@ -3,9 +3,9 @@
     - events.each do |event|
       - if user_signed_in?
         = link_to event_or_attendance_list_or_report_path(event),
-          class: 'list-group-item' do
+          class: 'list-group-item list-group-item-action' do
 
-          %h5.list-group-item-heading
+          %strong.list-group-item-heading
             = event.name
             %small.pull-right= event.model_name.human
 
@@ -18,7 +18,7 @@
 
       - else
         .list-group-item
-          %h5.list-group-item-heading
+          %h6.list-group-item-heading
             = event.name
             %small.pull-right= event.model_name.human
 
@@ -26,7 +26,7 @@
             = date_icon
             = l(event.datetime, format: :date_only)
 
-            = event_final_score_label(event)
+            = event_final_score_label(event, pull_right: true)
 
   - else
     .list-group-item

@@ -9,18 +9,18 @@ module EventsHelper
 
     content_tag(:span,
                 t(attendance_status, scope: %w(activerecord enums attendance status)),
-                class: "label label-primary #{('pull-right' if pull_right)}")
+                class: "tag tag-primary #{('pull-right' if pull_right)}")
   end
 
   def event_final_score_label(event, pull_right: false)
     return unless event.past? && event.report.present?
 
     css_class = if event.won?
-                  'label label-success'
+                  'tag tag-success'
                 elsif event.lost?
-                  'label label-danger'
+                  'tag tag-danger'
                 else # event.drew
-                  'label label-warning'
+                  'tag tag-warning'
                 end
 
     css_class += ' pull-right' if pull_right
