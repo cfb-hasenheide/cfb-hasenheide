@@ -5,8 +5,9 @@
     %h4.card-title
       = post.title
 
-    %h6.card-subtitle.text-muted
-      = post.subtitle
+    - if post.subtitle?
+      %h6.card-subtitle.text-muted
+        = post.subtitle
 
   .card-block
     %p.card-text.text-justify
