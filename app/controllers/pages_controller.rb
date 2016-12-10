@@ -1,7 +1,7 @@
 class PagesController < PublicController
-  before_action :set_events, :set_news, only: :welcome
-
   def welcome
+    set_events
+    set_posts
     @homepage_header = HomepageHeader.active
   end
 
@@ -20,9 +20,9 @@ class PagesController < PublicController
     @future_events = events.future(3)
   end
 
-  def set_news
-    news = News.all
-    news = news.where(internal: false) unless user_signed_in?
-    @news = news.order('created_at DESC').limit(5)
+  def set_posts
+    posts = Post.all
+    posts = posts.where(public: true) unless user_signed_in?
+    @posts = posts.order(created_at: :desc).limit(5)
   end
 end

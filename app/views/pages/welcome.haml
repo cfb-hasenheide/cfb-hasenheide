@@ -7,8 +7,8 @@
         = link_to 'Neuigkeiten', news_index_path
 
     .card-columns
-      - @news.each do |news|
-        = render news
+      - @posts.each do |post|
+        = render 'posts/preview', post: post
 
   .col-md-4
     .card
