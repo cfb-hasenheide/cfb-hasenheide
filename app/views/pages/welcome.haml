@@ -4,9 +4,7 @@
   .col-md-8
     .card.card-primary.card-inverse
       %h2.card-header
-        Neuigkeiten
-        .pull-right
-          = link_to 'Alle anzeigen', news_index_path
+        = link_to 'Neuigkeiten', news_index_path
 
     .card-columns
       - @news.each do |news|
@@ -15,12 +13,7 @@
   .col-md-4
     .card
       %h2.card-header
-        Events
-
-        - if user_signed_in?
-          .pull-right
-            %small
-              = link_to 'Alle anzeigen', events_path
+        = link_to_if user_signed_in?, 'Events', events_path
 
       .card-block
         %p.card-text
