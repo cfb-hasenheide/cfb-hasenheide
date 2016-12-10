@@ -139,3 +139,13 @@ textarea
 #chatView .chatMessages
   max-height: calc(100vh - 415px)
   overflow-y: auto
+
+.card-columns
+  +media-breakpoint-only(xl)
+    column-count: 2
+  +media-breakpoint-only(lg)
+    column-count: 2
+  +media-breakpoint-only(md)
+    column-count: 1
+  +media-breakpoint-only(sm)
+    column-count: 1
