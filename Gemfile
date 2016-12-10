@@ -48,7 +48,7 @@ source 'https://rails-assets.org' do
 end
 gem 'ckeditor'
 gem 'simple_form'
-gem 'bootstrap_form'
+gem 'bootstrap_form', branch: 'bootstrap-v4'
 # NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
