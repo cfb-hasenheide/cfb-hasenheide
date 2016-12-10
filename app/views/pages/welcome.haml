@@ -34,20 +34,20 @@
 
       = render 'events/list_short', events: @past_events
 
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Tabelle
+.card
+  %h2.card-header Tabelle
 
-      .panel-body
-        .fussballDeWidget#tableCFB
-          = spinner_icon
-          Lade Tabelle
+  .card-block
+    %p.card-text
+      .fussballDeWidget#tableCFB
+        = spinner_icon
+        Lade Tabelle
 
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Spielplan
+.card
+  %h2.card-header Spielplan
 
-      .panel-body
-        .fussballDeWidget#scheduleCFB
-          = spinner_icon
-          Lade Spielplan
+  .card-block
+    %p.card-text
+      .fussballDeWidget#scheduleCFB
+        = spinner_icon
+        Lade Spielplan
