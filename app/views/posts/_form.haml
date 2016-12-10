@@ -7,6 +7,15 @@
 
   = f.text_field :subtitle
 
+  = f.static_control :image do
+    = image_tag f.object.image_url, class: 'img-thumbnail'
+
+  = f.file_field :image
+
+  = f.hidden_field :image_cache
+
+  = f.check_box :remove_image, label: 'entfernen'
+
   = f.text_area :summary, rows: 3
 
   = f.text_area :content, rows: 9

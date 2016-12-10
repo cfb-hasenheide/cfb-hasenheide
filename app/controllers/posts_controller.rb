@@ -21,6 +21,8 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content,
+                                 :image,
+                                 :image_cache,
                                  :member_id,
                                  :posted_on,
                                  :public,
