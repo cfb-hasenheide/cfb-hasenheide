@@ -1,0 +1,29 @@
+= content_for :title, post.title
+
+.card{class: ('card-outline-primary' if post.public?)}
+  .card-block
+    %h4.card-title
+      = post.title
+
+    %h6.card-subtitle.text-muted
+      = post.subtitle
+
+  .card-block
+    %p.card-text.text-justified
+      %strong
+        = post.summary
+
+    %p.card-text.text-justified
+      = post.content
+
+    %p.card-text.text-muted
+      %small
+        Von
+        = post.member.player.nickname
+        am
+        = l post.posted_on
+
+    - if can?(:update, post)
+      = link_to edit_post_path(post), class: 'card-link warning-button-sm' do
+        = edit_icon
+        Bearbeiten

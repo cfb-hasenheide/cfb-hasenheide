@@ -1,0 +1,29 @@
+.card{class: ('card-outline-primary' if post.public?)}
+  .card-block
+    %h4.card-title
+      = post.title
+
+    %h6.card-subtitle.text-muted
+      = post.subtitle
+
+  .card-block
+    %p.card-text.text-justified
+      - if post.summary?
+        = post.summary
+
+      - else
+        = post.content
+
+    = link_to post_path(post), class: 'primary-button' do
+      - if post.summary?
+        Weiter lesen
+
+      - else
+        Lesen
+
+    %p.card-text.text-muted
+      %small
+        Von
+        = post.member.player.nickname
+        am
+        = l post.posted_on

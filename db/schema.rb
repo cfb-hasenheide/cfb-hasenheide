@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206210537) do
+ActiveRecord::Schema.define(version: 20161210132456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,19 @@ ActiveRecord::Schema.define(version: 20161206210537) do
     t.index ["training_id", "player_id"], name: "index_players_trainings_on_training_id_and_player_id", using: :btree
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subtitle"
+    t.string   "summary"
+    t.string   "content"
+    t.boolean  "public",     default: false, null: false
+    t.date     "posted_on",                  null: false
+    t.integer  "member_id",                  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["member_id"], name: "index_posts_on_member_id", using: :btree
+  end
+
   create_table "reports", force: :cascade do |t|
     t.integer  "event_id"
     t.text     "content"
@@ -310,4 +323,5 @@ ActiveRecord::Schema.define(version: 20161206210537) do
   add_foreign_key "functions", "users"
   add_foreign_key "members", "users"
   add_foreign_key "players", "members"
+  add_foreign_key "posts", "members"
 end

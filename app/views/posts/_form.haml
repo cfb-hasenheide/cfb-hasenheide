@@ -1,0 +1,16 @@
+= bootstrap_form_for post do |f|
+  = f.hidden_field :member_id, value: current_user.member.id
+
+  = f.check_box :public
+
+  = f.text_field :title
+
+  = f.text_field :subtitle
+
+  = f.text_area :summary, rows: 3
+
+  = f.text_area :content, rows: 9
+
+  = f.date_field :posted_on
+
+  = f.submit

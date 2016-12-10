@@ -64,6 +64,8 @@ Rails.application.routes.draw do
     get :for_user, on: :new
   end
 
+  resources :posts
+
   resources :reports, concerns: :paginatable, except: :destroy do
     get :no_content, on: :collection
     get :missing, on: :collection
