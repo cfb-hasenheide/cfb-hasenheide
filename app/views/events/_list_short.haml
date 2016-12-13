@@ -2,7 +2,7 @@
   - if events.present?
     - events.each do |event|
       - if user_signed_in?
-        = link_to event_or_attendance_list_or_report_path(event),
+        = link_to event_or_attendance_list_or_report_link(event),
           class: 'list-group-item list-group-item-action' do
 
           %strong.list-group-item-heading
