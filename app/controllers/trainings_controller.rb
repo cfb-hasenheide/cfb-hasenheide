@@ -4,6 +4,13 @@ class TrainingsController < ApplicationController
 
   def index
     @trainings = Training.order(date: :desc).page(params[:page])
+    sql = <<-SQL
+      SELECT p.nickname, count(*) from players_trainings pt
+      JOIN players p on p.id = pt.player_id
+      GROUP BY p.id
+      ORDER BY count(*) DESC, p.nickname;
+    SQL
+    @training_counts_by_player = ActiveRecord::Base.connection.select_rows sql
   end
 
   def new

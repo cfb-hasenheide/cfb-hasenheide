@@ -17,14 +17,14 @@
       Liste
 
   %li{role: 'presentation'}
-    = link_to '#player_counts_by_training', 'data-toggle' => 'tab' do
-      = chart_icon
-      Teilnehmer
-
-  %li{role: 'presentation'}
     = link_to '#training_counts_by_player', 'data-toggle' => 'tab' do
       = chart_icon
       Teilnahmen
+
+  %li{role: 'presentation'}
+    = link_to '#player_counts_by_training', 'data-toggle' => 'tab' do
+      = chart_icon
+      Teilnehmer
 
 %br
 
@@ -39,8 +39,29 @@
     .text-center
       = paginate @trainings
 
+  .tab-pane.fade#training_counts_by_player
+    .panel.panel-default
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+            %th
+              Name
+            %th.text-right
+              Teilnahmen
+
+        %tbody
+          - @training_counts_by_player.each_with_index do |(player, count), index|
+            %tr
+              %td.text-muted.text-right
+                = succeed '.' do
+                  = index + 1
+              %td
+                = player
+              %td.text-right
+                = count
+
+    = training_counts_by_player_chart
+
   .tab-pane.fade#player_counts_by_training
     = player_counts_by_training_chart
-
-  .tab-pane.fade#training_counts_by_player
-    = training_counts_by_player_chart
