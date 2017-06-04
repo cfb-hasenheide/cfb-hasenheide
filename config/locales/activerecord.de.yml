@@ -10,6 +10,9 @@ de:
         one: Homepage Header
         other: Homepage Headers
       league_match: Ligaspiel
+      medium:
+        one: Medium
+        other: Medien
       member: Mitglied
       other: Sonstiges
       player: Spieler
@@ -52,8 +55,11 @@ de:
         heading: Überschrift
         text: Text
         updated_at: Aktualisiert
-      message:
-        content: Nachricht
+      medium:
+        description: Beschreibung
+        file: Datei
+        user: Hochlader
+        type: Typ
       member:
         firstname: Vorname
         lastname: Nachname
@@ -64,6 +70,8 @@ de:
         member_since: Mitglied seit
         member_until: Mitglied bis
         identifier: Mitgliedsnr.
+      message:
+        content: Nachricht
       news:
         title: Titel
         content: Inhalt

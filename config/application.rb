@@ -23,6 +23,7 @@ module CfbHasenheide
 
     # Load models in subfolders
     config.autoload_paths += %W(#{config.root}/app/models/events)
+    config.autoload_paths += %W(#{config.root}/app/models/media)
 
     # Enable per-form CSRF tokens.
     config.action_controller.per_form_csrf_tokens = true

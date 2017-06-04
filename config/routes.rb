@@ -56,6 +56,8 @@ Rails.application.routes.draw do
     post :activate, on: :member
   end
 
+  resources :media, only: %i[index show new create destroy]
+
   resources :messages, only: [:create, :index]
 
   resources :news, concerns: :paginatable

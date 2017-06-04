@@ -1,0 +1,16 @@
+- if @medium.errors.present?
+  %ul
+    - @medium.errors.full_messages.each do |error_message|
+      %li
+        = error_message
+
+= form_for @medium do |f|
+  = f.hidden_field :file_cache
+  = f.hidden_field :user_id, value: current_user.id
+  = f.select :type, %w(Image Video)
+
+  = f.file_field :file
+
+  = f.text_area :description
+
+  = f.submit

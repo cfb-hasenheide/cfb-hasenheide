@@ -1,0 +1,9 @@
+de:
+  media:
+    index:
+      upload: Hochladen
+    new:
+      upload: hochladen
+    show:
+      delete: Löschen
+      delete_confirm: Wirklich löschen?

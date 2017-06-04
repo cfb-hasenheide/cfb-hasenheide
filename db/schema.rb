@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206210537) do
+ActiveRecord::Schema.define(version: 20170604121908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,16 @@ ActiveRecord::Schema.define(version: 20161206210537) do
     t.datetime "updated_at",                                null: false
     t.integer  "background_position_y", default: 0,         null: false
     t.string   "color",                 default: "#ffffff", null: false
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string   "type",        null: false
+    t.string   "file",        null: false
+    t.text     "description"
+    t.integer  "user_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_media_on_user_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -308,6 +318,7 @@ ActiveRecord::Schema.define(version: 20161206210537) do
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
+  add_foreign_key "media", "users"
   add_foreign_key "members", "users"
   add_foreign_key "players", "members"
 end

@@ -1,0 +1,28 @@
+%h1
+  = Medium.model_name.human
+
+  %small.text-muted
+    = @medium.type
+
+%dl
+  %dt
+    = Medium.human_attribute_name(:image)
+
+  %dd
+    = link_to @medium.file_url, @medium.file_url
+
+  %dt
+    = Medium.human_attribute_name(:description)
+
+  %dd
+    = @medium.description
+
+  %dt
+    = Medium.human_attribute_name(:user)
+
+  %dd
+    = @medium.user.username
+
+- if can? :destroy, @medium
+  = link_to t('.delete'), @medium, method: :delete,
+    'data-confirm' => t('.delete_confirm')

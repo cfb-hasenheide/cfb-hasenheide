@@ -1,0 +1,6 @@
+de:
+  media:
+    create:
+      notice: Datei erfolgreich hochgeladen.
+    destroy:
+      notice: Datei erfolgreich gelöscht.

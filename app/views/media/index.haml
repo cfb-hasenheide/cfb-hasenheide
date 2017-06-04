@@ -1,0 +1,12 @@
+%h1
+  = Medium.model_name.human(count: 2)
+
+  %small.text-muted
+    = @media.count
+
+%ul
+  - @media.each do |medium|
+    %li
+      = link_to medium.file_url, medium
+
+= link_to t('.upload'), new_medium_path

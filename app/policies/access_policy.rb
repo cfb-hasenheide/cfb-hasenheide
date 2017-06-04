@@ -11,6 +11,9 @@ class AccessPolicy
       can [:update, :destroy], Comment do |comment, user|
         comment.user == user
       end
+      can :destroy, Medium do |medium, user|
+        medium.user == user
+      end
     end
   end
 end
