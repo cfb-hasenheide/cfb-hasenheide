@@ -1,30 +1,3 @@
-GIT
-  remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: 07dc4d7bd7806ab4b963cf8acbad73d97cdfe74e
-  specs:
-    carrierwave (1.1.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
-
-GIT
-  remote: git://github.com/fog/fog-aws.git
-  revision: 9d8ea0eb5b9d015f2b127b68602d8cac6cde5ba6
-  specs:
-    fog-aws (1.3.0)
-      fog-core (~> 1.38)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-      ipaddress (~> 0.8)
-
-GIT
-  remote: git://github.com/scambra/devise_invitable.git
-  revision: 017d8b7915da7c8881659689b3800957880c8703
-  specs:
-    devise_invitable (1.7.2)
-      actionmailer (>= 4.1.0)
-      devise (>= 4.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -99,6 +72,10 @@ GEM
       capistrano (~> 3.7)
       capistrano-bundler
       puma (~> 3.4)
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     chartkick (2.2.4)
     ckeditor (4.2.3)
       cocaine
@@ -124,6 +101,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_invitable (1.7.2)
+      actionmailer (>= 4.1.0)
+      devise (>= 4.0.0)
     diff-lcs (1.3)
     erubi (1.6.0)
     erubis (2.7.0)
@@ -135,6 +115,11 @@ GEM
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     ffi (1.9.18)
+    fog-aws (1.3.0)
+      fog-core (~> 1.38)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
     fog-core (1.44.3)
       builder
       excon (~> 0.49)
@@ -187,8 +172,8 @@ GEM
     i18n (0.8.4)
     icalendar (2.4.1)
     ipaddress (0.8.3)
-    jbuilder (2.6.4)
-      activesupport (>= 3.0.0)
+    jbuilder (2.7.0)
+      activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
@@ -221,7 +206,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_magick (4.7.0)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
     multi_xml (0.6.0)
@@ -231,8 +216,8 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     nio4r (2.1.0)
-    nokogiri (1.7.2)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -246,7 +231,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (3.9.0)
+    puma (3.9.1)
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -397,15 +382,15 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano3-puma
-  carrierwave!
+  carrierwave
   chartkick
   ckeditor
   coffee-rails
   database_cleaner
   devise
-  devise_invitable!
+  devise_invitable
   factory_girl_rails
-  fog-aws!
+  fog-aws
   font-awesome-rails
   font-awesome-sass
   friendly_id
@@ -437,7 +422,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
