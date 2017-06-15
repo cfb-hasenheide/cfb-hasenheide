@@ -1,0 +1,18 @@
+= bootstrap_form_for goal do |f|
+  = f.hidden_field :event_id, value: event.id
+  = f.hidden_field :reporter_id, value: current_user.player.id
+
+  = f.number_field :minute, min: 0, max: 120
+  = f.number_field :extra_time, min: 1, max: 10
+
+  = f.number_field :club_score, min: 0, max: 99
+  = f.number_field :rival_score, min: 0, max: 99
+
+  = f.check_box :club, checked: true
+
+  = f.collection_select :scorer_id, players, :id, :nickname, include_blank: true
+  = f.collection_select :provider_id, players, :id, :nickname, include_blank: true
+
+  = f.text_area :comment
+
+  = f.submit

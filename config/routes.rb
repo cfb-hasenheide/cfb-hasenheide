@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   resources :events, concerns: :paginatable do
     resource :attendance_list, only: [:show, :new]
     resource :report, only: [:show, :new, :edit]
+    resources :match_events, only: [:index]
+    resources :goals, only: [:new]
   end
 
   resources :league_matches,
@@ -51,6 +53,8 @@ Rails.application.routes.draw do
     only: [:create, :edit, :update]
 
   resources :forum_threads
+
+  resources :goals, only: [:create]
 
   resources :homepage_headers, except: :show do
     post :activate, on: :member

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206210537) do
+ActiveRecord::Schema.define(version: 20170606195253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,25 @@ ActiveRecord::Schema.define(version: 20161206210537) do
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_functions_on_role_id", using: :btree
     t.index ["user_id"], name: "index_functions_on_user_id", using: :btree
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.integer  "event_id",    null: false
+    t.integer  "minute",      null: false
+    t.integer  "extra_time"
+    t.integer  "club_score",  null: false
+    t.integer  "rival_score", null: false
+    t.boolean  "club",        null: false
+    t.integer  "scorer_id"
+    t.integer  "provider_id"
+    t.text     "comment"
+    t.integer  "reporter_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["event_id"], name: "index_goals_on_event_id", using: :btree
+    t.index ["provider_id"], name: "index_goals_on_provider_id", using: :btree
+    t.index ["reporter_id"], name: "index_goals_on_reporter_id", using: :btree
+    t.index ["scorer_id"], name: "index_goals_on_scorer_id", using: :btree
   end
 
   create_table "homepage_headers", force: :cascade do |t|
@@ -308,6 +327,10 @@ ActiveRecord::Schema.define(version: 20161206210537) do
   add_foreign_key "forum_threads", "users"
   add_foreign_key "functions", "roles"
   add_foreign_key "functions", "users"
+  add_foreign_key "goals", "events"
+  add_foreign_key "goals", "players", column: "provider_id"
+  add_foreign_key "goals", "players", column: "reporter_id"
+  add_foreign_key "goals", "players", column: "scorer_id"
   add_foreign_key "members", "users"
   add_foreign_key "players", "members"
 end
