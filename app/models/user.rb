@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  has_one :member
-  has_one :address, as: :addressable, dependent: :destroy
   has_many :functions
+  has_one :address, as: :addressable, dependent: :destroy
+  has_one :member
+  has_one :player, through: :member
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

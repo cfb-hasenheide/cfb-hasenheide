@@ -59,9 +59,11 @@ module IconsHelper
     content_tag_container('fa fa-youtube fa-stack-1x fa-inverse')
   end
 
-  def fussball_de_icon
+  def goal_icon
     fa_icon('soccer-ball-o')
   end
+
+  alias_method :fussball_de_icon, :goal_icon
 
   def fussballde_link_icon
     content_tag_container('fa fa-soccer-ball-o fa-stack-1x fa-inverse')
