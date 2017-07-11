@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.4.1'
 
 # rails
 gem 'rails', '~> 5.0'
@@ -21,18 +21,14 @@ gem 'kaminari'
 
 # authentication
 gem 'devise'
-# NOTE: using devise_invitable master, because of:
-# undefined method `attributes_for' for class `Devise::ParameterSanitizer' (NameError)
-# Did you mean?  attr_writer
-#   from /Users/elgrillo/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.6/lib/active_support/core_ext/module/aliasing.rb:32:in `alias_method_chain'
-gem 'devise_invitable', github: 'scambra/devise_invitable'
+gem 'devise_invitable'
 
 # authorization
 gem 'access-granted'
 
 # file uploading
-gem 'fog-aws', github: 'fog/fog-aws'
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'fog-aws'
+gem 'carrierwave'
 gem 'mini_magick'
 
 # assets
@@ -45,7 +41,6 @@ gem 'bootstrap-sass'
 gem 'ckeditor'
 gem 'simple_form'
 gem 'bootstrap_form'
-# NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
@@ -78,7 +73,6 @@ group :development do
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
 end
