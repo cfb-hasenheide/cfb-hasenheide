@@ -66,6 +66,11 @@ gem 'icalendar'
 gem 'raygun4ruby'
 
 group :development do
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano3-puma', require: false
   gem 'guard-rspec', require: false
   gem 'listen'
   gem 'rails_best_practices', require: false
@@ -86,9 +91,4 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'rails-controller-testing'
-end
-
-group :production do
-  # heroku
-  gem 'rails_12factor'
 end

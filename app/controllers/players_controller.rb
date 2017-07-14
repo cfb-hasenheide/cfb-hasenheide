@@ -13,7 +13,8 @@ class PlayersController < ApplicationController
   end
 
   def new
-    @player = Player.new(user_id: params[:user_id])
+    member_id = Member.find_by(user_id: params[:user_id]).id
+    @player = Player.new(member_id: member_id)
   end
 
   def edit

@@ -29,3 +29,8 @@
 
       = link_to 'Spielbericht erstellen',
                 new_event_report_path(event)
+
+  %li{role: 'presentation',
+      class: ('active' if params[:controller] == 'match_events')}
+
+    = link_to 'Match Events', event_match_events_path(event)

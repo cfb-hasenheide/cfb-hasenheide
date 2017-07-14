@@ -6,6 +6,9 @@ de:
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
+      goal:
+        one: Tor
+        other: Tore
       homepage_header:
         one: Homepage Header
         other: Homepage Headers
@@ -43,6 +46,15 @@ de:
       forum_thread:
         topic: Thema
         comment: Kommentar
+      goal:
+        club: Tor für CFB?
+        club_score: Tore CFB
+        comment: Kommentar
+        extra_time: Nachspielzeit
+        minute: Spielminute
+        provider_id: Vorlagengeber
+        rival_score: Tore Gegner
+        scorer_id: Torschütze
       homepage_header:
         active: Aktiv
         background_image: Hintergrundbild

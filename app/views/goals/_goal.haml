@@ -1,0 +1,36 @@
+%li.list-group-item
+  %span.badge
+    = succeed "'" do
+      = goal.minute
+      - if goal.extra_time?
+        \+
+        = goal.extra_time
+
+  %h4.list-group-item-heading
+    = goal_icon
+    = Goal.model_name.human
+    für
+    = goal.club? ? goal.event.club_team_name : goal.event.rival_team_name
+
+  %p.list-group-item-text
+    = goal.scorer&.nickname
+
+    - if goal.provider_id?
+      = surround '(', ')' do
+        = goal.provider.nickname
+
+  - if goal.comment?
+    %p.list-group-item-text
+      = goal.comment
+
+  %p.list-group-item-text.text-muted
+    - if goal.updated_at > goal.created_at
+      Editiert am
+      = l goal.updated_at, format: :short
+
+    - else
+      Erstellt am
+      = l goal.created_at, format: :short
+
+    von
+    = goal.reporter.nickname

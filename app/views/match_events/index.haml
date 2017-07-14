@@ -1,0 +1,18 @@
+= content_for(:title, "Match Events #{@event.name}")
+
+= render 'events/subnavigation', event: @event
+
+.page-header
+  %h1
+    Match Events
+    %small= @event.name
+
+= render 'events/basic_information', event: @event
+
+.panel.panel-default
+  %ul.list-group
+    = render @goals
+
+= link_to new_event_goal_path(@event), class: 'btn btn-default' do
+  = create_icon
+  = Goal.model_name.human

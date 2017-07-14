@@ -36,14 +36,14 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.action_cable.url = 'wss://cfb-hasenheide.herokuapp.com/cable'
+  config.action_cable.url = 'ws://cfb-hasenheide.de/cable'
   config.action_cable.allowed_request_origins = [
-    'https://cfb-hasenheide.herokuapp.com',
-    'http://cfb-hasenheide.herokuapp.com',
+    'https://cfb-hasenheide.de',
+    'http://cfb-hasenheide.de'
   ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
