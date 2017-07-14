@@ -17,105 +17,106 @@
 $brand-primary: #335032
 $navbar-default-link-hover-color: #D5A021
 $navbar-default-link-active-color: #D5A021
-$link-color: #D5A021
-$link-hover-color: #D5A021
-$link-active-color: #D5A021
-
-body
-  padding-top: 70px
-  padding-bottom: 70px
-
+// $link-color: #D5A021
+// $link-hover-color: #D5A021
+// $link-active-color: #D5A021
+//
+// body
+//   padding-top: 70px
+//   padding-bottom: 70px
+//
 @import 'bootstrap'
 @import 'rails_bootstrap_forms'
 @import 'bootstrap3-switch'
 @import 'font-awesome-sprockets'
 @import 'font-awesome'
 
-.halfs
-  @extend .row
-  .half
-    @extend .col-md-6
-
-.two-ten
-  @extend .row
-  .two
-    @extend .col-md-2
-  .ten
-    @extend .col-md-10
-
-.thirds
-  @extend .row
-  .third
-    @extend .col-md-4
-  .two-thirds
-    @extend .col-md-8
-
 @import 'sticky_footer'
+//
+// .halfs
+//   @extend .row
+//   .half
+//     @extend .col-md-6
+//
+// .two-ten
+//   @extend .row
+//   .two
+//     @extend .col-md-2
+//   .ten
+//     @extend .col-md-10
+//
+// .thirds
+//   @extend .row
+//   .third
+//     @extend .col-md-4
+//   .two-thirds
+//     @extend .col-md-8
+//
 .primary-button
   @extend .btn
   @extend .btn-outline-primary
-
-.primary-button-sm
-  @extend .primary-button
-  @extend .btn-sm
-
-.default-button
-  @extend .btn
-  @extend .btn-secondary
-
-.default-button-sm
-  @extend .default-button
-  @extend .btn-sm
-
-.default-button-xs
-  @extend .default-button
-  @extend .btn-sm
-
-.warning-button-sm
-  @extend .btn
-  @extend .btn-outline-warning
-  @extend .btn-sm
-
-.danger-button
-  @extend .btn
-  @extend .btn-outline-danger
-
-table
-  @extend .table
-
-label.required:after
-  content: ' *'
-
-blockquote
-  font-size: 14px
-
-.img-thumbnail
-  width: 140px
-  height: 140px
-
-.homepageHeader
-  @extend .jumbotron
-
-tr.clickableTableRow
-  cursor: pointer
-
-textarea
-  resize: vertical
-
-#chatModal .modal-body
-  max-height: calc(100vh - 200px)
-  overflow-y: auto
-
-#chatView .chatMessages
-  max-height: calc(100vh - 415px)
-  overflow-y: auto
-
-.card-columns
-  +media-breakpoint-only(xl)
-    column-count: 2
-  +media-breakpoint-only(lg)
-    column-count: 2
-  +media-breakpoint-only(md)
-    column-count: 1
-  +media-breakpoint-only(sm)
-    column-count: 1
+//
+// .primary-button-sm
+//   @extend .primary-button
+//   @extend .btn-sm
+//
+// .default-button
+//   @extend .btn
+//   @extend .btn-secondary
+//
+// .default-button-sm
+//   @extend .default-button
+//   @extend .btn-sm
+//
+// .default-button-xs
+//   @extend .default-button
+//   @extend .btn-sm
+//
+// .warning-button-sm
+//   @extend .btn
+//   @extend .btn-outline-warning
+//   @extend .btn-sm
+//
+// .danger-button
+//   @extend .btn
+//   @extend .btn-outline-danger
+//
+// table
+//   @extend .table
+//
+// label.required:after
+//   content: ' *'
+//
+// blockquote
+//   font-size: 14px
+//
+// .img-thumbnail
+//   width: 140px
+//   height: 140px
+//
+// .homepageHeader
+//   @extend .jumbotron
+//
+// tr.clickableTableRow
+//   cursor: pointer
+//
+// textarea
+//   resize: vertical
+//
+// #chatModal .modal-body
+//   max-height: calc(100vh - 200px)
+//   overflow-y: auto
+//
+// #chatView .chatMessages
+//   max-height: calc(100vh - 415px)
+//   overflow-y: auto
+//
+// .card-columns
+//   +media-breakpoint-only(xl)
+//     column-count: 2
+//   +media-breakpoint-only(lg)
+//     column-count: 2
+//   +media-breakpoint-only(md)
+//     column-count: 1
+//   +media-breakpoint-only(sm)
+//     column-count: 1
