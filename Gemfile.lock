@@ -400,7 +400,7 @@ PLATFORMS
 
 DEPENDENCIES
   access-granted
-  bootstrap (~> 4.0.0.alpha5)
+  bootstrap (~> 4.0.0.alpha6)
   bootstrap-switch-rails
   bootstrap_form!
   byebug
