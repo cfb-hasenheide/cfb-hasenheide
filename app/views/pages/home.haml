@@ -1,19 +1,21 @@
 = render @homepage_header if @homepage_header
 
 .row
-  .col-md-8
-    .card.card-primary.card-inverse
-      %h2.card-header
-        = link_to 'Neuigkeiten', news_index_path
+  .col-8
+    .card.card-primary.card-inverse.mb-4
+      %h2.h5.card-header
+        Neuigkeiten
+
+    = render @news
 
     .card-columns
       - @posts.each do |post|
         = render 'posts/preview', post: post
 
-  .col-md-4
+  .col-4
     .card
-      %h2.card-header
-        = link_to_if user_signed_in?, 'Events', events_path
+      %h2.h5.card-header
+        Events
 
       .card-block
         %p.card-text
@@ -27,7 +29,7 @@
 
       = render 'events/list_short', events: @past_events
 
-.card
+.card.mb-4
   %h2.card-header Tabelle
 
   .card-block
