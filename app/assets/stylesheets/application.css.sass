@@ -50,6 +50,7 @@ body
   .two-thirds
     @extend .col-md-8
 
+@import 'sticky_footer'
 .primary-button
   @extend .btn
   @extend .btn-outline-primary
@@ -82,39 +83,8 @@ body
 table
   @extend .table
 
-html
-  position: relative
-  min-height: 100%
-
-body
-  /* Margin bottom by footer height */
-  margin-bottom: 60px
-
 label.required:after
   content: ' *'
-
-.footer
-  position: absolute
-  bottom: 0
-  width: 100%
-  /* Set the fixed height of the footer here */
-  height: 60px
-  background-color: $brand-primary
-
-.footer p
-  margin: 10px 0
-
-.footer a
-  margin: 10px 0
-  color: $brand-primary
-  text-decoration: none
-  &:hover
-    color: $navbar-default-link-hover-color
-  &:active
-    color: $navbar-default-link-active-color
-  &.right
-    margin: 0
-    float: right
 
 blockquote
   font-size: 14px
