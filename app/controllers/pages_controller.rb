@@ -1,5 +1,5 @@
 class PagesController < PublicController
-  def welcome
+  def home
     set_events
     set_posts
     @homepage_header = HomepageHeader.active

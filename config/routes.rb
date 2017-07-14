@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  root 'pages#welcome'
+  root 'pages#home'
 
   resources :attendances, only: :update
 
