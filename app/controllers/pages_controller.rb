@@ -1,6 +1,7 @@
 class PagesController < PublicController
   def home
     set_events
+    set_news
     set_posts
     @homepage_header = HomepageHeader.active
   end
@@ -18,6 +19,12 @@ class PagesController < PublicController
     events = events.where(public: true) unless user_signed_in?
     @past_events = events.past(3)
     @future_events = events.future(3)
+  end
+
+  def set_news
+    news = News.all
+    news = news.where(public: true) unless user_signed_in?
+    @news = news.order(created_at: :desc).limit(5)
   end
 
   def set_posts
