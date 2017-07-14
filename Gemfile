@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+git_source(:github) { |name| "https://github.com/#{name}.git" }
+
+ruby '2.4.1'
 
 # rails
 gem 'rails', '~> 5.0'
@@ -48,7 +50,7 @@ source 'https://rails-assets.org' do
 end
 gem 'ckeditor'
 gem 'simple_form'
-gem 'bootstrap_form', branch: 'bootstrap-v4'
+gem 'bootstrap_form', github: 'bootstrap-ruby/rails-bootstrap-forms', branch: 'bootstrap-v4'
 # NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
