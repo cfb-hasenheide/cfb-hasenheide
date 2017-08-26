@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module CfbHasenheide
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -35,8 +38,5 @@ module CfbHasenheide
 
     # Require `belongs_to` associations by default.
     Rails.application.config.active_record.belongs_to_required_by_default = true
-
-    # Do not halt callback chains when a callback returns false.
-    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end
