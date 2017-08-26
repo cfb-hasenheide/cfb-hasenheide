@@ -1,11 +1,11 @@
 # https://coderwall.com/p/ttrhow/deploying-rails-app-using-nginx-puma-and-capistrano-3
 
 # Change these
-server ENV['IP_ADDRESS'], port: ENV['PORT'], roles: [:web, :app, :db], primary: true
+server ENV['CFB_IP_ADDRESS'], port: ENV['CFB_PORT'], roles: [:web, :app, :db], primary: true
 
-set :repo_url,     ENV['REPO_URL']
-set :application,  ENV['APPLICATION']
-set :user,         ENV['USER']
+set :repo_url,     ENV['CFB_REPO_URL']
+set :application,  ENV['CFB_APPLICATION_NAME']
+set :user,         ENV['CFB_USER']
 set :puma_threads, [4, 16]
 set :puma_workers, 0
 
