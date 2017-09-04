@@ -43,7 +43,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.0.0.beta'
 # Bootstrap 4 tooltips and popovers denpent on tether for positioning
 source 'https://rails-assets.org' do
     gem 'rails-assets-tether', '>= 1.1.0'
