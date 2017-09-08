@@ -1,0 +1,29 @@
+.card{class: ('card-outline-primary' if post.public?)}
+  = image_tag post.image_url, class: 'card-img-top w-100'
+
+  .card-block
+    %h4.card-title
+      = post.title
+
+    %h6.card-subtitle.text-muted
+      = post.subtitle
+
+  .card-block
+    %p.card-text.text-justify
+      %strong
+        = post.summary
+
+    %p.card-text.text-justify
+      = post.content
+
+    %p.card-text.text-muted
+      %small
+        Von
+        = post.member.player.nickname
+        am
+        = l post.posted_on
+
+    - if can?(:update, post)
+      = link_to edit_post_path(post), class: 'card-link warning-button-sm' do
+        = edit_icon
+        Bearbeiten

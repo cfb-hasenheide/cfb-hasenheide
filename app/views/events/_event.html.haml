@@ -1,11 +1,12 @@
-.list-group
-  = link_to event_or_attendance_list_or_report_path(event),
-    class: 'list-group-item' do
+.card.text-xs-center{class: ('card-outline-primary' if event.future?)}
+  .card-header
+    = event.model_name.human
 
-    %h4.list-group-item-heading
+  .card-block
+    %h4.card-title
       = event.name
 
-    %p.list-group-item-text
+    %p.card-text
       %ul.list-unstyled
         %li
           = date_icon
@@ -17,8 +18,8 @@
           = address_icon
           = event.address
 
-      .label.label-default= event.model_name.human
+    %p.card-text
+      = event_attendance_label(event)
+      = event_final_score_label(event)
 
-      .pull-right
-        = event_attendance_label(event)
-        = event_final_score_label(event)
+    = event_or_attendance_list_or_report_link(event)

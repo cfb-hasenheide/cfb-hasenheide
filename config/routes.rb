@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  root 'pages#welcome'
+  root 'pages#home'
 
   resources :attendances, only: :update
 
@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   resources :players, concerns: :paginatable, except: :destroy do
     get :for_user, on: :new
   end
+
+  resources :posts
 
   resources :reports, concerns: :paginatable, except: :destroy do
     get :no_content, on: :collection

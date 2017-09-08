@@ -25,4 +25,12 @@
   .form-group
     .col-md-10.col-md-offset-2
       = f.submit class: 'primary-button'
+
       = link_to 'Abbrechen', news_index_path, class: 'default-button'
+
+      = link_to news,
+        method: :delete,
+        class: 'danger-button',
+        data: { confirm: 'Wirklich unwiderruflich löschen?' } do
+        = delete_icon
+        Löschen

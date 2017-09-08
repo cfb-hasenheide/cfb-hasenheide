@@ -1,29 +1,23 @@
-.panel{class: (news.internal? ? 'panel-default' : 'panel-primary')}
-  .panel-body
-    %h3
-      %small.pull-right
+.card.mb-4{class: ('card-outline-primary' unless news.internal?)}
+  .card-block
+    %p.card-text
+      %small.text-muted
         = internal_icon if news.internal?
         = l(news.created_at, format: :date_only)
+
+    %h2.card-title
       = news.title
 
-    = truncate(news.content,
-               length: 1_500,
-               separator: '<br><br>',
-               omission: "<br>",
-               escape: false) do
+    %p.card-text.text-justify
+      = truncate(news.content,
+                 length: 1_500,
+                 separator: '<br><br>',
+                 omission: "<br>",
+                 escape: false) do
 
-      = link_to 'weiterlesen', news_path(news)
+        = link_to 'weiterlesen', news_path(news)
 
-  - if admin?
-    .panel-footer
-      = link_to edit_news_path(news), class: 'default-button-xs' do
+    - if can?(:update, news)
+      = link_to edit_news_path(news), class: 'card-link warning-button-sm' do
         = edit_icon
         Bearbeiten
-
-      = link_to news,
-        method: :delete,
-        class: 'default-button-xs',
-        data: { :confirm => 'Wirklich unwiderruflich löschen?' } do
-        %span.text-danger
-          = delete_icon
-          Löschen

@@ -20,9 +20,9 @@
                   new_event_path(type: event_class.name)
 
 - @events.in_groups_of(4) do |events|
-  .row
-    - events.compact.each do |event|
-      .col-xs-12.col-sm-6.col-md-4.col-lg-3
+  .card-deck-wrapper
+    .card-deck
+      - events.compact.each do |event|
         = render 'event', event: event
 
 = render 'layouts/pagination', entries: @events

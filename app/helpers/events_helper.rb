@@ -9,18 +9,18 @@ module EventsHelper
 
     content_tag(:span,
                 t(attendance_status, scope: %w(activerecord enums attendance status)),
-                class: "label label-primary #{('pull-right' if pull_right)}")
+                class: "tag tag-primary #{('pull-right' if pull_right)}")
   end
 
   def event_final_score_label(event, pull_right: false)
     return unless event.past? && event.report.present?
 
     css_class = if event.won?
-                  'label label-success'
+                  'tag tag-success'
                 elsif event.lost?
-                  'label label-danger'
+                  'tag tag-danger'
                 else # event.drew
-                  'label label-warning'
+                  'tag tag-warning'
                 end
 
     css_class += ' pull-right' if pull_right
@@ -32,13 +32,18 @@ module EventsHelper
     content_tag(:span, content.html_safe, class: css_class)
   end
 
-  def event_or_attendance_list_or_report_path(event)
+  def event_or_attendance_list_or_report_link(event)
     if event.future? && event.attendance_list_open?
-      event_attendance_list_path(event)
+      text = AttendanceList.model_name.human
+      path = event_attendance_list_path(event)
     elsif event.past? && event.report.present?
-      event_report_path(event)
+      text = Report.model_name.human
+      path = event_report_path(event)
     else
-      event_path(event)
+      text = Event.model_name.human
+      path = event_path(event)
     end
+
+    link_to text, path, class: 'btn btn-outline-primary'
   end
 end

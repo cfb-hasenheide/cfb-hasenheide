@@ -1,0 +1,48 @@
+= render @homepage_header if @homepage_header
+
+.row
+  .col-8
+    .card.card-primary.card-inverse.mb-4
+      %h2.h5.card-header
+        Neuigkeiten
+
+    = render @news
+
+    .card-columns
+      - @posts.each do |post|
+        = render 'posts/preview', post: post
+
+  .col-4
+    .card
+      %h2.h5.card-header
+        Events
+
+      .card-block
+        %p.card-text
+          %small.text-muted Kommende
+
+      = render 'events/list_short', events: @future_events
+
+      .card-block
+        %p.card-text
+          %small.text-muted Vergangene
+
+      = render 'events/list_short', events: @past_events
+
+.card.mb-4
+  %h2.card-header Tabelle
+
+  .card-block
+    %p.card-text
+      .fussballDeWidget#tableCFB
+        = spinner_icon
+        Lade Tabelle
+
+.card
+  %h2.card-header Spielplan
+
+  .card-block
+    %p.card-text
+      .fussballDeWidget#scheduleCFB
+        = spinner_icon
+        Lade Spielplan

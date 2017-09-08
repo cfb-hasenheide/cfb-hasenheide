@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+git_source(:github) { |name| "https://github.com/#{name}.git" }
+
 ruby '2.4.1'
 
 # rails
@@ -37,10 +39,15 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0.beta'
+# Bootstrap 4 tooltips and popovers denpent on tether for positioning
+source 'https://rails-assets.org' do
+    gem 'rails-assets-tether', '>= 1.1.0'
+end
 gem 'ckeditor'
 gem 'simple_form'
-gem 'bootstrap_form'
+gem 'bootstrap_form', github: 'bootstrap-ruby/rails-bootstrap-forms', branch: 'bootstrap-v4'
+# NOTE: https://github.com/bootstrap-ruby/rails-bootstrap-forms#nested-forms
 gem 'nested_form'
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
