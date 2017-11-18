@@ -27,8 +27,8 @@ gem 'devise_invitable'
 gem 'access-granted'
 
 # file uploading
-gem 'fog-aws'
-gem 'carrierwave'
+gem 'fog-aws', github: 'fog/fog-aws'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 
 # assets
