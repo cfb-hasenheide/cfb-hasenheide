@@ -4,9 +4,9 @@ class Event < ApplicationRecord
   paginates_per 12
 
   belongs_to :club_team, class_name: 'Team'
+  has_one :attendance_list, as: :attendable, dependent: :destroy
   has_many :attendances, through: :attendance_list
   has_many :goals
-  has_one :attendance_list, as: :attendable, dependent: :destroy
   has_one :report, dependent: :destroy
 
   after_initialize :set_public, unless: :persisted?
