@@ -44,7 +44,9 @@ Rails.application.configure do
   config.action_cable.url = 'ws://cfb-hasenheide.de/cable'
   config.action_cable.allowed_request_origins = [
     'https://cfb-hasenheide.de',
-    'http://cfb-hasenheide.de'
+    'https://www.cfb-hasenheide.de',
+    'http://cfb-hasenheide.de',
+    'http://www.cfb-hasenheide.de'
   ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
