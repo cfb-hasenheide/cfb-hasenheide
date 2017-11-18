@@ -1,7 +1,7 @@
 fussballDeWidget =
   tableCFB: ->
     new fussballdeWidgetAPI()
-      .showWidget('tableCFB', '01TB9KHR74000000VS541L4QVTSA3RAV')
+      .showWidget('tableCFB', '021MCNLGJG000000VS541L4FVT19MEPC')
 
   scheduleCFB: ->
     new fussballdeWidgetAPI()
