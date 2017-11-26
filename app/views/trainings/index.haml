@@ -31,7 +31,8 @@
 .tab-content
   .tab-pane.fade.in.active#list
     .text-center
-      %small.text-muted= page_entries_info @trainings
+      %small.text-muted
+        = page_entries_info @trainings
 
     %ul.list-group
       = render @trainings

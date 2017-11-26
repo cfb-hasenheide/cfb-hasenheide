@@ -5,14 +5,14 @@ class ReportsController < ApplicationController
   respond_to :html
 
   def index
-    @reports = Report.includes(:event)
+    @reports = Report.joins(:event)
                      .order('events.datetime DESC')
                      .page(params[:page])
   end
 
   def no_content
     @reports = Report.no_content
-                     .includes(:event)
+                     .joins(:event)
                      .order('events.datetime DESC')
                      .page(params[:page])
   end
