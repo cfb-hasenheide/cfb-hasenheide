@@ -58,7 +58,7 @@ class Event < ApplicationRecord
   end
 
   def eligible_players
-    Player.active.player_pass(player_pass_needed?)
+    Player.player_pass(player_pass_needed?)
   end
 
   def attending_players
