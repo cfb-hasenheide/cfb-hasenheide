@@ -73,7 +73,7 @@ class AttendanceListsController < ApplicationController
 
   def deliver_attendance_list_closed_mail
     EventMailer.attendance_list_closed(@attendance_list.attendable_id,
-                                       to_player_ids: params[:player_ids],
+                                       to_player_ids: to_player_ids,
                                        message: params[:message],
                                        time_to_meet: params[:time_to_meet].to_i,
                                        from_user_id: current_user.id)
@@ -84,12 +84,17 @@ class AttendanceListsController < ApplicationController
 
   def deliver_attendance_list_opened_mail
     EventMailer.attendance_list_opened(@attendance_list.attendable_id,
-                                       to_player_ids: params[:player_ids],
+                                       to_player_ids: to_player_ids,
                                        message: params[:message],
                                        from_user_id: current_user.id)
                .deliver_later
 
     flash[:notice] += ' Mail wurde versendet.'
+  end
+
+  # FIXME: This just quick fixes a params fuck up
+  def to_player_ids
+    params[:player_ids].flatten.reject(&:blank?)
   end
 
   def set_attendance_list
