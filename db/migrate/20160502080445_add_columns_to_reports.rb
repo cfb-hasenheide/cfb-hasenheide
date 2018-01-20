@@ -1,4 +1,4 @@
-class AddColumnsToReports < ActiveRecord::Migration
+class AddColumnsToReports < ActiveRecord::Migration[4.2]
   def change
     add_column :reports, :annotation, :string
     add_column :reports, :captain_id, :integer

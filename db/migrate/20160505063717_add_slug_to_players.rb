@@ -1,4 +1,4 @@
-class AddSlugToPlayers < ActiveRecord::Migration
+class AddSlugToPlayers < ActiveRecord::Migration[4.2]
   def change
     add_column :players, :slug, :string
     add_index :players, :slug, unique: true

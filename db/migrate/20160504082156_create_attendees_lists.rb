@@ -1,4 +1,4 @@
-class CreateAttendeesLists < ActiveRecord::Migration
+class CreateAttendeesLists < ActiveRecord::Migration[4.2]
   def change
     create_table :attendees_lists do |t|
       t.references :attendable, polymorphic: true, index: true

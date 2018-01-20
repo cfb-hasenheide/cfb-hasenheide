@@ -1,4 +1,4 @@
-class AddTeamFieldsToEvents < ActiveRecord::Migration
+class AddTeamFieldsToEvents < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :home_team, :string
     add_column :events, :home_team_id, :int

@@ -1,4 +1,4 @@
-class ChangeEventColumnNulls < ActiveRecord::Migration
+class ChangeEventColumnNulls < ActiveRecord::Migration[4.2]
   def change
     change_column_null :events, :address, false
     change_column_null :events, :datetime, false

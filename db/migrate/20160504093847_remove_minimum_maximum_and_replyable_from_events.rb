@@ -1,4 +1,4 @@
-class RemoveMinimumMaximumAndReplyableFromEvents < ActiveRecord::Migration
+class RemoveMinimumMaximumAndReplyableFromEvents < ActiveRecord::Migration[4.2]
   def change
     remove_column :events, :minimum, :integer
     remove_column :events, :maximum, :integer

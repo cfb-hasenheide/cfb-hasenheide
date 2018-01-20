@@ -1,4 +1,4 @@
-class AddScoresToReports < ActiveRecord::Migration
+class AddScoresToReports < ActiveRecord::Migration[4.2]
   def change
     add_column :reports, :club_final_score, :integer, limit: 1
     add_column :reports, :rival_final_score, :integer, limit: 1
