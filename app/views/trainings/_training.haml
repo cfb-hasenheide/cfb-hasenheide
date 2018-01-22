@@ -5,7 +5,7 @@
     = l(training.date)
 
     - if can?(:update, Training)
-      = link_to edit_training_path(training), class: 'btn btn-default btn-xs' do
+      = link_to edit_training_path(training), class: 'btn btn-secondary btn-sm' do
         %span.text-warning
           = edit_icon
           %span.hidden-xs Bearbeiten

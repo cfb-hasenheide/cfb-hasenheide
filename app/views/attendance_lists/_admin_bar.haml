@@ -1,7 +1,7 @@
 .well.well-sm
   - if attendance_list.open?
     .btn-group{role: 'group'}
-      %button.btn.btn-default.dropdown-toggle{type: 'button',
+      %button.btn.btn-secondary.dropdown-toggle{type: 'button',
         'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
         'aria-expanded' => 'false'}
         Meldeliste schließen
@@ -18,7 +18,7 @@
 
   - else
     .btn-group{role: 'group'}
-      %button.btn.btn-default.dropdown-toggle{type: 'button',
+      %button.btn.btn-secondary.dropdown-toggle{type: 'button',
         'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
         'aria-expanded' => 'false'}
         Meldeliste öffnen
