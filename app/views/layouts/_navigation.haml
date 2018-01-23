@@ -1,87 +1,140 @@
-%nav.navbar.navbar-fixed-top.navbar-default{role: 'navigation'}
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container
-    .navbar-header
-      %button.navbar-toggle.collapsed{'data-target' => '#navigation',
-        'data-toggle' => 'collapse', type: 'button'}
-        %span.sr-only Navigation aus-/einklappen
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
+    = link_to root_path, class: 'navbar-brand' do
+      = image_tag 'logo_navbar.png',
+        height: '30',
+        class: 'd-inline-block align-top',
+        alt: 'CFB Hasenheide Logo'
 
-      = link_to root_path, class: 'pull-left' do
-        = image_tag 'logo_navbar.png',
-          alt: 'CFB Hasenheide Logo',
-          class: 'logoNavbar'
+      CFB Hasenheide
 
-      = link_to 'CFB Hasenheide', root_path, class: 'navbar-brand'
+    = button_tag class: 'navbar-toggler',
+      type: 'button',
+      'data-toggle': 'collapse',
+      'data-target': '#navigation',
+      'aria-controls': 'navigation',
+      'aria-expanded': 'false',
+      'aria-label': 'Toggle navigation' do
+      %span.navbar-toggler-icon
 
-    #navigation.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li{class: ('active' if params[:controller] == 'news')}
-          = link_to 'News', news_index_path
+    .collapse.navbar-collapse#navigation
+      %ul.navbar-nav.mr-auto
+        %li.nav-item{class: ('active' if params[:controller] == 'news')}
+          = link_to news_index_path,
+            class: 'nav-link' do
+            = News.model_name.human(count: 2)
+            - if params[:controller] == 'news'
+              %span.sr-only(current)
 
         - if user_signed_in?
-          %li{class: ('active' if params[:controller] == 'events')}
-            = link_to 'Events', events_path
+          %li.nav-item{class: ('active' if params[:controller] == 'events')}
+            = link_to events_path,
+              class: 'nav-link' do
+              = Event.model_name.human(count: 2)
+              - if params[:controller] == 'events'
+                %span.sr-only(current)
 
-          %li{class: ('active' if params[:controller] == 'reports')}
-            = link_to 'Spielberichte', reports_path
+          %li.nav-item{class: ('active' if params[:controller] == 'reports')}
+            = link_to reports_path,
+              class: 'nav-link' do
+              = Report.model_name.human(count: 2)
+              - if params[:controller] == 'reports'
+                %span.sr-only(current)
 
-          %li{class: ('active' if params[:controller] == 'players')}
-            = link_to 'Spieler', players_path
+          %li.nav-item{class: ('active' if params[:controller] == 'players')}
+            = link_to players_path,
+              class: 'nav-link' do
+              = Player.model_name.human(count: 2)
+              - if params[:controller] == 'players'
+                %span.sr-only(current)
 
-          %li{class: ('active' if params[:controller] == 'trainings')}
-            = link_to 'Training', trainings_path
+          %li.nav-item{class: ('active' if params[:controller] == 'trainings')}
+            = link_to trainings_path,
+              class: 'nav-link' do
+              = Training.model_name.human
+              - if params[:controller] == 'trainings'
+                %span.sr-only(current)
 
-        %li{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
-          = link_to 'Kontakt', '/contact'
+        %li.nav-item{class: ('active' if params[:controller] == 'pages' && params[:action] == 'contact')}
+          = link_to '/contact',
+            class: 'nav-link' do
+            Kontakt
+            - if params[:controller] == 'pages' && params[:action] == 'contact'
+              %span.sr-only(current)
 
-      %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          %li
-            = link_to '#chatModal', 'data-toggle' => 'modal' do
+          %li.nav-item
+            = link_to '#chatModal',
+              'data-toggle': 'modal',
+              class: 'nav-link' do
               = chat_icon
               Chat
 
-          %li.dropdown
-            %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown',
-              role: 'button', 'aria-expanded' => 'false' }
+          %li.nav-item.dropdown
+            = link_to '#',
+              id: 'navbarUserDropdown',
+              role: 'button',
+              'data-toggle': 'dropdown',
+              'aria-haspopup': true,
+              'aria-expanded': false,
+              class: 'nav-link dropdown-toggle' do
               = image_tag current_user.player.avatar_url(:small_thumb),
-                width: '30',
-                height: '30',
+                height: '24',
                 alt: current_user.player.nickname,
-                class: 'img-circle'
+                class: 'd-inline-block align-top rounded-circle'
               = current_user.player.nickname
-              %span.caret
-            %ul.dropdown-menu{role: 'menu'}
-              - if current_user.admin?
-                %li.dropdown-header
-                  Admin Einstellungen
-                %li
-                  = link_to 'Admin Dashboard', administration_path
-                %li
-                  = link_to 'Teams verwalten', teams_path
-                %li
-                  = link_to 'User verwalten', users_path
-                %li.divider
 
-              %li.dropdown-header
+            .dropdown-menu{'aria-labealledby': 'navbarUserDropdown'}
+              - if current_user.admin?
+                %h6.dropdown-header
+                  Admin Einstellungen
+
+                = link_to administration_path,
+                  class: 'dropdown-item' do
+                  Admin Dashboard
+
+                = link_to teams_path,
+                  class: 'dropdown-item' do
+                  Teams verwalten
+
+                = link_to users_path,
+                  class: 'dropdown-item' do
+                  User verwalten
+
+                .dropdown-divider
+
+              %h6.dropdown-header
                 User Einstellungen
-              %li
-                = link_to 'Account bearbeiten', edit_user_registration_path
-              %li
-                = link_to 'Spieler bearbeiten',
-                  edit_player_path(current_user.player)
-              %li.divider
-              %li
-                = link_to destroy_user_session_path, method: :delete do
-                  = logout_icon
-                  Logout
+
+              = link_to edit_user_registration_path,
+                class: 'dropdown-item' do
+                Account bearbeiten
+
+              = link_to edit_player_path(current_user.player),
+                class: 'dropdown-item' do
+                Spieler bearbeiten
+
+              .dropdown-divider
+
+              = link_to destroy_user_session_path,
+                method: :delete,
+                class: 'dropdown-item' do
+                = logout_icon
+                Logout
 
         - else
-          %li
-            = link_to new_user_session_path do
+          %li.nav-item.dropdown
+            = link_to '#',
+              id: 'navbarLoginDropdown',
+              role: 'button',
+              'data-toggle': 'dropdown',
+              'aria-haspopup': true,
+              'aria-expanded': false,
+              class: 'nav-link dropdown-toggle' do
               = login_icon
               Login
 
-= render 'layouts/chat' if user_signed_in?
+            .dropdown-menu.dropdown-menu-right{'aria-labealledby': 'navbarLoginDropdown'}
+              = render 'devise/sessions/form'
+
+  = render 'layouts/chat' if user_signed_in?

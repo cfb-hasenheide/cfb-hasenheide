@@ -6,6 +6,9 @@ de:
       comment: Kommentar
       contact: Kontakt
       cup_match: Pokalspiel
+      event:
+        one: Event
+        other: Events
       goal:
         one: Tor
         other: Tore
@@ -16,7 +19,9 @@ de:
       member: Mitglied
       other: Sonstiges
       player: Spieler
-      report: Spielbericht
+      report:
+        one: Spielbericht
+        other: Spielberichte
       team:
         one: Mannschaft
         other: Mannschaften
