@@ -1,7 +1,6 @@
-.page-header
-  %h1
-    Event erstellen
-    %small= @event.model_name.human
+%h1
+  Event erstellen
+  %small= @event.model_name.human
 
 = render "events/#{@event.model_name.plural}/form",
          event: @event,

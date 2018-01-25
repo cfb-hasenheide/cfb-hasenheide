@@ -1,13 +1,12 @@
 #chatView
-  .page-header
-    %h1
-      Chat
-      %small
-        = link_to messages_path,
-          remote: true,
-          class: 'chatRefresh',
-          'data-disable-with' => "#{refreshing_icon}" do
-          = refresh_icon
+  %h1
+    Chat
+    %small
+      = link_to messages_path,
+        remote: true,
+        class: 'chatRefresh',
+        'data-disable-with' => "#{refreshing_icon}" do
+        = refresh_icon
 
   .panel.panel-default.chatMessagesContainer
     %ul.list-group.chatMessages

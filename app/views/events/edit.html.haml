@@ -1,8 +1,8 @@
-.page-header
-  %h1
-    Event bearbeiten
+%h1
+  Event bearbeiten
+  %small
+    = @event.name
     %small
-      = @event.name
-      %small= @event.model_name.human
+      = @event.model_name.human
 
 = render "events/#{@event.class.to_s.underscore.pluralize}/form", event: @event

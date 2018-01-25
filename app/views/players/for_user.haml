@@ -1,7 +1,7 @@
 = content_for :title, 'Spieler für User erstellen'
 
-.page-header
-  %h1= content_for :title
+%h1
+  = content_for :title
 
 = bootstrap_form_tag url: new_player_path,
   method: :get,

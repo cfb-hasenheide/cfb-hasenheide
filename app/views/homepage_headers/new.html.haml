@@ -1,12 +1,11 @@
 = content_for(:title, "#{HomepageHeader.model_name.human} erstellen")
 
-.page-header
-  %h1
-    = content_for(:title)
+%h1
+  = content_for(:title)
 
-    .pull-right
-      = link_to homepage_headers_path, class: 'default-button' do
-        = cancel_icon
-        %span.hidden-xs Abbrechen
+  .pull-right
+    = link_to homepage_headers_path, class: 'default-button' do
+      = cancel_icon
+      %span.hidden-xs Abbrechen
 
 = render 'form', homepage_header: @homepage_header

@@ -1,10 +1,9 @@
-.page-header
-  %h1
-    Forum
-    .pull-right
-      = link_to new_forum_thread_path, class: 'primary-button' do
-        = create_icon
-        Thema erstellen
+%h1
+  Forum
+  .pull-right
+    = link_to new_forum_thread_path, class: 'primary-button' do
+      = create_icon
+      Thema erstellen
 
 - for forum_thread in @forum_threads
   .panel.panel-primary

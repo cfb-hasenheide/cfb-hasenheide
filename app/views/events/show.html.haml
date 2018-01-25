@@ -2,15 +2,14 @@
 
 = render 'subnavigation', event: @event
 
-.page-header
-  %h1
-    = content_for(:title)
-    %small
-      = @event.model_name.human
-      = link_to event_path(@event, format: :ics),
-        class: 'default-button-xs' do
-        = download_icon
-        \.ics
+%h1
+  = content_for(:title)
+  %small
+    = @event.model_name.human
+    = link_to event_path(@event, format: :ics),
+      class: 'default-button-xs' do
+      = download_icon
+      \.ics
 
 = render 'basic_information', event: @event
 
