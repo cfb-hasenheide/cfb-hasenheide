@@ -8,50 +8,63 @@
         = t('helpers.submit.create', model: Team.model_name.human)
 
 .table-responsive
-  %table
+  %table.table
     %thead
       %tr
-        %th.col-md-3= Team.human_attribute_name(:name)
-        %th.col-md-4= Team.human_attribute_name(:description)
-        %th.col-md-1= Team.human_attribute_name(:club)
-        %th.col-md-1= Team.human_attribute_name(:player_pass_needed)
-        %th.col-md-1= Team.human_attribute_name(:current_season)
-        %th.col-md-1.text-right.text-muted Aktionen
+        %th
+          = Team.human_attribute_name(:name)
+
+        %th
+          = Team.human_attribute_name(:description)
+
+        %th
+          = Team.human_attribute_name(:club)
+
+        %th
+          = Team.human_attribute_name(:player_pass_needed)
+
+        %th
+          = Team.human_attribute_name(:current_season)
+
+        %th.text-right.text-muted
+          Aktionen
 
     %tbody
       - @teams.each do |team|
         %tr
-          %td.col-md-3= team.name
+          %td
+            = team.name
 
-          %td.col-md-4= team.description
+          %td
+            = team.description
 
-          %td.col-md-1
+          %td
             - if team.club?
               .label.label-success= t('simple_form.yes')
 
-          %td.col-md-1
+          %td
             - if team.club? && team.player_pass_needed?
               .label.label-success= t('simple_form.yes')
 
-          %td.col-md-1
+          %td
             = form_for team, remote: true do |f|
               = f.check_box :current_season, class: 'bootstrap-switch',
                 'data-size' => 'mini', 'data-on-color' => 'success',
                 'data-on-text' => 'Ja', 'data-off-text' => 'Nö',
                 onchange: '$(this.form).submit();'
 
-          %td.col-md-2
-            .btn-toolbar.pull-right
-              - if team.club?
-                = link_to team_players_path(team), class: 'default-button-xs' do
-                  = create_icon
-                  = user_icon
-              = link_to edit_team_path(team), class: 'default-button-xs' do
-                = edit_icon
-              = link_to team_path(team), method: :delete,
-                class: 'default-button-xs',
-                'data-confirm' => 'Team wirklich löschen?' do
-                %span.text-danger
-                  = delete_icon
+          %td.text-right{nowrap: ''}
+            - if team.club?
+              = link_to team_players_path(team), class: 'default-button-xs mr-2' do
+                = create_icon
+                = user_icon
+
+            = link_to edit_team_path(team), class: 'default-button-xs mr-2' do
+              = edit_icon
+
+            = link_to team_path(team), method: :delete,
+              class: 'default-button-xs',
+              'data-confirm' => 'Team wirklich löschen?' do
+              = delete_icon
 
 = render 'layouts/pagination', entries: @teams

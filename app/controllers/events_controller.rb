@@ -8,7 +8,9 @@ class EventsController < ApplicationController
   respond_to :html
 
   def index
-    @events = Event.order('datetime DESC').page(params[:page])
+    @events = Event.includes(:attendance_list, :report)
+                   .order('datetime DESC')
+                   .page(params[:page])
   end
 
   def show

@@ -40,12 +40,15 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'ckeditor'
 gem 'simple_form'
-gem 'bootstrap_form'
-gem 'nested_form'
+gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/rails-bootstrap-forms.git",
+    branch: "master"
 gem 'bootstrap-switch-rails'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
 gem 'chartkick'
+
+gem 'webpacker', '~> 3.0'
 
 # json
 gem 'jbuilder'

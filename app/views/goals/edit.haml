@@ -1,0 +1,13 @@
+= content_for(:title, "#{@event.name} #{Goal.model_name.human} #{t('edit').downcase}")
+
+.card
+  .card-header
+    = render 'events/header',
+      event: @event,
+      subtitle: "#{Goal.model_name.human} #{t('edit').downcase}"
+
+  .card-body
+    = render 'form',
+      event: @event,
+      goal: @goal,
+      players: @players

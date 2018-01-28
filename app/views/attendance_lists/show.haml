@@ -1,41 +1,79 @@
 = content_for(:title, "Meldeliste #{@event.name}")
 
-= render 'events/subnavigation', event: @event
+.card
+  .card-header
+    = render 'events/header_with_subnavigation',
+      event: @event,
+      subtitle: AttendanceList.model_name.human
 
-%h1
-  Meldeliste
-  %small= @event.name
+  .card-body
+    - if can?(:update, AttendanceList)
+      .mb-4
+        - if @attendance_list.open?
+          .btn-group.mr-3
+            = button_tag class: 'btn btn-secondary dropdown-toggle',
+              type: 'button',
+              id: 'closeAttendanceListDropdownMenuButton',
+              'data-toggle': 'dropdown',
+              'aria-haspopup': 'true',
+              'aria-expanded': false do
+              Meldeliste schließen
 
-= render 'events/basic_information', event: @event
+            .dropdown-menu{'aria-labelledby': 'closeAttendanceListDropdownMenuButton'}
+              = link_to close_attendance_list_path(@attendance_list),
+                method: :post,
+                class: 'dropdown-item' do
+                ohne E-Mail
 
-= render 'admin_bar', attendance_list: @attendance_list if admin?
+              .dropdown-divider
 
-= render 'progress_bar', attendance_list: @attendance_list
-
-.halfs
-  .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title Meldung abgeben
-
-      .panel-body
-        - if @attendance_list.open? && @current_user_attendance.blank?
-          %strong.text-muted Du kannst aktuell nicht melden!
-
-        - elsif @attendance_list.open?
-          = bootstrap_form_for @current_user_attendance do |f|
-            = f.select :status,
-              attendance_status_options,
-              {},
-              { onchange: 'this.form.submit();' }
+              = link_to close_mail_attendance_list_path(@attendance_list),
+                class: 'dropdown-item' do
+                = mail_icon
+                Final Call
 
         - else
-          %strong.text-muted Die Meldeliste ist geschlossen!
+          .btn-group.mr-3
+            = button_tag class: 'btn btn-secondary dropdown-toggle',
+              type: 'button',
+              id: 'openAttendanceListDropdownMenuButton',
+              'data-toggle': 'dropdown',
+              'aria-haspopup': 'true',
+              'aria-expanded': false do
+              Meldeliste öffnen
 
-  .half
-    .panel.panel-default
-      .panel-heading
-        %h2.panel-title Meldungen
+            .dropdown-menu{'aria-labelledby': 'closeAttendanceListDropdownMenuButton'}
+              = link_to open_attendance_list_path(@attendance_list),
+                method: :post,
+                class: 'dropdown-item' do
+                ohne E-Mail
 
-      = render 'attendances/attendances',
-        attendances: @attendance_list.attendances.includes(:player)
+              .dropdown-divider
+
+              = link_to open_mail_attendance_list_path(@attendance_list),
+                class: 'dropdown-item' do
+                = mail_icon
+                mit E-Mail
+
+        = link_to edit_multiple_attendance_list_attendances_path(@attendance_list),
+          class: 'card-link btn btn-secondary' do
+          = edit_icon
+          Meldeliste bearbeiten
+
+    = render 'progress_bar', attendance_list: @attendance_list
+
+    - if @attendance_list.open? && @current_user_attendance.blank?
+      %strong.text-muted Du kannst aktuell nicht melden!
+
+    - elsif @attendance_list.open?
+      = bootstrap_form_for @current_user_attendance do |f|
+        = f.select :status,
+          attendance_status_options,
+          {},
+          { onchange: 'this.form.submit();' }
+
+    - else
+      %strong.text-muted Die Meldeliste ist geschlossen!
+
+  = render 'attendances/attendances',
+    attendances: @attendance_list.attendances.includes(:player)

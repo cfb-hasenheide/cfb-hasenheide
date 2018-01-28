@@ -1,47 +1,55 @@
 = content_for(:title, @event.name)
 
-= render 'subnavigation', event: @event
+.card
+  .card-header
+    = render 'header_with_subnavigation',
+      event: @event,
+      subtitle: @event.model_name.human
 
-%h1
-  = content_for(:title)
-  %small
-    = @event.model_name.human
+  .card-body
+    - if @event.description?
+      %p.lead
+        = comment_icon
+        = @event.description
+
     = link_to event_path(@event, format: :ics),
-      class: 'default-button-xs' do
+      class: 'card-link btn btn-secondary' do
       = download_icon
       \.ics
 
-= render 'basic_information', event: @event
+    - if can? :update, Event
+      = link_to edit_polymorphic_path(@event),
+        class: 'card-link btn btn-secondary' do
+        = edit_icon
+        Event bearbeiten
 
-= render 'admin_bar', event: @event if admin?
+    - if can? :destroy, Event
+      = link_to event_path(@event),
+        method: :delete,
+        class: 'card-link btn btn-secondary',
+        data: { confirm: 'Event wirklich löschen?' } do
+        = delete_icon
+        Event Löschen
 
-- if @event.description?
-  %p.lead
-    = comment_icon
-    = @event.description
+    %hr
 
-.halfs
-  .half
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title Adresse
+    %h3
+      Adresse
 
-      .panel-body
-        %p
-          = address_icon
-          = @event.address
-        %p
-          = link_icon
-          = link_to 'in Google Maps öffnen',
-            @event.google_maps_url,
-            target: :blank
-        %p
-          = image_tag @event.google_static_maps_url,
-            class: 'img-responsive img-rounded'
+    %p
+      = address_icon
+      = @event.address
+    %p
+      = link_icon
+      = link_to 'in Google Maps öffnen',
+        @event.google_maps_url,
+        target: :blank
+    %p
+      = image_tag @event.google_static_maps_url,
+        class: 'card-img-top'
 
-  .half
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title Letzte Begegnungen
+    %hr
 
-      = render 'events/list_short', events: @previous_events
+    %h3.panel-title Letzte Begegnungen
+
+  = render 'events/list_short', events: @previous_events

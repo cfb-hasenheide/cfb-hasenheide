@@ -1,9 +1,10 @@
 = content_for(:title, "Meldeliste erstellen #{@event.name}")
 
-= render 'events/subnavigation', event: @event
+.card
+  .card-header
+    = render 'events/header_with_subnavigation',
+      event: @event,
+      subtitle: 'Meldeliste erstellen'
 
-%h1
-  Meldeliste erstellen
-  %small= @event.name
-
-= render 'form', attendance_list: @attendance_list
+  .card-body
+    = render 'form', attendance_list: @attendance_list

@@ -1,0 +1,109 @@
+%h3.card-title
+  Statistik
+
+%p.card-text
+  %table.table.table-sm
+    - if report.incident.present?
+      %tr
+        %th.text-right{scope: 'row'}
+          = t(:incident, scope: %w(activerecord attributes report))
+
+        %td
+          = t(report.incident, scope: %w(activerecord enums report incident))
+
+    %tr
+      %th.text-right{scope: 'row'}
+        Endstand
+
+      %td
+        = report.final_score
+        - if report.result.present?
+          = surround '(', ')' do
+            = t(report.result, scope: %w(activerecord enums report result))
+
+    %tr
+      %th.text-right{scope: 'row'}
+        Halbzeitstand
+
+      %td
+        = report.half_time_score
+
+    %tr
+      %th.text-right{scope: 'row'}
+        Ecken
+
+      %td
+        = corners(report)
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:possession, scope: %w(activerecord attributes report))
+
+      %td
+        = report.possession? ? report.possession.to_s + ' %' : ''
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:turf, scope: %w(activerecord attributes report))
+
+      %td
+        - if report.turf.present?
+          = t(report.turf, scope: %w(activerecord enums report turf))
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:weather, scope: %w(activerecord attributes report))
+
+      %td
+        - if report.weather.present?
+          = t(report.weather, scope: %w(activerecord enums report weather))
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:referee, scope: %w(activerecord attributes report))
+
+      %td
+        = report.referee? ? 'Ja' : 'Nein'
+
+    - if report.referee?
+      %tr
+        %th.text-right{scope: 'row'}
+          = t(:referee_name, scope: %w(activerecord attributes report))
+
+        %td
+          = report.referee_name
+
+      %tr
+        %th.text-right{scope: 'row'}
+          = t(:referee_description, scope: %w(activerecord attributes report))
+
+        %td
+          = report.referee_description
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:goalkeeper_id, scope: %w(activerecord attributes report))
+
+      %td
+        = Player.find(report.goalkeeper_id).nickname if report.goalkeeper_id?
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:captain_id, scope: %w(activerecord attributes report))
+
+      %td
+        = Player.find(report.captain_id).nickname if report.captain_id?
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:most_valuable_player_id, scope: %w(activerecord attributes report))
+
+      %td
+        = Player.find(report.most_valuable_player_id).nickname if report.most_valuable_player_id?
+
+    %tr
+      %th.text-right{scope: 'row'}
+        = t(:annotation, scope: %w(activerecord attributes report))
+
+      %td
+        = report.annotation

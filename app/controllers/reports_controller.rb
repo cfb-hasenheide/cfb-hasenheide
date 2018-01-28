@@ -22,6 +22,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @comments = @report.comments.includes(:user)
     @event = @report.event
     @attending_players =
       Player.where(id: @event.attendances.yes.pluck(:player_id)).order(:nickname)

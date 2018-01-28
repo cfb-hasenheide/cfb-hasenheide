@@ -1,6 +1,10 @@
-= content_for :title, 'Spielbericht bearbeiten'
+= content_for :title, "#{@event.name} #{t('edit_model_name', model_name: Report.model_name.human)}"
 
-%h1
-  = content_for :title
+.card
+  .card-header
+    = render 'events/header_with_subnavigation',
+      event: @event,
+      subtitle: t('edit_model_name', model_name: Report.model_name.human)
 
-= render 'form', event: @event, report: @report
+  .card-body
+    = render 'form', event: @event, report: @report

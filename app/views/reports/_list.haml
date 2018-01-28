@@ -1,44 +1,39 @@
-.text-center
-  %small.text-muted
-    = page_entries_info reports
-
-%ul.list-group
+%ul.list-group.list-group-flush
   - reports.each do |report|
-    = link_to report_path(report), class: 'list-group-item' do
-      - unless report.comments.count.zero?
-        %span.badge{'data-toggle' => 'tooltip', title: 'Stimmen zum Spiel'}
-          = report.comments.count
-          = comment_icon
+    = link_to report_path(report),
+      class: 'list-group-item list-group-item-action flex-column align-items-start' do
+      .d-flex.w-100.justify-content-between
+        %h5.mb-1
+          = report.event.name
 
-      %h4.list-group-item-heading
-        = report.event.name
+          %small.text-muted
+            = report.event.model_name.human
 
-        %small
-          = report.event.model_name.human
+        - unless report.comments.count.zero?
+          %small{'data-toggle' => 'tooltip', title: 'Stimmen zum Spiel'}
+            = report.comments.count
+            = comment_icon
 
-      %p.list-group-item-text
-        %ul.list-inline
+      %p.mb-1
+        %ul.list-unstyled
           %li
-            .label{class: "label-#{contextual_class_for_report(report)}"}
-              = report.final_score
-
-          %li
+            = date_icon
             = l(report.event.datetime, format: :date_only)
 
           %li
-            - if report.content?
-              Bericht von
+            = event_final_score_label(report.event)
 
-              %strong
-                - if report.reporter_id?
-                  = Player.find(report.reporter_id).nickname
+      %small
+        - if report.content?
+          Bericht von
 
-                - else
-                  ?
+          %strong
+            - if report.reporter_id?
+              = Player.find(report.reporter_id).nickname
 
             - else
-              %span.text-muted
-                Kein Bericht
+              ?
 
-.text-center
-  = paginate reports
+        - else
+          %span.text-muted
+            Kein Bericht

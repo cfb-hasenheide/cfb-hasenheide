@@ -1,28 +1,35 @@
 = content_for :title, 'Fehlende Spielberichte'
 
-= render 'subnavigation'
+.card
+  .card-header
+    %h1
+      = content_for :title
 
-%h1
-  = content_for :title
+    = render 'subnavigation'
 
-.table-responsive
-  %table.table.table-hover
-    %thead
-      %tr
-        %th.text-right Datum
-        %th Event
-        %th.text-right.text-muted Aktionen
+  .card-body.text-center
+    %small.text-muted
+      = page_entries_info @events_without_report
 
-    %tbody
-      - @events_without_report.each do |event|
+  .table-responsive
+    %table.table.table-hover
+      %thead
         %tr
-          %td.text-right.text-muted= l(event.datetime, format: :date_only)
-          %td= event.name
-          %td.text-right
-            - if can?(:create, Report)
-              = link_to new_event_report_path(event),
-                class: 'btn btn-primary btn-sm' do
-                = create_icon
-                Erstellen
+          %th.text-right Datum
+          %th Event
+          %th.text-right.text-muted Aktionen
 
-= render 'layouts/pagination', entries: @events_without_report
+      %tbody
+        - @events_without_report.each do |event|
+          %tr
+            %td.text-right.text-muted= l(event.datetime, format: :date_only)
+            %td= event.name
+            %td.text-right
+              - if can?(:create, Report)
+                = link_to new_event_report_path(event),
+                  class: 'btn btn-primary btn-sm' do
+                  = create_icon
+                  Erstellen
+
+  .card-body
+    = paginate @events_without_report

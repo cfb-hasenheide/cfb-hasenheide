@@ -1,0 +1,22 @@
+.input-group{'data-controller': 'number-input'}
+  .input-group-prepend
+    = button_tag type: 'button',
+      class: 'btn btn-outline-secondary',
+      'data-action': 'click->number-input#decrease' do
+      %small
+        %i.fa.fa-minus.fa-fw
+
+  = f.number_field method,
+    min: 0,
+    class: 'form-control text-center',
+    'data-target': 'number-input.input'
+
+  .input-group-append
+    = button_tag type: 'button',
+      class: 'btn btn-outline-secondary',
+      'data-action': 'click->number-input#increase' do
+      %small
+        %i.fa.fa-plus.fa-fw
+
+%small.form-text.text-center
+  = help_text

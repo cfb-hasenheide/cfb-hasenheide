@@ -1,13 +1,4 @@
 module ReportsHelper
-  def contextual_class_for_report(report)
-    case report.result
-    when 'won' then 'success'
-    when 'lost' then 'danger'
-    when 'drew' then 'warning'
-    else 'default'
-    end
-  end
-
   def corners(report)
     return unless report.corners_rival? || report.corners_club?
     corners = [report.corners_rival, report.corners_club]

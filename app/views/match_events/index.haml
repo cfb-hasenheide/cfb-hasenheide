@@ -1,17 +1,16 @@
 = content_for(:title, "Match Events #{@event.name}")
 
-= render 'events/subnavigation', event: @event
+.card
+  .card-header
+    = render 'events/header_with_subnavigation',
+      event: @event,
+      subtitle: 'Match Events'
 
-%h1
-  Match Events
-  %small= @event.name
+  .card-body
+    = link_to new_event_goal_path(@event),
+      class: 'card-link btn btn-secondary' do
+      = create_icon
+      = Goal.model_name.human
 
-= render 'events/basic_information', event: @event
-
-.panel.panel-default
-  %ul.list-group
+  %ul.list-group.list-group-flush
     = render @goals
-
-= link_to new_event_goal_path(@event), class: 'btn btn-secondary' do
-  = create_icon
-  = Goal.model_name.human

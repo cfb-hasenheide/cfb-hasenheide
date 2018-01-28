@@ -10,13 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require rails_bootstrap_forms
- *= require_self
  */
 
-$brand-primary: #335032
-$navbar-default-bg: $brand-primary
+// $brand-primary: #335032
+// $navbar-default-bg: $brand-primary
 $navbar-default-link-color: #fff
 // $navbar-default-link-color: #4F5D2F
 // $navbar-default-link-hover-color: #bbb
@@ -28,10 +25,11 @@ $navbar-default-toggle-hover-bg: $navbar-default-link-hover-color
 $link-color: #D5A021
 $link-hover-color: #D5A021
 $link-active-color: #D5A021
-
+$theme-colors: ( "primary": #335032 )
 body
   padding-bottom: 70px
 
+@import 'rails_bootstrap_forms'
 @import 'bootstrap'
 @import 'bootstrap3-switch'
 @import 'font-awesome-sprockets'
@@ -99,14 +97,14 @@ label.required:after
   width: 100%
   /* Set the fixed height of the footer here */
   height: 60px
-  background-color: $brand-primary
+  background-color: theme-color("primary")
 
 .footer p
   margin: 10px 0
 
 .footer a
   margin: 10px 0
-  color: $brand-primary
+  color: theme-color("primary")
   text-decoration: none
   &:hover
     color: $navbar-default-link-hover-color
@@ -132,9 +130,6 @@ blockquote
 
 tr.clickableTableRow
   cursor: pointer
-
-textarea
-  resize: vertical
 
 #chatModal .modal-body
   max-height: calc(100vh - 200px)

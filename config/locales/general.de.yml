@@ -1,0 +1,7 @@
+de:
+  cancel: Abbrechen
+  create: Erstellen
+  create_model_name: '%{model_name} erstellen'
+  delete: Löschen
+  edit: Bearbeiten
+  edit_model_name: '%{model_name} bearbeiten'

@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   resources :forum_threads
 
-  resources :goals, only: [:create]
+  resources :goals, only: [:create, :edit, :update, :destroy]
 
   resources :homepage_headers, except: :show do
     post :activate, on: :member

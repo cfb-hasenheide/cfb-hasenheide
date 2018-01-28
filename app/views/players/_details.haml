@@ -4,7 +4,7 @@
       = Player.model_name.human
 
   .panel-body
-    %dl.dl-horizontal
+    %dl
       %dt= Player.human_attribute_name(:status)
       %dd= t(player.status, scope: %w(activerecord enums player status))
 

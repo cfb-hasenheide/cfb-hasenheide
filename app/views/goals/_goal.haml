@@ -1,18 +1,25 @@
-%li.list-group-item
-  %span.badge
-    = succeed "'" do
-      = goal.minute
-      - if goal.extra_time?
-        \+
-        = goal.extra_time
+%li.list-group-item.flex-column.align-items-start
+  .d-flex.w-100.justify-content-between
+    %h5.mb-1
+      = goal_icon
 
-  %h4.list-group-item-heading
-    = goal_icon
-    = Goal.model_name.human
-    für
-    = goal.club? ? goal.event.club_team_name : goal.event.rival_team_name
+      = surround '(', ')' do
+        = goal.club_score
+        \:
+        = goal.rival_score
 
-  %p.list-group-item-text
+      = Goal.model_name.human
+      für
+      = goal.club? ? goal.event.club_team_name : goal.event.rival_team_name
+
+    %small
+      = succeed "'" do
+        = goal.minute
+        - if goal.extra_time?
+          \+
+          = goal.extra_time
+
+  %p.mb-1
     = goal.scorer&.nickname
 
     - if goal.provider_id?
@@ -20,10 +27,10 @@
         = goal.provider.nickname
 
   - if goal.comment?
-    %p.list-group-item-text
+    %p.mb-1
       = goal.comment
 
-  %p.list-group-item-text.text-muted
+  %small
     - if goal.updated_at > goal.created_at
       Editiert am
       = l goal.updated_at, format: :short
@@ -34,3 +41,8 @@
 
     von
     = goal.reporter.nickname
+
+    - if can? :update, Goal
+      = link_to edit_goal_path(goal) do
+        = edit_icon
+        bearbeiten

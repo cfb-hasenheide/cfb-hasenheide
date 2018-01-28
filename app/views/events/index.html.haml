@@ -1,28 +1,52 @@
-= content_for :title, 'Events'
+= content_for :title, Event.model_name.human(count: 2)
 
-.page-header
-  %h1
-    = content_for(:title)
-    - if admin?
-      .pull-right
-        .btn-group
-          %button.primary-button.dropdown-toggle{type: 'button',
-            'data-toggle' => 'dropdown', 'aria-haspopup' => 'true',
-            'aria-expanded' => 'false'}
+%h1
+  = content_for(:title)
+
+.card-deck
+  - if can? :create, Event
+    .card.mb-4.bg-light.text-center{style: 'min-width: 220px'}
+      .card-body
+
+      .card-footer
+        .dropup
+          = button_tag class: 'btn btn-primary dropdown-toggle',
+            type: 'button',
+            id: 'createEventDropdownButton',
+            'data-toggle': 'dropdown',
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false' do
             = create_icon
-            %span.hidden-xs Event erstellen
-            %span.caret
+            Event erstellen
 
-          %ul.dropdown-menu.pull-right
+          .dropdown-menu{'aria-labelledby': 'createEventDropdownButton'}
             - [LeagueMatch, CupMatch, Other].each do |event_class|
-              %li
-                = link_to event_class.model_name.human,
-                  new_event_path(type: event_class.name)
+              = link_to event_class.model_name.human,
+                new_event_path(type: event_class.name),
+                class: 'dropdown-item'
 
-- @events.in_groups_of(4) do |events|
-  .row
-    - events.compact.each do |event|
-      .col-xs-12.col-sm-6.col-md-4.col-lg-3
-        = render 'event', event: event
+              - unless event_class == Other
+                .dropdown-divider
+
+  - @events.each do |event|
+    .card.mb-4.text-center{style: 'min-width: 220px', class: ('border-dark' if event.future?)}
+      .card-header
+        = event.model_name.human
+
+      .card-body
+        %h5.card-title
+          = event.name
+
+        %ul.list-unstyled
+          %li
+            = date_icon
+            = l(event.datetime, format: :date_only)
+
+          %li
+            = time_icon
+            = l(event.datetime, format: :time_only)
+
+      .card-footer
+        = event_or_attendance_list_or_report_link(event)
 
 = render 'layouts/pagination', entries: @events

@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       flash.alert = @comment.errors.full_messages.to_sentence
     end
 
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
 
   def edit

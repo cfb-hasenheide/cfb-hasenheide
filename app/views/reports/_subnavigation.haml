@@ -1,9 +1,15 @@
-%ul.nav.nav-tabs.nav-justified
-  %li{role: 'presentation', class: ('active' if params[:action] == 'index')}
-    = link_to 'Spielberichte', reports_path
+%ul.nav.nav-tabs.card-header-tabs.flex-column.flex-md-row
+  %li.nav-item.flex-md-fill
+    = link_to Report.model_name.human(count: 2),
+      reports_path,
+      class: params[:action] == 'index' ? 'nav-link active' : 'nav-link'
 
-  %li{role: 'presentation', class: ('active' if params[:action] == 'no_content')}
-    = link_to 'Ohne Bericht', no_content_reports_path
+  %li.nav-item.flex-md-fill
+    = link_to 'Ohne Bericht',
+      no_content_reports_path,
+      class: params[:action] == 'no_content' ? 'nav-link active' : 'nav-link'
 
-  %li{role: 'presentation', class: ('active' if params[:action] == 'missing')}
-    = link_to 'Fehlende', missing_reports_path
+  %li.nav-item.flex-md-fill
+    = link_to 'Fehlende',
+      missing_reports_path,
+      class: params[:action] == 'missing' ? 'nav-link active' : 'nav-link'

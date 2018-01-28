@@ -1,15 +1,18 @@
-.list-group
+%ul.list-group.list-group-flush
   - if events.present?
     - events.each do |event|
       - if user_signed_in?
         = link_to event_or_attendance_list_or_report_path(event),
-          class: 'list-group-item' do
+          class: 'list-group-item list-group-item-action flex-column align-item-start' do
 
-          %h5.list-group-item-heading
-            = event.name
-            %small.pull-right= event.model_name.human
+          .d-flex.w-100.justify-content-between
+            %h5.mb-1
+              = event.name
 
-          %p.list-group-item-text
+            %small
+              = event.model_name.human
+
+          %p.mb-1
             = date_icon
             = l(event.datetime, format: :date_only)
 

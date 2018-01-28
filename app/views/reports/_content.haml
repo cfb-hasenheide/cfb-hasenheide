@@ -1,0 +1,27 @@
+%h3.card-title
+  Bericht
+
+%p.card-text
+  = report.content.html_safe.presence || 'Noch kein Bericht vorhanden'
+
+  %table.table.table-sm
+    %tr
+      %th{scope: 'row'}
+        Spieler
+
+      %td
+        = attending_players.pluck(:nickname).to_sentence
+
+    %tr
+      %th{scope: 'row'}
+        Zuschauer
+
+      %td
+        = watching_players.pluck(:nickname).to_sentence
+
+    %tr
+      %th{scope: 'row'}
+        = t(:reporter_id, scope: %w(activerecord attributes report))
+
+      %td
+        = Player.find(report.reporter_id).nickname if report.reporter_id?

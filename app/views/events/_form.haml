@@ -1,43 +1,37 @@
-.halfs
-  .half
-    = bootstrap_nested_form_for event,
-      as: :event,
-      layout: :horizontal,
-      label_col: 'col-sm-4',
-      control_col: 'col-sm-8' do |f|
+= bootstrap_form_for event, as: :event do |f|
+  = f.hidden_field :type
 
-      = f.hidden_field :type
+  = f.collection_select :club_team_id,
+    Team.club,
+    :id,
+    :name,
+    { prompt: true },
+    { required: true }
 
-      = f.collection_select :club_team_id,
-        Team.club,
-        :id,
-        :name,
-        { prompt: true },
-        { required: true }
+  = f.select :rival_team_id,
+    grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
+    { prompt: true },
+    { required: true }
 
-      = f.select :rival_team_id,
-        grouped_options_for_select(grouped_team_options, f.object.rival_team_id),
-        { prompt: true },
-        { required: true }
+  = f.form_group :home do
+    = f.radio_button :home, true, label: 'Heimspiel', inline: true
+    = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
 
-      = f.form_group :home do
-        = f.radio_button :home, true, label: 'Heimspiel', inline: true
-        = f.radio_button :home, false, label: 'Auswärtsspiel', inline: true
+  = f.datetime_select :datetime
 
-      = f.datetime_select :datetime
+  = f.text_field :address, icon: 'map-marker'
 
-      = f.text_field :address, icon: 'map-marker'
+  = f.text_area :description, icon: 'comment'
 
-      = f.text_area :description, icon: 'comment'
+  = f.form_group do
+    = f.check_box_without_bootstrap :public,
+      class: 'bootstrap-switch',
+      'data-on-color' => 'warning',
+      'data-on-text' => "#{public_icon} Öffentlich",
+      'data-off-color' => 'success',
+      'data-off-text' => "#{internal_icon} Intern"
 
-      = f.form_group do
-        = f.check_box_without_bootstrap :public,
-          class: 'bootstrap-switch',
-          'data-on-color' => 'warning',
-          'data-on-text' => "#{public_icon} Öffentlich",
-          'data-off-color' => 'success',
-          'data-off-text' => "#{internal_icon} Intern"
+  = f.form_group do
+    = f.submit class: 'primary-button'
 
-      = f.form_group do
-        = f.submit class: 'primary-button'
-        = link_to 'Abbrechen', events_path, class: 'default-button'
+    = link_to 'Abbrechen', events_path, class: 'default-button'

@@ -1,26 +1,26 @@
-.input-group
-  - if report.home?
-    %span.input-group-addon= report.club_team_name
+.row
+  - if f.object.home?
+    .col
+      = render 'layouts/de_and_increasable_number_field',
+        f: f,
+        method: :club_half_time_score,
+        help_text: f.object.club_team_name
 
-    = f.number_field_without_bootstrap :club_half_time_score, min: 0,
-      class: 'form-control'
-
-    %span.input-group-addon :
-
-    = f.number_field_without_bootstrap :rival_half_time_score, min: 0,
-      class: 'form-control'
-
-    %span.input-group-addon= report.rival_team_name
+    .col
+      = render 'layouts/de_and_increasable_number_field',
+        f: f,
+        method: :rival_half_time_score,
+        help_text: f.object.rival_team_name
 
   - else
-    %span.input-group-addon= report.rival_team_name
+    .col
+      = render 'layouts/de_and_increasable_number_field',
+        f: f,
+        method: :rival_half_time_score,
+        help_text: f.object.rival_team_name
 
-    = f.number_field_without_bootstrap :rival_half_time_score, min: 0,
-      class: 'form-control'
-
-    %span.input-group-addon :
-
-    = f.number_field_without_bootstrap :club_half_time_score, min: 0,
-      class: 'form-control'
-
-    %span.input-group-addon= report.club_team_name
+    .col
+      = render 'layouts/de_and_increasable_number_field',
+        f: f,
+        method: :club_half_time_score,
+        help_text: f.object.club_team_name

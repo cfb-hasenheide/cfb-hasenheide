@@ -1,0 +1,6 @@
+de:
+  goals:
+    create:
+      success: '%{model_name} erfolgreich erstellt.'
+    destroy:
+      success: '%{model_name} erfolgreich gelöscht.'

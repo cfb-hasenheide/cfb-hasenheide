@@ -1,8 +1,17 @@
 = content_for :title, 'Spielberichte'
 
-= render 'subnavigation'
+.card
+  .card-header
+    %h1
+      = content_for :title
 
-%h1
-  = content_for :title
+    = render 'subnavigation'
 
-= render 'list', reports: @reports
+  .card-body.text-center
+    %small.text-muted
+      = page_entries_info @reports
+
+  = render 'list', reports: @reports
+
+  .card-body
+    = paginate @reports

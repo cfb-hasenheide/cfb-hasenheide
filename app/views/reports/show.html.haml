@@ -1,15 +1,35 @@
-= content_for(:title, "Spielbericht #{@event.name}")
+= content_for(:title, "#{@event.name} #{Report.model_name.human}")
 
-= render 'events/subnavigation', event: @event
+.card
+  .card-header
+    = render 'events/header_with_subnavigation',
+      event: @event,
+      subtitle: Report.model_name.human
 
-%h1
-  Spielbericht
-  %small= @event.name
+  .card-body
+    - if can?(:update, Report)
+      = link_to edit_event_report_path(@event),
+        class: 'card-link btn btn-secondary mb-4' do
+        = edit_icon
+        = t('edit')
 
-= render 'events/basic_information', event: @event
+    .row
+      .col-lg-4
+        = render 'statistics', report: @report
 
-= render 'report',
-  event: @event,
-  report: @report,
-  attending_players: @attending_players,
-  watching_players: @watching_players
+      .col-lg-8
+        = render 'content',
+          report: @report,
+          attending_players: @attending_players,
+          watching_players: @watching_players
+
+    %h3.card-title
+      Stimmen zum Spiel
+      .badge.badge-pill.badge-dark
+        = @report.comments.count
+
+  = render 'comments/comments', comments: @comments
+
+  - if can?(:create, Comment)
+    .card-footer
+      = render 'comments/form', comment: @comments.new

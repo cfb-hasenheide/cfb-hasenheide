@@ -1,18 +1,110 @@
-= bootstrap_form_for goal do |f|
-  = f.hidden_field :event_id, value: event.id
-  = f.hidden_field :reporter_id, value: current_user.player.id
+%ul.nav.nav-tabs.nav-fill.mb-4
+  %li.nav-item
+    = link_to "#clubGoal",
+      class: 'nav-link active text-success',
+      id: 'club-goal-tab',
+      'data-toggle': 'tab',
+      role: 'tab',
+      'aria-controls': 'club-goal',
+      'aria-selected': true do
+      = goal_icon
+      = Goal.model_name.human
+      = event.club_team.name
 
-  = f.number_field :minute, min: 0, max: 120
-  = f.number_field :extra_time, min: 1, max: 10
+  %li.nav-item
+    = link_to '#rivalGoal',
+      class: 'nav-link text-danger',
+      id: 'rival-goal-tab',
+      'data-toggle': 'tab',
+      role: 'tab',
+      'aria-controls': 'rival-goal',
+      'aria-selected': false do
+      = goal_icon
+      = Goal.model_name.human
+      = event.rival_team.name
 
-  = f.number_field :club_score, min: 0, max: 99
-  = f.number_field :rival_score, min: 0, max: 99
+.tab-content
+  .tab-pane.fade.show.active#clubGoal{role: 'tabpanel', 'aria-labelledby': 'club-goal-tab'}
+    = bootstrap_form_for goal do |f|
+      = f.hidden_field :event_id, value: event.id
+      = f.hidden_field :reporter_id, value: current_user.player.id
+      = f.hidden_field :club, value: true
 
-  = f.check_box :club, checked: true
+      .row
+        .col
+          = f.number_field :minute, min: 0, max: 120
 
-  = f.collection_select :scorer_id, players, :id, :nickname, include_blank: true
-  = f.collection_select :provider_id, players, :id, :nickname, include_blank: true
+        .col
+          = f.number_field :extra_time, min: 1, max: 10
 
-  = f.text_area :comment
+      .row
+        .col
+          = f.number_field :club_score, min: 0, max: 99
 
-  = f.submit
+        .col
+          = f.number_field :rival_score, min: 0, max: 99
+
+      .row
+        .col
+          = f.collection_select :scorer_id,
+            players,
+            :id,
+            :nickname,
+            include_blank: true
+
+        .col
+          = f.collection_select :provider_id,
+            players,
+            :id,
+            :nickname,
+            include_blank: true
+
+      = f.text_area :comment
+
+      = f.submit class: 'primary-button mb-1'
+
+      = link_to t('cancel'),
+        event_match_events_path(event),
+        class: 'default-button mb-1'
+
+      - if goal.persisted?
+        = link_to goal_path(goal),
+          method: :delete,
+          class: 'default-button mb-1' do
+          = delete_icon
+          = t('delete')
+
+  .tab-pane.fade#rivalGoal{role: 'tabpanel', 'aria-labelledby': 'rival-goal-tab'}
+    = bootstrap_form_for goal do |f|
+      = f.hidden_field :event_id, value: event.id
+      = f.hidden_field :reporter_id, value: current_user.player.id
+      = f.hidden_field :club, value: false
+
+      .row
+        .col
+          = f.number_field :minute, min: 0, max: 120
+
+        .col
+          = f.number_field :extra_time, min: 1, max: 10
+
+      .row
+        .col
+          = f.number_field :club_score, min: 0, max: 99
+
+        .col
+          = f.number_field :rival_score, min: 0, max: 99
+
+      = f.text_area :comment
+
+      = f.submit class: 'primary-button mb-1'
+
+      = link_to t('cancel'),
+        event_match_events_path(event),
+        class: 'default-button mb-1'
+
+      - if goal.persisted?
+        = link_to goal_path(goal),
+          method: :delete,
+          class: 'default-button mb-1' do
+          = delete_icon
+          = t('delete')

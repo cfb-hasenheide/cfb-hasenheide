@@ -1,102 +1,151 @@
-= bootstrap_form_for report,
-  layout: :horizontal,
-  label_col: 'col-md-2',
-  control_col: 'col-md-5' do |f|
-
+= form_with model: report do |f|
   = f.hidden_field :event_id
 
-  = f.fields_for event do |e|
-    .form-group
-      = e.label report.event.model_name.human, nil, class: 'col-md-2 control-label'
-      .col-md-5
-        %p.form-control-static
-          = report.event_name
-
-    .form-group
-      = e.label :datetime, nil, class: 'col-md-2 control-label'
-      .col-md-5
-        %p.form-control-static
-          = l(report.event_datetime)
-
-    .form-group
-      = e.label :address, nil, class: 'col-md-2 control-label'
-      .col-md-5
-        %p.form-control-static
-          = report.event_address
-
-  %hr
-
   - unless report.event.type == 'Other'
-    .form-group
-      = label_tag 'Endstand', nil, class: 'col-md-2 control-label'
-      .col-md-5
-        = render 'form_final_score', f: f, report: report
+    %fieldset.border-bottom.mb-4
+      .form-group.row
+        = label_tag 'Endstand', nil, class: 'col-sm-4 col-form-label'
 
-    .form-group
-      = label_tag 'Halbzeitstand', nil, class: 'col-md-2 control-label'
-      .col-md-5
-        = render 'form_half_time_score', f: f, report: report
+        .col-sm-8
+          = render 'form_final_score', f: f
 
-    .form-group
-      = label_tag 'Ecken', nil, class: 'col-md-2 control-label'
-      .col-md-5
-        = render 'form_corners', f: f, report: report
+      .form-group.row
+        = label_tag 'Halbzeitstand', nil, class: 'col-sm-4 control-label'
 
-    = f.number_field :possession, min: 0, max: 100, append: '%'
+        .col-sm-8
+          = render 'form_half_time_score', f: f
 
-    = f.select :incident, options_for_select(incident_options),
-      include_blank: true
+      .form-group.row
+        = label_tag 'Ecken', nil, class: 'col-sm-4 control-label'
 
-    %hr
+        .col-sm-8
+          = render 'form_corners', f: f
 
-  = f.select :turf, options_for_select(turf_options), prompt: true
+      .form-group.row
+        = f.label :possession, class: 'col-sm-4 control-label'
 
-  = f.select :weather, options_for_select(weather_options), prompt: true
+        .col-sm-8
+          = render 'layouts/de_and_increasable_number_field',
+            f: f,
+            method: :possession,
+            help_text: f.object.club_team_name
 
-  = f.form_group do
-    = f.check_box :referee,
-      'data-toggle' => 'collapse',
-      'data-target' => '#refereeForm'
+      .form-group.row
+        = f.label :incident, class: 'col-sm-4 control-label'
 
-  .collapse#refereeForm{class: ('in' if report.referee?)}
-    = f.text_field :referee_name
+        .col-sm-8
+          = f.select :incident,
+            options_for_select(incident_options),
+            { include_blank: true },
+            class: 'form-control'
 
-    = f.text_field :referee_description
+  %fieldset.border-bottom.mb-4
+    .form-group.row
+      = f.label :turf, class: 'col-sm-4 control-label'
 
-  %hr
+      .col-sm-8
+        = f.select :turf,
+          options_for_select(turf_options),
+          { prompt: true },
+          class: 'form-control'
 
-  = f.collection_select :goalkeeper_id,
-    report.event.attending_players,
-    :id,
-    :nickname,
-    prompt: true
+    .form-group.row
+      = f.label :weather, class: 'col-sm-4 control-label'
 
-  = f.collection_select :captain_id,
-    report.event.attending_players,
-    :id,
-    :nickname,
-    prompt: true
+      .col-sm-8
+        = f.select :weather,
+          options_for_select(weather_options),
+          { prompt: true },
+          class: 'form-control'
 
-  = f.collection_select :most_valuable_player_id,
-    report.event.attending_players,
-    :id,
-    :nickname,
-    prompt: true
+  %fieldset.border-bottom.mb-4
+    .form-group.row
+      .col-sm-4
 
-  = f.text_area :annotation
+      .col-sm-8
+        .form-check
+          = f.check_box :referee,
+            'data-toggle' => 'collapse',
+            'data-target' => '#refereeForm',
+            class: 'form-check-input'
 
-  %hr
+          = f.label :referee, class: 'form-check-label'
 
-  = f.text_area :content, rows: 10, control_col: 'col-md-10'
+    .collapse#refereeForm{class: ('show' if report.referee?)}
+      .form-group.row
+        = f.label :referee_name, class: 'col-sm-4 control-label'
 
-  = f.collection_select :reporter_id,
-    Player.all.order(:nickname),
-    :id,
-    :nickname,
-    prompt: true
+        .col-sm-8
+          = f.text_field :referee_name, class: 'form-control'
 
-  %hr
+      .form-group.row
+        = f.label :referee_description, class: 'col-sm-4 control-label'
 
-  = f.form_group do
-    = f.submit class: 'btn btn-primary'
-    = link_to 'Abbrechen', :back, class: 'btn btn-secondary'
+        .col-sm-8
+          = f.text_field :referee_description, class: 'form-control'
+
+  %fieldset.border-bottom.mb-4
+    .form-group.row
+      = f.label :goalkeeper_id, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.collection_select :goalkeeper_id,
+          report.event.attending_players,
+          :id,
+          :nickname,
+          { prompt: true },
+          class: 'form-control'
+
+    .form-group.row
+      = f.label :captain_id, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.collection_select :captain_id,
+          report.event.attending_players,
+          :id,
+          :nickname,
+          { prompt: true },
+          class: 'form-control'
+
+    .form-group.row
+      = f.label :most_valuable_player_id, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.collection_select :most_valuable_player_id,
+          report.event.attending_players,
+          :id,
+          :nickname,
+          { prompt: true },
+          class: 'form-control'
+
+    .form-group.row
+      = f.label :annotation, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.text_area :annotation, class: 'form-control'
+
+  %fieldset.border-bottom.mb-4
+    .form-group.row
+      = f.label :content, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.text_area :content, rows: 10, class: 'form-control'
+
+    .form-group.row
+      = f.label :reporter_id, class: 'col-sm-4 control-label'
+
+      .col-sm-8
+        = f.collection_select :reporter_id,
+          Player.all.order(:nickname),
+          :id,
+          :nickname,
+          { prompt: true },
+          class: 'form-control'
+
+  .form-group.row
+    .col-sm-4
+
+    .col-sm-8
+      = f.submit class: 'btn btn-primary'
+
+      = link_to 'Abbrechen', :back, class: 'btn btn-secondary float-right'

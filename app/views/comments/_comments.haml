@@ -1,4 +1,4 @@
-%ul.list-group
+%ul.list-group.list-group-flush
   - if comments.empty?
     %li.list-group-item.text-muted
       Keine vorhanden
@@ -6,28 +6,25 @@
   - else
     - comments.each do |comment|
       %li.list-group-item
-        .media
-          .media-left
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1
             = image_tag comment.user.player.avatar_url(:small_thumb),
               width: '30',
               height: '30',
               alt: comment.user.player.nickname,
               class: 'img-circle'
 
-          .media-body
-            %strong.text-muted
-              = comment.user.player.nickname
-              - if can?(:update, comment) || can?(:destroy, comment)
-                = link_to edit_comment_path(comment),
-                  class: 'btn btn-secondary btn-sm' do
-                  %span.text-warning
-                    = edit_icon
-                    %span.hidden-xs bearbeiten
+            = comment.user.player.nickname
 
-            %small.pull-right.text-muted
-              = 'bearbeitet |' if comment.edited?
-              = l(comment.updated_at, format: :short)
+          %small
+            = 'bearbeitet |' if comment.edited?
+            = l(comment.updated_at, format: :short)
 
-            %br
+        .mb-1
+          = comment.content
 
-            = comment.content
+        - if can?(:update, comment) || can?(:destroy, comment)
+          %small
+            = link_to edit_comment_path(comment) do
+              = edit_icon
+              = t('edit')

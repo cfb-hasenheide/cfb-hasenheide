@@ -1,36 +1,36 @@
-%ul.nav.nav-tabs.nav-justified
-  %li{role: 'presentation',
-      class: ('active' if params[:controller] == 'events')}
+%ul.nav.nav-tabs.card-header-tabs.flex-column.flex-md-row
+  %li.nav-item.flex-md-fill
+    = link_to Event.model_name.human,
+      event_path(event),
+      class: params[:controller] == 'events' ? 'nav-link active' : 'nav-link'
 
-    = link_to event.name, event_path(event)
-
-  - if event.attendance_list.present?
-    %li{role: 'presentation',
-        class: ('active' if params[:controller] == 'attendance_lists')}
-
-      = link_to 'Meldeliste', event_attendance_list_path(event)
+  - if event.attendance_list&.persisted?
+    %li.nav-item.flex-md-fill
+      = link_to AttendanceList.model_name.human,
+        event_attendance_list_path(event),
+        class: params[:controller] == 'attendance_lists' ? 'nav-link active' : 'nav-link'
 
   - elsif can?(:create, AttendanceList)
-    %li{role: 'presentation',
-        class: ('active' if params[:controller] == 'attendance_lists')}
-
-      = link_to 'Meldeliste erstellen',
-                new_event_attendance_list_path(event)
+    %li.nav-item.flex-md-fill
+      = link_to new_event_attendance_list_path(event),
+        class: params[:controller] == 'attendance_lists' ? 'nav-link active' : 'nav-link' do
+        = create_icon
+        = t('create_model_name', model_name: AttendanceList.model_name.human)
 
   - if event.report.present?
-    %li{role: 'presentation',
-        class: ('active' if params[:controller] == 'reports')}
-
-      = link_to 'Spielbericht', event_report_path(event)
+    %li.nav-item.flex-md-fill
+      = link_to Report.model_name.human,
+        event_report_path(event),
+        class: params[:controller] == 'reports' ? 'nav-link active' : 'nav-link'
 
   - elsif can?(:create, Report)
-    %li{role: 'presentation',
-        class: ('active' if params[:controller] == 'reports')}
+    %li.nav-item.flex-md-fill
+      = link_to new_event_report_path(event),
+        class: params[:controller] == 'reports' ? 'nav-link active' : 'nav-link' do
+        = create_icon
+        = t('create_model_name', model_name: Report.model_name.human)
 
-      = link_to 'Spielbericht erstellen',
-                new_event_report_path(event)
-
-  %li{role: 'presentation',
-      class: ('active' if params[:controller] == 'match_events')}
-
-    = link_to 'Match Events', event_match_events_path(event)
+  %li.nav-item.flex-md-fill
+    = link_to 'Match Events',
+      event_match_events_path(event),
+      class: params[:controller] == 'match_events' ? 'nav-link active' : 'nav-link'
