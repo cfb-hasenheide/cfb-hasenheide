@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   let(:event) { create :event }
   let(:event_attr) { attributes_for :event }
+  let(:public_event) { true }
 
   let(:valid_attributes) do
     event_attr[:club_team_id] = create(:team, :club).id
     event_attr[:rival_team_id] = create(:team, :rival).id
+    event_attr[:public] = public_event
     event_attr
   end
 
@@ -65,6 +67,11 @@ RSpec.describe EventsController, type: :controller do
         expect do
           post :create, params: { event: valid_attributes }
         end.to change { Event.count }.from(0).to(1)
+      end
+
+      it 'sets the event to given public value' do
+        post :create, params: { event: valid_attributes }
+        expect(Event.first.public).to eq public_event
       end
 
       it 'redirects to the created event' do
