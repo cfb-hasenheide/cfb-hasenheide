@@ -67,6 +67,7 @@ class EventsController < ApplicationController
       :home,
       :name,
       :type,
+      :public,
       attendance_list_attributes: [:id, :minimum, :maximum]
     )
   end
