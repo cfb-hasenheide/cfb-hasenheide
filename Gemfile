@@ -10,7 +10,7 @@ gem 'responders'
 gem 'puma'
 
 # db
-gem 'pg'
+gem 'pg', '~> 0.2'
 gem 'redis'
 
 # slugs
