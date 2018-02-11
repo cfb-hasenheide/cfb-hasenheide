@@ -6,6 +6,7 @@ class Player < ApplicationRecord
   belongs_to :member
   has_one :address, through: :member
   has_one :contact, through: :member
+  has_one_attached :portrait
 
   has_many :attendances, dependent: :destroy
   has_and_belongs_to_many :teams

@@ -1,0 +1,45 @@
+.card
+  .card-body
+    %h5.card-title
+      = Member.model_name.human
+
+    %h6.card-subtitle.mb-2.text-muted
+      = member.full_name
+
+    %p.card-text
+      = render member
+
+    - if can? :update, member
+      = link_to edit_member_path(member), class: 'card-link' do
+        = edit_icon
+        = t('edit_model_name', model_name: Member.model_name.human)
+
+  .card-body
+    %h5.card-title
+      = Contact.model_name.human
+
+    %p.card-text
+      = render member.contact
+
+    - if can? :update, member.contact
+      = link_to edit_contact_path(member.contact), class: 'card-link' do
+        = edit_icon
+        = t('edit_model_name', model_name: Contact.model_name.human)
+
+  .card-body
+    %h5.card-title
+      = Address.model_name.human
+
+    %p.card-text
+      - if member.address.present?
+        = render member.address
+
+      - elsif can? :create, Address
+        = link_to new_member_address_path(member), class: 'card-link' do
+          = create_icon
+          = t('create_model_name', model_name: Address.model_name.human)
+
+    - if member.address && can?(:update, member.address)
+      = link_to edit_address_path(member.address), class: 'card-link' do
+        = edit_icon
+        = t('edit_model_name', model_name: Address.model_name.human)

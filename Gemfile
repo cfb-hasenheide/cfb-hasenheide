@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # rails
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.2.beta'
 gem 'responders'
 
 # app server
@@ -30,6 +30,7 @@ gem 'access-granted'
 gem 'fog-aws', github: 'fog/fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
+gem 'aws-sdk-s3', require: false
 
 # assets
 gem 'sass-rails'
@@ -65,7 +66,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano3-puma', require: false
-  gem 'bullet'
+  # gem 'bullet'
   gem 'guard-rspec', require: false
   gem 'listen'
   gem 'rails_best_practices', require: false

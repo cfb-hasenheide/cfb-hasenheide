@@ -17,10 +17,6 @@ class User < ApplicationRecord
 
   delegate :player, to: :member
 
-  def self.without_player
-    User.where.not(id: Player.pluck(:user_id))
-  end
-
   # NOTE: Workaround to migrate users from legacy app
   # https://vesselinv.com/rails-devise-user-migration-legacy-apps/
   def self.legacy_password(password)

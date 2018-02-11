@@ -93,6 +93,7 @@ de:
         nickname: Spitzname
         player_pass: Spielerpass
         player_pass_number: Spielerpass-Nummmer
+        portrait: Spielerbild
       report:
         annotation: Anmerkungen
         captain_id: Kapitän

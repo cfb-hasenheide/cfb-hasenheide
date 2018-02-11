@@ -4,11 +4,13 @@ class Member < ApplicationRecord
   has_one :player, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
 
-  after_create :create_contact, :create_default_player
+  after_create :create_contact
 
-  private
+  def self.without_player
+    where.not(id: Player.pluck(:member_id))
+  end
 
-  def create_default_player
-    self.create_player(nickname: user.username)
+  def full_name
+    "#{firstname} #{lastname}".presence || user.username
   end
 end

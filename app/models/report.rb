@@ -5,14 +5,14 @@ class Report < ApplicationRecord
   validates :event_id, presence: true, uniqueness: true
   validates :club_final_score,
             numericality: { greater_than_or_equal_to: :club_half_time_score },
-            if: 'club_half_time_score.present?'
+            if: Proc.new { |report| report.club_half_time_score.present? }
   validates :rival_final_score,
             numericality: { greater_than_or_equal_to: :rival_half_time_score },
-            if: 'rival_half_time_score.present?'
+            if: Proc.new { |report| report.rival_half_time_score.present? }
   validates :possession,
             numericality: { greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100 },
-            if: 'possession.present?'
+            if: Proc.new { |report| report.possession.present? }
 
   enum incident: { armchair_decision: 0,
                    called_off_club: 1,

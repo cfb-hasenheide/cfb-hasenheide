@@ -1,0 +1,54 @@
+%dl.row
+  %dt.col-sm-6
+    = Member.human_attribute_name(:firstname)
+
+  %dd.col-sm-6
+    = member.firstname
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:lastname)
+
+  %dd.col-sm-6
+    = member.lastname
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:date_of_birth)
+
+  %dd.col-sm-6
+    = l(member.date_of_birth) if member && member.date_of_birth?
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:place_of_birth)
+
+  %dd.col-sm-6
+    = member.place_of_birth
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:identifier)
+
+  %dd.col-sm-6
+    = member.identifier
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:member_since)
+
+  %dd.col-sm-6
+    = l(member.member_since) if member && member.member_since?
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:member_until)
+
+  %dd.col-sm-6
+    = l(member.member_until) if member && member.member_until?
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:player_ideal)
+
+  %dd.col-sm-6
+    = member.player_ideal
+
+  %dt.col-sm-6
+    = Member.human_attribute_name(:personal_moment)
+
+  %dd.col-sm-6
+    = member.personal_moment

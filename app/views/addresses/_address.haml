@@ -1,0 +1,18 @@
+%dl.row
+  %dt.col-sm-6
+    = Address.human_attribute_name(:street)
+
+  %dd.col-sm-6
+    = address.street
+
+  %dt.col-sm-6
+    = Address.human_attribute_name(:zipcode)
+
+  %dd.col-sm-6
+    = address.zipcode
+
+  %dt.col-sm-6
+    = Address.human_attribute_name(:city)
+
+  %dd.col-sm-6
+    = address.city

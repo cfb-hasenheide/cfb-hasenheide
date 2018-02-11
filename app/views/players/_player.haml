@@ -1,16 +1,59 @@
-.thumbnail
-  = image_tag player.avatar_url(:thumb)
-  .caption
-    %h3
+.card
+  .card-body
+    %h5.card-title
+      = Player.model_name.human
+
+    %h6.card-subtitle.mb-2.text-muted
       = player.nickname
-      .pull-right.text-muted
-        = player.jersey_name unless player.jersey_name == player.nickname
-        = player.jersey_number
 
-    %p.text-center
-      = t(player.status, scope: %w(activerecord enums player status))
-      = '| Spielerpass' if player.player_pass?
+    %p.card-text
+      .row
+        .col
+          - if player.portrait.attached?
+            = image_tag player.portrait,
+              class: 'img-fluid',
+              alt: player.nickname
 
-    %p.text-center
-      = link_to player_path(player), class: 'default-button' do
-        Profil
+        .col
+          %dl.row
+            %dt.col-sm-6
+              = Player.human_attribute_name(:jersey_name)
+
+            %dd.col-sm-6
+              = player.jersey_name
+
+            %dt.col-sm-6
+              = Player.human_attribute_name(:jersey_number)
+
+            %dd.col-sm-6
+              = player.jersey_number
+
+            %dt.col-sm-6
+              = Player.human_attribute_name(:status)
+
+            %dd.col-sm-6
+              = t(player.status, scope: %w(activerecord enums player status))
+
+            %dt.col-sm-6
+              = Player.human_attribute_name(:player_pass)
+
+            %dd.col-sm-6
+              = player.player_pass? ? 'Ja' : 'Nein'
+
+            - if player.player_pass?
+              %dt.col-sm-6
+                = Player.human_attribute_name(:player_pass_number)
+
+              %dd.col-sm-6
+                = player.player_pass_number
+
+              %dt.col-sm-6
+                = Player.human_attribute_name(:eligible_to_play_since)
+
+              %dd.col-sm-6
+                = l(player.eligible_to_play_since) if player.eligible_to_play_since?
+
+    - if can? :update, player
+      = link_to edit_player_path(player), class: 'card-link' do
+        = edit_icon
+        Spielerdaten bearbeiten

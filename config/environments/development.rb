@@ -65,10 +65,13 @@ Rails.application.configure do
   config.action_cable.url = 'ws://localhost:3000/cable'
 
   config.after_initialize do
-    Bullet.enable        = true
-    Bullet.bullet_logger = true
-    Bullet.console       = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer    = true
+    # Bullet.enable        = true
+    # Bullet.bullet_logger = true
+    # Bullet.console       = true
+    # Bullet.rails_logger  = true
+    # Bullet.add_footer    = true
   end
+  #
+  # Store files locally.
+  config.active_storage.service = :local
 end

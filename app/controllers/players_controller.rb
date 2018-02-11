@@ -6,19 +6,15 @@ class PlayersController < ApplicationController
                      .page(params[:page])
   end
 
-  def show
-  end
+  def show; end
 
-  def for_user
-  end
+  def for_member; end
 
   def new
-    member_id = Member.find_by(user_id: params[:user_id]).id
-    @player = Player.new(member_id: member_id)
+    @player = Player.new(member_id: params[:member_id])
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @player = Player.create(player_params)
@@ -38,9 +34,11 @@ class PlayersController < ApplicationController
                                    :eligible_to_play_since,
                                    :jersey_name,
                                    :jersey_number,
+                                   :member_id,
                                    :nickname,
                                    :player_pass,
                                    :player_pass_number,
+                                   :portrait,
                                    :remove_avatar,
                                    :status)
   end

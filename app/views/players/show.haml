@@ -1,46 +1,11 @@
-= content_for :title, @player.nickname
+= content_for :title, "#{Player.model_name.human} #{@player.nickname}"
 
 %h1
-  Spieler
-  %small= @player.nickname
-  .pull-right
-    = link_to players_path, class: 'default-button' do
-      = list_icon
-      %span.hidden-xs Alle Spieler
+  = Player.model_name.human
 
-- if admin? || current_user == @player.member.user
-  .well.well-sm
-    = link_to edit_member_path(@player.member), class: 'default-button' do
-      = edit_icon
-      Person bearbeiten
+  %small.text-muted
+    = @player.nickname
 
-    = link_to edit_player_path(@player), class: 'default-button' do
-      = edit_icon
-      Spielerdaten bearbeiten
+= render @player
 
-    - if @player.address
-      = link_to edit_address_path(@player.address), class: 'default-button' do
-        = edit_icon
-        Addresse ändern
-
-    = link_to edit_contact_path(@player.contact), class: 'default-button' do
-      = edit_icon
-      Kontaktdaten bearbeiten
-
-    - unless @player.address
-      = link_to new_member_address_path(@player.member), class: 'pull-right primary-button' do
-        = create_icon
-        Addresse hinzufügen
-
-.halfs
-  .half
-    = render 'members/details', member: @player.member
-  .half
-    = render 'details', player: @player
-
-.halfs
-  - if @player.address && (current_user == @player.member.user || admin?)
-    .half
-      = render 'addresses/details', address: @player.address
-  .half
-    = render 'contacts/details', contact: @player.contact
+= render 'members/card', member: @player.member

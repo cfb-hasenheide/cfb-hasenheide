@@ -1,11 +1,16 @@
 = bootstrap_form_for player,
   layout: :horizontal,
-  label_col: 'col-md-2',
-  control_col: 'col-md-4' do |f|
+  label_col: 'col-md-4',
+  control_col: 'col-md-8' do |f|
+
+  = f.hidden_field :member_id, value: f.object.member_id
 
   = f.select :status, player_status_options, prompt: true
-  = f.number_field :jersey_number, min: 0, max: 99
+
+  = f.select :jersey_number, (1..99).to_a, prompt: true
+
   = f.text_field :jersey_name
+
   = f.text_field :nickname
 
   = f.form_group do
@@ -13,13 +18,20 @@
       'data-toggle' => 'collapse',
       'data-target' => '#playerPassForm'
 
-  .collapse#playerPassForm{class: ('in' if player.player_pass?)}
+  .collapse#playerPassForm{class: ('show' if player.player_pass?)}
     = f.text_field :player_pass_number
 
     = f.date_select :eligible_to_play_since,
       start_year: Date.today.year,
       end_year: Date.today.year - 10,
       prompt: true
+
+  %hr
+
+  = f.static_control :portrait do
+    = image_tag player.portrait, class: 'w-25' if player.portrait.attached?
+
+  = f.file_field :portrait, label: t('edit')
 
   %hr
 
@@ -37,4 +49,3 @@
 
   = f.form_group do
     = f.primary
-    = link_to t('links.cancel'), player_path(player), class: 'default-button'
