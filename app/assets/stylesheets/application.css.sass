@@ -27,14 +27,14 @@ $link-hover-color: #D5A021
 $link-active-color: #D5A021
 $theme-colors: ( "primary": #335032 )
 body
-  padding-bottom: 70px
+  padding-top: 4.5rem
+  padding-bottom: 2.5rem
 
 @import 'rails_bootstrap_forms'
 @import 'bootstrap'
 @import 'bootstrap3-switch'
 @import 'font-awesome-sprockets'
 @import 'font-awesome'
-
 .halfs
   @extend .row
   .half
@@ -130,11 +130,3 @@ blockquote
 
 tr.clickableTableRow
   cursor: pointer
-
-#chatModal .modal-body
-  max-height: calc(100vh - 200px)
-  overflow-y: auto
-
-#chatView .chatMessages
-  max-height: calc(100vh - 415px)
-  overflow-y: auto

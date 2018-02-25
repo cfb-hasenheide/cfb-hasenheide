@@ -1,14 +1,16 @@
 %li.list-group-item
   .media
-    .media-left
-      = image_tag message.user.player.avatar_url(:small_thumb),
-        width: '30',
-        height: '30',
-        alt: current_user.player.nickname,
-        class: 'img-circle'
+    = image_tag message.user.player.avatar_url(:small_thumb),
+      width: '50',
+      height: '50',
+      alt: current_user.player.nickname,
+      class: 'mr-3 rounded-circle'
+
     .media-body
-      %strong.text-muted
+      %h6.mt-0
         = message.user.player.nickname
-      %small.pull-right.text-muted= l(message.created_at, format: :short)
-      %br
+
+        %small.pull-right.text-muted
+          = l(message.created_at, format: :short)
+
       = message.content

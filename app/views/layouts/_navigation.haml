@@ -1,13 +1,5 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+%nav.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-dark
   .container
-    = link_to root_path, class: 'navbar-brand' do
-      = image_tag 'logo_navbar.png',
-        height: '30',
-        class: 'd-inline-block align-top',
-        alt: 'CFB Hasenheide Logo'
-
-      CFB Hasenheide
-
     = button_tag class: 'navbar-toggler',
       type: 'button',
       'data-toggle': 'collapse',
@@ -17,7 +9,24 @@
       'aria-label': 'Toggle navigation' do
       %span.navbar-toggler-icon
 
-    .collapse.navbar-collapse#navigation
+    = link_to root_path, class: 'navbar-brand' do
+      = image_tag 'logo_navbar.png',
+        height: '30',
+        class: 'd-inline-block align-top',
+        alt: 'CFB Hasenheide Logo'
+
+      CFB Hasenheide
+
+    = button_tag class: 'navbar-toggler px-3 py-2',
+      type: 'button',
+      'data-toggle': 'modal',
+      'data-target': '#chatModal',
+      'aria-controls': 'chat',
+      'aria-expanded': 'false',
+      'aria-label': 'Toggle chat' do
+      = chat_icon
+
+    .collapse.navbar-collapse.justify-content-between#navigation
       %ul.navbar-nav.mr-auto
         %li.nav-item{class: ('active' if params[:controller] == 'news')}
           = link_to news_index_path,
@@ -62,14 +71,8 @@
             - if params[:controller] == 'pages' && params[:action] == 'contact'
               %span.sr-only(current)
 
+      %ul.navbar-nav.ml-auto
         - if user_signed_in?
-          %li.nav-item
-            = link_to '#chatModal',
-              'data-toggle': 'modal',
-              class: 'nav-link' do
-              = chat_icon
-              Chat
-
           %li.nav-item.dropdown
             = link_to '#',
               id: 'navbarUserDropdown',
@@ -121,6 +124,14 @@
                 class: 'dropdown-item' do
                 = logout_icon
                 Logout
+
+          %li.nav-item
+            = link_to '#chatModal',
+              id: 'chatNavbarLink',
+              'data-toggle': 'modal',
+              class: 'btn btn-outline-secondary d-none d-lg-block' do
+              = chat_icon
+              Chat
 
         - else
           %li.nav-item.dropdown

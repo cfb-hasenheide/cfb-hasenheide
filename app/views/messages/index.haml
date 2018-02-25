@@ -1,15 +1,16 @@
 #chatView
   %h1
     Chat
+
     %small
       = link_to messages_path,
         remote: true,
         class: 'chatRefresh',
-        'data-disable-with' => "#{refreshing_icon}" do
+        'data-disable-with' => refreshing_icon do
         = refresh_icon
 
-  .panel.panel-default.chatMessagesContainer
-    %ul.list-group.chatMessages
-
-    .panel-footer
+  .card.chatMessagesContainer
+    .card-body
       = render 'form'
+
+    %ul.list-group.list-group-flush.chatMessages

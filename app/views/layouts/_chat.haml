@@ -1,10 +1,8 @@
-.modal.fade#chatModal{tabindex: '-1',
-  role: 'dialog',
-  'aria-labelledby' => 'chatLabel'}
-  .modal-dialog{role: 'document'}
+.modal.fade#chatModal{tabindex: '-1', role: 'dialog', 'aria-labelledby': 'chatLabel'}
+  .modal-dialog.modal-lg{role: 'document'}
     .modal-content
       .modal-header
-        %h4.modal-title#chatLabel
+        %h5.modal-title#chatLabel
           Chat
 
           %small
@@ -14,22 +12,13 @@
               'data-disable-with' => "#{refreshing_icon}" do
               = refresh_icon
 
-          .btn-group.pull-right
-            = link_to chat_path, class: 'default-button-xs' do
-              %span.text-info
-                = full_screen_icon
-                Vollbild
+        = button_tag class: 'close',
+          'data-dismiss' => 'modal',
+          'aria-label' => 'Close' do
+          %span{'aria-hidden': true}
+            &times;
 
-            = button_tag class: 'default-button-xs',
-              'data-dismiss' => 'modal',
-              'aria-label' => 'Close' do
-              = close_icon
-              %span.hidden-xs Schließen
-
-      .modal-body.chatMessagesContainer
-        %ul.list-group.chatMessages
-
-      .modal-footer
+      .modal-body
         = form_for Message.new, remote: true do |f|
           = f.hidden_field :user_id, value: current_user.id
 
@@ -38,9 +27,12 @@
               class: 'form-control',
               placeholder: Message.human_attribute_name(:content)
 
-            %span.input-group-btn
+            .input-group-append
               = button_tag type: 'submit',
                 class: 'primary-button',
                 'data-disable-with' => "#{spinner_icon} Senden" do
                 = chat_message_icon
                 Senden
+
+      .modal-body.px-0.chatMessagesContainer
+        %ul.list-group.list-group-flush.chatMessages
