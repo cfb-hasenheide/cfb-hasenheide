@@ -1,0 +1,43 @@
+= content_for :title, Medium.model_name.human(count: 2)
+
+%h1
+  = content_for(:title)
+
+%div.text-center.text-muted.mb-4
+  = page_entries_info(@media)
+
+.card-deck
+  - @media.each do |medium|
+    .card.mb-4.text-center{style: 'min-width: 220px'}
+      - if medium.blob.image?
+        = image_tag medium.service_url, class: 'card-img-top w-100'
+
+      - else # pdf or video
+        = image_tag medium.preview(resize: '220x220'), class: 'card-img-top w-100'
+
+      .card-body
+        %ul.list-unstyled
+          %li
+            = medium.filename
+
+          %li
+            = medium.content_type
+
+          %li
+            = medium.metadata
+
+        - medium.attachments.each do |attachment|
+          = link_to "#{attachment.record_type.constantize.model_name.human} #{attachment.record_type.constantize.send(:human_attribute_name, attachment.name)}",
+            url_for(action: :show, controller: attachment.record_type.pluralize.downcase, id: attachment.record_id),
+            class: 'card-link'
+
+      .card-footer
+        %small.text-muted.justify-content-between
+          = l medium.created_at, format: :short
+
+          = link_to rails_blob_path(medium.record.send(medium.name), disposition: 'attachment'),
+            class: 'badge badge-secondary' do
+            = download_icon
+
+%div.text-center.text-muted.mt-4
+  = paginate @media

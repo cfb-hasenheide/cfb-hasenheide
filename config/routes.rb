@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
   resources :goals, only: [:create, :edit, :update, :destroy]
 
+  resources :media, only: :index
+
   resources :homepage_headers, except: :show do
     post :activate, on: :member
   end
