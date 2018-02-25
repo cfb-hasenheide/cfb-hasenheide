@@ -196,9 +196,10 @@ de:
   time:
     am: vormittags
     formats:
+      date_only: ! '%a, %d.%m.%Y'
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
+      month_and_year: ! "%B %Y"
       short: ! "%d.%m.%y | %H:%M"
-      date_only: ! '%a, %d.%m.%Y'
       time_only: ! '%H:%M Uhr'
     pm: nachmittags

@@ -1,13 +1,17 @@
 %h1
   News
 
-  - if admin?
-    .pull-right
-      = link_to new_news_path, class: 'primary-button' do
-        = create_icon
-        %span.hidden-xs News erstellen
+- if can? :create, News
+  = link_to new_news_path, class: 'primary-button mb-4' do
+    = create_icon
+    = t('create_model_name', model_name: News.model_name.human)
 
-- for news in @news
-  = render 'news', news: news
+.row
+  .col
+    - @news.each do |news|
+      = render 'news', news: news
 
-= render 'layouts/pagination', entries: @news
+    = render 'layouts/pagination', entries: @news
+
+  .col-lg-3
+    = render 'archive', news_by_month: @news_by_month

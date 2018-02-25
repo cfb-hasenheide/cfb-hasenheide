@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2018_02_13_200835) do
   end
 
   create_table "attendance_lists", id: :serial, force: :cascade do |t|
-    t.string "attendable_type"
     t.integer "attendable_id"
+    t.string "attendable_type"
     t.boolean "open", default: false, null: false
     t.integer "minimum", default: 7, null: false
     t.integer "maximum", default: 11, null: false
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2018_02_13_200835) do
   end
 
   create_table "bootsy_image_galleries", id: :serial, force: :cascade do |t|
-    t.string "bootsy_resource_type"
     t.integer "bootsy_resource_id"
+    t.string "bootsy_resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -244,31 +244,17 @@ ActiveRecord::Schema.define(version: 2018_02_13_200835) do
   end
 
   create_table "players_teams", id: false, force: :cascade do |t|
-    t.bigint "player_id", null: false
-    t.bigint "team_id", null: false
+    t.integer "player_id", null: false
+    t.integer "team_id", null: false
     t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id", unique: true
     t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true
   end
 
   create_table "players_trainings", id: false, force: :cascade do |t|
-    t.bigint "training_id", null: false
-    t.bigint "player_id", null: false
+    t.integer "training_id", null: false
+    t.integer "player_id", null: false
     t.index ["player_id", "training_id"], name: "index_players_trainings_on_player_id_and_training_id"
     t.index ["training_id", "player_id"], name: "index_players_trainings_on_training_id_and_player_id"
-  end
-
-  create_table "posts", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.string "subtitle"
-    t.string "summary"
-    t.string "content"
-    t.boolean "public", default: false, null: false
-    t.date "posted_on", null: false
-    t.integer "member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "image"
-    t.index ["member_id"], name: "index_posts_on_member_id"
   end
 
   create_table "reports", id: :serial, force: :cascade do |t|
@@ -342,8 +328,8 @@ ActiveRecord::Schema.define(version: 2018_02_13_200835) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer "invitation_limit"
-    t.string "invited_by_type"
     t.integer "invited_by_id"
+    t.string "invited_by_type"
     t.integer "invitations_count", default: 0
     t.boolean "legacy_password"
     t.boolean "admin", default: false, null: false
@@ -368,5 +354,4 @@ ActiveRecord::Schema.define(version: 2018_02_13_200835) do
   add_foreign_key "goals", "players", column: "scorer_id"
   add_foreign_key "members", "users"
   add_foreign_key "players", "members"
-  add_foreign_key "posts", "members"
 end

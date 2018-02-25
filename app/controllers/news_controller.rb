@@ -5,9 +5,10 @@ class NewsController < ApplicationController
   respond_to :html
 
   def index
-    news = News.order('created_at DESC')
+    news = News.order(created_at: :desc)
     news = news.where(internal: false) unless user_signed_in?
     @news = news.page(params[:page]).per(5)
+    @news_by_month = news_by_month
 
     respond_with(@news)
   end
@@ -47,11 +48,17 @@ class NewsController < ApplicationController
 
   private
 
-  def set_news
-    @news = News.find(params[:id])
-  end
-
   def news_params
     params.require(:news).permit(:title, :content, :internal)
+  end
+
+  def news_by_month
+    News.order(created_at: :desc)
+        .select(:created_at, :title, :id)
+        .group_by { |n| n.created_at.beginning_of_month }
+  end
+
+  def set_news
+    @news = News.find(params[:id])
   end
 end
