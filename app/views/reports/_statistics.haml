@@ -1,109 +1,116 @@
-%h3.card-title
-  Statistik
-
 %p.card-text
   %table.table.table-sm
     - if report.incident.present?
       %tr
         %th.text-right{scope: 'row'}
-          = t(:incident, scope: %w(activerecord attributes report))
+          = Report.human_attribute_name(:incident)
 
         %td
           = t(report.incident, scope: %w(activerecord enums report incident))
 
-    %tr
-      %th.text-right{scope: 'row'}
-        Endstand
+    - if report.club_final_score? || report.rival_final_score?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:final_score)
 
-      %td
-        = report.final_score
-        - if report.result.present?
-          = surround '(', ')' do
-            = t(report.result, scope: %w(activerecord enums report result))
+        %td
+          = report.final_score
+          - if report.result.present?
+            = surround '(', ')' do
+              = t(report.result, scope: %w(activerecord enums report result))
 
-    %tr
-      %th.text-right{scope: 'row'}
-        Halbzeitstand
+    - if report.club_half_time_score? || report.rival_half_time_score?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:half_time_score)
 
-      %td
-        = report.half_time_score
+        %td
+          = report.half_time_score
 
-    %tr
-      %th.text-right{scope: 'row'}
-        Ecken
+    - if report.corners_club? || report.corners_rival?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:corners)
 
-      %td
-        = corners(report)
+        %td
+          = corners(report)
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:possession, scope: %w(activerecord attributes report))
+    - if report.possession?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:possession)
 
-      %td
-        = report.possession? ? report.possession.to_s + ' %' : ''
+        %td
+          = report.possession
+          \%
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:turf, scope: %w(activerecord attributes report))
+    - if report.turf?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:turf)
 
-      %td
-        - if report.turf.present?
+        %td
           = t(report.turf, scope: %w(activerecord enums report turf))
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:weather, scope: %w(activerecord attributes report))
+    - if report.weather?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:weather)
 
-      %td
-        - if report.weather.present?
+        %td
           = t(report.weather, scope: %w(activerecord enums report weather))
 
     %tr
       %th.text-right{scope: 'row'}
-        = t(:referee, scope: %w(activerecord attributes report))
+        = Report.human_attribute_name(:referee)
 
       %td
         = report.referee? ? 'Ja' : 'Nein'
 
-    - if report.referee?
+    - if report.referee_name?
       %tr
         %th.text-right{scope: 'row'}
-          = t(:referee_name, scope: %w(activerecord attributes report))
+          = Report.human_attribute_name(:referee_name)
 
         %td
           = report.referee_name
 
+    - if report.referee_description?
       %tr
         %th.text-right{scope: 'row'}
-          = t(:referee_description, scope: %w(activerecord attributes report))
+          = Report.human_attribute_name(:referee_description)
 
         %td
           = report.referee_description
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:goalkeeper_id, scope: %w(activerecord attributes report))
+    - if report.goalkeeper_id?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:goalkeeper_id)
 
-      %td
-        = Player.find(report.goalkeeper_id).nickname if report.goalkeeper_id?
+        %td
+          = Player.find(report.goalkeeper_id).nickname
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:captain_id, scope: %w(activerecord attributes report))
+    - if report.captain_id?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:captain_id)
 
-      %td
-        = Player.find(report.captain_id).nickname if report.captain_id?
+        %td
+          = Player.find(report.captain_id).nickname
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:most_valuable_player_id, scope: %w(activerecord attributes report))
+    - if report.most_valuable_player_id?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:most_valuable_player_id)
 
-      %td
-        = Player.find(report.most_valuable_player_id).nickname if report.most_valuable_player_id?
+        %td
+          = Player.find(report.most_valuable_player_id).nickname
 
-    %tr
-      %th.text-right{scope: 'row'}
-        = t(:annotation, scope: %w(activerecord attributes report))
+    - if report.annotation?
+      %tr
+        %th.text-right{scope: 'row'}
+          = Report.human_attribute_name(:annotation)
 
-      %td
-        = report.annotation
+        %td
+          = report.annotation

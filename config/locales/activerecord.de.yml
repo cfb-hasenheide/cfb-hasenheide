@@ -99,13 +99,16 @@ de:
         captain_id: Kapitän
         club_final_score: Endstand CFB
         content: Bericht
+        corners: Ecken
+        final_score: Endstand
+        half_time_score: Halbzeitstand
         goalkeeper_id: Torwart
         incident: Sonderereignis
         most_valuable_player_id: Spieler des Tages
         possession: Ballbesitz
         referee: Schiedsrichter?
-        referee_name: Name
         referee_description: Beschreibung
+        referee_name: Name
         reporter_id: Berichtschreiber
         rival_final_score: Endstand Gegner
         turf: Belag
