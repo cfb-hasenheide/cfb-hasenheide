@@ -3,31 +3,27 @@
 %h1
   = content_for(:title)
 
+- if can? :create, Event
+  .dropup.mb-4
+    = button_tag class: 'btn btn-primary dropdown-toggle',
+      type: 'button',
+      id: 'createEventDropdownButton',
+      'data-toggle': 'dropdown',
+      'aria-haspopup': 'true',
+      'aria-expanded': 'false' do
+      = create_icon
+      Event erstellen
+
+    .dropdown-menu{'aria-labelledby': 'createEventDropdownButton'}
+      - [LeagueMatch, CupMatch, Other].each do |event_class|
+        = link_to event_class.model_name.human,
+          new_event_path(type: event_class.name),
+          class: 'dropdown-item'
+
+        - unless event_class == Other
+          .dropdown-divider
+
 .card-deck
-  - if can? :create, Event
-    .card.mb-4.bg-light.text-center{style: 'min-width: 220px'}
-      .card-body
-
-      .card-footer
-        .dropup
-          = button_tag class: 'btn btn-primary dropdown-toggle',
-            type: 'button',
-            id: 'createEventDropdownButton',
-            'data-toggle': 'dropdown',
-            'aria-haspopup': 'true',
-            'aria-expanded': 'false' do
-            = create_icon
-            Event erstellen
-
-          .dropdown-menu{'aria-labelledby': 'createEventDropdownButton'}
-            - [LeagueMatch, CupMatch, Other].each do |event_class|
-              = link_to event_class.model_name.human,
-                new_event_path(type: event_class.name),
-                class: 'dropdown-item'
-
-              - unless event_class == Other
-                .dropdown-divider
-
   - @events.each do |event|
     .card.mb-4.text-center{style: 'min-width: 220px', class: ('border-dark' if event.future?)}
       .card-header

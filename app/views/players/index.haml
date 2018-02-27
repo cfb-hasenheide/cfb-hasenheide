@@ -3,16 +3,12 @@
 %h1
   = content_for :title
 
+- if can? :create, Player
+  = link_to for_member_new_player_path, class: 'primary-button mb-4' do
+    = create_icon
+    = t('create_model_name', model_name: Player.model_name.human)
+
 .card-deck
-  - if can? :create, Player
-    .card.mb-4.bg-light.text-center{style: 'min-width: 220px'}
-      .card-body
-
-      .card-footer
-        = link_to for_member_new_player_path, class: 'primary-button' do
-          = create_icon
-          = t('create_model_name', model_name: Player.model_name.human)
-
   - @players.each do |player|
     .card.mb-4.text-center{style: 'min-width: 220px'}
       - if player.portrait.attached?
