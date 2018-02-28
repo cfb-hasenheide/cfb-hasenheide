@@ -2,7 +2,7 @@ class AccessPolicy
   include AccessGranted::Policy
 
   def configure
-    role :admin, proc { |user| user.admin? } do
+    role :admin, proc { |user| user&.admin? } do
       can :manage, Object
     end
 

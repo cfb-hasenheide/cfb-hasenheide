@@ -2,52 +2,48 @@
 
 .row
   .col-md-8
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Neuigkeiten
-          .pull-right
-            %small
-              = link_to 'Alle anzeigen', news_index_path
+    .card.mb-4
+      .card-header
+        .d-flex.justify-content-between.align-items-center
+          = News.model_name.human(count: 2)
 
-    - @news.each do |news|
-      = render 'news/news', news: news
+          = link_to 'Alle anzeigen', news_index_path, class: 'badge badge-secondary'
+
+    = render @news
 
   .col-md-4
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title
-          Events
+    .card
+      .card-header
+        .d-flex.justify-content-between.align-items-center
+          = Event.model_name.human(count: 2)
 
           - if user_signed_in?
-            .pull-right
-              %small
-                = link_to 'Alle anzeigen', events_path
+            = link_to 'Alle anzeigen', events_path, class: 'badge badge-secondary'
 
-      .panel-body
-        .text-muted Kommende
+      .card-body.text-muted
+        Kommende
 
       = render 'events/list_short', events: @future_events
 
-      .panel-body
-        .text-muted Vergangene
+      .card-body.text-muted
+        Vergangene
 
       = render 'events/list_short', events: @past_events
 
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Tabelle
+.card.mt-4
+  .card-header
+    Tabelle
 
-      .panel-body
-        .fussballDeWidget#tableCFB
-          = spinner_icon
-          Lade Tabelle
+  .card-body
+    .fussballDeWidget#tableCFB
+      = spinner_icon
+      Lade Tabelle
 
-    .panel.panel-primary
-      .panel-heading
-        %h2.panel-title Spielplan
+.card.mt-4
+  .card-header
+    Spielplan
 
-      .panel-body
-        .fussballDeWidget#scheduleCFB
-          = spinner_icon
-          Lade Spielplan
+  .card-body
+    .fussballDeWidget#scheduleCFB
+      = spinner_icon
+      Lade Spielplan
