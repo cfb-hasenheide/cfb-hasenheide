@@ -1,9 +1,18 @@
-%h1
-  = @news.title
-  %small.pull-right
-    = internal_icon if @news.internal?
-    = l(@news.created_at, format: :date_only)
+.card.mb-4{class: ('border-primary' unless @news.internal?)}
+  .card-body
+    %h5.card-title
+      %small.float-right.text-muted
+        = internal_icon if @news.internal?
 
-.panel{class: (@news.internal? ? 'panel-default' : 'panel-primary')}
-  .panel-body
-    = @news.content.html_safe
+        = l(@news.created_at, format: :date_only)
+
+      = @news.title
+
+    %p.card-text.text-justify
+      = @news.content.html_safe
+
+  - if can? :update, @news
+    .card-footer
+      = link_to edit_news_path(@news), class: 'card-link default-button-xs' do
+        = edit_icon
+        = t('edit')
