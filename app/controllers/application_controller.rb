@@ -10,11 +10,17 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
+  before_action :allow_iframe_requests
+
   rescue_from 'AccessGranted::AccessDenied' do
     redirect_back_or_to(path: root_path, alert: 'Aktion nicht erlaubt!')
   end
 
   protected
+
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end
 
   def authorize_admin!
     return true if current_user.admin?
